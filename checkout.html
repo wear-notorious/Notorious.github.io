@@ -319,25 +319,46 @@
   document.getElementById("quantity").textContent = quantity;
   document.getElementById("total").textContent = price * quantity;
 
-  function confirmOrder() {
+ async function confirmOrder() {
+  const form = document.getElementById("checkoutForm");
 
-    const form = document.getElementById("checkoutForm");
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    const city = document.getElementById("city").value;
-    const address = document.getElementById("address").value;
-
-    alert(
-      "Thank you " + name +
-      "! Your order information is ready."
-    );
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
   }
+
+  const orderData = {
+    product: product,
+    price: price,
+    size: size,
+    quantity: quantity,
+    fullName: document.getElementById("name").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    postalCode: document.getElementById("postal").value.trim(),
+    address: document.getElementById("address").value.trim()
+  };
+
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwjaNDf--2jqHCmh27PNxa3ezvYiI9a4afwUsca5JMAALZkFUruZ1uD-FysKrOHNlftfg/exec";
+
+  try {
+    await fetch(WEB_APP_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(orderData)
+    });
+
+    alert("Order confirmed! Thank you for shopping with NOTORIOUS™.");
+
+    window.location.href = "index.html";
+
+  } catch (error) {
+    alert("Something went wrong. Please try again.");
+  }
+}
 </script>
 
 </body>
