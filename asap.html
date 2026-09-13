@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ASAP Tee — NOTORIOUS™</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      border-bottom: 1px solid #222;
+      background: #0a0a0a;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 85px;
+      width: auto;
+      display: block;
+    }
+
+    .back-link {
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .product-page {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 24px 100px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 18px;
+    }
+
+    .thumbnails {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .thumb {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid #222;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: 0.2s;
+    }
+
+    .thumb:hover,
+    .thumb.active {
+      opacity: 1;
+      border-color: #fff;
+    }
+
+    .main-image {
+      width: 100%;
+      border-radius: 18px;
+      display: block;
+      background: #111;
+    }
+
+    .product-info h1 {
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+
+    .description {
+      color: #bdbdbd;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .meta {
+      color: #bdbdbd;
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+
+    .label {
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .sizes {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .size-btn {
+      min-width: 55px;
+      padding: 12px 16px;
+      border: 1px solid #444;
+      background: transparent;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .size-btn:hover,
+    .size-btn.active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .quantity-wrap {
+      margin-bottom: 28px;
+    }
+
+    .quantity {
+      width: 90px;
+      padding: 12px;
+      background: #111;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 10px;
+    }
+
+    .order-btn {
+      width: 100%;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 999px;
+      background: #fff;
+      color: #000;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-bottom: 14px;
+    }
+
+    .order-btn:hover {
+      opacity: 0.9;
+    }
+
+    .cod-note {
+      text-align: center;
+      color: #aaa;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 850px) {
+      .product-page {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .thumbnails {
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .thumb {
+        width: 85px;
+        flex: 0 0 auto;
+      }
+
+      .logo img {
+        height: 65px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a class="logo" href="index.html">
+        <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo">
+      </a>
+
+      <a class="back-link" href="index.html#shop">Back to Shop</a>
+    </nav>
+  </header>
+
+  <main class="product-page">
+
+    <section class="gallery">
+
+      <div class="thumbnails">
+        <img class="thumb active"
+             src="images/asap-front.png"
+             onclick="changeImage(this)">
+
+        <img class="thumb"
+             src="images/asap-front-1.jpeg"
+             onclick="changeImage(this)">
+
+        <img class="thumb"
+             src="images/asap-front-2.png"
+             onclick="changeImage(this)">
+
+        <img class="thumb"
+             src="images/asap-front-neck.png"
+             onclick="changeImage(this)">
+      </div>
+
+      <div>
+        <img
+          id="mainProductImage"
+          class="main-image"
+          src="images/asap-front.png"
+          alt="ASAP Tee"
+        >
+      </div>
+
+    </section>
+
+    <section class="product-info">
+
+      <h1>ASAP Tee</h1>
+
+      <div class="price">209 MAD</div>
+
+      <p class="description">
+        Premium NOTORIOUS™ streetwear T-shirt designed for a clean,
+        bold and effortless look.
+      </p>
+
+      <div class="meta">
+        <div>90% Cotton / 10% Polyester</div>
+        <div>Unisex</div>
+        <div>Crew neck</div>
+        <div>Cash on Delivery available</div>
+      </div>
+
+      <span class="label">Choose size</span>
+
+      <div class="sizes">
+        <button class="size-btn" onclick="selectSize(this)">M</button>
+        <button class="size-btn" onclick="selectSize(this)">L</button>
+        <button class="size-btn" onclick="selectSize(this)">XL</button>
+        <button class="size-btn" onclick="selectSize(this)">XXL</button>
+      </div>
+
+      <div class="quantity-wrap">
+        <span class="label">Quantity</span>
+        <input class="quantity" type="number" min="1" value="1">
+      </div>
+
+      <button class="order-btn" onclick="orderNow()">
+        ORDER — CASH ON DELIVERY
+      </button>
+
+      <div class="cod-note">
+        Pay when your order arrives.
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    let selectedSize = "";
+
+    function changeImage(image) {
+      document.getElementById("mainProductImage").src = image.src;
+
+      document.querySelectorAll(".thumb").forEach(function(thumb) {
+        thumb.classList.remove("active");
+      });
+
+      image.classList.add("active");
+    }
+
+    function selectSize(button) {
+      document.querySelectorAll(".size-btn").forEach(function(btn) {
+        btn.classList.remove("active");
+      });
+
+      button.classList.add("active");
+      selectedSize = button.textContent;
+    }
+
+    function orderNow() {
+      if (!selectedSize) {
+        alert("Please choose a size.");
+        return;
+      }
+
+      alert(
+        "Perfect. Next step: we will connect this button to your COD checkout."
+      );
+    }
+  </script>
+
+</body>
+</html>
