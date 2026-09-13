@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Checkout — NOTORIOUS™</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #080808;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      height: 90px;
+      border-bottom: 1px solid #222;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+    }
+
+    .logo img {
+      height: 65px;
+      width: auto;
+      display: block;
+    }
+
+    .back {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .checkout {
+      max-width: 1150px;
+      margin: auto;
+      padding: 70px 25px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #888;
+      margin-bottom: 45px;
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 50px;
+    }
+
+    .box {
+      background: #111;
+      border: 1px solid #242424;
+      border-radius: 18px;
+      padding: 30px;
+    }
+
+    .box h2 {
+      margin-bottom: 25px;
+      font-size: 22px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    input, select {
+      width: 100%;
+      background: #080808;
+      border: 1px solid #333;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    input:focus, select:focus {
+      border-color: white;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid #222;
+      color: #bbb;
+    }
+
+    .summary-line strong {
+      color: white;
+    }
+
+    .total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 25px;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .cod {
+      margin: 25px 0;
+      background: #181818;
+      border-radius: 12px;
+      padding: 17px;
+      color: #bbb;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .order-btn {
+      width: 100%;
+      border: none;
+      background: white;
+      color: black;
+      padding: 18px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .order-btn:hover {
+      transform: translateY(-2px);
+      background: #ddd;
+    }
+
+    .secure {
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 800px) {
+      header {
+        height: 75px;
+        padding: 0 20px;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+
+      .checkout {
+        padding: 40px 18px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .checkout-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo">
+  </div>
+
+  <a href="index.html#shop" class="back">← Back to shop</a>
+</header>
+
+<main class="checkout">
+
+  <h1>CHECKOUT</h1>
+  <p class="subtitle">Complete your information to place your order.</p>
+
+  <div class="checkout-grid">
+
+    <div class="box">
+
+      <h2>Delivery information</h2>
+
+      <form id="checkoutForm">
+
+        <div class="field">
+          <label>Full name</label>
+          <input type="text" id="name" placeholder="Your full name" required>
+        </div>
+
+        <div class="field">
+          <label>Phone number</label>
+          <input type="tel" id="phone" placeholder="06XXXXXXXX" required>
+        </div>
+
+        <div class="row">
+
+          <div class="field">
+            <label>City</label>
+            <input type="text" id="city" placeholder="Casablanca" required>
+          </div>
+
+          <div class="field">
+            <label>Postal code (optional)</label>
+            <input type="text" id="postal" placeholder="20000">
+          </div>
+
+        </div>
+
+        <div class="field">
+          <label>Delivery address</label>
+          <input
+            type="text"
+            id="address"
+            placeholder="Street, neighbourhood, building..."
+            required
+          >
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="box">
+
+      <h2>Order summary</h2>
+
+      <div class="summary-line">
+        <span>Product</span>
+        <strong id="product">—</strong>
+      </div>
+
+      <div class="summary-line">
+        <span>Size</span>
+        <strong id="size">—</strong>
+      </div>
+
+      <div class="summary-line">
+        <span>Quantity</span>
+        <strong id="quantity">—</strong>
+      </div>
+
+      <div class="summary-line">
+        <span>Unit price</span>
+        <strong><span id="price">0</span> MAD</strong>
+      </div>
+
+      <div class="cod">
+        <strong>Cash on Delivery</strong><br>
+        Pay when your order arrives.
+      </div>
+
+      <div class="total">
+        <span>Total</span>
+        <span><span id="total">0</span> MAD</span>
+      </div>
+
+      <br>
+
+      <button class="order-btn" onclick="confirmOrder()">
+        CONFIRM ORDER
+      </button>
+
+      <p class="secure">
+        NOTORIOUS™ — WEAR WHAT THEY WON’T.
+      </p>
+
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  const product = params.get("product") || "ASAP Tee";
+  const price = Number(params.get("price")) || 209;
+  const size = params.get("size") || "-";
+  const quantity = Number(params.get("quantity")) || 1;
+
+  document.getElementById("product").textContent = product;
+  document.getElementById("price").textContent = price;
+  document.getElementById("size").textContent = size;
+  document.getElementById("quantity").textContent = quantity;
+  document.getElementById("total").textContent = price * quantity;
+
+  function confirmOrder() {
+
+    const form = document.getElementById("checkoutForm");
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const city = document.getElementById("city").value;
+    const address = document.getElementById("address").value;
+
+    alert(
+      "Thank you " + name +
+      "! Your order information is ready."
+    );
+  }
+</script>
+
+</body>
+</html>
