@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOTORIOUS™ — Wear What They Won’t</title>
+  <meta
+    name="description"
+    content="NOTORIOUS™ — Premium streetwear brand. Wear What They Won’t."
+  />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #222;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 55%),
+        #0a0a0a;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900;
+      letter-spacing: -3px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      color: #bdbdbd;
+      margin-bottom: 36px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #ffffff;
+      color: #000000;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    section {
+      padding: 90px 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 40px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .product-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .product-image {
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, #191919, #0f0f0f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      margin-bottom: 8px;
+    }
+
+    .product-info p {
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .about {
+      background: #0f0f0f;
+    }
+
+    .about p {
+      max-width: 760px;
+      color: #bdbdbd;
+      font-size: 1.08rem;
+    }
+
+    .cod-box {
+      margin-top: 30px;
+      padding: 24px;
+      border: 1px solid #2b2b2b;
+      border-radius: 16px;
+      background: #111;
+    }
+
+    footer {
+      padding: 35px 24px;
+      border-top: 1px solid #222;
+      color: #888;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">NOTORIOUS™</div>
+
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>NOTORIOUS™</h1>
+        <p>WEAR WHAT THEY WON’T.</p>
+        <a class="btn" href="#shop">SHOP NOW</a>
+      </div>
+    </section>
+
+    <section id="shop">
+      <div class="container">
+        <h2 class="section-title">Latest Drops</h2>
+
+        <div class="products">
+
+          <div class="product-card">
+            <div class="product-image">
+              Product image coming soon
+            </div>
+
+            <div class="product-info">
+              <h3>SWEET LIES Tee</h3>
+              <p>Premium streetwear T-shirt.</p>
+              <div class="price">209 MAD</div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              Product image coming soon
+            </div>
+
+            <div class="product-info">
+              <h3>NOTORIOUS Tee</h3>
+              <p>Premium streetwear T-shirt.</p>
+              <div class="price">209 MAD</div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              Product image coming soon
+            </div>
+
+            <div class="product-info">
+              <h3>Limited Drop</h3>
+              <p>Exclusive NOTORIOUS™ release.</p>
+              <div class="price">209 MAD</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container">
+        <h2 class="section-title">About NOTORIOUS™</h2>
+
+        <p>
+          NOTORIOUS™ is a streetwear brand built for people who refuse to dress
+          like everyone else. Bold ideas, premium pieces and attitude in every drop.
+        </p>
+
+        <div class="cod-box">
+          <strong>Cash on Delivery available.</strong>
+          <p style="margin-top: 8px;">
+            Order online and pay when your package arrives.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 NOTORIOUS™ — WEAR WHAT THEY WON’T.
+  </footer>
+
+</body>
+</html>
