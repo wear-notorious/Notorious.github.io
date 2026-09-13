@@ -326,15 +326,22 @@
     }
 
     function orderNow() {
-      if (!selectedSize) {
-        alert("Please choose a size.");
-        return;
-      }
+  if (!selectedSize) {
+    alert("Please choose a size.");
+    return;
+  }
 
-      alert(
-        "Perfect. Next step: we will connect this button to your COD checkout."
-      );
-    }
+  const quantity = document.querySelector(".quantity").value;
+
+  const params = new URLSearchParams({
+    product: "ASAP Tee",
+    price: "209",
+    size: selectedSize,
+    quantity: quantity
+  });
+
+  window.location.href = "checkout.html?" + params.toString();
+}
   </script>
 
 </body>
