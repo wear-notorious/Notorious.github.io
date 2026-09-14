@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NOTORIOUS™</title>
+
+  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #080808;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .loading {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="productPage" class="loading">
+    LOADING PRODUCT...
+  </div>
+<script>
+const PRODUCTS_API_URL = "https://script.google.com/macros/s/AKfycbyIP2107KWxxv4T-4N1mUXLgnQaKPS3Hp12S8tKIPKV7X1QBH8OS6D3v0TGSiq6Zp41Gw/exec";
+
+async function loadProduct() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
+
+  const productPage = document.getElementById("productPage");
+
+  if (!slug) {
+    productPage.innerHTML = "PRODUCT NOT FOUND";
+    return;
+  }
+
+  try {
+    const response = await fetch(PRODUCTS_API_URL);
+    const products = await response.json();
+
+    const product = products.find(
+      item => String(item.slug).toLowerCase() === slug.toLowerCase()
+    );
+
+    if (!product) {
+      productPage.innerHTML = "PRODUCT NOT FOUND";
+      return;
+    }
+
+    document.title = product.product + " | NOTORIOUS™";
+
+    productPage.innerHTML = `
+      <div>
+        <h1>${product.product}</h1>
+        <p>${product.description}</p>
+        <strong>${product.price} MAD</strong>
+      </div>
+    `;
+
+  } catch (error) {
+    console.error(error);
+    productPage.innerHTML = "ERROR LOADING PRODUCT";
+  }
+}
+
+loadProduct();
+</script>
+  
+</body>
+</html>
