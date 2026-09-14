@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contact Us — NOTORIOUS™</title>
+
+  <meta
+    name="description"
+    content="Contact NOTORIOUS™ for order support, sizing, delivery questions and more."
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #080808;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid #222;
+      background: #080808;
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: auto;
+      padding: 22px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .logo img {
+      height: 85px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.6;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid #333;
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 7px;
+      font-size: 22px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-hero {
+      text-align: center;
+      padding: 100px 20px 75px;
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    .eyebrow {
+      color: #777;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    .contact-hero h1 {
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 26px;
+    }
+
+    .contact-hero p {
+      color: #aaa;
+      max-width: 680px;
+      margin: auto;
+      font-size: 17px;
+    }
+
+    .contact-container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 25px 120px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .contact-card {
+      background: #0e0e0e;
+      border: 1px solid #252525;
+      border-radius: 18px;
+      padding: 42px 30px;
+      text-align: center;
+    }
+
+    .contact-card i {
+      font-size: 32px;
+      margin-bottom: 22px;
+    }
+
+    .contact-card h2 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .contact-card p {
+      color: #999;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .contact-card a {
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      border-bottom: 1px solid #555;
+      padding-bottom: 4px;
+    }
+
+    .contact-card a:hover {
+      border-color: #fff;
+    }
+
+    .support-note {
+      max-width: 900px;
+      margin: 0 auto 120px;
+      padding: 0 25px;
+    }
+
+    .support-box {
+      border: 1px solid #2c2c2c;
+      border-radius: 18px;
+      padding: 45px;
+      text-align: center;
+    }
+
+    .support-box span {
+      display: block;
+      color: #777;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .support-box h2 {
+      font-size: clamp(24px, 4vw, 38px);
+      margin-bottom: 16px;
+    }
+
+    .support-box p {
+      color: #aaa;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    footer {
+      border-top: 1px solid #222;
+      padding: 55px 20px 35px;
+      text-align: center;
+      background: #050505;
+    }
+
+    .footer-brand {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      color: #777;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 35px;
+    }
+
+    .footer-socials a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #292929;
+      border-radius: 50%;
+      transition: all 0.25s ease;
+    }
+
+    .footer-socials a:hover {
+      border-color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .footer-link {
+      display: inline-block;
+      color: #888;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 22px;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: #fff;
+    }
+
+    .footer-copy {
+      color: #555;
+      font-size: 11px;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 18px 20px;
+      }
+
+      .logo img {
+        height: 65px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 18px);
+        left: 0;
+        right: 0;
+        background: #0a0a0a;
+        border: 1px solid #222;
+        padding: 22px;
+        flex-direction: column;
+        gap: 22px;
+        z-index: 9999;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        font-size: 13px;
+        letter-spacing: 2px;
+      }
+
+      .contact-hero {
+        padding: 75px 22px 65px;
+      }
+
+      .contact-hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .contact-container {
+        padding: 65px 18px 80px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .support-note {
+        margin-bottom: 80px;
+        padding: 0 18px;
+      }
+
+      .support-box {
+        padding: 35px 25px;
+      }
+
+      .footer-socials {
+        gap: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+
+      <a class="logo" href="index.html">
+        <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo">
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html">HOME</a>
+        <a href="index.html#shop">SHOP</a>
+        <a href="about.html">ABOUT</a>
+        <a href="shipping.html">SHIPPING</a>
+        <a href="contact.html">CONTACT</a>
+      </div>
+
+      <button
+        class="menu-toggle"
+        onclick="toggleMenu()"
+        aria-label="Open menu">
+        ☰
+      </button>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="contact-hero">
+
+      <div class="eyebrow">WE'RE HERE TO HELP</div>
+
+      <h1>
+        CONTACT<br>
+        NOTORIOUS™
+      </h1>
+
+      <p>
+        Questions about your order, delivery, sizing or anything else?
+        Reach out and we'll help you as quickly as possible.
+      </p>
+
+    </section>
+
+    <section class="contact-container">
+
+      <div class="contact-grid">
+
+        <div class="contact-card">
+          <i class="fa-brands fa-instagram"></i>
+
+          <h2>Instagram</h2>
+
+          <p>
+            Message us directly for quick questions,
+            product information and order support.
+          </p>
+
+          <a
+            href="https://www.instagram.com/wear_notorious/"
+            target="_blank">
+            MESSAGE US
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <i class="fa-brands fa-tiktok"></i>
+
+          <h2>TikTok</h2>
+
+          <p>
+            Follow NOTORIOUS™ and stay connected
+            with our latest drops and content.
+          </p>
+
+          <a
+            href="https://www.tiktok.com/@wear_notorious"
+            target="_blank">
+            VISIT TIKTOK
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <i class="fa-brands fa-facebook-f"></i>
+
+          <h2>Facebook</h2>
+
+          <p>
+            You can also reach us through our official
+            NOTORIOUS™ Facebook page.
+          </p>
+
+          <a
+            href="https://www.facebook.com/wearnotorious"
+            target="_blank">
+            VISIT FACEBOOK
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="support-note">
+
+      <div class="support-box">
+
+        <span>ORDER SUPPORT</span>
+
+        <h2>
+          Already placed an order?
+        </h2>
+
+        <p>
+          When contacting us about an existing order,
+          please include your order number and the phone number
+          used when placing the order. This helps us assist you faster.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <div class="footer-brand">NOTORIOUS™</div>
+
+    <div class="footer-tagline">
+      WEAR WHAT THEY WON’T.
+    </div>
+
+    <div class="footer-socials">
+
+      <a
+        href="https://www.instagram.com/wear_notorious/"
+        target="_blank"
+        aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+
+      <a
+        href="https://www.tiktok.com/@wear_notorious"
+        target="_blank"
+        aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+
+      <a
+        href="https://www.facebook.com/wearnotorious"
+        target="_blank"
+        aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+
+    </div>
+
+    <a href="shipping.html" class="footer-link">
+      Shipping & Returns
+    </a>
+
+    <div class="footer-copy">
+      © 2026 NOTORIOUS™. All rights reserved.
+    </div>
+
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.querySelector(".nav-links").classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>
