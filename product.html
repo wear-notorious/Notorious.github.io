@@ -297,11 +297,119 @@
     gap: 8px;
   }
 }
+    /* PRODUCT PAGE HEADER */
+.site-header {
+  width: 100%;
+  background: #0b0b0b;
+  border-bottom: 1px solid #222;
+  position: relative;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  height: 100px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-logo {
+  width: 55px;
+  height: auto;
+  display: block;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.nav-links a:hover {
+  opacity: 0.65;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* MOBILE HEADER */
+@media (max-width: 768px) {
+  .header-container {
+    height: 80px;
+    padding: 0 20px;
+  }
+
+  .site-logo {
+    width: 45px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: #0b0b0b;
+    border-top: 1px solid #222;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
   </style>
 </head>
 
 <body>
+<header class="site-header">
+  <div class="header-container">
 
+    <a href="index.html" class="logo-link">
+      <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS™" class="site-logo">
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html#home">HOME</a>
+      <a href="index.html#shop">SHOP</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+      ☰
+    </button>
+
+  </div>
+</header>
   <div id="productPage" class="loading">
     LOADING PRODUCT...
   </div>
@@ -572,6 +680,10 @@ function orderNow() {
 
   window.location.href = "checkout.html?" + params.toString();
 }
+  function toggleMenu() {
+  document.querySelector(".nav-links").classList.toggle("active");
+}
+  
 loadProduct();
 </script>
   
