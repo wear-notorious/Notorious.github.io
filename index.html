@@ -332,6 +332,70 @@ nav {
 }
 
 }
+    footer {
+  border-top: 1px solid #222;
+  padding: 55px 20px 35px;
+  text-align: center;
+  background: #050505;
+}
+
+.footer-brand {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.footer-tagline {
+  color: #777;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 35px;
+}
+
+.footer-socials a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  transition: opacity 0.2s ease;
+}
+
+.footer-socials a:hover {
+  opacity: 0.55;
+}
+
+.footer-copy {
+  color: #555;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+  footer {
+    padding: 45px 20px 30px;
+  }
+
+  .footer-socials {
+    gap: 18px;
+  }
+
+  .footer-socials a {
+    font-size: 11px;
+  }
+}
 </style>
 </head>
 
@@ -449,8 +513,19 @@ nav {
   </main>
 
   <footer>
-    © 2026 NOTORIOUS™ — WEAR WHAT THEY WON’T.
-  </footer>
+  <div class="footer-brand">NOTORIOUS™</div>
+  <div class="footer-tagline">WEAR WHAT THEY WON’T.</div>
+
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/wear_notorious/" target="_blank">INSTAGRAM</a>
+    <a href="https://www.tiktok.com/@wear_notorious" target="_blank">TIKTOK</a>
+    <a href="https://www.facebook.com/wearnotorious" target="_blank">FACEBOOK</a>
+  </div>
+
+  <div class="footer-copy">
+    © 2026 NOTORIOUS™. All rights reserved.
+  </div>
+</footer>
 <script>
   function toggleMenu() {
     document.querySelector(".nav-links").classList.toggle("active");
