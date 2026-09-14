@@ -209,6 +209,85 @@
         height: 65px;
       }
     }
+    .size-guide-btn {
+  margin: 10px 0 16px;
+  padding: 10px 14px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.size-guide-btn:hover {
+  border-color: #fff;
+}
+
+.size-guide-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.size-guide-modal.active {
+  display: flex;
+}
+
+.size-guide-content {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.size-guide-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.size-guide-content h2 {
+  margin-bottom: 8px;
+}
+
+.size-guide-note,
+.size-guide-disclaimer {
+  color: #999;
+  font-size: 13px;
+}
+
+.size-guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 22px 0 16px;
+}
+
+.size-guide-table th,
+.size-guide-table td {
+  border: 1px solid #333;
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.size-guide-table th {
+  background: #1a1a1a;
+}
   </style>
 </head>
 
@@ -255,6 +334,7 @@
         >
       </div>
 
+      
     </section>
 
     <section class="product-info">
@@ -276,7 +356,9 @@
       </div>
 
       <span class="label">Choose size</span>
-
+<button type="button" class="size-guide-btn" onclick="openSizeGuide()">
+  SIZE GUIDE
+</button>
       <div class="sizes">
   <button class="size-btn" onclick="selectSize(this)">S</button>
   <button class="size-btn" onclick="selectSize(this)">M</button>
@@ -297,7 +379,37 @@
       <div class="cod-note">
         Pay when your order arrives.
       </div>
+<div id="sizeGuideModal" class="size-guide-modal">
+  <div class="size-guide-content">
+    <button class="size-guide-close" onclick="closeSizeGuide()">×</button>
 
+    <h2>SIZE GUIDE</h2>
+    <p class="size-guide-note">
+      Measurements are taken with the T-shirt laid flat.
+    </p>
+
+    <table class="size-guide-table">
+      <thead>
+        <tr>
+          <th>Size</th>
+          <th>Chest (A)</th>
+          <th>Length (B)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>S</td><td>48 cm</td><td>64 cm</td></tr>
+        <tr><td>M</td><td>50 cm</td><td>66 cm</td></tr>
+        <tr><td>L</td><td>52 cm</td><td>68 cm</td></tr>
+        <tr><td>XL</td><td>54 cm</td><td>70 cm</td></tr>
+        <tr><td>XXL</td><td>56 cm</td><td>72 cm</td></tr>
+      </tbody>
+    </table>
+
+    <p class="size-guide-disclaimer">
+      Actual measurements may vary by up to ±2 cm.
+    </p>
+  </div>
+</div>
     </section>
 
   </main>
@@ -323,7 +435,13 @@
       button.classList.add("active");
       selectedSize = button.textContent;
     }
+function openSizeGuide() {
+  document.getElementById("sizeGuideModal").classList.add("active");
+}
 
+function closeSizeGuide() {
+  document.getElementById("sizeGuideModal").classList.remove("active");
+}
     function orderNow() {
   if (!selectedSize) {
     alert("Please choose a size.");
