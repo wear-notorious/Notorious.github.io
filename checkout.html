@@ -326,18 +326,20 @@
     form.reportValidity();
     return;
   }
+const orderId = "NOT-" + Date.now();
 
-  const orderData = {
-    product: product,
-    price: price,
-    size: size,
-    quantity: quantity,
-    fullName: document.getElementById("name").value.trim(),
-    phone: document.getElementById("phone").value.trim(),
-    city: document.getElementById("city").value.trim(),
-    postalCode: document.getElementById("postal").value.trim(),
-    address: document.getElementById("address").value.trim()
-  };
+const orderData = {
+  orderId: orderId,
+  product: product,
+  price: price,
+  size: size,
+  quantity: quantity,
+  fullName: document.getElementById("name").value.trim(),
+  phone: document.getElementById("phone").value.trim(),
+  city: document.getElementById("city").value.trim(),
+  postalCode: document.getElementById("postal").value.trim(),
+  address: document.getElementById("address").value.trim()
+};
 
   const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwjaNDf--2jqHCmh27PNxa3ezvYiI9a4afwUsca5JMAALZkFUruZ1uD-FysKrOHNlftfg/exec";
 
@@ -352,6 +354,7 @@
     });
 
   const successParams = new URLSearchParams({
+  orderId: orderId,
   product: product,
   size: size,
   quantity: quantity,
