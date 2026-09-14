@@ -518,7 +518,7 @@ async function loadProducts() {
     const container = document.getElementById("productsContainer");
 
     container.innerHTML = products.map(product => `
-      <a href="${product.slug}.html"
+      <a href="product.html?slug=${product.slug}"
          class="product-card"
          style="display:flex; flex-direction:column; color:inherit; text-decoration:none;">
 
