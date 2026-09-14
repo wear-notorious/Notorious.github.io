@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>About Us — NOTORIOUS™</title>
+
+  <meta
+    name="description"
+    content="Discover NOTORIOUS™ — a streetwear brand made for those who choose their own path."
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #080808;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    /* HEADER */
+
+    header {
+      border-bottom: 1px solid #222;
+      background: #080808;
+    }
+
+    nav {
+      max-width: 1400px;
+      margin: auto;
+      padding: 22px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo img {
+      height: 85px;
+      width: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.6;
+    }
+
+    /* ABOUT */
+
+    .about-hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 90px 20px;
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    .about-hero-content {
+      max-width: 850px;
+    }
+
+    .eyebrow {
+      color: #777;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      margin-bottom: 22px;
+    }
+
+    .about-hero h1 {
+      font-size: clamp(42px, 7vw, 90px);
+      line-height: 0.95;
+      letter-spacing: -3px;
+      margin-bottom: 35px;
+    }
+
+    .intro {
+      color: #bbb;
+      max-width: 700px;
+      margin: auto;
+      font-size: 18px;
+    }
+
+    .statement {
+      max-width: 900px;
+      margin: auto;
+      padding: 110px 25px;
+    }
+
+    .statement p {
+      font-size: clamp(21px, 3vw, 34px);
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 32px;
+    }
+
+    .statement .muted {
+      color: #777;
+    }
+
+    /* MISSION + COMMUNITY */
+
+    .about-grid {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px 25px 120px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .about-card {
+      background: #0e0e0e;
+      border: 1px solid #252525;
+      border-radius: 18px;
+      padding: 55px 45px;
+    }
+
+    .about-card span {
+      display: block;
+      color: #666;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+
+    .about-card h2 {
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+
+    .about-card p {
+      color: #aaa;
+      font-size: 16px;
+    }
+
+    /* FINAL MESSAGE */
+
+    .final-message {
+      padding: 120px 20px;
+      text-align: center;
+      border-top: 1px solid #222;
+    }
+
+    .final-message p {
+      color: #888;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .final-message h2 {
+      max-width: 850px;
+      margin: auto;
+      font-size: clamp(30px, 5vw, 60px);
+      line-height: 1.1;
+    }
+
+    .final-slogan {
+      margin-top: 55px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid #222;
+      padding: 55px 20px 35px;
+      text-align: center;
+      background: #050505;
+    }
+
+    .footer-brand {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      color: #777;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 35px;
+    }
+
+    .footer-socials a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #292929;
+      border-radius: 50%;
+      transition: all 0.25s ease;
+    }
+
+    .footer-socials a:hover {
+      border-color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .footer-copy {
+      color: #555;
+      font-size: 11px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 18px 20px;
+      }
+
+      .logo img {
+        height: 65px;
+      }
+
+      .nav-links {
+        gap: 17px;
+      }
+
+      .nav-links a {
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+
+      .about-hero {
+        min-height: 60vh;
+        padding: 70px 22px;
+      }
+
+      .about-hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .intro {
+        font-size: 16px;
+      }
+
+      .statement {
+        padding: 75px 22px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        padding: 0 18px 80px;
+      }
+
+      .about-card {
+        padding: 38px 28px;
+      }
+
+      .final-message {
+        padding: 85px 22px;
+      }
+
+      .footer-socials {
+        gap: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+
+      <a class="logo" href="index.html">
+        <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo">
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html">HOME</a>
+        <a href="index.html#shop">SHOP</a>
+        <a href="about.html">ABOUT</a>
+      </div>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="about-hero">
+      <div class="about-hero-content">
+
+        <div class="eyebrow">THIS IS NOT JUST CLOTHING</div>
+
+        <h1>
+          NOT MADE<br>
+          TO FIT IN.
+        </h1>
+
+        <p class="intro">
+          NOTORIOUS™ was created for the people who think differently,
+          move differently, and refuse to become another copy in the crowd.
+        </p>
+
+      </div>
+    </section>
+
+    <section class="statement">
+
+      <p>
+        We believe what you wear should say something about you
+        before you even speak.
+      </p>
+
+      <p class="muted">
+        Every NOTORIOUS™ piece is made for people who choose their own
+        attitude, their own identity, and their own path.
+      </p>
+
+      <p>
+        Because being different was never something to hide.
+      </p>
+
+    </section>
+
+    <section class="about-grid">
+
+      <div class="about-card">
+        <span>01 — OUR MISSION</span>
+
+        <h2>Wear who you are.</h2>
+
+        <p>
+          Our mission is simple: create pieces that give you another way
+          to express yourself — without asking anyone for permission.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <span>02 — THE COMMUNITY</span>
+
+        <h2>This brand belongs to you too.</h2>
+
+        <p>
+          NOTORIOUS™ isn't about us telling you who to be.
+          It's about giving a home to everyone who refuses to let
+          the crowd decide for them.
+        </p>
+      </div>
+
+    </section>
+
+    <section class="final-message">
+
+      <p>If you've ever felt different, you're already one of us.</p>
+
+      <h2>
+        You're not just wearing NOTORIOUS™.<br>
+        You're part of it.
+      </h2>
+
+      <div class="final-slogan">
+        NOTORIOUS™ — WEAR WHAT THEY WON’T.
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <div class="footer-brand">NOTORIOUS™</div>
+    <div class="footer-tagline">WEAR WHAT THEY WON’T.</div>
+
+    <div class="footer-socials">
+
+      <a href="https://www.instagram.com/wear_notorious/"
+         target="_blank"
+         aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+
+      <a href="https://www.tiktok.com/@wear_notorious"
+         target="_blank"
+         aria-label="TikTok">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
+
+      <a href="https://www.facebook.com/wearnotorious"
+         target="_blank"
+         aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+
+    </div>
+
+    <div class="footer-copy">
+      © 2026 NOTORIOUS™. All rights reserved.
+    </div>
+
+  </footer>
+
+</body>
+</html>
