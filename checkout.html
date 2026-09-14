@@ -351,7 +351,14 @@
       body: JSON.stringify(orderData)
     });
 
-   window.location.href = "success.html";
+  const successParams = new URLSearchParams({
+  product: product,
+  size: size,
+  quantity: quantity,
+  total: Number(price) * Number(quantity)
+});
+
+window.location.href = "success.html?" + successParams.toString();
 
   } catch (error) {
     alert("Something went wrong. Please try again.");
