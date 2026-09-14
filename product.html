@@ -30,6 +30,273 @@
       letter-spacing: 2px;
       color: #aaa;
     }
+    .product-layout {
+  width: min(1180px, calc(100% - 40px));
+  margin: 60px auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.gallery {
+  min-width: 0;
+}
+
+.main-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #111;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #222;
+}
+
+.main-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.thumbnail {
+  padding: 0;
+  border: 1px solid #222;
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.thumbnail.active {
+  border-color: #fff;
+}
+
+.product-details {
+  padding-top: 10px;
+}
+
+.brand-label {
+  color: #888;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.product-details h1 {
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 22px;
+}
+
+.product-description {
+  color: #bbb;
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.product-meta {
+  padding: 18px 0;
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.size-section {
+  margin-top: 28px;
+}
+
+.size-section h3 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.size-btn {
+  min-width: 52px;
+  height: 46px;
+  padding: 0 14px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.size-btn:hover,
+.size-btn.active {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.size-guide-btn {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.quantity-section {
+  margin-top: 24px;
+}
+
+.quantity-section label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.quantity-section select {
+  width: 100px;
+  padding: 12px;
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
+.order-btn {
+  width: 100%;
+  margin-top: 28px;
+  padding: 16px 20px;
+  background: #fff;
+  color: #000;
+  border: 0;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.order-btn:hover {
+  opacity: 0.9;
+}
+
+.payment-note {
+  margin-top: 12px;
+  color: #777;
+  font-size: 12px;
+  text-align: center;
+}
+
+.size-guide-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.size-guide-modal.active {
+  display: flex;
+}
+
+.size-guide-content {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.size-guide-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: 0;
+  background: none;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.size-guide-note,
+.size-guide-disclaimer {
+  color: #999;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.size-guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 22px 0 16px;
+}
+
+.size-guide-table th,
+.size-guide-table td {
+  padding: 12px 8px;
+  border: 1px solid #333;
+  text-align: center;
+}
+
+.size-guide-table th {
+  background: #1a1a1a;
+}
+
+@media (max-width: 800px) {
+  .product-layout {
+    width: min(100% - 24px, 600px);
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin: 24px auto 50px;
+  }
+
+  .product-details h1 {
+    font-size: 32px;
+  }
+
+  .thumbnails {
+    gap: 8px;
+  }
+}
   </style>
 </head>
 
@@ -85,20 +352,210 @@ async function loadProduct() {
 
     document.title = product.product + " | NOTORIOUS™";
 
-    productPage.innerHTML = `
-      <div>
-        <h1>${product.product}</h1>
-        <p>${product.description}</p>
-        <strong>${product.price} MAD</strong>
+   const productImages = [
+  product.mainImage,
+  product.image2,
+  product.image3,
+  product.image4
+].filter(Boolean);
+
+const sizes = String(product.sizes || "")
+  .split(",")
+  .map(size => size.trim())
+  .filter(Boolean);
+
+productPage.classList.remove("loading");
+
+productPage.innerHTML = `
+  <main class="product-layout">
+
+    <section class="gallery">
+      <div class="main-image-wrap">
+        <img
+          id="mainProductImage"
+          class="main-product-image"
+          src="${productImages[0] || ""}"
+          alt="${product.product}"
+        >
       </div>
-    `;
+
+      <div class="thumbnails">
+        ${productImages.map((image, index) => `
+          <button
+            type="button"
+            class="thumbnail ${index === 0 ? "active" : ""}"
+            onclick="changeImage('${image}', this)"
+          >
+            <img src="${image}" alt="${product.product}">
+          </button>
+        `).join("")}
+      </div>
+    </section>
+
+    <section class="product-details">
+
+      <p class="brand-label">NOTORIOUS™</p>
+
+      <h1>${product.product}</h1>
+
+      <div class="product-price">${product.price} MAD</div>
+
+      <p class="product-description">${product.description}</p>
+
+      <div class="product-meta">
+        <p><strong>Material:</strong> ${product.material || "-"}</p>
+        <p><strong>Fit:</strong> ${product.fit || "-"}</p>
+      </div>
+
+      <div class="size-section">
+        <h3>CHOOSE SIZE</h3>
+
+        <div class="size-options">
+          ${sizes.map(size => `
+            <button
+              type="button"
+              class="size-btn"
+              onclick="selectSize('${size}', this)"
+            >
+              ${size}
+            </button>
+          `).join("")}
+        </div>
+
+        <button
+          type="button"
+          class="size-guide-btn"
+          onclick="openSizeGuide()"
+        >
+          SIZE GUIDE
+        </button>
+      </div>
+
+      <div class="quantity-section">
+        <label for="quantity">QUANTITY</label>
+
+        <select id="quantity">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+      <button
+        type="button"
+        class="order-btn"
+        onclick="orderNow()"
+      >
+        ORDER NOW
+      </button>
+
+      <p class="payment-note">
+        Cash on Delivery • Delivery included
+      </p>
+
+    </section>
+
+  </main>
+
+  <div id="sizeGuideModal" class="size-guide-modal">
+    <div class="size-guide-content">
+
+      <button
+        class="size-guide-close"
+        onclick="closeSizeGuide()"
+      >
+        ×
+      </button>
+
+      <h2>SIZE GUIDE</h2>
+
+      <p class="size-guide-note">
+        Measurements are taken with the T-shirt laid flat.
+      </p>
+
+      <table class="size-guide-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Chest (A)</th>
+            <th>Length (B)</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr><td>S</td><td>48 cm</td><td>64 cm</td></tr>
+          <tr><td>M</td><td>50 cm</td><td>66 cm</td></tr>
+          <tr><td>L</td><td>52 cm</td><td>68 cm</td></tr>
+          <tr><td>XL</td><td>54 cm</td><td>70 cm</td></tr>
+          <tr><td>XXL</td><td>56 cm</td><td>72 cm</td></tr>
+        </tbody>
+      </table>
+
+      <p class="size-guide-disclaimer">
+        Actual measurements may vary by up to ±2 cm.
+      </p>
+
+    </div>
+  </div>
+`;
+
+window.currentProduct = product;
 
   } catch (error) {
     console.error(error);
     productPage.innerHTML = "ERROR LOADING PRODUCT";
   }
 }
+let selectedSize = "";
 
+function changeImage(image, button) {
+  document.getElementById("mainProductImage").src = image;
+
+  document.querySelectorAll(".thumbnail").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+}
+
+function selectSize(size, button) {
+  selectedSize = size;
+
+  document.querySelectorAll(".size-btn").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  button.classList.add("active");
+}
+
+function openSizeGuide() {
+  document.getElementById("sizeGuideModal").classList.add("active");
+}
+
+function closeSizeGuide() {
+  document.getElementById("sizeGuideModal").classList.remove("active");
+}
+
+function orderNow() {
+  if (!selectedSize) {
+    alert("Please select a size.");
+    return;
+  }
+
+  const quantity = document.getElementById("quantity").value;
+  const product = window.currentProduct;
+
+  const params = new URLSearchParams({
+    product: product.product,
+    price: product.price,
+    size: selectedSize,
+    quantity: quantity
+  });
+
+  window.location.href = "checkout.html?" + params.toString();
+}
 loadProduct();
 </script>
   
