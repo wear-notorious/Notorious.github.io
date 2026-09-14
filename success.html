@@ -129,17 +129,39 @@
       Your order has been received successfully.
     </p>
 
-    <div class="info-box">
-      <p>
-        <span class="label">Payment:</span>
-        Cash on Delivery
-      </p>
+  <div class="info-box">
 
-      <p>
-        <span class="label">Next step:</span>
-        Your order will be confirmed by phone before delivery.
-      </p>
-    </div>
+  <p>
+    <span class="label">Product:</span>
+    <span id="productName"></span>
+  </p>
+
+  <p>
+    <span class="label">Size:</span>
+    <span id="productSize"></span>
+  </p>
+
+  <p>
+    <span class="label">Quantity:</span>
+    <span id="productQuantity"></span>
+  </p>
+
+  <p>
+    <span class="label">Total:</span>
+    <strong><span id="orderTotal"></span> MAD</strong>
+  </p>
+
+  <p>
+    <span class="label">Payment:</span>
+    Cash on Delivery
+  </p>
+
+  <p>
+    <span class="label">Next step:</span>
+    Your order will be confirmed by phone before delivery.
+  </p>
+
+</div>
 
     <a href="index.html" class="button">
       CONTINUE SHOPPING
@@ -150,6 +172,20 @@
     </p>
 
   </div>
+<script>
+  const params = new URLSearchParams(window.location.search);
 
+  document.getElementById("productName").textContent =
+    params.get("product") || "-";
+
+  document.getElementById("productSize").textContent =
+    params.get("size") || "-";
+
+  document.getElementById("productQuantity").textContent =
+    params.get("quantity") || "1";
+
+  document.getElementById("orderTotal").textContent =
+    params.get("total") || "0";
+</script>
 </body>
 </html>
