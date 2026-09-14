@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <head>
   <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
   <meta charset="UTF-8" />
@@ -367,14 +368,21 @@ nav {
 .footer-socials a {
   color: #fff;
   text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  transition: opacity 0.2s ease;
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #292929;
+  border-radius: 50%;
+  transition: all 0.25s ease;
 }
 
 .footer-socials a:hover {
-  opacity: 0.55;
+  border-color: #fff;
+  transform: translateY(-3px);
+  opacity: 1;
 }
 
 .footer-copy {
@@ -392,9 +400,6 @@ nav {
     gap: 18px;
   }
 
-  .footer-socials a {
-    font-size: 11px;
-  }
 }
 </style>
 </head>
@@ -517,10 +522,18 @@ nav {
   <div class="footer-tagline">WEAR WHAT THEY WON’T.</div>
 
   <div class="footer-socials">
-    <a href="https://www.instagram.com/wear_notorious/" target="_blank">INSTAGRAM</a>
-    <a href="https://www.tiktok.com/@wear_notorious" target="_blank">TIKTOK</a>
-    <a href="https://www.facebook.com/wearnotorious" target="_blank">FACEBOOK</a>
-  </div>
+  <a href="https://www.instagram.com/wear_notorious/" target="_blank" aria-label="Instagram">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
+
+  <a href="https://www.tiktok.com/@wear_notorious" target="_blank" aria-label="TikTok">
+    <i class="fa-brands fa-tiktok"></i>
+  </a>
+
+  <a href="https://www.facebook.com/wearnotorious" target="_blank" aria-label="Facebook">
+    <i class="fa-brands fa-facebook-f"></i>
+  </a>
+</div>
 
   <div class="footer-copy">
     © 2026 NOTORIOUS™. All rights reserved.
