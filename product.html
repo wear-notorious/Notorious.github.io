@@ -320,7 +320,19 @@ async function loadProduct() {
   }
 
   try {
-    const products = await new Promise((resolve, reject) => {
+    let products;
+
+const cachedProducts = localStorage.getItem("notoriousProducts");
+
+if (cachedProducts) {
+  try {
+    products = JSON.parse(cachedProducts);
+  } catch (error) {
+    console.error("Cache error:", error);
+  }
+}
+    if (!products) {
+  products = await new Promise((resolve, reject) => {
   const callbackName = "notoriousProductsCallback";
 
   window[callbackName] = function(data) {
@@ -340,7 +352,11 @@ async function loadProduct() {
 
   document.body.appendChild(script);
 });
-
+      }
+localStorage.setItem(
+  "notoriousProducts",
+  JSON.stringify(products)
+);
     const product = products.find(
       item => String(item.slug).toLowerCase() === slug.toLowerCase()
     );
