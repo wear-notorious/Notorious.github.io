@@ -53,8 +53,26 @@ async function loadProduct() {
   }
 
   try {
-    const response = await fetch(PRODUCTS_API_URL);
-    const products = await response.json();
+    const products = await new Promise((resolve, reject) => {
+  const callbackName = "notoriousProductsCallback";
+
+  window[callbackName] = function(data) {
+    resolve(data);
+    delete window[callbackName];
+    script.remove();
+  };
+
+  const script = document.createElement("script");
+  script.src = PRODUCTS_API_URL + "?callback=" + callbackName;
+
+  script.onerror = function() {
+    reject(new Error("Could not load products"));
+    delete window[callbackName];
+    script.remove();
+  };
+
+  document.body.appendChild(script);
+});
 
     const product = products.find(
       item => String(item.slug).toLowerCase() === slug.toLowerCase()
