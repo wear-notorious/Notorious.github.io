@@ -195,6 +195,29 @@
     @media (max-width: 800px) {
       .nav-links {
   display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #0a0a0a;
+  flex-direction: column;
+  padding: 25px 20px;
+  gap: 22px;
+  border-top: 1px solid #222;
+  z-index: 999;
+}
+
+.nav-links.active {
+  display: flex;
+}
+
+.menu-toggle {
+  display: block;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 nav {
@@ -260,6 +283,7 @@ nav {
         <a href="#shop">Shop</a>
         <a href="#about">About</a>
       </div>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">☰</button>
     </nav>
   </header>
 
@@ -354,6 +378,10 @@ nav {
   <footer>
     © 2026 NOTORIOUS™ — WEAR WHAT THEY WON’T.
   </footer>
-
+<script>
+  function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+  }
+</script>
 </body>
 </html>
