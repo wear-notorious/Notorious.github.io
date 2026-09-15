@@ -466,6 +466,126 @@ margin-right: 8px;
   }
 
 }
+    /* ===== NOTORIOUS IMAGE SLIDER ===== */
+
+.brand-slider {
+  position: relative;
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+}
+
+.slider-track {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.slider-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.slider-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slider-slide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ARROWS */
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 5;
+  backdrop-filter: blur(5px);
+}
+
+.slider-prev {
+  left: 25px;
+}
+
+.slider-next {
+  right: 25px;
+}
+
+.slider-arrow:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* DOTS */
+
+.slider-dots {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 9px;
+  z-index: 5;
+}
+
+.slider-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.slider-dot.active {
+  background: #fff;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .slider-track {
+    aspect-ratio: 16 / 9;
+  }
+
+  .slider-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .slider-prev {
+    left: 10px;
+  }
+
+  .slider-next {
+    right: 10px;
+  }
+
+  .slider-dots {
+    bottom: 12px;
+  }
+}
 </style>
 </head>
 
@@ -504,7 +624,38 @@ margin-right: 8px;
     <a class="btn" href="#shop">SHOP THE DROP</a>
   </div>
 </section>
+<!-- NOTORIOUS IMAGE SLIDER -->
+<section class="brand-slider">
+  <div class="slider-track">
 
+    <div class="slider-slide active">
+      <img src="images/slide-1.png" alt="NOTORIOUS Lifestyle">
+    </div>
+
+    <div class="slider-slide">
+      <img src="images/slide-2.png" alt="NOTORIOUS Lifestyle">
+    </div>
+
+    <div class="slider-slide">
+      <img src="images/slide-3.png" alt="NOTORIOUS Lifestyle">
+    </div>
+
+    <div class="slider-slide">
+      <img src="images/slide-4.png" alt="NOTORIOUS Lifestyle">
+    </div>
+
+  </div>
+
+  <button class="slider-arrow slider-prev" type="button">&#10094;</button>
+  <button class="slider-arrow slider-next" type="button">&#10095;</button>
+
+  <div class="slider-dots">
+    <button class="slider-dot active" type="button"></button>
+    <button class="slider-dot" type="button"></button>
+    <button class="slider-dot" type="button"></button>
+    <button class="slider-dot" type="button"></button>
+  </div>
+</section>
     <section id="shop">
       <div class="container">
         <h2 class="section-title">Latest Drops</h2>
@@ -616,6 +767,59 @@ async function loadProducts() {
   }
 }
 loadProducts();
+</script>
+  <script>
+  const sliderTrack = document.querySelector(".slider-track");
+  const sliderSlides = document.querySelectorAll(".slider-slide");
+  const sliderDots = document.querySelectorAll(".slider-dot");
+  const prevButton = document.querySelector(".slider-prev");
+  const nextButton = document.querySelector(".slider-next");
+
+  let currentSlide = 0;
+  let sliderInterval;
+
+  function showSlide(index) {
+    if (index >= sliderSlides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = sliderSlides.length - 1;
+    } else {
+      currentSlide = index;
+    }
+
+    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    sliderDots.forEach(dot => dot.classList.remove("active"));
+    sliderDots[currentSlide].classList.add("active");
+  }
+
+  function startSlider() {
+    clearInterval(sliderInterval);
+
+    sliderInterval = setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 4000);
+  }
+
+  nextButton.addEventListener("click", () => {
+    showSlide(currentSlide + 1);
+    startSlider();
+  });
+
+  prevButton.addEventListener("click", () => {
+    showSlide(currentSlide - 1);
+    startSlider();
+  });
+
+  sliderDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showSlide(index);
+      startSlider();
+    });
+  });
+
+  showSlide(0);
+  startSlider();
 </script>
 </body>
 </html>
