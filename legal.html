@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Privacy & Terms — NOTORIOUS™</title>
+
+  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #080808;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    /* HEADER */
+
+    header {
+      border-bottom: 1px solid #222;
+      background: #0a0a0a;
+    }
+
+    nav {
+      max-width: 1400px;
+      height: 100px;
+      margin: 0 auto;
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo img {
+      width: 85px;
+      height: auto;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.65;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    /* PAGE */
+
+    .legal-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 25px 100px;
+    }
+
+    .eyebrow {
+      color: #888;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 80px);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 25px;
+    }
+
+    .intro {
+      color: #aaa;
+      font-size: 17px;
+      max-width: 700px;
+      margin-bottom: 60px;
+    }
+
+    .legal-section {
+      padding: 35px 0;
+      border-top: 1px solid #222;
+    }
+
+    .legal-section h2 {
+      font-size: 23px;
+      margin-bottom: 15px;
+      letter-spacing: 0.5px;
+    }
+
+    .legal-section p {
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+
+    .legal-section ul {
+      color: #aaa;
+      padding-left: 22px;
+      margin-top: 10px;
+    }
+
+    .legal-section li {
+      margin-bottom: 8px;
+    }
+
+    .section-label {
+      color: #666;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid #222;
+      text-align: center;
+      padding: 45px 20px;
+      background: #080808;
+    }
+
+    footer strong {
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+
+    footer p {
+      color: #777;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .footer-links {
+      margin-top: 18px;
+    }
+
+    .footer-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 12px;
+      margin: 0 10px;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 768px) {
+
+      nav {
+        height: 80px;
+        padding: 0 20px;
+      }
+
+      .logo img {
+        width: 65px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        padding: 25px;
+        background: #0b0b0b;
+        border-top: 1px solid #222;
+        flex-direction: column;
+        gap: 25px;
+        z-index: 999;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .legal-container {
+        padding: 55px 20px 80px;
+      }
+
+      h1 {
+        font-size: 45px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav>
+
+    <a class="logo" href="index.html">
+      <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="index.html#shop">SHOP</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </div>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+      ☰
+    </button>
+
+  </nav>
+</header>
+
+
+<main class="legal-container">
+
+  <p class="eyebrow">NOTORIOUS™ / LEGAL</p>
+
+  <h1>PRIVACY<br>& TERMS.</h1>
+
+  <p class="intro">
+    Your privacy matters to us. This page explains how NOTORIOUS™
+    handles customer information and the terms that apply when
+    placing an order through our website.
+  </p>
+
+
+  <section class="legal-section">
+
+    <p class="section-label">01 / PRIVACY</p>
+    <h2>Information We Collect</h2>
+
+    <p>
+      When you place an order, we may collect information necessary
+      to process and deliver your purchase, including:
+    </p>
+
+    <ul>
+      <li>Full name</li>
+      <li>Phone number</li>
+      <li>City and delivery address</li>
+      <li>Postal code when provided</li>
+      <li>Product, size and quantity ordered</li>
+    </ul>
+
+  </section>
+
+
+  <section class="legal-section">
+
+    <p class="section-label">02 / PRIVACY</p>
+    <h2>How We Use Your Information</h2>
+
+    <p>
+      Your information is used only when reasonably necessary to
+      process your order, confirm it, arrange delivery, provide
+      customer support, and manage our store operations.
+    </p>
+
+    <p>
+      Order information may be shared with service providers involved
+      in fulfilling and delivering your order when necessary to
+      complete your purchase.
+    </p>
+
+  </section>
+
+
+  <section class="legal-section">
+
+    <p class="section-label">03 / PRIVACY</p>
+    <h2>Data Protection</h2>
+
+    <p>
+      We take reasonable measures to protect customer information.
+      We do not sell your personal information to third parties.
+    </p>
+
+  </section>
+
+
+  <section class="legal-section">
+
+    <p class="section-label">04 / ORDERS</p>
+    <h2>Orders & Payment</h2>
+
+    <p>
+      Orders placed through NOTORIOUS™ are subject to availability
+      and confirmation.
+    </p>
+
+    <p>
+      Payment is made by Cash on Delivery (COD). The customer pays
+      the order amount when the order is delivered. No online card
+      payment is required through this website.
+    </p>
+
+  </section>
+
+
+  <section class="legal-section">
+
+    <p class="section-label">05 / DELIVERY</p>
+    <h2>Shipping</h2>
+
+    <p>
+      We currently deliver within Morocco. Delivery times may vary
+      depending on the destination, order processing and circumstances
+      outside our reasonable control.
+    </p>
+
+    <p>
+      For more information, please read our
+      <a href="shipping.html" style="color:#fff;">Shipping & Returns</a>
+      page.
+    </p>
+
+  </section>
+
+
+  <section class="legal-section">
+
+    <p class="section-label">06 / RETURNS</p>
+    <h2>Returns & Order Issues</h2>
+
+    <p>
+      Customers should verify their selected product and size before
+      submitting an order.
+    </p>
+
+    <p>
+      If an item arrives damaged, defective, or different from the
+      item ordered, please contact us as soon as possible so the
+      issue can be reviewed.
+    </p>
+
+  </section>
+
+
+  <section class="legal-section">
+
+    <p class="section-label">07 / PRODUCTS</p>
+    <h2>Product Information</h2>
+
+    <p>
+      We aim to display our products as accurately as possible.
+      However, slight differences in color or appearance may occur
+      depending on lighting, photography and the customer's screen.
+    </p>
+
+  </section>
+
+
+  <section class="legal-section">
+
+    <p class="section-label">08 / TERMS</p>
+    <h2>Website Use</h2>
+
+    <p>
+      Content displayed on this website, including NOTORIOUS™ branding,
+      graphics, product designs, photographs and written content, may
+      not be copied, reproduced or used commercially without permission.
+    </p>
+
+  </section>
+
+
+  <section class="legal-section">
+
+    <p class="section-label">09 / CONTACT</p>
+    <h2>Questions?</h2>
+
+    <p>
+      If you have a question about an order, privacy, shipping or these
+      terms, you can reach us through our Contact page.
+    </p>
+
+    <p>
+      <a href="contact.html" style="color:#fff;">Contact NOTORIOUS™ →</a>
+    </p>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <strong>NOTORIOUS™</strong>
+
+  <p>WEAR WHAT THEY WON'T.</p>
+
+  <div class="footer-links">
+    <a href="shipping.html">Shipping & Returns</a>
+    <a href="legal.html">Privacy & Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <p>© 2026 NOTORIOUS™. All rights reserved.</p>
+
+</footer>
+
+
+<script>
+  function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>
