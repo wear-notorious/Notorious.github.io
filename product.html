@@ -213,6 +213,24 @@
 .order-btn:hover {
   opacity: 0.9;
 }
+    .add-cart-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 16px 20px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.add-cart-btn:hover {
+  background: #fff;
+  color: #000;
+}
 
 .payment-note {
   margin-top: 12px;
@@ -347,7 +365,31 @@
   display: flex;
   align-items: center;
 }
+.cart-button {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #fff;
+  color: #000;
+  font-size: 10px;
+  font-weight: 800;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .nav-links {
   display: flex;
   align-items: center;
@@ -443,7 +485,10 @@
       <a href="about.html">ABOUT</a>
       <a href="contact.html">CONTACT</a>
     </nav>
-
+<a href="cart.html" class="cart-button" aria-label="Shopping cart">
+  <i class="fa-solid fa-bag-shopping"></i>
+  <span class="cart-count" id="cartCount">0</span>
+</a>
     <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
       ☰
     </button>
@@ -607,6 +652,14 @@ productPage.innerHTML = `
         </select>
       </div>
 
+<button
+  type="button"
+  class="add-cart-btn"
+  onclick="addToCart()"
+>
+  ADD TO CART
+</button>
+
       <button
         type="button"
         class="order-btn"
@@ -701,7 +754,41 @@ function openSizeGuide() {
 function closeSizeGuide() {
   document.getElementById("sizeGuideModal").classList.remove("active");
 }
+function addToCart() {
+  if (!selectedSize) {
+    alert("Please select a size.");
+    return;
+  }
 
+  const quantity = parseInt(document.getElementById("quantity").value);
+  const product = window.currentProduct;
+
+  let cart = JSON.parse(localStorage.getItem("notoriousCart")) || [];
+
+  const existingItem = cart.find(
+    item => item.slug === product.slug && item.size === selectedSize
+  );
+
+  if (existingItem) {
+    existingItem.quantity += quantity;
+  } else {
+    cart.push({
+      slug: product.slug,
+      product: product.product,
+      price: Number(product.price),
+      image: product.mainImage,
+      size: selectedSize,
+      quantity: quantity
+    });
+  }
+
+  localStorage.setItem("notoriousCart", JSON.stringify(cart));
+  
+const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+document.getElementById("cartCount").textContent = cartCount;
+  
+  alert("Added to cart!");
+}
 function orderNow() {
   if (!selectedSize) {
     alert("Please select a size.");
@@ -725,6 +812,17 @@ function orderNow() {
 }
   
 loadProduct();
+  function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("notoriousCart")) || [];
+  const total = cart.reduce((sum, item) => sum + Number(item.quantity), 0);
+
+  const cartCount = document.getElementById("cartCount");
+  if (cartCount) {
+    cartCount.textContent = total;
+  }
+}
+
+updateCartCount();
 </script>
   
 </body>
