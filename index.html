@@ -735,8 +735,19 @@ margin-right: 8px;
 </footer>
 <script>
   function toggleMenu() {
-    document.querySelector(".nav-links").classList.toggle("active");
+  const menu = document.querySelector(".nav-links");
+  const button = document.querySelector(".menu-toggle");
+
+  menu.classList.toggle("active");
+
+  if (menu.classList.contains("active")) {
+    button.innerHTML = "✕";
+    button.setAttribute("aria-label", "Close menu");
+  } else {
+    button.innerHTML = "☰";
+    button.setAttribute("aria-label", "Open menu");
   }
+}
   const PRODUCTS_API_URL = "https://script.google.com/macros/s/AKfycbyIP21O7KWxxv4T-4N1mUXLgnQaKPS3Hp12S8tKIPKV7XlQBHBOS6D3v0TGSiq6Zp41Gw/exec";
 
 function renderProducts(products) {
