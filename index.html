@@ -69,7 +69,30 @@
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  padding-bottom: 6px;
+}
 
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: white;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus::after,
+.nav-links a:active::after {
+  width: 100%;
+}
    .hero {
     min-height: 92vh;
     position: relative;
