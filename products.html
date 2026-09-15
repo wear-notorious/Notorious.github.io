@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>All Products | NOTORIOUS™</title>
+
+  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #080808;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+
+    header {
+      position: relative;
+      background: #090909;
+      border-bottom: 1px solid #222;
+      z-index: 1000;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      height: 105px;
+      margin: auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-logo {
+      width: 85px;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 42px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      transition: opacity .2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      opacity: .65;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      color: #fff;
+      font-size: 32px;
+      cursor: pointer;
+    }
+
+    /* PAGE HERO */
+
+    .shop-hero {
+      max-width: 1400px;
+      margin: auto;
+      padding: 65px 40px 45px;
+    }
+
+    .shop-hero span {
+      color: #777;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .shop-hero h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: .95;
+      letter-spacing: -2px;
+      margin-top: 12px;
+    }
+
+    .shop-hero p {
+      color: #999;
+      margin-top: 18px;
+      max-width: 550px;
+      line-height: 1.6;
+    }
+
+    /* TOOLBAR */
+
+    .shop-toolbar {
+      max-width: 1400px;
+      margin: auto;
+      padding: 0 40px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid #222;
+    }
+
+    #productCount {
+      color: #888;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .filter-mobile,
+    select {
+      background: #111;
+      color: #fff;
+      border: 1px solid #2b2b2b;
+      border-radius: 8px;
+      min-height: 42px;
+      padding: 0 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter-mobile {
+      display: none;
+    }
+
+    /* SHOP */
+
+    .shop-layout {
+      max-width: 1400px;
+      margin: auto;
+      padding: 35px 40px 80px;
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 40px;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      border-right: 1px solid #222;
+      padding-right: 30px;
+    }
+
+    .sidebar-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .sidebar-top h3 {
+      font-size: 14px;
+      letter-spacing: 1.5px;
+    }
+
+    .close-filter {
+      display: none;
+      background: none;
+      color: #fff;
+      border: 0;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .filter-group {
+      padding: 0 0 28px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid #222;
+    }
+
+    .filter-group h4 {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      margin-bottom: 17px;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #aaa;
+      font-size: 13px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .filter-option input {
+      accent-color: white;
+    }
+
+    .price-filter {
+      width: 100%;
+      background: #111;
+      border: 1px solid #2a2a2a;
+      color: white;
+      padding: 11px;
+      border-radius: 7px;
+    }
+
+    /* PRODUCTS */
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .product-card {
+      min-width: 0;
+      background: #101010;
+      border: 1px solid #222;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: #444;
+    }
+
+    .product-image {
+      aspect-ratio: 1 / 1;
+      background: #f4f4f4;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.025);
+    }
+
+    .product-info {
+      padding: 18px;
+    }
+
+    .product-info h3 {
+      font-size: 15px;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    .product-price {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      color: #888;
+      padding: 70px 0;
+      text-align: center;
+    }
+
+    /* MOBILE FILTER OVERLAY */
+
+    .filter-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.7);
+      z-index: 1999;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid #222;
+      text-align: center;
+      padding: 55px 20px 35px;
+    }
+
+    .footer-brand {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    .footer-tagline {
+      color: #777;
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin-top: 10px;
+    }
+
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 28px 0;
+    }
+
+    .footer-socials a {
+      width: 46px;
+      height: 46px;
+      border: 1px solid #333;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 19px;
+    }
+
+    .footer-links {
+      margin-bottom: 25px;
+    }
+
+    .footer-links a {
+      color: #888;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 0 8px;
+    }
+
+    .footer-copy {
+      color: #555;
+      font-size: 11px;
+    }
+
+    /* TABLET */
+
+    @media (max-width: 1000px) {
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+      .header-container {
+        height: 95px;
+        padding: 0 25px;
+      }
+
+      .site-logo {
+        width: 65px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #090909;
+        border-top: 1px solid #222;
+        border-bottom: 1px solid #222;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+        padding: 25px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .shop-hero {
+        padding: 45px 20px 30px;
+      }
+
+      .shop-hero h1 {
+        font-size: 42px;
+      }
+
+      .shop-toolbar {
+        padding: 0 20px 20px;
+      }
+
+      .filter-mobile {
+        display: block;
+      }
+
+      .shop-layout {
+        display: block;
+        padding: 25px 14px 60px;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: min(85%, 340px);
+        height: 100vh;
+        overflow-y: auto;
+        background: #0b0b0b;
+        border-right: 1px solid #333;
+        padding: 30px 25px;
+        z-index: 2000;
+        transition: left .3s ease;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .close-filter {
+        display: block;
+      }
+
+      .filter-overlay.active {
+        display: block;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .product-card {
+        border-radius: 10px;
+      }
+
+      .product-info {
+        padding: 11px 10px 13px;
+      }
+
+      .product-info h3 {
+        font-size: 13px;
+        line-height: 1.3;
+        min-height: 34px;
+      }
+
+      .product-price {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-container">
+
+    <a href="index.html">
+      <img
+        src="images/Notorious-Logo-White.png"
+        alt="NOTORIOUS™"
+        class="site-logo"
+      >
+    </a>
+
+    <nav class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="products.html" class="active">PRODUCTS</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+      ☰
+    </button>
+
+  </div>
+</header>
+
+<section class="shop-hero">
+  <span>NOTORIOUS™ COLLECTION</span>
+  <h1>ALL PRODUCTS</h1>
+  <p>
+    Explore the complete NOTORIOUS™ collection.
+    Made for those who wear what they won't.
+  </p>
+</section>
+
+<div class="shop-toolbar">
+
+  <div id="productCount">
+    LOADING PRODUCTS...
+  </div>
+
+  <div class="toolbar-actions">
+
+    <button class="filter-mobile" onclick="openFilters()">
+      <i class="fa-solid fa-sliders"></i>
+      FILTER
+    </button>
+
+    <select id="sortProducts" onchange="applyFilters()">
+      <option value="default">SORT BY</option>
+      <option value="low">PRICE: LOW TO HIGH</option>
+      <option value="high">PRICE: HIGH TO LOW</option>
+      <option value="az">NAME: A–Z</option>
+    </select>
+
+  </div>
+</div>
+
+<div class="shop-layout">
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-top">
+      <h3>FILTERS</h3>
+
+      <button class="close-filter" onclick="closeFilters()">
+        ×
+      </button>
+    </div>
+
+    <div class="filter-group">
+      <h4>AVAILABILITY</h4>
+
+      <label class="filter-option">
+        <input
+          type="checkbox"
+          id="activeOnly"
+          checked
+          onchange="applyFilters()"
+        >
+        In stock
+      </label>
+    </div>
+
+    <div class="filter-group">
+      <h4>SIZE</h4>
+
+      <label class="filter-option">
+        <input type="checkbox" class="size-filter" value="S" onchange="applyFilters()">
+        S
+      </label>
+
+      <label class="filter-option">
+        <input type="checkbox" class="size-filter" value="M" onchange="applyFilters()">
+        M
+      </label>
+
+      <label class="filter-option">
+        <input type="checkbox" class="size-filter" value="L" onchange="applyFilters()">
+        L
+      </label>
+
+      <label class="filter-option">
+        <input type="checkbox" class="size-filter" value="XL" onchange="applyFilters()">
+        XL
+      </label>
+
+      <label class="filter-option">
+        <input type="checkbox" class="size-filter" value="XXL" onchange="applyFilters()">
+        XXL
+      </label>
+    </div>
+
+    <div class="filter-group">
+      <h4>MAX PRICE</h4>
+
+      <input
+        class="price-filter"
+        type="number"
+        id="maxPrice"
+        placeholder="Example: 200 MAD"
+        oninput="applyFilters()"
+      >
+    </div>
+
+  </aside>
+
+  <main>
+    <div class="products-grid" id="productsGrid">
+      <div class="empty-state">Loading collection...</div>
+    </div>
+  </main>
+
+</div>
+
+<div
+  class="filter-overlay"
+  id="filterOverlay"
+  onclick="closeFilters()"
+></div>
+
+<footer>
+
+  <div class="footer-brand">NOTORIOUS™</div>
+
+  <div class="footer-tagline">
+    WEAR WHAT THEY WON’T.
+  </div>
+
+  <div class="footer-socials">
+
+    <a
+      href="https://www.instagram.com/wear_notorious/"
+      target="_blank"
+      aria-label="Instagram"
+    >
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <a
+      href="https://www.tiktok.com/@wear_notorious"
+      target="_blank"
+      aria-label="TikTok"
+    >
+      <i class="fa-brands fa-tiktok"></i>
+    </a>
+
+    <a
+      href="https://www.facebook.com/wearnotorious"
+      target="_blank"
+      aria-label="Facebook"
+    >
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+  </div>
+
+  <div class="footer-links">
+    <a href="shipping.html">Shipping & Returns</a>
+    <a href="legal.html">Privacy & Terms</a>
+  </div>
+
+  <div class="footer-copy">
+    © 2026 NOTORIOUS™. All rights reserved.
+  </div>
+
+</footer>
+
+<script>
+  const PRODUCTS_API_URL =
+    "https://script.google.com/macros/s/AKfycbyIP21O7KWxxv4T-4N1mUXLgnQaKPS3Hp12S8tKIPKV7X1QBHBOS6D3v0TGSiq6Zp41Gw/exec";
+
+  let allProducts = [];
+
+  function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+  }
+
+  function openFilters() {
+    document.getElementById("sidebar").classList.add("active");
+    document.getElementById("filterOverlay").classList.add("active");
+  }
+
+  function closeFilters() {
+    document.getElementById("sidebar").classList.remove("active");
+    document.getElementById("filterOverlay").classList.remove("active");
+  }
+
+  function renderProducts(products) {
+    const grid = document.getElementById("productsGrid");
+
+    document.getElementById("productCount").textContent =
+      products.length + (products.length === 1 ? " PRODUCT" : " PRODUCTS");
+
+    if (!products.length) {
+      grid.innerHTML =
+        '<div class="empty-state">No products found.</div>';
+      return;
+    }
+
+    grid.innerHTML = products.map(product => `
+      <a
+        href="product.html?slug=${encodeURIComponent(product.slug)}"
+        class="product-card"
+      >
+        <div class="product-image">
+          <img
+            src="${product.mainImage}"
+            alt="${product.product}"
+            loading="lazy"
+          >
+        </div>
+
+        <div class="product-info">
+          <h3>${product.product}</h3>
+          <div class="product-price">${product.price} MAD</div>
+        </div>
+      </a>
+    `).join("");
+  }
+
+  function applyFilters() {
+    let products = [...allProducts];
+
+    const activeOnly =
+      document.getElementById("activeOnly").checked;
+
+    if (activeOnly) {
+      products = products.filter(product =>
+        !product.status ||
+        String(product.status).toLowerCase() === "active"
+      );
+    }
+
+    const selectedSizes = [
+      ...document.querySelectorAll(".size-filter:checked")
+    ].map(input => input.value);
+
+    if (selectedSizes.length) {
+      products = products.filter(product => {
+        const sizes = String(product.sizes || "")
+          .split(",")
+          .map(size => size.trim().toUpperCase());
+
+        return selectedSizes.some(size =>
+          sizes.includes(size)
+        );
+      });
+    }
+
+    const maxPrice =
+      Number(document.getElementById("maxPrice").value);
+
+    if (maxPrice > 0) {
+      products = products.filter(product =>
+        Number(product.price) <= maxPrice
+      );
+    }
+
+    const sort =
+      document.getElementById("sortProducts").value;
+
+    if (sort === "low") {
+      products.sort((a, b) =>
+        Number(a.price) - Number(b.price)
+      );
+    }
+
+    if (sort === "high") {
+      products.sort((a, b) =>
+        Number(b.price) - Number(a.price)
+      );
+    }
+
+    if (sort === "az") {
+      products.sort((a, b) =>
+        String(a.product).localeCompare(String(b.product))
+      );
+    }
+
+    renderProducts(products);
+  }
+
+  function initializeProducts(products) {
+    allProducts = Array.isArray(products) ? products : [];
+
+    localStorage.setItem(
+      "notoriousProducts",
+      JSON.stringify(allProducts)
+    );
+
+    applyFilters();
+  }
+
+  const cachedProducts =
+    localStorage.getItem("notoriousProducts");
+
+  if (cachedProducts) {
+    try {
+      initializeProducts(JSON.parse(cachedProducts));
+    } catch (error) {
+      console.error("Cache error:", error);
+    }
+  }
+
+  const callbackName =
+    "notoriousProductsListingCallback";
+
+  window[callbackName] = function(products) {
+    initializeProducts(products);
+
+    delete window[callbackName];
+
+    const script =
+      document.getElementById("productsApiScript");
+
+    if (script) {
+      script.remove();
+    }
+  };
+
+  const script =
+    document.createElement("script");
+
+  script.id = "productsApiScript";
+
+  script.src =
+    PRODUCTS_API_URL +
+    "?callback=" +
+    callbackName +
+    "&t=" +
+    Date.now();
+
+  script.onerror = function() {
+    if (!allProducts.length) {
+      document.getElementById("productsGrid").innerHTML =
+        '<div class="empty-state">Could not load products.</div>';
+
+      document.getElementById("productCount").textContent =
+        "PRODUCTS";
+    }
+  };
+
+  document.body.appendChild(script);
+</script>
+
+</body>
+</html>
