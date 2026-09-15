@@ -68,9 +68,28 @@
       letter-spacing: 2px;
     }
 
-    .nav-links a:hover {
-      opacity: 0.6;
-    }
+    .nav-links a {
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: white;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus::after,
+.nav-links a:active::after {
+  width: 100%;
+}
 
     .menu-toggle {
       display: none;
