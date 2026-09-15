@@ -45,29 +45,83 @@
       border-bottom: 1px solid #222;
     }
 
-    nav {
-      max-width: 1200px;
-      margin: auto;
-      padding: 18px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+   nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px 24px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  position: relative;
+}
 
     .logo {
       font-size: 1.25rem;
       font-weight: 800;
       letter-spacing: 2px;
     }
+    .logo {
+  justify-self: center;
+  grid-column: 2;
+}
+    .menu-toggle {
+  justify-self: start;
+  grid-column: 1;
+  grid-row: 1;
+}
+    .cart-button {
+  justify-self: end;
+  grid-column: 3;
+  grid-row: 1;
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+}
+    .cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: white;
+  color: black;
+  font-size: 10px;
+  font-weight: 800;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
     .nav-links {
-  display: flex;
+  display: none;
   gap: 30px;
   font-size: 0.95rem;
   font-family: "Arial Black", Arial, sans-serif;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
+}
+    .nav-links.active {
+  display: flex;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 20px 0;
+  background: #0a0a0a;
+  border-top: 1px solid #222;
+  z-index: 1000;
+}
+
+.nav-links.active a {
+  width: 100%;
+  padding: 16px 24px;
+  text-align: center;
 }
 .nav-links a {
   position: relative;
@@ -337,14 +391,28 @@
   color: white;
   font-size: 30px;
   cursor: pointer;
+  justify-self: start;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 nav {
   padding: 14px 18px;
 }
-
+      
+.logo {
+  justify-self: center;
+  grid-column: 2;
+  grid-row: 1;
+}
 .logo img {
   height: 58px !important;
+}
+      .cart-button {
+  justify-self: end;
+  grid-column: 3;
+  grid-row: 1;
+  display: block;
 }
 
 .products {
@@ -553,20 +621,33 @@ margin-right: 8px;
 
 <body>
 
-  <header>
-    <nav>
-<div class="logo">
-  <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo" style="height:85px; width:auto; display:block;">
-</div>
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="products.html">PRODUCTS</a>
-       <a href="about.html">ABOUT</a>
+ <header>
+  <nav>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+      ☰
+    </button>
+
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo" style="height:85px; width:auto; display:block;">
+      </a>
+    </div>
+
+    <div class="nav-links">
+      <a href="#home">HOME</a>
+      <a href="products.html">PRODUCTS</a>
+      <a href="about.html">ABOUT</a>
       <a href="contact.html">CONTACT</a>
-      </div>
-      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">☰</button>
-    </nav>
-  </header>
+    </div>
+
+    <a href="#" class="cart-button" aria-label="Shopping cart">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span class="cart-count">0</span>
+    </a>
+
+  </nav>
+</header>
 
   <main>
 
