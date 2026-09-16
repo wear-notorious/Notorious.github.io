@@ -728,220 +728,114 @@
   }
 }
 
-    /* YOU MAY ALSO LIKE */
-.recommendations-section {
-  margin-top: 70px;
-  padding-top: 45px;
-  border-top: 1px solid #222;
-  min-width: 0;
+@media (max-width: 768px) {
 }
 
-    .recommendations-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 25px;
+    /* YOU MIGHT ALSO LIKE */
+
+.might-like-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 90px 40px 75px;
 }
 
-.recommendations-header h2 {
+.might-like-header {
+  margin-bottom: 32px;
+}
+
+.might-like-header span {
+  display: block;
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.might-like-header h2 {
   margin: 0;
-}
-
-.recommendations-arrows {
-  display: flex;
-  gap: 8px;
-}
-
-.recommendations-arrows button {
-  width: 42px;
-  height: 42px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: transparent;
   color: #fff;
-  border: 1px solid #333;
-  border-radius: 50%;
-
-  font-size: 27px;
-  line-height: 1;
-  cursor: pointer;
-
-  transition: background 0.2s ease, color 0.2s ease;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
 }
 
-      cursor: pointer;
+.might-like-grid {
+  display: flex;
+  gap: 18px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 15px;
+  scrollbar-width: none;
 }
 
-.recommendations-arrows button {
-  transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+.might-like-grid::-webkit-scrollbar {
+  display: none;
 }
 
-.recommendations-arrows button:hover {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
-  transform: scale(1.08);
+.might-like-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  color: #fff;
+  text-decoration: none;
 }
 
-.recommendations-arrows button:active {
-  transform: scale(0.95);
+.might-like-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  background: #111;
+}
+
+.might-like-card h3 {
+  margin: 12px 0 5px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.might-like-price {
+  color: #aaa;
+  font-size: 13px;
+}
+
+.might-like-action {
+  margin-top: 30px;
+}
+
+.might-like-action a {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid #555;
+  padding-bottom: 5px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+@media (max-width: 800px) {
+  .might-like-section {
+    padding: 65px 20px 55px;
+  }
+
+  .might-like-header h2 {
+    font-size: 22px;
+  }
+
+  .might-like-grid {
+    gap: 12px;
+  }
+
+  .might-like-card {
+    flex: 0 0 72%;
+  }
 }
     
-.recommendations-section h2 {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 1.5px;
-}
-
-.recommendations-grid {
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  gap: 18px;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-
-  padding-bottom: 12px;
-}
-
-.recommendations-grid {
-  scrollbar-width: none;
-}
-
-.recommendations-grid::-webkit-scrollbar {
-  display: none;
-}
-
-.recommendation-card {
-  flex: 0 0 260px;
-  scroll-snap-align: start;
-
-  color: #fff;
-  text-decoration: none;
-}
-
-.recommendation-card img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  display: block;
-  border-radius: 12px;
-  background: #111;
-}
-
-.recommendation-card h3 {
-  margin: 12px 0 5px;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.recommendation-card .recommendation-price {
-  font-size: 13px;
-  color: #aaa;
-}
-    /* RECENTLY VIEWED */
-
-.recently-viewed-section {
-  margin-top: 70px;
-  padding-top: 45px;
-  border-top: 1px solid #222;
-  min-width: 0;
-}
-
-.recently-viewed-header {
-  margin-bottom: 25px;
-  min-height: 42px;
-  display: flex;
-  align-items: center;
-}
-
-.recently-viewed-header h2 {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 1.5px;
-}
-
-.recently-viewed-grid {
-  display: flex;
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  gap: 18px;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-
-  padding-bottom: 12px;
-  scrollbar-width: none;
-}
-
-.recently-viewed-grid::-webkit-scrollbar {
-  display: none;
-}
-
-.recently-viewed-card {
-  flex: 0 0 260px;
-  scroll-snap-align: start;
-  color: #fff;
-  text-decoration: none;
-}
-
-.recently-viewed-card img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  display: block;
-  border-radius: 12px;
-  background: #111;
-}
-
-.recently-viewed-card h3 {
-  margin: 12px 0 5px;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.recently-viewed-price {
-  font-size: 13px;
-  color: #aaa;
-}
-
-@media (max-width: 768px) {
-  .recommendations-section {
-    margin-top: 50px;
-    padding-top: 35px;
-    width: auto;
-    margin-left: 0;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .recommendations-section h2 {
-    font-size: 18px;
-  }
-
-  .recommendations-grid {
-  gap: 12px;
-}
-
-}
-
     footer {
   border-top: 1px solid #222;
   padding: 55px 20px 35px;
@@ -1243,40 +1137,25 @@ productPage.innerHTML = `
 
     </section>
 
-    <!-- YOU MAY ALSO LIKE -->
-<section class="recommendations-section">
- <div class="recommendations-header">
-  <h2>YOU MAY ALSO LIKE</h2>
-
-  <div class="recommendations-arrows">
-    <button type="button" onclick="scrollRecommendations(-1)" aria-label="Previous products">
-      ‹
-    </button>
-
-    <button type="button" onclick="scrollRecommendations(1)" aria-label="Next products">
-      ›
-    </button>
-  </div>
-</div>
-
-  <div
-    class="recommendations-grid"
-    id="recommendationsGrid"
-  ></div>
-</section>
-
-<!-- RECENTLY VIEWED -->
-<section class="recently-viewed-section">
-  <div class="recently-viewed-header">
-    <h2>RECENTLY VIEWED</h2>
-  </div>
-
-  <div class="recently-viewed-grid" id="recentlyViewedGrid"></div>
-</section>
-
   </main>
 
   </main>
+
+<!-- YOU MIGHT ALSO LIKE -->
+<section class="might-like-section">
+  <div class="might-like-header">
+    <span>KEEP EXPLORING</span>
+    <h2>YOU MIGHT ALSO LIKE</h2>
+  </div>
+
+  <div class="might-like-grid" id="mightLikeGrid">
+    <!-- Products will load automatically -->
+  </div>
+
+  <div class="might-like-action">
+    <a href="products.html">VIEW ALL PRODUCTS →</a>
+  </div>
+</section>
 
 <footer>
   <div class="footer-brand">NOTORIOUS™</div>
@@ -1367,76 +1246,16 @@ productPage.innerHTML = `
   </div>
 `;
 
-window.currentProduct = product;
-    /* RECENTLY VIEWED */
+    const mightLikeGrid = document.getElementById("mightLikeGrid");
 
-const recentlyViewedGrid = document.getElementById("recentlyViewedGrid");
-
-let recentlyViewed = JSON.parse(
-  localStorage.getItem("notoriousRecentlyViewed") || "[]"
-);
-
-/* Show products viewed BEFORE the current one */
-if (recentlyViewedGrid) {
-  const previousProducts = recentlyViewed
+if (mightLikeGrid) {
+  const mightLikeProducts = [...products]
     .filter(item => item.slug !== product.slug)
+    .sort(() => Math.random() - 0.5)
     .slice(0, 8);
 
-  if (previousProducts.length > 0) {
-    recentlyViewedGrid.innerHTML = previousProducts.map(item => `
-      <a
-        href="product.html?slug=${item.slug}"
-        class="recently-viewed-card"
-      >
-        <img
-          src="${item.mainImage}"
-          alt="${item.product}"
-          loading="lazy"
-        >
-
-        <h3>${item.product}</h3>
-
-        <div class="recently-viewed-price">
-          ${item.price} MAD
-        </div>
-      </a>
-    `).join("");
-  } else {
-    document.querySelector(".recently-viewed-section").style.display = "none";
-  }
-}
-
-/* Save current product */
-recentlyViewed = recentlyViewed.filter(
-  item => item.slug !== product.slug
-);
-
-recentlyViewed.unshift({
-  slug: product.slug,
-  product: product.product,
-  price: product.price,
-  mainImage: product.mainImage
-});
-
-recentlyViewed = recentlyViewed.slice(0, 8);
-
-localStorage.setItem(
-  "notoriousRecentlyViewed",
-  JSON.stringify(recentlyViewed)
-);
-    
-const recommendationsGrid = document.getElementById("recommendationsGrid");
-
-if (recommendationsGrid) {
-  const recommendedProducts = products
-    .filter(item => item.slug !== product.slug)
-    .slice(0, 10);
-
-  recommendationsGrid.innerHTML = recommendedProducts.map(item => `
-    <a
-      href="product.html?slug=${item.slug}"
-      class="recommendation-card"
-    >
+  mightLikeGrid.innerHTML = mightLikeProducts.map(item => `
+    <a href="product.html?slug=${item.slug}" class="might-like-card">
       <img
         src="${item.mainImage}"
         alt="${item.product}"
@@ -1445,12 +1264,14 @@ if (recommendationsGrid) {
 
       <h3>${item.product}</h3>
 
-      <div class="recommendation-price">
+      <div class="might-like-price">
         ${item.price} MAD
       </div>
     </a>
   `).join("");
 }
+    
+window.currentProduct = product;
     
   } catch (error) {
     console.error(error);
@@ -1642,20 +1463,7 @@ document.getElementById("cartCount").textContent = cartCount;
   }, 100);
 });
 
-  function scrollRecommendations(direction) {
-  const container = document.getElementById("recommendationsGrid");
-
-  if (!container) return;
-
-  const card = container.querySelector(".recommendation-card");
-  const scrollAmount = card ? card.offsetWidth + 18 : 280;
-
-  container.scrollBy({
-    left: direction * scrollAmount,
-    behavior: "smooth"
-  });
-}
-  
+ 
   function openImageZoom() {
   const mainImage = document.getElementById("mainProductImage");
   const zoomedImage = document.getElementById("zoomedProductImage");
