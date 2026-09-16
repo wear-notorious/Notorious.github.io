@@ -324,14 +324,17 @@ if (isCartCheckout) {
   const price = Number(params.get("price")) || 209;
   const size = params.get("size") || "-";
   const quantity = Number(params.get("quantity")) || 1;
+  
+let cartTotal = 0;
+let cartQuantity = 0;
 
-  if (isCartCheckout && cart.length > 0) {
-  const cartTotal = cart.reduce(
+if (isCartCheckout && cart.length > 0) {
+  cartTotal = cart.reduce(
     (sum, item) => sum + Number(item.price) * Number(item.quantity),
     0
   );
 
-  const cartQuantity = cart.reduce(
+  cartQuantity = cart.reduce(
     (sum, item) => sum + Number(item.quantity),
     0
   );
