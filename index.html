@@ -45,13 +45,13 @@
       border-bottom: 1px solid #222;
     }
 
-   nav {
-  max-width: 1200px;
+  nav {
+  max-width: 1400px;
   margin: auto;
-  padding: 18px 24px;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  padding: 22px 6%;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   position: relative;
 }
 
@@ -60,20 +60,12 @@
       font-weight: 800;
       letter-spacing: 2px;
     }
-    .logo {
-  justify-self: start;
-  grid-column: 1;
-}
-    .menu-toggle {
+
+.menu-toggle {
   display: none;
-  justify-self: start;
-  grid-column: 1;
-  grid-row: 1;
 }
+    
     .cart-button {
-  justify-self: end;
-  grid-column: 3;
-  grid-row: 1;
   position: relative;
   color: white;
   text-decoration: none;
@@ -97,16 +89,26 @@
 
     .nav-links {
   display: flex;
-  justify-self: center;
-  grid-column: 2;
-  gap: 30px;
+  align-items: center;
+  gap: 45px;
   font-size: 0.95rem;
   font-family: "Arial Black", Arial, sans-serif;
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
-   
+
+    @media (min-width: 801px) {
+  .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .cart-button {
+    margin-left: auto;
+  }
+}
 
 .nav-links.active a {
   width: 100%;
@@ -444,34 +446,45 @@
 
 .menu-toggle {
   display: block;
+  position: absolute;
+  left: 25px;
   background: none;
   border: none;
   color: white;
   font-size: 32px;
   cursor: pointer;
-  justify-self: start;
-  grid-column: 1;
-  grid-row: 1;
   z-index: 1001;
 }
 
 nav {
-  padding: 14px 18px;
+  height: 95px;
+  padding: 0 25px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
       
 .logo {
-  justify-self: center;
-  grid-column: 2;
-  grid-row: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
+
 .logo img {
-  height: 58px !important;
+  height: 65px !important;
 }
-      .cart-button {
-  justify-self: end;
-  grid-column: 3;
-  grid-row: 1;
-  display: block;
+      
+  .cart-button {
+  display: flex;
+  position: absolute;
+  right: 25px;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
 }
 
 .products {
@@ -731,7 +744,7 @@ margin-right: 8px;
       <a href="contact.html">CONTACT</a>
     </div>
 
-    <a href="#" class="cart-button" aria-label="Shopping cart">
+    <a href="cart.html" class="cart-button" aria-label="Shopping cart">
       <i class="fa-solid fa-bag-shopping"></i>
       <span class="cart-count">0</span>
     </a>
