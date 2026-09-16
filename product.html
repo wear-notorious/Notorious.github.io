@@ -516,6 +516,81 @@
     display: flex;
   }
 }
+    /* ADD TO CART NOTIFICATION */
+.cart-notification {
+  position: fixed;
+  top: 95px;
+  right: 24px;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-width: 300px;
+  padding: 16px 20px;
+
+  background: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+  transform: translateX(30px);
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.cart-notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cart-notification-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.cart-notification strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.cart-notification span:not(.cart-notification-icon) {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .cart-notification {
+    top: 82px;
+    left: 16px;
+    right: 16px;
+    min-width: 0;
+  }
+}
+    
   </style>
   <link
   rel="stylesheet"
@@ -929,8 +1004,38 @@ function addToCart() {
 const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 document.getElementById("cartCount").textContent = cartCount;
   
-  alert("Added to cart!");
+  showCartNotification();
 }
+  function showCartNotification() {
+  const oldNotification = document.querySelector(".cart-notification");
+  if (oldNotification) oldNotification.remove();
+
+  const notification = document.createElement("div");
+  notification.className = "cart-notification";
+
+  notification.innerHTML = `
+    <span class="cart-notification-icon">✓</span>
+    <div>
+      <strong>ADDED TO CART</strong>
+      <span>Your item is now in your cart.</span>
+    </div>
+  `;
+
+  document.body.appendChild(notification);
+
+  requestAnimationFrame(() => {
+    notification.classList.add("show");
+  });
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  }, 2500);
+}
+  
 function orderNow() {
   if (!selectedSize) {
     alert("Please select a size.");
