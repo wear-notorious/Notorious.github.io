@@ -639,6 +639,68 @@
   line-height: 1;
   cursor: pointer;
 }
+    /* MOBILE STICKY ADD TO CART */
+.mobile-sticky-cart {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 90px;
+  }
+
+  .mobile-sticky-cart {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9998;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.96);
+    border-top: 1px solid #222;
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-sticky-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-sticky-info span {
+    font-size: 9px;
+    color: #888;
+    letter-spacing: 1.5px;
+  }
+
+  .mobile-sticky-info strong {
+    margin-top: 2px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  .mobile-sticky-cart button {
+    flex: 1;
+    max-width: 220px;
+    padding: 15px 20px;
+
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+}
     
   </style>
   <link
@@ -925,6 +987,12 @@ productPage.innerHTML = `
 `;
 
 window.currentProduct = product;
+    
+    const mobileStickyPrice = document.getElementById("mobileStickyPrice");
+
+if (mobileStickyPrice) {
+  mobileStickyPrice.textContent = `${product.price} MAD`;
+}
 
   } catch (error) {
     console.error(error);
@@ -1222,6 +1290,17 @@ loadProduct();
 
 updateCartCount();
 </script>
+  <!-- MOBILE STICKY ADD TO CART -->
+<div class="mobile-sticky-cart" id="mobileStickyCart">
+  <div class="mobile-sticky-info">
+    <span>PRICE</span>
+    <strong id="mobileStickyPrice">— MAD</strong>
+  </div>
+
+  <button type="button" onclick="addToCart()">
+    ADD TO CART
+  </button>
+</div>
   
 </body>
 </html>
