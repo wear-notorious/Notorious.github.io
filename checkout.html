@@ -308,17 +308,49 @@
 
 <script>
   const params = new URLSearchParams(window.location.search);
+  const isCartCheckout = params.get("cart") === "1";
+
+let cart = [];
+
+if (isCartCheckout) {
+  try {
+    cart = JSON.parse(localStorage.getItem("notoriousCheckoutCart")) || [];
+  } catch (error) {
+    cart = [];
+  }
+}
 
   const product = params.get("product") || "ASAP Tee";
   const price = Number(params.get("price")) || 209;
   const size = params.get("size") || "-";
   const quantity = Number(params.get("quantity")) || 1;
 
+  if (isCartCheckout && cart.length > 0) {
+  const cartTotal = cart.reduce(
+    (sum, item) => sum + Number(item.price) * Number(item.quantity),
+    0
+  );
+
+  const cartQuantity = cart.reduce(
+    (sum, item) => sum + Number(item.quantity),
+    0
+  );
+
+  document.getElementById("product").textContent =
+    cart.map(item => `${item.product} (${item.size})`).join(" + ");
+
+  document.getElementById("price").textContent = cartTotal;
+  document.getElementById("size").textContent = "Multiple";
+  document.getElementById("quantity").textContent = cartQuantity;
+  document.getElementById("total").textContent = cartTotal;
+
+} else {
   document.getElementById("product").textContent = product;
   document.getElementById("price").textContent = price;
   document.getElementById("size").textContent = size;
   document.getElementById("quantity").textContent = quantity;
   document.getElementById("total").textContent = price * quantity;
+}
 
  async function confirmOrder() {
   const form = document.getElementById("checkoutForm");
@@ -331,10 +363,17 @@ const orderId = "NOT-" + Date.now();
 
 const orderData = {
   orderId: orderId,
-  product: product,
-  price: price,
-  size: size,
-  quantity: quantity,
+
+  product: isCartCheckout
+    ? cart.map(item => `${item.product} (${item.size}) x${item.quantity}`).join(" | ")
+    : product,
+
+  price: isCartCheckout ? cartTotal : price,
+
+  size: isCartCheckout ? "Multiple" : size,
+
+  quantity: isCartCheckout ? cartQuantity : quantity,
+
   fullName: document.getElementById("name").value.trim(),
   phone: document.getElementById("phone").value.trim(),
   city: document.getElementById("city").value.trim(),
@@ -354,14 +393,25 @@ const orderData = {
       body: JSON.stringify(orderData)
     });
 
-  const successParams = new URLSearchParams({
+ const successParams = new URLSearchParams({
   orderId: orderId,
-  product: product,
-  size: size,
-  quantity: quantity,
-  total: Number(price) * Number(quantity)
-});
 
+  product: isCartCheckout
+    ? cart.map(item => `${item.product} (${item.size}) x${item.quantity}`).join(" | ")
+    : product,
+
+  size: isCartCheckout ? "Multiple" : size,
+
+  quantity: isCartCheckout ? cartQuantity : quantity,
+
+  total: isCartCheckout
+    ? cartTotal
+    : Number(price) * Number(quantity)
+});
+if (isCartCheckout) {
+  localStorage.removeItem("notoriousCart");
+  localStorage.removeItem("notoriousCheckoutCart");
+}
 window.location.href = "success.html?" + successParams.toString();
 
   } catch (error) {
