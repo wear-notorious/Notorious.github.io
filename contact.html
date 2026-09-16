@@ -548,9 +548,12 @@
     order support and business inquiries.
   </p>
 
-  <a href="mailto:wear.notorious0@gmail.com">
-    SEND EMAIL
-  </a>
+ <a
+  href="mailto:wear.notorious0@gmail.com"
+  onclick="openNotoriousEmail(event)"
+>
+  SEND EMAIL
+</a>
 </div>
         
       </div>
@@ -628,5 +631,20 @@
     }
   </script>
 
+  <script>
+  function openNotoriousEmail(event) {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (!isMobile) {
+      event.preventDefault();
+
+      window.open(
+        "https://mail.google.com/mail/?view=cm&fs=1&to=wear.notorious0@gmail.com",
+        "_blank"
+      );
+    }
+  }
+</script>
+  
 </body>
 </html>
