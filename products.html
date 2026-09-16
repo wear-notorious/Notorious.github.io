@@ -449,18 +449,35 @@
 
     @media (max-width: 800px) {
       .header-container {
-        height: 95px;
-        padding: 0 25px;
-      }
+  height: 95px;
+  padding: 0 25px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-      .site-logo {
+.site-logo {
   height: 65px;
   width: auto;
 }
 
-      .menu-toggle {
-        display: block;
-      }
+.menu-toggle {
+  display: block;
+  position: absolute;
+  left: 25px;
+}
+
+.logo-link {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cart-button {
+  position: absolute;
+  right: 25px;
+}
 
       .nav-links {
         display: none;
@@ -578,7 +595,7 @@
 <header>
   <div class="header-container">
 
-    <a href="index.html">
+    <a href="index.html" class="logo-link">
       <img
         src="images/Notorious-Logo-White.png"
         alt="NOTORIOUS™"
