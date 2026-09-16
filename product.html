@@ -701,6 +701,67 @@
     cursor: pointer;
   }
 }
+
+    /* YOU MAY ALSO LIKE */
+.recommendations-section {
+  margin-top: 70px;
+  padding-top: 45px;
+  border-top: 1px solid #222;
+}
+
+.recommendations-section h2 {
+  margin: 0 0 25px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.recommendation-card {
+  color: #fff;
+  text-decoration: none;
+}
+
+.recommendation-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  background: #111;
+}
+
+.recommendation-card h3 {
+  margin: 12px 0 5px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.recommendation-card .recommendation-price {
+  font-size: 13px;
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .recommendations-section {
+    margin-top: 50px;
+    padding-top: 35px;
+  }
+
+  .recommendations-section h2 {
+    font-size: 18px;
+  }
+
+  .recommendations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
     
   </style>
   <link
@@ -923,6 +984,16 @@ productPage.innerHTML = `
 
     </section>
 
+    <!-- YOU MAY ALSO LIKE -->
+<section class="recommendations-section">
+  <h2>YOU MAY ALSO LIKE</h2>
+
+  <div
+    class="recommendations-grid"
+    id="recommendationsGrid"
+  ></div>
+</section>
+
   </main>
   
   <!-- IMAGE ZOOM OVERLAY -->
@@ -988,7 +1059,33 @@ productPage.innerHTML = `
 
 window.currentProduct = product;
     
+const recommendationsGrid = document.getElementById("recommendationsGrid");
 
+if (recommendationsGrid) {
+  const recommendedProducts = products
+    .filter(item => item.slug !== product.slug)
+    .slice(0, 3);
+
+  recommendationsGrid.innerHTML = recommendedProducts.map(item => `
+    <a
+      href="product.html?slug=${item.slug}"
+      class="recommendation-card"
+    >
+      <img
+        src="${item.mainImage}"
+        alt="${item.product}"
+        loading="lazy"
+      >
+
+      <h3>${item.product}</h3>
+
+      <div class="recommendation-price">
+        ${item.price} MAD
+      </div>
+    </a>
+  `).join("");
+}
+    
   } catch (error) {
     console.error(error);
     productPage.innerHTML = "ERROR LOADING PRODUCT";
