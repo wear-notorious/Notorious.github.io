@@ -516,6 +516,31 @@
   .nav-links.active {
     display: flex;
   }
+  .recently-viewed-section {
+  margin-top: 50px;
+  padding-top: 35px;
+  width: 100%;
+  min-width: 0;
+}
+
+.recently-viewed-header h2 {
+  font-size: 18px;
+}
+
+.recently-viewed-grid {
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.recently-viewed-card {
+  flex: 0 0 72%;
+  min-width: 0;
+}
+
+.recently-viewed-card h3 {
+  font-size: 13px;
+}
 }
     /* ADD TO CART NOTIFICATION */
 .cart-notification {
@@ -825,6 +850,74 @@
   font-size: 13px;
   color: #aaa;
 }
+    /* RECENTLY VIEWED */
+
+.recently-viewed-section {
+  margin-top: 70px;
+  padding-top: 45px;
+  border-top: 1px solid #222;
+  min-width: 0;
+}
+
+.recently-viewed-header {
+  margin-bottom: 25px;
+}
+
+.recently-viewed-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.recently-viewed-grid {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  gap: 18px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  padding-bottom: 12px;
+  scrollbar-width: none;
+}
+
+.recently-viewed-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.recently-viewed-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  color: #fff;
+  text-decoration: none;
+}
+
+.recently-viewed-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  background: #111;
+}
+
+.recently-viewed-card h3 {
+  margin: 12px 0 5px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.recently-viewed-price {
+  font-size: 13px;
+  color: #aaa;
+}
 
 @media (max-width: 768px) {
   .recommendations-section {
@@ -1089,6 +1182,15 @@ productPage.innerHTML = `
   ></div>
 </section>
 
+<!-- RECENTLY VIEWED -->
+<section class="recently-viewed-section">
+  <div class="recently-viewed-header">
+    <h2>RECENTLY VIEWED</h2>
+  </div>
+
+  <div class="recently-viewed-grid" id="recentlyViewedGrid"></div>
+</section>
+
   </main>
   
   <!-- IMAGE ZOOM OVERLAY -->
@@ -1153,6 +1255,62 @@ productPage.innerHTML = `
 `;
 
 window.currentProduct = product;
+    /* RECENTLY VIEWED */
+
+const recentlyViewedGrid = document.getElementById("recentlyViewedGrid");
+
+let recentlyViewed = JSON.parse(
+  localStorage.getItem("notoriousRecentlyViewed") || "[]"
+);
+
+/* Show products viewed BEFORE the current one */
+if (recentlyViewedGrid) {
+  const previousProducts = recentlyViewed
+    .filter(item => item.slug !== product.slug)
+    .slice(0, 8);
+
+  if (previousProducts.length > 0) {
+    recentlyViewedGrid.innerHTML = previousProducts.map(item => `
+      <a
+        href="product.html?slug=${item.slug}"
+        class="recently-viewed-card"
+      >
+        <img
+          src="${item.mainImage}"
+          alt="${item.product}"
+          loading="lazy"
+        >
+
+        <h3>${item.product}</h3>
+
+        <div class="recently-viewed-price">
+          ${item.price} MAD
+        </div>
+      </a>
+    `).join("");
+  } else {
+    document.querySelector(".recently-viewed-section").style.display = "none";
+  }
+}
+
+/* Save current product */
+recentlyViewed = recentlyViewed.filter(
+  item => item.slug !== product.slug
+);
+
+recentlyViewed.unshift({
+  slug: product.slug,
+  product: product.product,
+  price: product.price,
+  mainImage: product.mainImage
+});
+
+recentlyViewed = recentlyViewed.slice(0, 8);
+
+localStorage.setItem(
+  "notoriousRecentlyViewed",
+  JSON.stringify(recentlyViewed)
+);
     
 const recommendationsGrid = document.getElementById("recommendationsGrid");
 
