@@ -69,6 +69,31 @@
   margin-top: 12px;
 }
 
+    .gallery-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.gallery-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #555;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.gallery-dot.active {
+  width: 9px;
+  height: 9px;
+  background: #fff;
+}
+    
 .thumbnail {
   padding: 0;
   border: 1px solid #222;
@@ -626,6 +651,16 @@ productPage.innerHTML = `
           </button>
         `).join("")}
       </div>
+      <div class="gallery-dots">
+  ${productImages.map((image, index) => `
+    <button
+      type="button"
+      class="gallery-dot ${index === 0 ? "active" : ""}"
+      onclick="document.querySelectorAll('.thumbnail')[${index}].click()"
+      aria-label="View image ${index + 1}">
+    </button>
+  `).join("")}
+</div>
     </section>
 
     <section class="product-details">
@@ -762,6 +797,17 @@ function changeImage(image, button) {
   });
 
   button.classList.add("active");
+  const thumbnails = Array.from(document.querySelectorAll(".thumbnail"));
+const dots = document.querySelectorAll(".gallery-dot");
+const activeIndex = thumbnails.indexOf(button);
+
+dots.forEach(dot => {
+  dot.classList.remove("active");
+});
+
+if (dots[activeIndex]) {
+  dots[activeIndex].classList.add("active");
+}
 }
 let touchStartX = 0;
 let touchEndX = 0;
