@@ -690,6 +690,7 @@ function removeItem(index) {
 
   saveCart(cart);
   renderCart();
+  updateCartCount();
 }
 
 
@@ -718,7 +719,7 @@ function toggleMenu() {
 
 renderCart();
 
-  function updateCartCount() {
+ function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("notoriousCart")) || [];
 
   const total = cart.reduce(
@@ -730,9 +731,10 @@ renderCart();
 
   if (cartCount) {
     cartCount.textContent = total;
+    cartCount.style.display = total > 0 ? "flex" : "none";
   }
 }
-
+  
 updateCartCount();
 </script>
 
