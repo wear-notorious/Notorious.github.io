@@ -941,12 +941,92 @@
 }
 
 }
+
+    footer {
+  border-top: 1px solid #222;
+  padding: 55px 20px 35px;
+  text-align: center;
+  background: #050505;
+}
+
+.footer-brand {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.footer-tagline {
+  color: #777;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 35px;
+}
+
+.footer-socials a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #292929;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+}
+
+.footer-socials a:hover {
+  border-color: #fff;
+  transform: translateY(-3px);
+  opacity: 1;
+}
+
+.footer-link {
+  display: inline-block;
+  margin-left: 8px;
+  margin-right: 8px;
+  color: #888;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 22px;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+.footer-copy {
+  color: #555;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
     
   </style>
   <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 >
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+  
 </head>
 
 <body>
@@ -1195,6 +1275,36 @@ productPage.innerHTML = `
 </section>
 
   </main>
+
+  </main>
+
+<footer>
+  <div class="footer-brand">NOTORIOUS™</div>
+  <div class="footer-tagline">WEAR WHAT THEY WON’T.</div>
+
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/wear_notorious/" target="_blank" aria-label="Instagram">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <a href="https://www.tiktok.com/@wear_notorious" target="_blank" aria-label="TikTok">
+      <i class="fa-brands fa-tiktok"></i>
+    </a>
+
+    <a href="https://www.facebook.com/wearnotorious" target="_blank" aria-label="Facebook">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+  </div>
+
+  <a href="shipping.html" class="footer-link">Shipping & Returns</a>
+  <a href="legal.html" class="footer-link">Privacy & Terms</a>
+
+  <div class="footer-copy">
+    © 2026 NOTORIOUS™. All rights reserved.
+  </div>
+</footer>
+
+<!-- IMAGE ZOOM OVERLAY -->
   
   <!-- IMAGE ZOOM OVERLAY -->
 <div id="imageZoomOverlay" class="image-zoom-overlay" onclick="closeImageZoom()">
