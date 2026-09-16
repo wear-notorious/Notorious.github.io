@@ -22,6 +22,203 @@
       overflow-x: hidden;
     }
 
+    header {
+  border-bottom: 1px solid #222;
+  background: #080808;
+}
+
+nav {
+  max-width: 1400px;
+  margin: auto;
+  padding: 22px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 85px;
+  width: auto;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+}
+
+@media (min-width: 701px) {
+  nav {
+    position: relative;
+  }
+
+  .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .cart-button {
+    margin-left: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -7px;
+    right: -10px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    font-size: 10px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: white;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus::after,
+.nav-links a:active::after {
+  width: 100%;
+}
+
+.menu-toggle {
+  display: none;
+}
+    /* MOBILE HEADER */
+
+@media (max-width: 700px) {
+  nav {
+    height: 95px;
+    padding: 0 25px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-toggle {
+    display: flex !important;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logo img {
+    height: 65px;
+  }
+
+  .cart-button {
+    display: flex;
+    position: absolute;
+    right: 20px;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -7px;
+    right: -10px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    font-size: 10px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #090909;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    padding: 25px;
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+}
+    
     .loading {
       min-height: 100vh;
       display: flex;
@@ -366,104 +563,7 @@
   }
 }
     /* PRODUCT PAGE HEADER */
-.site-header {
-  width: 100%;
-  background: #0b0b0b;
-  border-bottom: 1px solid #222;
-  position: relative;
-  z-index: 1000;
-}
 
-.header-container {
-  max-width: 1200px;
-  height: 100px;
-  margin: 0 auto;
-  padding: 0 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.site-logo {
-  width: 110px;
-  height: auto;
-  display: block;
-}
-
-.logo-link {
-  display: flex;
-  align-items: center;
-}
-.cart-button {
-  position: relative;
-  color: #fff;
-  text-decoration: none;
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cart-count {
-  position: absolute;
-  top: -8px;
-  right: -10px;
-  background: #fff;
-  color: #000;
-  font-size: 10px;
-  font-weight: 800;
-  min-width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 38px;
-}
-
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-}
-
-.nav-links a {
-  position: relative;
-  padding-bottom: 6px;
-}
-
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: white;
-  transform: translateX(-50%);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after,
-.nav-links a:focus::after,
-.nav-links a:active::after {
-  width: 100%;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: 0;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-}
 
 /* MOBILE HEADER */
 @media (max-width: 768px) {
@@ -491,14 +591,6 @@
   right: 20px;
   left: auto;
 }
-
-  .site-logo {
-  width: 80px;
-}
-
-  .menu-toggle {
-    display: block;
-  }
 
   .nav-links {
     display: none;
@@ -924,29 +1016,32 @@
 </head>
 
 <body>
-<header class="site-header">
-  <div class="header-container">
+<header>
+  <nav>
 
-    <a href="index.html" class="logo-link">
-      <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS™" class="site-logo">
+    <a class="logo" href="index.html">
+      <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo">
     </a>
 
-    <nav class="nav-links">
-      <a href="index.html#home">HOME</a>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
       <a href="products.html">PRODUCTS</a>
       <a href="about.html">ABOUT</a>
       <a href="contact.html">CONTACT</a>
-    </nav>
-<a href="cart.html" class="cart-button" aria-label="Shopping cart">
-  <i class="fa-solid fa-bag-shopping"></i>
-  <span class="cart-count" id="cartCount">0</span>
-</a>
-    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+    </div>
+
+    <a href="cart.html" class="cart-button" aria-label="Shopping cart">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
       ☰
     </button>
 
-  </div>
+  </nav>
 </header>
+  
   <div id="productPage" class="loading">
     LOADING PRODUCT...
   </div>
