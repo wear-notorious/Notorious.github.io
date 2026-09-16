@@ -988,11 +988,6 @@ productPage.innerHTML = `
 
 window.currentProduct = product;
     
-    const mobileStickyPrice = document.getElementById("mobileStickyPrice");
-
-if (mobileStickyPrice) {
-  mobileStickyPrice.textContent = `${product.price} MAD`;
-}
 
   } catch (error) {
     console.error(error);
@@ -1173,6 +1168,17 @@ document.getElementById("cartCount").textContent = cartCount;
   }, 2500);
 }
 
+  document.addEventListener("DOMContentLoaded", function() {
+  const stickyPrice = document.getElementById("mobileStickyPrice");
+
+  const updateStickyPrice = setInterval(function() {
+    if (window.currentProduct && stickyPrice) {
+      stickyPrice.textContent = `${window.currentProduct.price} MAD`;
+      clearInterval(updateStickyPrice);
+    }
+  }, 100);
+});
+  
   function openImageZoom() {
   const mainImage = document.getElementById("mainProductImage");
   const zoomedImage = document.getElementById("zoomedProductImage");
