@@ -506,9 +506,24 @@
 }
 
 .menu-toggle {
-  display: block;
+  display: flex !important;
   position: absolute;
   left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 1001;
 }
 
 .logo-link {
@@ -544,8 +559,19 @@
       }
 
       .nav-links.active {
-        display: flex;
-      }
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #0a0a0a;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  z-index: 999;
+}
 
       .shop-hero {
         padding: 45px 20px 30px;
