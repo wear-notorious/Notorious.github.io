@@ -439,9 +439,29 @@
 /* MOBILE HEADER */
 @media (max-width: 768px) {
   .header-container {
-    height: 80px;
-    padding: 0 20px;
-  }
+  height: 80px;
+  padding: 0 20px;
+  position: relative;
+}
+
+.menu-toggle {
+  display: block;
+  position: absolute;
+  left: 20px;
+  right: auto;
+}
+
+.logo-link {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cart-button {
+  position: absolute;
+  right: 20px;
+  left: auto;
+}
 
   .site-logo {
   width: 80px;
