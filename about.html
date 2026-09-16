@@ -406,13 +406,22 @@
 }
 
 .menu-toggle {
-  display: block;
+  display: flex !important;
   position: absolute;
   left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
   background: none;
   border: none;
   color: #fff;
   font-size: 32px;
+  line-height: 1;
   cursor: pointer;
   z-index: 1001;
 }
