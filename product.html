@@ -748,9 +748,22 @@
   transition: background 0.2s ease, color 0.2s ease;
 }
 
+      cursor: pointer;
+}
+
+.recommendations-arrows button {
+  transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+
 .recommendations-arrows button:hover {
   background: #fff;
   color: #000;
+  border-color: #fff;
+  transform: scale(1.08);
+}
+
+.recommendations-arrows button:active {
+  transform: scale(0.95);
 }
     
 .recommendations-section h2 {
@@ -777,13 +790,12 @@
   padding-bottom: 12px;
 }
 
-.recommendations-grid::-webkit-scrollbar {
-  height: 5px;
+.recommendations-grid {
+  scrollbar-width: none;
 }
 
-.recommendations-grid::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 10px;
+.recommendations-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .recommendation-card {
