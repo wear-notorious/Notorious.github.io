@@ -130,22 +130,95 @@
       font-size: 18px;
     }
 
-    .statement {
-      max-width: 900px;
-      margin: auto;
-      padding: 110px 25px;
-    }
+   /* BRAND MANIFESTO */
 
-    .statement p {
-      font-size: clamp(21px, 3vw, 34px);
-      font-weight: 700;
-      line-height: 1.45;
-      margin-bottom: 32px;
-    }
+.brand-manifesto {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 110px 40px 80px;
+}
 
-    .statement .muted {
-      color: #777;
-    }
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.manifesto-label {
+  display: block;
+  margin-bottom: 22px;
+  color: #777;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.manifesto-content h2 {
+  margin: 0;
+  font-size: clamp(55px, 6vw, 95px);
+  line-height: 0.9;
+  letter-spacing: -4px;
+  font-weight: 900;
+}
+
+.manifesto-content p {
+  max-width: 520px;
+  margin: 35px 0;
+  color: #999;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.manifesto-meta {
+  display: flex;
+  gap: 30px;
+  padding-top: 22px;
+  border-top: 1px solid #292929;
+  color: #666;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.manifesto-image {
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+  background: #111;
+}
+
+.manifesto-image img {
+  width: 100%;
+  height: 600px;
+  display: block;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: transform 0.6s ease;
+}
+
+.manifesto-image:hover img {
+  transform: scale(1.025);
+}
+
+.manifesto-bottom {
+  margin-top: 90px;
+  padding-top: 35px;
+  border-top: 1px solid #292929;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+
+  font-size: clamp(25px, 4vw, 55px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.manifesto-bottom span:last-child {
+  color: #555;
+}
 
     /* MISSION + COMMUNITY */
 
@@ -313,10 +386,6 @@
         font-size: 16px;
       }
 
-      .statement {
-        padding: 75px 22px;
-      }
-
       .about-grid {
         grid-template-columns: 1fr;
         padding: 0 18px 80px;
@@ -333,6 +402,49 @@
       .footer-socials {
         gap: 18px;
       }
+
+      /* BRAND MANIFESTO MOBILE */
+
+.brand-manifesto {
+  padding: 75px 20px 60px;
+}
+
+.manifesto-grid {
+  grid-template-columns: 1fr;
+  gap: 45px;
+}
+
+.manifesto-content h2 {
+  font-size: 52px;
+  line-height: 0.9;
+  letter-spacing: -2px;
+}
+
+.manifesto-content p {
+  margin: 28px 0;
+  font-size: 14px;
+}
+
+.manifesto-meta {
+  gap: 20px;
+}
+
+.manifesto-image {
+  min-height: 460px;
+}
+
+.manifesto-image img {
+  height: 460px;
+}
+
+.manifesto-bottom {
+  margin-top: 55px;
+  padding-top: 25px;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
     }
     .menu-toggle {
   display: none;
@@ -425,24 +537,42 @@
       </div>
     </section>
 
-    <section class="statement">
+   <!-- BRAND MANIFESTO -->
+<section class="brand-manifesto">
+
+  <div class="manifesto-grid">
+
+    <div class="manifesto-content">
+      <span class="manifesto-label">THE NOTORIOUS™ MINDSET</span>
+
+      <h2>
+        WE DON'T DESIGN<br>
+        TO BLEND IN.
+      </h2>
 
       <p>
-        We believe what you wear should say something about you
-        before you even speak.
+        NOTORIOUS™ is built for people who choose their own attitude,
+        their own identity, and their own path.
       </p>
 
-      <p class="muted">
-        Every NOTORIOUS™ piece is made for people who choose their own
-        attitude, their own identity, and their own path.
-      </p>
+      <div class="manifesto-meta">
+        <span>EST. 2026</span>
+        <span>MOROCCO</span>
+      </div>
+    </div>
 
-      <p>
-        Because being different was never something to hide.
-      </p>
+    <div class="manifesto-image">
+      <img src="images/about-manifesto.jpg" alt="NOTORIOUS™ streetwear">
+    </div>
 
-    </section>
+  </div>
 
+  <div class="manifesto-bottom">
+    <span>DIFFERENT BY CHOICE.</span>
+    <span>NOT BY ACCIDENT.</span>
+  </div>
+
+</section>
     <section class="about-grid">
 
       <div class="about-card">
