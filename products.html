@@ -341,6 +341,30 @@
       font-weight: 800;
     }
 
+    .product-social-proof {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 8px 0 10px;
+}
+
+.product-stars {
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.new-drop {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #aaa;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 3px 6px;
+}
+    
     .empty-state {
       grid-column: 1 / -1;
       color: #888;
@@ -775,9 +799,15 @@
         </div>
 
         <div class="product-info">
-          <h3>${product.product}</h3>
-          <div class="product-price">${product.price} MAD</div>
-        </div>
+  <h3>${product.product}</h3>
+
+  <div class="product-social-proof">
+    <span class="product-stars">★★★★★</span>
+    <span class="new-drop">NEW DROP</span>
+  </div>
+
+  <div class="product-price">${product.price} MAD</div>
+</div>
       </a>
     `).join("");
   }
