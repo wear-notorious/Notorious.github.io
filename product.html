@@ -59,6 +59,7 @@
   display: block;
   touch-action: pan-y;
   user-select: none;
+  transition: transform 0.22s ease, opacity 0.22s ease;
 }
 
 .thumbnails {
@@ -779,8 +780,9 @@ function handleSwipe() {
 
 function swipeImage(direction) {
   const thumbnails = Array.from(document.querySelectorAll(".thumbnail"));
+  const mainImage = document.getElementById("mainProductImage");
 
-  if (!thumbnails.length) return;
+  if (!thumbnails.length || !mainImage) return;
 
   let currentIndex = thumbnails.findIndex(btn =>
     btn.classList.contains("active")
@@ -796,7 +798,26 @@ function swipeImage(direction) {
     newIndex = thumbnails.length - 1;
   }
 
-  thumbnails[newIndex].click();
+  const moveOut = direction === 1 ? "-35px" : "35px";
+  const moveIn = direction === 1 ? "35px" : "-35px";
+
+  mainImage.style.transform = `translateX(${moveOut})`;
+  mainImage.style.opacity = "0";
+
+  setTimeout(() => {
+    thumbnails[newIndex].click();
+
+    mainImage.style.transition = "none";
+    mainImage.style.transform = `translateX(${moveIn})`;
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        mainImage.style.transition = "transform 0.22s ease, opacity 0.22s ease";
+        mainImage.style.transform = "translateX(0)";
+        mainImage.style.opacity = "1";
+      });
+    });
+  }, 220);
 }
 
 document.addEventListener("touchstart", function(e) {
