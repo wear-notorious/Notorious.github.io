@@ -709,6 +709,48 @@
   border-top: 1px solid #222;
 }
 
+    .recommendations-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.recommendations-header h2 {
+  margin: 0;
+}
+
+.recommendations-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.recommendations-arrows button {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 50%;
+
+  font-size: 27px;
+  line-height: 1;
+  cursor: pointer;
+
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.recommendations-arrows button:hover {
+  background: #fff;
+  color: #000;
+}
+    
 .recommendations-section h2 {
   margin: 0 0 25px;
   font-size: 22px;
@@ -717,12 +759,32 @@
 }
 
 .recommendations-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 18px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  padding-bottom: 12px;
+}
+
+.recommendations-grid::-webkit-scrollbar {
+  height: 5px;
+}
+
+.recommendations-grid::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
 }
 
 .recommendation-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+
   color: #fff;
   text-decoration: none;
 }
@@ -758,9 +820,12 @@
   }
 
   .recommendations-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
+  gap: 12px;
+}
+
+.recommendation-card {
+  flex: 0 0 72%;
+}
 }
     
   </style>
@@ -986,7 +1051,19 @@ productPage.innerHTML = `
 
     <!-- YOU MAY ALSO LIKE -->
 <section class="recommendations-section">
+ <div class="recommendations-header">
   <h2>YOU MAY ALSO LIKE</h2>
+
+  <div class="recommendations-arrows">
+    <button type="button" onclick="scrollRecommendations(-1)" aria-label="Previous products">
+      ‹
+    </button>
+
+    <button type="button" onclick="scrollRecommendations(1)" aria-label="Next products">
+      ›
+    </button>
+  </div>
+</div>
 
   <div
     class="recommendations-grid"
@@ -1064,7 +1141,7 @@ const recommendationsGrid = document.getElementById("recommendationsGrid");
 if (recommendationsGrid) {
   const recommendedProducts = products
     .filter(item => item.slug !== product.slug)
-    .slice(0, 3);
+    .slice(0, 10);
 
   recommendationsGrid.innerHTML = recommendedProducts.map(item => `
     <a
@@ -1275,6 +1352,20 @@ document.getElementById("cartCount").textContent = cartCount;
     }
   }, 100);
 });
+
+  function scrollRecommendations(direction) {
+  const container = document.getElementById("recommendationsGrid");
+
+  if (!container) return;
+
+  const card = container.querySelector(".recommendation-card");
+  const scrollAmount = card ? card.offsetWidth + 18 : 280;
+
+  container.scrollBy({
+    left: direction * scrollAmount,
+    behavior: "smooth"
+  });
+}
   
   function openImageZoom() {
   const mainImage = document.getElementById("mainProductImage");
