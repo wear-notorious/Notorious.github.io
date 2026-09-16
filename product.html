@@ -57,6 +57,8 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .thumbnails {
@@ -760,7 +762,56 @@ function changeImage(image, button) {
 
   button.classList.add("active");
 }
+let touchStartX = 0;
+let touchEndX = 0;
 
+function handleSwipe() {
+  const minSwipeDistance = 50;
+
+  if (touchStartX - touchEndX > minSwipeDistance) {
+    swipeImage(1);
+  }
+
+  if (touchEndX - touchStartX > minSwipeDistance) {
+    swipeImage(-1);
+  }
+}
+
+function swipeImage(direction) {
+  const thumbnails = Array.from(document.querySelectorAll(".thumbnail"));
+
+  if (!thumbnails.length) return;
+
+  let currentIndex = thumbnails.findIndex(btn =>
+    btn.classList.contains("active")
+  );
+
+  let newIndex = currentIndex + direction;
+
+  if (newIndex >= thumbnails.length) {
+    newIndex = 0;
+  }
+
+  if (newIndex < 0) {
+    newIndex = thumbnails.length - 1;
+  }
+
+  thumbnails[newIndex].click();
+}
+
+document.addEventListener("touchstart", function(e) {
+  if (e.target.id === "mainProductImage") {
+    touchStartX = e.changedTouches[0].screenX;
+  }
+});
+
+document.addEventListener("touchend", function(e) {
+  if (e.target.id === "mainProductImage") {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }
+});
+  
 function selectSize(size, button) {
   selectedSize = size;
 
