@@ -330,24 +330,81 @@
       font-size: 1.1rem;
     }
 
-    .about {
-      background: #0f0f0f;
-    }
+    .brand-statement {
+  position: relative;
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 
-    .about p {
-      max-width: 760px;
-      color: #bdbdbd;
-      font-size: 1.08rem;
-    }
+  background-image: url("images/brand-statement.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
-    .cod-box {
-      margin-top: 30px;
-      padding: 24px;
-      border: 1px solid #2b2b2b;
-      border-radius: 16px;
-      background: #111;
-    }
+.brand-statement-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.65) 45%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
 
+.brand-statement-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.brand-statement-content span {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #aaa;
+}
+
+.brand-statement-content h2 {
+  margin: 0;
+  font-size: clamp(55px, 7vw, 105px);
+  line-height: 0.9;
+  font-weight: 900;
+  letter-spacing: -3px;
+}
+
+.brand-statement-content p {
+  max-width: 520px;
+  margin: 28px 0 32px;
+  color: #ccc;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.brand-statement-btn {
+  display: inline-block;
+  padding: 15px 22px;
+  border: 1px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  transition: 0.25s ease;
+}
+
+.brand-statement-btn:hover {
+  background: #fff;
+  color: #000;
+}
+    
     footer {
       padding: 35px 24px;
       border-top: 1px solid #222;
@@ -690,23 +747,24 @@ margin-right: 8px;
       </div>
     </section>
 
-    <section class="about" id="about">
-      <div class="container">
-        <h2 class="section-title">About NOTORIOUS™</h2>
+    <!-- BRAND STATEMENT -->
+<section class="brand-statement">
+  <div class="brand-statement-overlay"></div>
 
-        <p>
-          NOTORIOUS™ is a streetwear brand built for people who refuse to dress
-          like everyone else. Bold ideas, premium pieces and attitude in every drop.
-        </p>
+  <div class="brand-statement-content">
+    <span>NOTORIOUS™</span>
 
-        <div class="cod-box">
-          <strong>Cash on Delivery available.</strong>
-          <p style="margin-top: 8px;">
-            Order online and pay when your package arrives.
-          </p>
-        </div>
-      </div>
-    </section>
+    <h2>NOT MADE<br>TO FIT IN.</h2>
+
+    <p>
+      Limited streetwear for people who wear what they won't.
+    </p>
+
+    <a href="about.html" class="brand-statement-btn">
+      DISCOVER THE BRAND →
+    </a>
+  </div>
+</section>
 
   </main>
 
