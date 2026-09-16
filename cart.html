@@ -168,15 +168,21 @@
       color: #000;
     }
 
-    .remove-btn {
-      margin-top: 15px;
-      border: 0;
-      background: none;
-      color: #777;
-      text-decoration: underline;
-      cursor: pointer;
-      font-size: 12px;
-    }
+   .remove-btn {
+  margin-top: 15px;
+  border: 0;
+  background: none;
+  color: #e53935;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.remove-btn:hover {
+  color: #ff5252;
+  transform: scale(1.15);
+}
 
     .line-total {
       font-weight: 900;
@@ -485,7 +491,7 @@ function renderCart() {
           class="remove-btn"
           onclick="removeItem(${index})"
         >
-          REMOVE
+         <i class="fa-solid fa-trash"></i>
         </button>
 
       </div>
