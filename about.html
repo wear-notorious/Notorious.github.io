@@ -406,8 +406,15 @@
 }
 
 .menu-toggle {
+  display: block;
   position: absolute;
   left: 20px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 1001;
 }
 
 .logo {
@@ -531,27 +538,19 @@
   letter-spacing: -1px;
 }
     }
+    
     .menu-toggle {
   display: none;
-  background: transparent;
-  border: 1px solid #333;
+  background: none;
+  border: none;
   color: #fff;
-  width: 42px;
-  height: 42px;
-  border-radius: 7px;
-  font-size: 22px;
+  font-size: 32px;
   cursor: pointer;
-  align-items: center;
-  justify-content: center;
 }
 
 @media (max-width: 700px) {
   nav {
     position: relative;
-  }
-
-  .menu-toggle {
-    display: flex;
   }
 
   .nav-links {
