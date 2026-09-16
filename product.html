@@ -1484,7 +1484,7 @@ function closeSizeGuide() {
 }
 function addToCart() {
   if (!selectedSize) {
-    alert("Please select a size.");
+    showSizeNotification();
     return;
   }
 
@@ -1546,7 +1546,36 @@ document.getElementById("cartCount").textContent = cartCount;
     }, 300);
   }, 2500);
 }
+  
+function showSizeNotification() {
+  const oldNotification = document.querySelector(".cart-notification");
+  if (oldNotification) oldNotification.remove();
 
+  const notification = document.createElement("div");
+  notification.className = "cart-notification";
+
+  notification.innerHTML = `
+    <span class="cart-notification-icon">!</span>
+    <div>
+      <strong>SELECT A SIZE</strong>
+      <span>Please choose your size before continuing.</span>
+    </div>
+  `;
+
+  document.body.appendChild(notification);
+
+  requestAnimationFrame(() => {
+    notification.classList.add("show");
+  });
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  }, 2500);
+}
   document.addEventListener("DOMContentLoaded", function() {
   const stickyPrice = document.getElementById("mobileStickyPrice");
 
@@ -1643,7 +1672,7 @@ document.addEventListener("touchend", function(event) {
   
 function orderNow() {
   if (!selectedSize) {
-    alert("Please select a size.");
+    showSizeNotification();
     return;
   }
 
