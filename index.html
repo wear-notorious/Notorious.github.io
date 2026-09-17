@@ -12,23 +12,6 @@
   />
 
   <style>
-    #shop {
-  position: relative;
-  background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(212, 175, 55, 0.07) 0%,
-      rgba(212, 175, 55, 0.025) 30%,
-      transparent 65%
-    ),
-    linear-gradient(
-      to bottom,
-      #111111 0%,
-      #090909 18%,
-      #050505 45%,
-      #050505 100%
-    );
-}
     * {
       margin: 0;
       padding: 0;
@@ -198,13 +181,16 @@
 }
 
 .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(0,0,0,0.05),
-        rgba(0,0,0,0.35)
-    );
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.12) 55%,
+    rgba(0, 0, 0, 0.55) 78%,
+    rgba(0, 0, 0, 0.90) 92%,
+    #0a0a0a 100%
+  );
 }
 
 .hero-content {
