@@ -48,6 +48,35 @@ nav {
   gap: 45px;
 }
 
+    .delivery-info {
+  margin: 28px 0;
+  padding: 22px 0;
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+}
+
+.delivery-info h3 {
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.delivery-info p {
+  margin: 7px 0;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.delivery-info p::before {
+  content: "✓";
+  margin-right: 10px;
+  color: #fff;
+  font-weight: 900;
+}
+    
 @media (min-width: 701px) {
   nav {
     position: relative;
@@ -1173,6 +1202,13 @@ productPage.innerHTML = `
         <p><strong>Material:</strong> ${product.material || "-"}</p>
         <p><strong>Fit:</strong> ${product.fit || "-"}</p>
       </div>
+      
+      <div class="delivery-info">
+  <h3>DELIVERY</h3>
+  <p>Delivery available across Morocco.</p>
+  <p>Cash on Delivery.</p>
+  <p>Estimated delivery: 2–5 business days.</p>
+</div>
 
       <div class="size-section">
         <h3>CHOOSE SIZE</h3>
