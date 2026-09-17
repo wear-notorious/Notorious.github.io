@@ -351,8 +351,30 @@
   border-color: #555;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
 }
-
+    
+.best-seller-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 5;
+  padding: 8px 13px;
+  background: linear-gradient(
+    135deg,
+    #f5d76e 0%,
+    #d4af37 45%,
+    #b8860b 100%
+  );
+  color: #000;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+  line-height: 1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+    
     .product-image {
+      position: relative;
       aspect-ratio: 1 / 1;
       background: #f4f4f4;
       overflow: hidden;
@@ -909,6 +931,9 @@
         class="product-card"
       >
         <div class="product-image">
+        ${product.slug === "asap" ? `
+  <span class="best-seller-badge">BEST SELLER</span>
+` : ""}
           <img
             src="${product.mainImage}"
             alt="${product.product}"
