@@ -1037,7 +1037,7 @@ if (searchInput) {
   }
 
   function initializeProducts(products) {
-    allProducts = Array.isArray(products) ? products : [];
+    allProducts = Array.isArray(products) ? [...products].reverse() : [];
 
     localStorage.setItem(
       "notoriousProducts",
