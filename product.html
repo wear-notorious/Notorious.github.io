@@ -1100,6 +1100,7 @@ if (cachedProducts) {
     console.error("Cache error:", error);
   }
 }
+    if (!products) {
   products = await new Promise((resolve, reject) => {
   const callbackName = "notoriousProductsCallback";
 
@@ -1121,6 +1122,8 @@ if (cachedProducts) {
   document.body.appendChild(script);
 });
       
+    }
+    
 localStorage.setItem(
   "notoriousProducts",
   JSON.stringify(products)
