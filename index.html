@@ -310,7 +310,36 @@
   transform: translateY(-2px);
 }
 
+    .best-seller-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 5;
+
+  padding: 7px 11px;
+
+  background: linear-gradient(
+    135deg,
+    #8f6b00 0%,
+    #d4af37 25%,
+    #f7e27d 50%,
+    #d4af37 75%,
+    #8f6b00 100%
+  );
+
+  color: #000;
+  border-radius: 4px;
+
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+    
     .product-image {
+      position: relative;
       aspect-ratio: 1 / 1;
       background: linear-gradient(135deg, #191919, #0f0f0f);
       display: flex;
@@ -994,6 +1023,9 @@ function renderProducts(products) {
        style="display:flex; flex-direction:column; color:inherit; text-decoration:none;">
 
       <div class="product-image">
+      ${product.slug === "asap" ? `
+  <span class="best-seller-badge">BEST SELLER</span>
+` : ""}
         <img
           src="${product.mainImage}"
           alt="${product.product}"
