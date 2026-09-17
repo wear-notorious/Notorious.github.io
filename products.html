@@ -849,6 +849,13 @@
     >
       <i class="fa-brands fa-facebook-f"></i>
     </a>
+    <a
+  href="mailto:wear.notorious0@gmail.com"
+  onclick="openNotoriousEmail(event)"
+  aria-label="Email"
+>
+  <i class="fa-solid fa-envelope"></i>
+</a>
 
   </div>
 
@@ -1059,6 +1066,19 @@ if (searchInput) {
 
   document.body.appendChild(script);
 </script>
+<script>
+  function openNotoriousEmail(event) {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
+    if (!isMobile) {
+      event.preventDefault();
+
+      window.open(
+        "https://mail.google.com/mail/?view=cm&fs=1&to=wear.notorious0@gmail.com",
+        "_blank"
+      );
+    }
+  }
+</script>
 </body>
 </html>
