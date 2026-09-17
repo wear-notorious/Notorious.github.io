@@ -222,6 +222,16 @@
           <label>Full name</label>
           <input type="text" id="name" placeholder="Your full name" required>
         </div>
+        <div class="field">
+  <label>Email address</label>
+  <input
+    type="email"
+    id="email"
+    placeholder="your@email.com"
+    autocomplete="email"
+    required
+  >
+</div>
 
         <div class="field">
           <label>Phone number</label>
@@ -378,6 +388,7 @@ const orderData = {
   quantity: isCartCheckout ? cartQuantity : quantity,
 
   fullName: document.getElementById("name").value.trim(),
+  email: document.getElementById("email").value.trim(),
   phone: document.getElementById("phone").value.trim(),
   city: document.getElementById("city").value.trim(),
   postalCode: document.getElementById("postal").value.trim(),
