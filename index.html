@@ -993,8 +993,12 @@ margin-right: 8px;
 
   <div class="nav-links">
   <a href="#home">HOME</a>
+    
   <div class="products-menu">
-  <button type="button" class="products-menu-btn">PRODUCTS</button>
+
+  <button type="button" class="products-menu-btn">
+    PRODUCTS
+  </button>
 
   <div class="products-dropdown">
     <a href="products.html">ALL PRODUCTS</a>
@@ -1002,9 +1006,7 @@ margin-right: 8px;
     <a href="products.html?category=hoodies">HOODIES</a>
     <a href="products.html?category=pants">PANTS</a>
   </div>
-</div>
-  <a href="about.html">ABOUT</a>
-  <a href="contact.html">CONTACT</a>
+
 </div>
 
     <a href="cart.html" class="cart-button" aria-label="Shopping cart">
@@ -1257,12 +1259,18 @@ setInterval(() => {
   }
 </script>
   <script>
-  const productsBtn = document.querySelector('.products-menu-btn');
-  const productsMenu = document.querySelector('.products-menu');
+ const productsBtn = document.querySelector(".products-menu-btn");
+const productsMenu = document.querySelector(".products-menu");
 
-  productsBtn.addEventListener('click', () => {
-    productsMenu.classList.toggle('open');
+if (productsBtn && productsMenu) {
+  productsBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    productsMenu.classList.toggle("open");
   });
+}
+    
 </script>
 </body>
 </html>
