@@ -65,6 +65,7 @@
       align-items: center;
       gap: 45px;
     }
+    
 @media (min-width: 801px) {
   .header-container {
     position: relative;
@@ -84,6 +85,16 @@
     color: #fff;
     text-decoration: none;
     font-size: 20px;
+  }
+
+  .products-menu::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 18px;
   }
 }
 
