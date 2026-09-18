@@ -577,32 +577,37 @@
   align-items: center;
   justify-content: center;
 }
-      /* Mobile Dropdown Adjustments */
-  .products-menu {
-    width: 100%;
-    text-align: center;
-  }
+      /* Mobile Dropdown */
+.products-menu {
+  width: 100%;
+  text-align: center;
+}
 
-  .products-dropdown {
-    position: static;
-    transform: none;
-    min-width: 100%;
-    background: transparent;
-    border: none;
-    padding: 6px 0;
-    box-shadow: none;
-  }
+.products-menu-btn {
+  width: 100%;
+  padding: 0 0 6px;
+}
 
-  .products-dropdown a {
-    padding: 10px 0;
-    font-size: 11px;
-    opacity: 0.8;
-  }
+.products-dropdown {
+  position: static;
+  transform: none;
+  min-width: 100%;
+  background: #111;
+  border: 1px solid #222;
+  margin-top: 10px;
+  padding: 6px 0;
+}
 
-  .products-dropdown a:hover {
-    background: transparent;
-    opacity: 1;
-  }
+.products-dropdown a {
+  padding: 10px 0;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.products-dropdown a:hover {
+  background: #181818;
+  opacity: 1;
+}
 
 .site-logo {
   height: 65px;
@@ -1195,6 +1200,14 @@ if (searchInput) {
       );
     }
   }
+</script>
+  <script>
+  const productsBtn = document.querySelector('.products-menu-btn');
+  const productsMenu = document.querySelector('.products-menu');
+
+  productsBtn.addEventListener('click', () => {
+    productsMenu.classList.toggle('open');
+  });
 </script>
 </body>
 </html>
