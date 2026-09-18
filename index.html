@@ -17,51 +17,7 @@
       padding: 0;
       box-sizing: border-box;
     }
-.products-menu {
-  position: relative;
-}
-    .products-menu-btn {
-  background: none;
-  border: none;
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 0 0 6px;
-  margin: 0;
-  position: relative;
-}
 
-.products-dropdown {
-  position: absolute;
-  top: calc(100% + 20px);
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 230px;
-  background: #0a0a0a;
-  border: 1px solid #222;
-  padding: 20px 0;
-  display: none;
-  z-index: 9999;
-}
-
-.products-menu.open .products-dropdown {
-  display: block;
-}
-
-.products-dropdown a {
-  display: block;
-  padding: 12px 22px;
-  color: #fff;
-  text-decoration: none;
-}
-
-.products-dropdown a:hover {
-  background: #181818;
-}
     html {
       scroll-behavior: smooth;
     }
@@ -185,28 +141,6 @@
   letter-spacing: 2px;
   position: relative;
   padding-bottom: 6px;
-}
-
-.nav-links a::after,
-.products-menu-btn::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: white;
-  transform: translateX(-50%);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after,
-.nav-links a:focus::after,
-.nav-links a:active::after,
-.products-menu-btn:hover::after,
-.products-menu-btn:focus::after,
-.products-menu-btn:active::after {
-  width: 100%;
 }
    .hero {
     min-height: 92vh;
@@ -667,25 +601,7 @@
   position: relative;
   padding-bottom: 6px;
 }
-
-.products-menu-btn::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: white;
-  transform: translateX(-50%);
-  transition: width 0.3s ease;
-}
-
-.products-menu-btn:hover::after,
-.products-menu-btn:focus::after,
-.products-menu-btn:active::after {
-  width: 100%;
-}
-
+      
 .products-dropdown {
   position: static;
   transform: none;
@@ -1006,18 +922,7 @@ margin-right: 8px;
 
   <div class="nav-links">
   <a href="#home">HOME</a>
-
-  <div class="products-menu">
-    <button type="button" class="products-menu-btn">PRODUCTS</button>
-
-    <div class="products-dropdown">
-      <a href="products.html">ALL PRODUCTS</a>
-      <a href="products.html?category=tshirts">T-SHIRTS</a>
-      <a href="products.html?category=hoodies">HOODIES</a>
-      <a href="products.html?category=pants">PANTS</a>
-    </div>
-  </div>
-
+  <a href="products.html">PRODUCTS</a>
   <a href="about.html">ABOUT</a>
   <a href="contact.html">CONTACT</a>
 </div>
@@ -1240,14 +1145,7 @@ renderMightLike(products);
 loadProducts();
 </script>
   <script>
-  const productsBtn = document.querySelector(".products-menu-btn");
-  const productsMenu = document.querySelector(".products-menu");
-
-  if (productsBtn && productsMenu) {
-    productsBtn.addEventListener("click", () => {
-      productsMenu.classList.toggle("open");
-    });
-  }
+  
 </script>
   <script>
  
