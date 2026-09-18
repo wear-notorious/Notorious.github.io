@@ -114,6 +114,55 @@
   align-items: center;
   gap: 45px;
 }
+    .products-menu {
+  position: relative;
+}
+
+.products-menu-btn {
+  position: relative;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0 0 6px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.products-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 180px;
+  padding: 12px 0;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  z-index: 2000;
+}
+
+.products-menu:hover .products-dropdown,
+.products-menu:focus-within .products-dropdown {
+  display: block;
+}
+
+.products-dropdown a {
+  display: block;
+  padding: 12px 18px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+.products-dropdown a:hover {
+  background: #151515;
+}
 
     @media (min-width: 801px) {
   .nav-links {
@@ -626,6 +675,26 @@
   background: #181818;
   opacity: 1;
 }
+      .products-menu.open .products-dropdown {
+  margin-top: 8px;
+  padding: 4px 0;
+}
+
+.products-menu.open .products-dropdown a {
+  padding: 9px 0;
+}
+
+.products-menu-btn::after {
+  content: "⌄";
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.products-menu.open .products-menu-btn::after {
+  transform: rotate(180deg);
+}
 
 .menu-toggle {
   display: block;
@@ -922,7 +991,16 @@ margin-right: 8px;
 
   <div class="nav-links">
   <a href="#home">HOME</a>
-  <a href="products.html">PRODUCTS</a>
+  <div class="products-menu">
+  <button type="button" class="products-menu-btn">PRODUCTS</button>
+
+  <div class="products-dropdown">
+    <a href="products.html">ALL PRODUCTS</a>
+    <a href="products.html?category=tshirts">T-SHIRTS</a>
+    <a href="products.html?category=hoodies">HOODIES</a>
+    <a href="products.html?category=pants">PANTS</a>
+  </div>
+</div>
   <a href="about.html">ABOUT</a>
   <a href="contact.html">CONTACT</a>
 </div>
@@ -1175,6 +1253,14 @@ setInterval(() => {
       );
     }
   }
+</script>
+  <script>
+  const productsBtn = document.querySelector('.products-menu-btn');
+  const productsMenu = document.querySelector('.products-menu');
+
+  productsBtn.addEventListener('click', () => {
+    productsMenu.classList.toggle('open');
+  });
 </script>
 </body>
 </html>
