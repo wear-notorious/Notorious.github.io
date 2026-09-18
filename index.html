@@ -603,85 +603,66 @@
     }
 
     @media (max-width: 800px) {
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: #0a0a0a;
-    flex-direction: column;
-    padding: 25px 20px;
-    gap: 22px;
-    border-top: 1px solid #222;
-    z-index: 999;
-  }
-
-  .nav-links.active {
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #0a0a0a;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    z-index: 999;
-  }
-
-  /* Target both <a> and <button> inside .nav-links so PRODUCTS looks identical */
-  .nav-links.active a,
-  .nav-links.active .products-menu-btn {
-    width: 100%;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: #fff;
-  }
-
-  .products-menu {
-    width: 100%;
-    text-align: center;
-  }
-
-  .products-menu-btn {
-    background: none;
-    border: none;
-    color: inherit;
-    font: inherit;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-    position: relative;
-  }
-
-  .products-dropdown {
-    position: static;
-    transform: none;
-    min-width: 100%;
-    background: #111;
-    border: 1px solid #222;
-    margin-top: 10px;
-    padding: 6px 0;
-  }
-
-  .products-menu.open .products-dropdown {
-  display: block !important;
+      .nav-links {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #0a0a0a;
+  flex-direction: column;
+  padding: 25px 20px;
+  gap: 22px;
+  border-top: 1px solid #222;
+  z-index: 999;
 }
 
-  .products-dropdown a {
-    padding: 10px 0;
-    font-size: 11px;
-    opacity: 0.8;
-  }
+.nav-links.active {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #0a0a0a;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  z-index: 999;
+}
+      .products-menu {
+  width: 100%;
+  text-align: center;
+}
+
+.products-menu-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  padding-bottom: 6px;
+}
+      
+.products-dropdown {
+  position: static;
+  transform: none;
+  min-width: 100%;
+  background: #111;
+  border: 1px solid #222;
+  margin-top: 10px;
+  padding: 6px 0;
 }
 
 .products-menu.open .products-dropdown {
-  display: block !important;
+  display: block;
 }
 
 .products-dropdown a {
@@ -1269,20 +1250,12 @@ setInterval(() => {
     }
   }
 </script>
- <script>
+  <script>
   const productsBtn = document.querySelector('.products-menu-btn');
   const productsMenu = document.querySelector('.products-menu');
 
-  productsBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  productsBtn.addEventListener('click', () => {
     productsMenu.classList.toggle('open');
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!productsMenu.contains(e.target)) {
-      productsMenu.classList.remove('open');
-    }
   });
 </script>
 </body>
