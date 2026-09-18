@@ -1073,6 +1073,14 @@
 
   function applyFilters() {
     let products = [...allProducts];
+    const category =
+  new URLSearchParams(window.location.search).get("category");
+
+if (category) {
+  products = products.filter(product =>
+    String(product.category || "").toLowerCase() === category.toLowerCase()
+  );
+}
     const searchInput = document.getElementById("productSearch");
 
 if (searchInput) {
