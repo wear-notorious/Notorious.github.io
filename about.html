@@ -586,6 +586,116 @@
     font-size: 13px;
     letter-spacing: 2px;
   }
+  /* ===== PRODUCTS DROPDOWN ===== */
+.products-menu {
+  position: relative;
+}
+
+.products-menu-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: inherit;
+  cursor: pointer;
+  padding: 0 0 6px;
+  margin: 0;
+}
+
+.products-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 180px;
+  padding: 12px 0;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  z-index: 2000;
+}
+
+.products-menu:hover .products-dropdown,
+.products-menu:focus-within .products-dropdown {
+  display: block;
+}
+
+.products-dropdown a {
+  display: block;
+  padding: 12px 18px 6px;
+  white-space: nowrap;
+}
+
+.products-dropdown a:hover {
+  background: #151515;
+}
+
+/* Pont invisible bach l-menu ma ytsedch mlli t7rrek la souris (desktop) */
+@media (min-width: 701px) {
+  .products-menu::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .products-menu {
+    width: 100%;
+  }
+
+  .products-menu-btn {
+    width: 100%;
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .products-menu-btn::after {
+    content: "⌄";
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 14px;
+    transition: transform 0.2s ease;
+  }
+
+  .products-menu.open .products-menu-btn::after {
+    transform: rotate(180deg);
+  }
+
+  .products-dropdown {
+    display: none !important;
+    position: static;
+    transform: none;
+    min-width: 100%;
+    background: #111;
+    border: 1px solid #222;
+    margin-top: 8px;
+    padding: 4px 0;
+  }
+
+  .products-menu.open .products-dropdown {
+    display: block !important;
+  }
+
+  .products-dropdown a {
+    padding: 9px 14px;
+    font-size: 11px;
+    opacity: 0.8;
+  }
+
+  .products-dropdown a:hover {
+    background: #181818;
+    opacity: 1;
+  }
+}
 }
   </style>
 </head>
@@ -601,7 +711,16 @@
 
       <div class="nav-links">
         <a href="index.html">HOME</a>
-        <a href="products.html">PRODUCTS</a>
+        <div class="products-menu">
+  <button type="button" class="products-menu-btn">PRODUCTS</button>
+
+  <div class="products-dropdown">
+    <a href="products.html">ALL PRODUCTS</a>
+    <a href="products.html?category=tshirts">T-SHIRTS</a>
+    <a href="products.html?category=hoodies">HOODIES</a>
+    <a href="products.html?category=pants">PANTS</a>
+  </div>
+</div>
         <a href="about.html">ABOUT</a>
         <a href="contact.html">CONTACT</a>
       </div>
@@ -779,6 +898,14 @@
       );
     }
   }
+</script>
+  <script>
+  const productsBtn = document.querySelector('.products-menu-btn');
+  const productsMenu = document.querySelector('.products-menu');
+
+  productsBtn.addEventListener('click', () => {
+    productsMenu.classList.toggle('open');
+  });
 </script>
 </body>
 </html>
