@@ -61,19 +61,19 @@
   pointer-events: none;
 }
   nav {
-  max-width: 1400px;
-  margin: auto;
-  padding: 22px 6%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
+      max-width: 1400px;
+      margin: auto;
+      padding: 18px 6%; /* 9ssenaha chwiya bach tji mtaqda m3a products.html */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
 
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: 2px;
+    .logo img {
+      height: 75px; /* 9ssrna l'logo b 10px bach ytwata m3a l'header dial products */
+      width: auto;
+      display: block;
     }
 
 .menu-toggle {
@@ -704,25 +704,27 @@
   z-index: 1001;
 }
 
-nav {
-  height: 95px;
-  padding: 0 25px;
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@media (max-width: 800px) {
+      nav {
+        height: 80px; /* Kanet 95px, rednaha 80px b7al products.html */
+        padding: 0 20px;
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
       
-.logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
+      .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
-.logo img {
-  height: 65px !important;
-}
+      .logo img {
+        height: 55px !important; /* Kanet 65px, rednaha 55px bach tji mtatabqa */
+      }
+    }
       
   .cart-button {
   display: flex;
