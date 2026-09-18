@@ -299,7 +299,7 @@
       }
     }
 
-    @media (min-width: 801px) {
+   @media (min-width: 801px) {
   .nav-links {
     position: absolute;
     left: 50%;
@@ -308,6 +308,16 @@
 
   .cart-button {
     margin-left: auto;
+  }
+
+  .products-menu::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 18px;
   }
 }
 
