@@ -1,970 +1,973 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <head>
-  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NOTORIOUS™ — Wear What They Won’t</title>
-  <meta
-    name="description"
-    content="NOTORIOUS™ — Premium streetwear brand. Wear What They Won’t."
-  />
+  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOTORIOUS™ — Wear What They Won’t</title>
+  <meta
+    name="description"
+    content="NOTORIOUS™ — Premium streetwear brand. Wear What They Won’t."
+  />
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html {
+      scroll-behavior: smooth;
+    }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0a0a0a;
-      color: #ffffff;
-      line-height: 1.5;
-    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0a0a0a;
+      color: #ffffff;
+      line-height: 1.5;
+    }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(12px);
-    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+    }
 
-    header::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  height: 45px;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 10, 10, 0.92) 0%,
-    rgba(10, 10, 10, 0.55) 30%,
-    rgba(10, 10, 10, 0.20) 65%,
-    transparent 100%
-  );
-  pointer-events: none;
+    header::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 45px;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.92) 0%,
+    rgba(10, 10, 10, 0.55) 30%,
+    rgba(10, 10, 10, 0.20) 65%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
-  nav {
-  max-width: 1400px;
-  margin: auto;
-  padding: 22px 6%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
+  nav {
+      max-width: 1400px;
+      margin: auto;
+      padding: 18px 6%; /* 9ssenaha chwiya bach tji mtaqda m3a products.html */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
 
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
+    .logo img {
+      height: 75px; /* 9ssrna l'logo b 10px bach ytwata m3a l'header dial products */
+      width: auto;
+      display: block;
+    }
 
 .menu-toggle {
-  display: none;
+  display: none;
 }
-    
-    .cart-button {
-  margin-left: auto;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-decoration: none;
-  font-size: 20px;
+    
+    .cart-button {
+  margin-left: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
 }
-    
-    .cart-count {
-  position: absolute;
-  top: -7px;
-  right: -10px;
-  background: white;
-  color: black;
-  font-size: 10px;
-  font-weight: 800;
-  min-width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4px;
-  line-height: 1;    
+    
+    .cart-count {
+  position: absolute;
+  top: -7px;
+  right: -10px;
+  background: white;
+  color: black;
+  font-size: 10px;
+  font-weight: 800;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  line-height: 1;    
 }
 
-    .nav-links {
-  display: flex;
-  align-items: center;
-  gap: 45px;
+    .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 45px;
 }
-    .products-menu {
-  position: relative;
+    .products-menu {
+  position: relative;
 }
 
 .products-menu-btn {
-  position: relative;
-  background: none;
-  border: none;
-  color: inherit;
-  padding: 0 0 6px;
-  font: inherit;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  cursor: pointer;
+  position: relative;
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0 0 6px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  cursor: pointer;
 }
 
 .products-dropdown {
-  display: none;
-  position: absolute;
-  top: calc(100% + 18px);
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 180px;
-  padding: 12px 0;
-  background: #0a0a0a;
-  border: 1px solid #222;
-  z-index: 2000;
+  display: none;
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 180px;
+  padding: 12px 0;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  z-index: 2000;
 }
 
 .products-menu:hover .products-dropdown,
 .products-menu:focus-within .products-dropdown {
-  display: block;
+  display: block;
 }
 
 .products-dropdown a {
-  display: block;
-  padding: 12px 18px;
-  color: #fff;
-  text-decoration: none;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  white-space: nowrap;
+  display: block;
+  padding: 12px 18px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
 }
 
 .products-dropdown a:hover {
-  background: #151515;
+  background: #151515;
 }
 
-    @media (min-width: 801px) {
-  .nav-links {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
+    @media (min-width: 801px) {
+  .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-  .cart-button {
-    margin-left: auto;
-  }
+  .cart-button {
+    margin-left: auto;
+  }
 }
 
 .nav-links.active a {
-  width: 100%;
-  padding: 16px 24px;
-  text-align: center;
+  width: auto;
+  padding: 0 0 6px;
+  text-align: center;
 }
-    
+    
 .nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  position: relative;
-  padding-bottom: 6px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 6px;
 }
-   .hero {
-    min-height: 92vh;
-    position: relative;
-    isolation: isolate;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 140px 7% 90px;
-    overflow: hidden;
+   .hero {
+    min-height: 92vh;
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 140px 7% 90px;
+    overflow: hidden;
 
-   
+   
 
-    background-size: cover;
-    background-position: center;
+    background-size: cover;
+    background-position: center;
 }
-    .hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+    .hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
 }
 
 .hero-bg img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0;
-  transition: opacity 1.2s ease-in-out;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
 }
 
 .hero-bg img.active {
-  opacity: 1;
+  opacity: 1;
 }
 
 .hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.05) 0%,
-    rgba(0, 0, 0, 0.12) 55%,
-    rgba(0, 0, 0, 0.55) 78%,
-    rgba(0, 0, 0, 0.90) 92%,
-    #0a0a0a 100%
-  );
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.12) 55%,
+    rgba(0, 0, 0, 0.55) 78%,
+    rgba(0, 0, 0, 0.90) 92%,
+    #0a0a0a 100%
+  );
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 760px;
-    text-align: left;
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+    text-align: left;
 }
 
 .hero-kicker {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    margin-bottom: 20px;
-    color: #bdbdbd;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    color: #bdbdbd;
 }
 
 .hero h1 {
-    font-size: clamp(3.8rem, 8vw, 8rem);
-    line-height: 0.88;
-    font-weight: 900;
-    letter-spacing: -4px;
-    margin-bottom: 28px;
-    text-transform: uppercase;
+    font-size: clamp(3.8rem, 8vw, 8rem);
+    line-height: 0.88;
+    font-weight: 900;
+    letter-spacing: -4px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
 }
 
 .hero p {
-    max-width: 520px;
-    font-size: clamp(1rem, 1.4vw, 1.2rem);
-    line-height: 1.7;
-    color: #c5c5c5;
-    margin-bottom: 36px;
+    max-width: 520px;
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    line-height: 1.7;
+    color: #c5c5c5;
+    margin-bottom: 36px;
 }
 
 .btn {
-    display: inline-block;
-    background: #fff;
-    color: #000;
-    padding: 17px 32px;
-    border-radius: 999px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-decoration: none;
-    transition: 0.25s ease;
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    padding: 17px 32px;
+    border-radius: 999px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.25s ease;
 }
 
 .btn:hover {
-    transform: translateY(-3px);
-    background: #e7e7e7;
+    transform: translateY(-3px);
+    background: #e7e7e7;
 }
 
-    section {
-      padding: 90px 24px;
-    }
+    section {
+      padding: 90px 24px;
+    }
 
-    .container {
-      max-width: 1200px;
-      margin: auto;
-    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
 
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: 40px;
-    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 40px;
+    }
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
 
-    .product-card {
-      background: #111;
-      border: 1px solid #222;
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .product-card:hover {
-  transform: translateY(-6px);
-  border-color: #555;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+    .product-card {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product-card:hover {
+  transform: translateY(-6px);
+  border-color: #555;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
 }
 
 .product-card .product-image img {
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease;
 }
 
 .product-card:hover .product-image img {
-  transform: scale(1.04);
+  transform: scale(1.04);
 }
-    .view-more-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 45px;
+    .view-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 45px;
 }
 
 .view-more-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 180px;
-  padding: 15px 32px;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  color: #fff;
-  background: transparent;
-  text-decoration: none;
-  font-family: "Arial Black", Arial, sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  padding: 15px 32px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  color: #fff;
+  background: transparent;
+  text-decoration: none;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .view-more-btn:hover {
-  background: #fff;
-  color: #000;
-  transform: translateY(-2px);
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
 }
 
-    .best-seller-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  z-index: 5;
+    .best-seller-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 5;
 
-  padding: 7px 11px;
+  padding: 7px 11px;
 
-  background: linear-gradient(
-    135deg,
-    #8f6b00 0%,
-    #d4af37 25%,
-    #f7e27d 50%,
-    #d4af37 75%,
-    #8f6b00 100%
-  );
+  background: linear-gradient(
+    135deg,
+    #8f6b00 0%,
+    #d4af37 25%,
+    #f7e27d 50%,
+    #d4af37 75%,
+    #8f6b00 100%
+  );
 
-  color: #000;
-  border-radius: 4px;
+  color: #000;
+  border-radius: 4px;
 
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  line-height: 1;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1;
 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
-    
-    .product-image {
-      position: relative;
-      aspect-ratio: 1 / 1;
-      background: linear-gradient(135deg, #191919, #0f0f0f);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #777;
-      font-size: 0.9rem;
-    }
+    
+    .product-image {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, #191919, #0f0f0f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 0.9rem;
+    }
 
-    .product-info {
-      padding: 20px;
-    }
+    .product-info {
+      padding: 20px;
+    }
 
-    .product-info h3 {
-      margin-bottom: 8px;
-    }
+    .product-info h3 {
+      margin-bottom: 8px;
+    }
 
-    .product-info p {
-      color: #aaa;
-      margin-bottom: 12px;
-    }
+    .product-info p {
+      color: #aaa;
+      margin-bottom: 12px;
+    }
 
-    .price {
-      font-weight: 800;
-      font-size: 1.1rem;
-    }
+    .price {
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
 
-    .brand-statement {
-  position: relative;
-  min-height: 620px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+    .brand-statement {
+  position: relative;
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 
-  background-image: url("images/brand-statement.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: url("images/brand-statement.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .brand-statement-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.92) 0%,
-    rgba(0, 0, 0, 0.65) 45%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.65) 45%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
 }
 
 .brand-statement-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 80px 40px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
 }
 
 .brand-statement-content span {
-  display: block;
-  margin-bottom: 18px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 4px;
-  color: #aaa;
+  display: block;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #aaa;
 }
 
 .brand-statement-content h2 {
-  margin: 0;
-  font-size: clamp(55px, 7vw, 105px);
-  line-height: 0.9;
-  font-weight: 900;
-  letter-spacing: -3px;
+  margin: 0;
+  font-size: clamp(55px, 7vw, 105px);
+  line-height: 0.9;
+  font-weight: 900;
+  letter-spacing: -3px;
 }
 
 .brand-statement-content p {
-  max-width: 520px;
-  margin: 28px 0 32px;
-  color: #ccc;
-  font-size: 17px;
-  line-height: 1.6;
+  max-width: 520px;
+  margin: 28px 0 32px;
+  color: #ccc;
+  font-size: 17px;
+  line-height: 1.6;
 }
 
 .brand-statement-btn {
-  display: inline-block;
-  padding: 15px 22px;
-  border: 1px solid #fff;
-  color: #fff;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 1.5px;
-  transition: 0.25s ease;
+  display: inline-block;
+  padding: 15px 22px;
+  border: 1px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  transition: 0.25s ease;
 }
 
 .brand-statement-btn:hover {
-  background: #fff;
-  color: #000;
+  background: #fff;
+  color: #000;
 }
-    /* YOU MIGHT ALSO LIKE */
+    /* YOU MIGHT ALSO LIKE */
 
 .might-like-section {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 90px 40px 75px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 90px 40px 75px;
 }
 
 .might-like-header {
-  margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .might-like-header span {
-  display: block;
-  margin-bottom: 10px;
-  color: #666;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
 }
 
 .might-like-header h2 {
-  margin: 0;
-  color: #fff;
-  font-size: 28px;
-  font-weight: 900;
-  letter-spacing: 1.5px;
+  margin: 0;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
 }
 
 .might-like-grid {
-  display: flex;
-  gap: 18px;
-  width: 100%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 15px;
-  scrollbar-width: none;
+  display: flex;
+  gap: 18px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 15px;
+  scrollbar-width: none;
 }
 
 .might-like-grid::-webkit-scrollbar {
-  display: none;
+  display: none;
 }
 
 .might-like-card {
-  flex: 0 0 260px;
-  scroll-snap-align: start;
-  color: #fff;
-  text-decoration: none;
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  color: #fff;
+  text-decoration: none;
 }
 
 .might-like-card img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  display: block;
-  border-radius: 12px;
-  background: #111;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  background: #111;
 }
 
 .might-like-card h3 {
-  margin: 12px 0 5px;
-  font-size: 14px;
-  font-weight: 800;
+  margin: 12px 0 5px;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .might-like-price {
-  color: #aaa;
-  font-size: 13px;
+  color: #aaa;
+  font-size: 13px;
 }
 
 .might-like-action {
-  margin-top: 30px;
+  margin-top: 30px;
 }
 
 .might-like-action a {
-  display: inline-block;
-  color: #fff;
-  text-decoration: none;
-  border-bottom: 1px solid #555;
-  padding-bottom: 5px;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 1.5px;
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid #555;
+  padding-bottom: 5px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
 }
 
 @media (max-width: 800px) {
-  .might-like-section {
-    padding: 65px 20px 55px;
-  }
+  .might-like-section {
+    padding: 65px 20px 55px;
+  }
 
-  .might-like-header h2 {
-    font-size: 22px;
-  }
+  .might-like-header h2 {
+    font-size: 22px;
+  }
 
-  .might-like-grid {
-    gap: 12px;
-  }
+  .might-like-grid {
+    gap: 12px;
+  }
 
-  .might-like-card {
-    flex: 0 0 72%;
-  }
+  .might-like-card {
+    flex: 0 0 72%;
+  }
 }
-    
-    footer {
-      padding: 35px 24px;
-      border-top: 1px solid #222;
-      color: #888;
-      text-align: center;
-    }
+    
+    footer {
+      padding: 35px 24px;
+      border-top: 1px solid #222;
+      color: #888;
+      text-align: center;
+    }
 
-    @media (max-width: 800px) {
-      .nav-links {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background: #0a0a0a;
-  flex-direction: column;
-  padding: 25px 20px;
-  gap: 22px;
-  border-top: 1px solid #222;
-  z-index: 999;
+ @media (max-width: 800px) {
+ .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #0a0a0a;
+    border-bottom: 1px solid #222;
+    flex-direction: column;
+    padding: 22px; /* Rednaha n9es bach ykon mzyer */
+    gap: 15px;          /* N9ssna l'gap binathom bhal products page */
+    z-index: 9999;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+      .products-menu {
+  width: 100%;
+  text-align: center;
 }
 
-.nav-links.active {
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #0a0a0a;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 45px;
-  z-index: 999;
-}
-      .products-menu {
-  width: 100%;
-  text-align: center;
+.products-menu {
+  width: 100%;
+  text-align: center;
 }
 
 .products-menu-btn {
-  background: none;
-  border: none;
-  color: inherit;
-  font: inherit;
-  font-weight: inherit;
-  letter-spacing: inherit;
-  text-transform: inherit;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  position: relative;
-  padding-bottom: 6px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  cursor: pointer;
+  width: 100%;
+  padding: 0 0 6px;
+  margin: 0;
+  position: relative;
 }
-      
+
 .products-dropdown {
-  position: static;
-  transform: none;
-  min-width: 100%;
-  background: #111;
-  border: 1px solid #222;
-  margin-top: 10px;
-  padding: 6px 0;
+  position: static;
+  transform: none;
+  min-width: 100%;
+  background: #111;
+  border: 1px solid #222;
+  margin-top: 10px;
+  padding: 6px 0;
 }
 
 .products-menu.open .products-dropdown {
-  display: block;
+  display: block;
+  margin-top: 8px;
+  padding: 4px 0;
 }
 
 .products-dropdown a {
-  padding: 10px 0;
-  font-size: 11px;
-  opacity: 0.8;
+  padding: 10px 0;
+  font-size: 11px;
+  opacity: 0.8;
 }
 
 .products-dropdown a:hover {
-  background: #181818;
-  opacity: 1;
-}
-      .products-menu.open .products-dropdown {
-  margin-top: 8px;
-  padding: 4px 0;
+  background: #181818;
+  opacity: 1;
 }
 
 .products-menu.open .products-dropdown a {
-  padding: 9px 0;
+  padding: 9px 0;
 }
 
 .products-menu-btn::after {
-  display: none !important;
+  content: "⌄";
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
 }
 
 .products-menu.open .products-menu-btn::after {
-  transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.products-menu.open .products-menu-btn::after {
+  transform: rotate(180deg);
 }
 
 .menu-toggle {
-  display: block;
-  position: absolute;
-  left: 20px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 32px;
-  cursor: pointer;
-  z-index: 1001;
+  display: block;
+  position: absolute;
+  left: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  z-index: 1001;
 }
 
-nav {
-  height: 95px;
-  padding: 0 25px;
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-      
-.logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
+@media (max-width: 800px) {
+      nav {
+        height: 80px; /* Kanet 95px, rednaha 80px b7al products.html */
+        padding: 0 20px;
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
-.logo img {
-  height: 65px !important;
-}
-      
-  .cart-button {
-  display: flex;
-  position: absolute;
-  right: 20px;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-decoration: none;
-  font-size: 20px;
+      .logo img {
+        height: 65px !important; /* Kanet 65px, rednaha 55px bach tji mtatabqa */
+      }
+    }
+      
+  .cart-button {
+  display: flex;
+  position: absolute;
+  right: 20px;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
 }
 
 .products {
-  grid-template-columns: 1fr;
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 24px;
 }
 
 .product-card {
-  width: 100%;
+  width: 100%;
 }
 
 .product-image {
-  height: 420px;
+  height: 420px;
 }
 
 .hero {
-  min-height: 78vh;
-  padding: 110px 22px 55px;
-  align-items: flex-end;
-  background-position: 58% center;
+  min-height: 78vh;
+  padding: 110px 22px 55px;
+  align-items: flex-end;
+  background-position: 58% center;
 }
 
 .hero-content {
-  max-width: 100%;
-  padding-top: 80px;
+  max-width: 100%;
+  padding-top: 80px;
 }
 
 .hero-kicker {
-  font-size: 11px;
-  letter-spacing: 3px;
-  margin-bottom: 14px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
 }
 
 .hero h1 {
-  font-size: 48px;
-  line-height: 0.9;
-  letter-spacing: -2px;
-  margin-bottom: 20px;
+  font-size: 48px;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
 }
 
 .hero p {
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 26px;
-  max-width: 340px;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 26px;
+  max-width: 340px;
 }
 
 .btn {
-  padding: 15px 26px;
-  font-size: 14px;
+  padding: 15px 26px;
+  font-size: 14px;
 }
 
 .product-info {
-  padding: 18px;
+  padding: 18px;
 }
 
 .product-info h3 {
-  font-size: 22px;
+  font-size: 22px;
 }
 
 .product-info p {
-  font-size: 14px;
+  font-size: 14px;
 }
 
 .price {
-  font-size: 18px;
+  font-size: 18px;
 }
 
-      .brand-statement {
-  min-height: 650px;
-  background-position: 68% center;
+      .brand-statement {
+  min-height: 650px;
+  background-position: 68% center;
 }
 
 .brand-statement-content {
-  padding: 60px 22px;
+  padding: 60px 22px;
 }
 
 .brand-statement-content h2 {
-  font-size: 52px;
-  line-height: 0.9;
-  letter-spacing: -2px;
+  font-size: 52px;
+  line-height: 0.9;
+  letter-spacing: -2px;
 }
 
 .brand-statement-content p {
-  max-width: 290px;
-  font-size: 14px;
+  max-width: 290px;
+  font-size: 14px;
 }
 
 .brand-statement-overlay {
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.88) 0%,
-    rgba(0, 0, 0, 0.58) 55%,
-    rgba(0, 0, 0, 0.15) 100%
-  );
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.58) 55%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
 }
-      
+      
 }
-    footer {
-  border-top: 1px solid #222;
-  padding: 55px 20px 35px;
-  text-align: center;
-  background: #050505;
+    footer {
+  border-top: 1px solid #222;
+  padding: 55px 20px 35px;
+  text-align: center;
+  background: #050505;
 }
 
 .footer-brand {
-  color: #fff;
-  font-size: 24px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  margin-bottom: 8px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
 }
 
 .footer-tagline {
-  color: #777;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 28px;
+  color: #777;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
 }
 
 .footer-socials {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  margin-bottom: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 35px;
 }
 
 .footer-socials a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 24px;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #292929;
-  border-radius: 50%;
-  transition: all 0.25s ease;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #292929;
+  border-radius: 50%;
+  transition: all 0.25s ease;
 }
 
 .footer-socials a:hover {
-  border-color: #fff;
-  transform: translateY(-3px);
-  opacity: 1;
+  border-color: #fff;
+  transform: translateY(-3px);
+  opacity: 1;
 }
 .footer-link {
-  display: inline-block;
-  margin-left: 8px;
+  display: inline-block;
+  margin-left: 8px;
 margin-right: 8px;
-  color: #888;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-bottom: 22px;
-  transition: color 0.2s ease;
+  color: #888;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 22px;
+  transition: color 0.2s ease;
 }
 
 .footer-link:hover {
-  color: #fff;
+  color: #fff;
 }
 .footer-copy {
-  color: #555;
-  font-size: 11px;
-  letter-spacing: 0.5px;
+  color: #555;
+  font-size: 11px;
+  letter-spacing: 0.5px;
 }
 
 @media (max-width: 600px) {
- .products {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+ .products {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .product-card {
-  min-width: 0;
-  border-radius: 10px;
-  overflow: hidden;
+  min-width: 0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .product-image {
-  width: 100%;
-  height: 180px;
-  aspect-ratio: auto;
-  overflow: hidden;
-  background: #f5f5f5;
+  width: 100%;
+  height: 180px;
+  aspect-ratio: auto;
+  overflow: hidden;
+  background: #f5f5f5;
 }
 
 .product-image img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center;
 }
 
 .product-info {
-  padding: 10px;
+  padding: 10px;
 }
 
 .product-info h3 {
-  font-size: 13px;
-  line-height: 1.3;
-  margin: 0 0 8px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 34px;
+  font-size: 13px;
+  line-height: 1.3;
+  margin: 0 0 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 34px;
 }
 
 .product-info p {
-  display: none;
+  display: none;
 }
 
 .price {
-  font-size: 15px;
-  font-weight: 800;
-  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 800;
+  margin-top: 4px;
 }
-  footer {
-    padding: 45px 20px 30px;
-  }
+  footer {
+    padding: 45px 20px 30px;
+  }
 
-  .footer-socials {
-    gap: 18px;
-  }
+  .footer-socials {
+    gap: 18px;
+  }
 
 }
-    /* ===== NOTORIOUS IMAGE SLIDER ===== */
+    /* ===== NOTORIOUS IMAGE SLIDER ===== */
 
 
 </style>
@@ -972,291 +975,291 @@ margin-right: 8px;
 
 <body>
 
- <header>
-  <nav>
+ <header>
+  <nav>
 
-   <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
-  ☰
+   <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+  ☰
 </button>
 
-    <div class="logo">
-      <a href="index.html">
-        <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo" style="height:85px; width:auto; display:block;">
-      </a>
-    </div>
+    <div class="logo">
+      <a href="index.html">
+        <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo" style="height:85px; width:auto; display:block;">
+      </a>
+    </div>
 
-  <div class="nav-links">
-  <a href="#home">HOME</a>
-  <div class="products-menu">
-  <button type="button" class="products-menu-btn">PRODUCTS</button>
+  <div class="nav-links">
+  <a href="#home">HOME</a>
+  <div class="products-menu">
+  <button type="button" class="products-menu-btn">PRODUCTS</button>
 
-  <div class="products-dropdown">
-    <a href="products.html">ALL PRODUCTS</a>
-    <a href="products.html?category=tshirts">T-SHIRTS</a>
-    <a href="products.html?category=hoodies">HOODIES</a>
-    <a href="products.html?category=pants">PANTS</a>
-  </div>
+  <div class="products-dropdown">
+    <a href="products.html">ALL PRODUCTS</a>
+    <a href="products.html?category=tshirts">T-SHIRTS</a>
+    <a href="products.html?category=hoodies">HOODIES</a>
+    <a href="products.html?category=pants">PANTS</a>
+  </div>
 </div>
-  <a href="about.html">ABOUT</a>
-  <a href="contact.html">CONTACT</a>
+  <a href="about.html">ABOUT</a>
+  <a href="contact.html">CONTACT</a>
 </div>
 
-    <a href="cart.html" class="cart-button" aria-label="Shopping cart">
-      <i class="fa-solid fa-bag-shopping"></i>
-      <span class="cart-count">0</span>
-    </a>
+    <a href="cart.html" class="cart-button" aria-label="Shopping cart">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span class="cart-count">0</span>
+    </a>
 
-  </nav>
+  </nav>
 </header>
 
-  <main>
+  <main>
 
-   <section class="hero" id="home">
-     <div class="hero-bg">
-  <img src="images/slider-1.png" class="active" alt="">
-  <img src="images/slide-2.png" alt="">
-  <img src="images/slider-3.png" alt="">
-  <img src="images/slider-4.png" alt="">
+   <section class="hero" id="home">
+     <div class="hero-bg">
+  <img src="images/slider-1.png" class="active" alt="">
+  <img src="images/slide-2.png" alt="">
+  <img src="images/slider-3.png" alt="">
+  <img src="images/slider-4.png" alt="">
 </div>
-  <div class="hero-overlay"></div>
+  <div class="hero-overlay"></div>
 
-  <div class="hero-content">
-    <span class="hero-kicker">NOTORIOUS™ STREETWEAR</span>
+  <div class="hero-content">
+    <span class="hero-kicker">NOTORIOUS™ STREETWEAR</span>
 
-    <h1>WEAR WHAT<br>THEY WON’T.</h1>
+    <h1>WEAR WHAT<br>THEY WON’T.</h1>
 
-    <p>
-      Limited drops. Bold attitude.<br>
-      Made for people who don’t dress like everyone else.
-    </p>
+    <p>
+      Limited drops. Bold attitude.<br>
+      Made for people who don’t dress like everyone else.
+    </p>
 
-    <a class="btn" href="#shop">SHOP THE DROP</a>
-  </div>
+    <a class="btn" href="#shop">SHOP THE DROP</a>
+  </div>
 </section>
 
-    <section id="shop">
-      <div class="container">
-        <h2 class="section-title">Latest Drops</h2>
+    <section id="shop">
+      <div class="container">
+        <h2 class="section-title">Latest Drops</h2>
 
-       <div class="products" id="productsContainer">
+       <div class="products" id="productsContainer">
 </div>
-        <div class="view-more-wrapper">
-  <a href="products.html" class="view-more-btn">VIEW MORE</a>
+        <div class="view-more-wrapper">
+  <a href="products.html" class="view-more-btn">VIEW MORE</a>
 </div>
-      </div>
-    </section>
+      </div>
+    </section>
 
-    <!-- BRAND STATEMENT -->
+    <!-- BRAND STATEMENT -->
 <section class="brand-statement">
-  <div class="brand-statement-overlay"></div>
+  <div class="brand-statement-overlay"></div>
 
-  <div class="brand-statement-content">
-    <span>NOTORIOUS™</span>
+  <div class="brand-statement-content">
+    <span>NOTORIOUS™</span>
 
-    <h2>NOT MADE<br>TO FIT IN.</h2>
+    <h2>NOT MADE<br>TO FIT IN.</h2>
 
-    <p>
-      Limited streetwear for people who wear what they won't.
-    </p>
+    <p>
+      Limited streetwear for people who wear what they won't.
+    </p>
 
-    <a href="about.html" class="brand-statement-btn">
-      DISCOVER THE BRAND →
-    </a>
-  </div>
+    <a href="about.html" class="brand-statement-btn">
+      DISCOVER THE BRAND →
+    </a>
+  </div>
 </section>
 
-  </main>
+  </main>
 
-  <!-- YOU MIGHT ALSO LIKE -->
+  <!-- YOU MIGHT ALSO LIKE -->
 <section class="might-like-section">
-  <div class="might-like-header">
-    <span>KEEP EXPLORING</span>
-    <h2>YOU MIGHT ALSO LIKE</h2>
-  </div>
+  <div class="might-like-header">
+    <span>KEEP EXPLORING</span>
+    <h2>YOU MIGHT ALSO LIKE</h2>
+  </div>
 
-  <div class="might-like-grid" id="mightLikeGrid">
-    <!-- Products will load automatically -->
-  </div>
+  <div class="might-like-grid" id="mightLikeGrid">
+    <!-- Products will load automatically -->
+  </div>
 
-  <div class="might-like-action">
-    <a href="products.html">VIEW ALL PRODUCTS →</a>
-  </div>
+  <div class="might-like-action">
+    <a href="products.html">VIEW ALL PRODUCTS →</a>
+  </div>
 </section>
 
 <footer>
-  <footer>
-  <div class="footer-brand">NOTORIOUS™</div>
-  <div class="footer-tagline">WEAR WHAT THEY WON’T.</div>
+  <footer>
+  <div class="footer-brand">NOTORIOUS™</div>
+  <div class="footer-tagline">WEAR WHAT THEY WON’T.</div>
 
-  <div class="footer-socials">
-  <a href="https://www.instagram.com/wear_notorious/" target="_blank" aria-label="Instagram">
-    <i class="fa-brands fa-instagram"></i>
-  </a>
+  <div class="footer-socials">
+  <a href="https://www.instagram.com/wear_notorious/" target="_blank" aria-label="Instagram">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
 
-  <a href="https://www.tiktok.com/@wear_notorious" target="_blank" aria-label="TikTok">
-    <i class="fa-brands fa-tiktok"></i>
-  </a>
+  <a href="https://www.tiktok.com/@wear_notorious" target="_blank" aria-label="TikTok">
+    <i class="fa-brands fa-tiktok"></i>
+  </a>
 
-  <a href="https://www.facebook.com/wearnotorious" target="_blank" aria-label="Facebook">
-    <i class="fa-brands fa-facebook-f"></i>
-  </a>
-    <a
-  href="mailto:wear.notorious0@gmail.com"
-  onclick="openNotoriousEmail(event)"
-  aria-label="Email"
+  <a href="https://www.facebook.com/wearnotorious" target="_blank" aria-label="Facebook">
+    <i class="fa-brands fa-facebook-f"></i>
+  </a>
+    <a
+  href="mailto:wear.notorious0@gmail.com"
+  onclick="openNotoriousEmail(event)"
+  aria-label="Email"
 >
-  <i class="fa-solid fa-envelope"></i>
+  <i class="fa-solid fa-envelope"></i>
 </a>
 </div>
 <a href="shipping.html" class="footer-link">Shipping & Returns</a>
-    <a href="legal.html" class="footer-link">Privacy & Terms</a>
-    <a href="about.html" class="footer-link">About Us</a>
-  <div class="footer-copy">
-    © 2026 NOTORIOUS™. All rights reserved.
-  </div>
+    <a href="legal.html" class="footer-link">Privacy & Terms</a>
+    <a href="about.html" class="footer-link">About Us</a>
+  <div class="footer-copy">
+    © 2026 NOTORIOUS™. All rights reserved.
+  </div>
 </footer>
 <script>
-  function toggleMenu() {
-  const menu = document.querySelector(".nav-links");
-  const button = document.querySelector(".menu-toggle");
+  function toggleMenu() {
+  const menu = document.querySelector(".nav-links");
+  const button = document.querySelector(".menu-toggle");
 
-  menu.classList.toggle("active");
+  menu.classList.toggle("active");
 
-  if (menu.classList.contains("active")) {
-    button.innerHTML = "✕";
-    button.setAttribute("aria-label", "Close menu");
-  } else {
-    button.innerHTML = "☰";
-    button.setAttribute("aria-label", "Open menu");
-  }
+  if (menu.classList.contains("active")) {
+    button.innerHTML = "✕";
+    button.setAttribute("aria-label", "Close menu");
+  } else {
+    button.innerHTML = "☰";
+    button.setAttribute("aria-label", "Open menu");
+  }
 }
-  const PRODUCTS_API_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
+  const PRODUCTS_API_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
 
 function renderProducts(products) {
-  const container = document.getElementById("productsContainer");
+  const container = document.getElementById("productsContainer");
 
-  container.innerHTML = products.slice(0, 6).map(product => `
-    <a href="product.html?slug=${product.slug}"
-       class="product-card"
-       style="display:flex; flex-direction:column; color:inherit; text-decoration:none;">
+  container.innerHTML = products.slice(0, 6).map(product => `
+    <a href="product.html?slug=${product.slug}"
+       class="product-card"
+       style="display:flex; flex-direction:column; color:inherit; text-decoration:none;">
 
-      <div class="product-image">
-      ${product.slug === "asap" ? `
-  <span class="best-seller-badge">BEST SELLER</span>
+      <div class="product-image">
+      ${product.slug === "asap" ? `
+  <span class="best-seller-badge">BEST SELLER</span>
 ` : ""}
-        <img
-          src="${product.mainImage}"
-          alt="${product.product}"
-          style="width:100%; height:100%; object-fit:cover;"
-        />
-      </div>
+        <img
+          src="${product.mainImage}"
+          alt="${product.product}"
+          style="width:100%; height:100%; object-fit:cover;"
+        />
+      </div>
 
-      <div class="product-info">
-        <h3>${product.product}</h3>
-        <p>${product.description}</p>
-        <div class="price">${product.price} MAD</div>
-      </div>
+      <div class="product-info">
+        <h3>${product.product}</h3>
+        <p>${product.description}</p>
+        <div class="price">${product.price} MAD</div>
+      </div>
 
-    </a>
-  `).join("");
+    </a>
+  `).join("");
 }
 
-  function renderMightLike(products) {
-  const container = document.getElementById("mightLikeGrid");
+  function renderMightLike(products) {
+  const container = document.getElementById("mightLikeGrid");
 
-  if (!container) return;
+  if (!container) return;
 
-  const selectedProducts = [...products]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 8);
+  const selectedProducts = [...products]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 8);
 
-  container.innerHTML = selectedProducts.map(product => `
-    <a href="product.html?slug=${product.slug}" class="might-like-card">
-      <img
-        src="${product.mainImage}"
-        alt="${product.product}"
-        loading="lazy"
-      >
+  container.innerHTML = selectedProducts.map(product => `
+    <a href="product.html?slug=${product.slug}" class="might-like-card">
+      <img
+        src="${product.mainImage}"
+        alt="${product.product}"
+        loading="lazy"
+      >
 
-      <h3>${product.product}</h3>
+      <h3>${product.product}</h3>
 
-      <div class="might-like-price">
-        ${product.price} MAD
-      </div>
-    </a>
-  `).join("");
+      <div class="might-like-price">
+        ${product.price} MAD
+      </div>
+    </a>
+  `).join("");
 }
-  
+  
 async function loadProducts() {
-  const cachedProducts = localStorage.getItem("notoriousProducts");
+  const cachedProducts = localStorage.getItem("notoriousProducts");
 
-  if (cachedProducts) {
-    try {
-      const products = JSON.parse(cachedProducts);
+  if (cachedProducts) {
+    try {
+      const products = JSON.parse(cachedProducts);
 renderProducts(products);
 renderMightLike(products);
-    } catch (error) {
-      console.error("Cache error:", error);
-    }
-  }
+    } catch (error) {
+      console.error("Cache error:", error);
+    }
+  }
 
-  try {
-    const response = await fetch(PRODUCTS_API_URL);
-    const products = await response.json();
+  try {
+    const response = await fetch(PRODUCTS_API_URL);
+    const products = await response.json();
 
-    localStorage.setItem(
-      "notoriousProducts",
-      JSON.stringify(products)
-    );
+    localStorage.setItem(
+      "notoriousProducts",
+      JSON.stringify(products)
+    );
 
-    renderProducts(products);
-    renderMightLike(products);
+    renderProducts(products);
+    renderMightLike(products);
 
-  } catch (error) {
-    console.error("Error loading products:", error);
-  }
+  } catch (error) {
+    console.error("Error loading products:", error);
+  }
 }
 loadProducts();
 </script>
-  <script>
-  
+  <script>
+  
 </script>
-  <script>
- 
-    // HERO BACKGROUND AUTO SLIDER
+  <script>
+ 
+    // HERO BACKGROUND AUTO SLIDER
 const heroImages = document.querySelectorAll(".hero-bg img");
 let currentHeroImage = 0;
 
 setInterval(() => {
-  heroImages[currentHeroImage].classList.remove("active");
+  heroImages[currentHeroImage].classList.remove("active");
 
-  currentHeroImage =
-    (currentHeroImage + 1) % heroImages.length;
+  currentHeroImage =
+    (currentHeroImage + 1) % heroImages.length;
 
-  heroImages[currentHeroImage].classList.add("active");
+  heroImages[currentHeroImage].classList.add("active");
 }, 4000);
 </script>
-  <script>
-  function openNotoriousEmail(event) {
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  <script>
+  function openNotoriousEmail(event) {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    if (!isMobile) {
-      event.preventDefault();
+    if (!isMobile) {
+      event.preventDefault();
 
-      window.open(
-        "https://mail.google.com/mail/?view=cm&fs=1&to=wear.notorious0@gmail.com",
-        "_blank"
-      );
-    }
-  }
+      window.open(
+        "https://mail.google.com/mail/?view=cm&fs=1&to=wear.notorious0@gmail.com",
+        "_blank"
+      );
+    }
+  }
 </script>
-  <script>
-  const productsBtn = document.querySelector('.products-menu-btn');
-  const productsMenu = document.querySelector('.products-menu');
+  <script>
+  const productsBtn = document.querySelector('.products-menu-btn');
+  const productsMenu = document.querySelector('.products-menu');
 
-  productsBtn.addEventListener('click', () => {
-    productsMenu.classList.toggle('open');
-  });
+  productsBtn.addEventListener('click', () => {
+    productsMenu.classList.toggle('open');
+  });
 </script>
 </body>
 </html>
