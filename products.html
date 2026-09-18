@@ -763,6 +763,26 @@
       .product-price {
         font-size: 15px;
       }
+      .products-menu.open .products-dropdown {
+  margin-top: 8px;
+  padding: 4px 0;
+}
+
+.products-menu.open .products-dropdown a {
+  padding: 9px 0;
+}
+
+.products-menu-btn::after {
+  content: "⌄";
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.products-menu.open .products-menu-btn::after {
+  transform: rotate(180deg);
+}
     }
   </style>
 </head>
