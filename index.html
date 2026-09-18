@@ -603,19 +603,19 @@
     }
 
  @media (max-width: 800px) {
-  .nav-links {
-  display: none;
-  position: absolute;
-  top: calc(100% + 18px);
-  left: 0;
-  right: 0;
-  background: #0a0a0a;
-  border: 1px solid #222;
-  padding: 22px;
-  flex-direction: column;
-  gap: 22px;
-  z-index: 9999;
-}
+ .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #0a0a0a;
+    border-bottom: 1px solid #222;
+    flex-direction: column;
+    padding: 22px; /* Rednaha n9es bach ykon mzyer */
+    gap: 15px;          /* N9ssna l'gap binathom bhal products page */
+    z-index: 9999;
+  }
 
   .nav-links.active {
     display: flex;
