@@ -271,20 +271,21 @@
       }
 
       .products-dropdown {
-        position: static;
-        transform: none;
-        min-width: 100%;
-        background: #111;
-        border: 1px solid #222;
-        margin-top: 10px;
-        padding: 6px 0;
-      }
+  display: none !important;
+  position: static;
+  transform: none;
+  min-width: 100%;
+  background: #111;
+  border: 1px solid #222;
+  margin-top: 10px;
+  padding: 6px 0;
+}
 
-      .products-menu.open .products-dropdown {
-        display: block;
-        margin-top: 8px;
-        padding: 4px 0;
-      }
+.products-menu.open .products-dropdown {
+  display: block !important;
+  margin-top: 8px;
+  padding: 4px 0;
+}
 
       .products-dropdown a {
         padding: 10px 0;
