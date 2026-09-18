@@ -1269,20 +1269,16 @@ setInterval(() => {
     }
   }
 </script>
-  <script>
+ <script>
   const productsBtn = document.querySelector('.products-menu-btn');
   const productsMenu = document.querySelector('.products-menu');
 
   productsBtn.addEventListener('click', (e) => {
-    // Empêcher toute redirection si le bouton est cliqué
     e.preventDefault();
     e.stopPropagation();
-
-    // Basculer l'ouverture du menu déroulant
     productsMenu.classList.toggle('open');
   });
 
-  // Fermer le menu si l'utilisateur clique ailleurs sur l'écran
   document.addEventListener('click', (e) => {
     if (!productsMenu.contains(e.target)) {
       productsMenu.classList.remove('open');
