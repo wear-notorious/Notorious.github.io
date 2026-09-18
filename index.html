@@ -17,7 +17,37 @@
       padding: 0;
       box-sizing: border-box;
     }
+.products-menu {
+  position: relative;
+}
 
+.products-dropdown {
+  position: absolute;
+  top: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 230px;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  padding: 20px 0;
+  display: none;
+  z-index: 9999;
+}
+
+.products-menu.open .products-dropdown {
+  display: block;
+}
+
+.products-dropdown a {
+  display: block;
+  padding: 12px 22px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.products-dropdown a:hover {
+  background: #181818;
+}
     html {
       scroll-behavior: smooth;
     }
@@ -600,6 +630,40 @@
   gap: 45px;
   z-index: 999;
 }
+      .products-menu {
+  width: 100%;
+  text-align: center;
+}
+
+.products-menu-btn {
+  width: 100%;
+  padding: 0 0 6px;
+}
+
+.products-dropdown {
+  position: static;
+  transform: none;
+  min-width: 100%;
+  background: #111;
+  border: 1px solid #222;
+  margin-top: 10px;
+  padding: 6px 0;
+}
+
+.products-menu.open .products-dropdown {
+  display: block;
+}
+
+.products-dropdown a {
+  padding: 10px 0;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.products-dropdown a:hover {
+  background: #181818;
+  opacity: 1;
+}
 
 .menu-toggle {
   display: block;
@@ -894,12 +958,23 @@ margin-right: 8px;
       </a>
     </div>
 
-    <div class="nav-links">
-      <a href="#home">HOME</a>
-      <a href="products.html">PRODUCTS</a>
-      <a href="about.html">ABOUT</a>
-      <a href="contact.html">CONTACT</a>
+  <div class="nav-links">
+  <a href="#home">HOME</a>
+
+  <div class="products-menu">
+    <button type="button" class="products-menu-btn">PRODUCTS</button>
+
+    <div class="products-dropdown">
+      <a href="products.html">ALL PRODUCTS</a>
+      <a href="products.html?category=tshirts">T-SHIRTS</a>
+      <a href="products.html?category=hoodies">HOODIES</a>
+      <a href="products.html?category=pants">PANTS</a>
     </div>
+  </div>
+
+  <a href="about.html">ABOUT</a>
+  <a href="contact.html">CONTACT</a>
+</div>
 
     <a href="cart.html" class="cart-button" aria-label="Shopping cart">
       <i class="fa-solid fa-bag-shopping"></i>
@@ -1117,6 +1192,16 @@ renderMightLike(products);
   }
 }
 loadProducts();
+</script>
+  <script>
+  const productsBtn = document.querySelector(".products-menu-btn");
+  const productsMenu = document.querySelector(".products-menu");
+
+  if (productsBtn && productsMenu) {
+    productsBtn.addEventListener("click", () => {
+      productsMenu.classList.toggle("open");
+    });
+  }
 </script>
   <script>
  
