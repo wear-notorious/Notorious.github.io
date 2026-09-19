@@ -843,7 +843,7 @@
 
 <section class="shop-hero">
   <span>NOTORIOUS™ COLLECTION</span>
-  <h1>ALL PRODUCTS</h1>
+  <h1 id="pageTitle">ALL PRODUCTS</h1>
   <p>
     Explore the complete NOTORIOUS™ collection.
     Made for those who wear what they won't.
@@ -1028,6 +1028,22 @@
 
   let allProducts = [];
 
+    const categoryTitles = {
+    tshirts: "T-SHIRTS",
+    hoodies: "HOODIES",
+    pants: "PANTS"
+  };
+
+  const currentCategory = (
+    new URLSearchParams(window.location.search).get("category") || ""
+  ).toLowerCase();
+
+  const pageTitleEl = document.getElementById("pageTitle");
+
+  if (pageTitleEl && categoryTitles[currentCategory]) {
+    pageTitleEl.textContent = categoryTitles[currentCategory];
+    document.title = categoryTitles[currentCategory] + " | NOTORIOUS™";
+  }
   function toggleMenu() {
     document.querySelector(".nav-links").classList.toggle("active");
   }
