@@ -245,70 +245,131 @@
       }
     }
 
-    /* PAGE */
+       /* HERO */
 
-    .legal-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 80px 25px 100px;
+    .shipping-hero {
+      text-align: center;
+      padding: 100px 20px 85px;
+      border-bottom: 1px solid #1f1f1f;
     }
 
     .eyebrow {
-      color: #888;
+      color: #777;
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 4px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
-    h1 {
-      font-size: clamp(42px, 7vw, 80px);
-      line-height: 0.95;
-      letter-spacing: -2px;
-      margin-bottom: 25px;
+    .shipping-hero h1 {
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 28px;
     }
 
-    .intro {
+    .shipping-hero p {
       color: #aaa;
+      max-width: 670px;
+      margin: auto;
       font-size: 17px;
-      max-width: 700px;
-      margin-bottom: 60px;
     }
 
-    .legal-section {
-      padding: 35px 0;
-      border-top: 1px solid #222;
+    /* CONTENT */
+
+    .policy-container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 90px 25px 120px;
     }
 
-    .legal-section h2 {
-      font-size: 23px;
-      margin-bottom: 15px;
-      letter-spacing: 0.5px;
+    .policy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
 
-    .legal-section p {
-      color: #aaa;
-      margin-bottom: 12px;
+    .policy-card {
+      background: #0e0e0e;
+      border: 1px solid #252525;
+      border-radius: 18px;
+      padding: 45px 38px;
     }
 
-    .legal-section ul {
-      color: #aaa;
-      padding-left: 22px;
-      margin-top: 10px;
-    }
-
-    .legal-section li {
-      margin-bottom: 8px;
-    }
-
-    .section-label {
+    .policy-number {
       color: #666;
+      display: block;
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 3px;
-      margin-bottom: 8px;
+      margin-bottom: 18px;
     }
 
+    .policy-card h2 {
+      font-size: 25px;
+      margin-bottom: 16px;
+    }
+
+    .policy-card p {
+      color: #aaa;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .policy-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .policy-card ul {
+      color: #aaa;
+      font-size: 15px;
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .policy-card li {
+      margin-bottom: 6px;
+    }
+
+    .policy-card strong {
+      color: #fff;
+    }
+
+    /* IMPORTANT NOTE */
+
+    .important-note {
+      max-width: 1100px;
+      margin: 0 auto 120px;
+      padding: 0 25px;
+    }
+
+    .note-box {
+      border: 1px solid #333;
+      border-radius: 18px;
+      padding: 45px;
+      text-align: center;
+    }
+
+    .note-box span {
+      color: #777;
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 17px;
+    }
+
+    .note-box h2 {
+      font-size: clamp(24px, 4vw, 38px);
+      margin-bottom: 18px;
+    }
+
+    .note-box p {
+      color: #aaa;
+      max-width: 750px;
+      margin: auto;
+    }
+    
       /* FOOTER */
 
     footer {
@@ -525,12 +586,42 @@
         opacity: 1;
       }
 
-      .legal-container {
-        padding: 55px 20px 80px;
+      .shipping-hero {
+        padding: 70px 20px 45px;
       }
 
-      h1 {
-        font-size: 45px;
+      .shipping-hero h1 {
+        font-size: 42px;
+      }
+
+      .shipping-hero p {
+        font-size: 15px;
+      }
+
+      .policy-container {
+        padding: 55px 20px 70px;
+      }
+
+      .policy-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .policy-card {
+        padding: 32px 26px;
+      }
+
+      .policy-card h2 {
+        font-size: 22px;
+      }
+
+      .important-note {
+        padding: 0 20px;
+        margin-bottom: 70px;
+      }
+
+      .note-box {
+        padding: 32px 24px;
       }
     }
     
@@ -581,173 +672,127 @@
 </header>
 
 
-<main class="legal-container">
+<main>
 
-  <p class="eyebrow">NOTORIOUS™ / LEGAL</p>
-
-  <h1>PRIVACY<br>& TERMS.</h1>
-
-  <p class="intro">
-    Your privacy matters to us. This page explains how NOTORIOUS™
-    handles customer information and the terms that apply when
-    placing an order through our website.
-  </p>
-
-
-  <section class="legal-section">
-
-    <p class="section-label">01 / PRIVACY</p>
-    <h2>Information We Collect</h2>
-
+  <section class="shipping-hero">
+    <div class="eyebrow">NOTORIOUS™ / LEGAL</div>
+    <h1>PRIVACY<br>& TERMS.</h1>
     <p>
-      When you place an order, we may collect information necessary
-      to process and deliver your purchase, including:
+      Your privacy matters to us. This page explains how NOTORIOUS™
+      handles customer information and the terms that apply when
+      placing an order through our website.
     </p>
-
-    <ul>
-      <li>Full name</li>
-      <li>Phone number</li>
-      <li>City and delivery address</li>
-      <li>Postal code when provided</li>
-      <li>Product, size and quantity ordered</li>
-    </ul>
-
   </section>
 
+  <section class="policy-container">
+    <div class="policy-grid">
 
-  <section class="legal-section">
+      <div class="policy-card">
+        <span class="policy-number">01 — INFORMATION</span>
+        <h2>What we collect.</h2>
+        <p>
+          When you place an order, we may collect information necessary
+          to process and deliver your purchase, including:
+        </p>
+        <ul>
+          <li>Full name</li>
+          <li>Phone number</li>
+          <li>City and delivery address</li>
+          <li>Postal code when provided</li>
+          <li>Product, size and quantity ordered</li>
+        </ul>
+      </div>
 
-    <p class="section-label">02 / PRIVACY</p>
-    <h2>How We Use Your Information</h2>
+      <div class="policy-card">
+        <span class="policy-number">02 — USAGE</span>
+        <h2>How we use it.</h2>
+        <p>
+          Your information is used only when reasonably necessary to
+          process your order, confirm it, arrange delivery, provide
+          customer support, and manage our store operations.
+        </p>
+        <p>
+          Order information may be shared with service providers involved
+          in fulfilling and delivering your order when necessary to
+          complete your purchase.
+        </p>
+      </div>
 
-    <p>
-      Your information is used only when reasonably necessary to
-      process your order, confirm it, arrange delivery, provide
-      customer support, and manage our store operations.
-    </p>
+      <div class="policy-card">
+        <span class="policy-number">03 — PROTECTION</span>
+        <h2>Data Protection.</h2>
+        <p>
+          We take reasonable measures to protect customer information.
+          We do not sell your personal information to third parties.
+        </p>
+      </div>
 
-    <p>
-      Order information may be shared with service providers involved
-      in fulfilling and delivering your order when necessary to
-      complete your purchase.
-    </p>
+      <div class="policy-card">
+        <span class="policy-number">04 — ORDERS</span>
+        <h2>Orders & Payment.</h2>
+        <p>
+          Orders placed through NOTORIOUS™ are subject to availability
+          and confirmation. Payment is made by <strong>Cash on Delivery (COD)</strong>.
+          The customer pays the order amount when the order is delivered.
+          No online card payment is required through this website.
+        </p>
+      </div>
 
+      <div class="policy-card">
+        <span class="policy-number">05 — DELIVERY</span>
+        <h2>Shipping.</h2>
+        <p>
+          We currently deliver within Morocco. Delivery times may vary
+          depending on the destination, order processing and circumstances
+          outside our reasonable control. For more information, read our
+          <a href="shipping.html" style="color:#fff;">Shipping & Returns</a> page.
+        </p>
+      </div>
+
+      <div class="policy-card">
+        <span class="policy-number">06 — RETURNS</span>
+        <h2>Returns & Order Issues.</h2>
+        <p>
+          Customers should verify their selected product and size before
+          submitting an order. If an item arrives damaged, defective, or
+          different from the item ordered, please contact us as soon as
+          possible so the issue can be reviewed.
+        </p>
+      </div>
+
+      <div class="policy-card">
+        <span class="policy-number">07 — PRODUCTS</span>
+        <h2>Product Information.</h2>
+        <p>
+          We aim to display our products as accurately as possible.
+          However, slight differences in color or appearance may occur
+          depending on lighting, photography and the customer's screen.
+        </p>
+      </div>
+
+      <div class="policy-card">
+        <span class="policy-number">08 — TERMS</span>
+        <h2>Website Use.</h2>
+        <p>
+          Content displayed on this website, including NOTORIOUS™ branding,
+          graphics, product designs, photographs and written content, may
+          not be copied, reproduced or used commercially without permission.
+        </p>
+      </div>
+
+    </div>
   </section>
 
-
-  <section class="legal-section">
-
-    <p class="section-label">03 / PRIVACY</p>
-    <h2>Data Protection</h2>
-
-    <p>
-      We take reasonable measures to protect customer information.
-      We do not sell your personal information to third parties.
-    </p>
-
-  </section>
-
-
-  <section class="legal-section">
-
-    <p class="section-label">04 / ORDERS</p>
-    <h2>Orders & Payment</h2>
-
-    <p>
-      Orders placed through NOTORIOUS™ are subject to availability
-      and confirmation.
-    </p>
-
-    <p>
-      Payment is made by Cash on Delivery (COD). The customer pays
-      the order amount when the order is delivered. No online card
-      payment is required through this website.
-    </p>
-
-  </section>
-
-
-  <section class="legal-section">
-
-    <p class="section-label">05 / DELIVERY</p>
-    <h2>Shipping</h2>
-
-    <p>
-      We currently deliver within Morocco. Delivery times may vary
-      depending on the destination, order processing and circumstances
-      outside our reasonable control.
-    </p>
-
-    <p>
-      For more information, please read our
-      <a href="shipping.html" style="color:#fff;">Shipping & Returns</a>
-      page.
-    </p>
-
-  </section>
-
-
-  <section class="legal-section">
-
-    <p class="section-label">06 / RETURNS</p>
-    <h2>Returns & Order Issues</h2>
-
-    <p>
-      Customers should verify their selected product and size before
-      submitting an order.
-    </p>
-
-    <p>
-      If an item arrives damaged, defective, or different from the
-      item ordered, please contact us as soon as possible so the
-      issue can be reviewed.
-    </p>
-
-  </section>
-
-
-  <section class="legal-section">
-
-    <p class="section-label">07 / PRODUCTS</p>
-    <h2>Product Information</h2>
-
-    <p>
-      We aim to display our products as accurately as possible.
-      However, slight differences in color or appearance may occur
-      depending on lighting, photography and the customer's screen.
-    </p>
-
-  </section>
-
-
-  <section class="legal-section">
-
-    <p class="section-label">08 / TERMS</p>
-    <h2>Website Use</h2>
-
-    <p>
-      Content displayed on this website, including NOTORIOUS™ branding,
-      graphics, product designs, photographs and written content, may
-      not be copied, reproduced or used commercially without permission.
-    </p>
-
-  </section>
-
-
-  <section class="legal-section">
-
-    <p class="section-label">09 / CONTACT</p>
-    <h2>Questions?</h2>
-
-    <p>
-      If you have a question about an order, privacy, shipping or these
-      terms, you can reach us through our Contact page.
-    </p>
-
-    <p>
-      <a href="contact.html" style="color:#fff;">Contact NOTORIOUS™ →</a>
-    </p>
-
+  <section class="important-note">
+    <div class="note-box">
+      <span>09 / CONTACT</span>
+      <h2>Have a question?</h2>
+      <p>
+        If you have a question about an order, privacy, shipping or these
+        terms, you can reach us through our
+        <a href="contact.html" style="color:#fff; text-decoration:underline;">Contact page →</a>.
+      </p>
+    </div>
   </section>
 
 </main>
