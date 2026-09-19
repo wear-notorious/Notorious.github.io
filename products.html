@@ -796,6 +796,15 @@
 .products-menu.open .products-menu-btn::after {
   transform: rotate(180deg);
 }
+      /* Sous-catégories dial TANK TOPS */
+.products-dropdown a.sub-item {
+  padding-left: 34px;
+  opacity: 0.75;
+}
+
+.products-dropdown a.sub-item::before {
+  content: "– ";
+}
     }
   </style>
 </head>
@@ -819,11 +828,17 @@
   <button type="button" class="products-menu-btn">PRODUCTS</button>
 
   <div class="products-dropdown">
-    <a href="products.html">ALL PRODUCTS</a>
-    <a href="products.html?category=tshirts">T-SHIRTS</a>
-    <a href="products.html?category=hoodies">HOODIES</a>
-    <a href="products.html?category=pants">PANTS</a>
-  </div>
+  <a href="products.html?category=tshirts">T-SHIRTS</a>
+  <a href="products.html?category=hoodies">HOODIES</a>
+  <a href="products.html?category=sweatshirts">SWEATSHIRTS</a>
+  <a href="products.html?category=tanktops">TANK TOPS</a>
+  <a href="products.html?category=hooded-tank-top" class="sub-item">HOODED TANK TOP</a>
+  <a href="products.html?category=muscle-tee" class="sub-item">MUSCLE TEE</a>
+  <a href="products.html?category=sweatshorts">SWEATSHORTS</a>
+  <a href="products.html?category=pants">PANTS</a>
+  <a href="products.html?category=caps">CAPS</a>
+  <a href="products.html?category=bucket-hats">BUCKET HATS</a>
+</div>
 </div>
       <a href="about.html">ABOUT</a>
       <a href="contact.html">CONTACT</a>
@@ -1028,10 +1043,17 @@
 
   let allProducts = [];
 
-    const categoryTitles = {
+      const categoryTitles = {
     tshirts: "T-SHIRTS",
     hoodies: "HOODIES",
-    pants: "PANTS"
+    sweatshirts: "SWEATSHIRTS",
+    tanktops: "TANK TOPS",
+    "hooded-tank-top": "HOODED TANK TOP",
+    "muscle-tee": "MUSCLE TEE",
+    sweatshorts: "SWEATSHORTS",
+    pants: "PANTS",
+    caps: "CAPS",
+    "bucket-hats": "BUCKET HATS"
   };
 
   const currentCategory = (
@@ -1105,9 +1127,16 @@
     const category =
   new URLSearchParams(window.location.search).get("category");
 
+const categoryGroups = {
+  tanktops: ["tanktops", "hooded-tank-top", "muscle-tee"]
+};
+
 if (category) {
+  const wanted =
+    categoryGroups[category.toLowerCase()] || [category.toLowerCase()];
+
   products = products.filter(product =>
-    String(product.category || "").toLowerCase() === category.toLowerCase()
+    wanted.includes(String(product.category || "").toLowerCase())
   );
 }
     const searchInput = document.getElementById("productSearch");
