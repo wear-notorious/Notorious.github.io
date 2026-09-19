@@ -1109,7 +1109,58 @@ margin-right: 8px;
 .nav-links {
   z-index: 2;
 }
-    
+ /* Sous-catégories dial TANK TOPS */
+.products-dropdown a.sub-item {
+  position: relative;
+  margin-left: 26px;
+  padding: 9px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #8a8a8a;
+  opacity: 1;
+  border-left: 1px solid #2f2f2f;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.products-dropdown a.sub-item::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  background: #555;
+  transform: translateY(-50%) rotate(45deg);
+  transition: background 0.2s ease;
+}
+
+.products-dropdown a.sub-item::after {
+  display: none;
+}
+
+.products-dropdown a.sub-item:hover {
+  color: #fff;
+  border-left-color: #fff;
+}
+
+.products-dropdown a.sub-item:hover::before {
+  background: #fff;
+}
+
+@media (max-width: 800px) {
+  .products-dropdown a.sub-item {
+    margin-left: 0;
+    padding: 8px 14px;
+    font-size: 10px;
+    border-left: none;
+    text-align: center;
+  }
+
+  .products-dropdown a.sub-item::before {
+    display: none;
+  }
+}   
 </style>
 </head>
 
@@ -1134,11 +1185,17 @@ margin-right: 8px;
   <button type="button" class="products-menu-btn">PRODUCTS</button>
 
   <div class="products-dropdown">
-    <a href="products.html">ALL PRODUCTS</a>
-    <a href="products.html?category=tshirts">T-SHIRTS</a>
-    <a href="products.html?category=hoodies">HOODIES</a>
-    <a href="products.html?category=pants">PANTS</a>
-  </div>
+  <a href="products.html?category=tshirts">T-SHIRTS</a>
+  <a href="products.html?category=hoodies">HOODIES</a>
+  <a href="products.html?category=sweatshirts">SWEATSHIRTS</a>
+  <a href="products.html?category=tanktops">TANK TOPS</a>
+  <a href="products.html?category=hooded-tank-top" class="sub-item">HOODED TANK TOP</a>
+  <a href="products.html?category=muscle-tee" class="sub-item">MUSCLE TEE</a>
+  <a href="products.html?category=sweatshorts">SWEATSHORTS</a>
+  <a href="products.html?category=pants">PANTS</a>
+  <a href="products.html?category=caps">CAPS</a>
+  <a href="products.html?category=bucket-hats">BUCKET HATS</a>
+</div>
 </div>
   <a href="about.html">ABOUT</a>
   <a href="contact.html">CONTACT</a>
