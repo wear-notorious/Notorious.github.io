@@ -542,6 +542,15 @@
     background: #181818;
     opacity: 1;
   }
+  /* Sous-catégories dial TANK TOPS */
+.products-dropdown a.sub-item {
+  padding-left: 34px;
+  opacity: 0.75;
+}
+
+.products-dropdown a.sub-item::before {
+  content: "– ";
+}
 }
   </style>
 </head>
@@ -561,11 +570,17 @@
   <button type="button" class="products-menu-btn">PRODUCTS</button>
 
   <div class="products-dropdown">
-    <a href="products.html">ALL PRODUCTS</a>
-    <a href="products.html?category=tshirts">T-SHIRTS</a>
-    <a href="products.html?category=hoodies">HOODIES</a>
-    <a href="products.html?category=pants">PANTS</a>
-  </div>
+  <a href="products.html?category=tshirts">T-SHIRTS</a>
+  <a href="products.html?category=hoodies">HOODIES</a>
+  <a href="products.html?category=sweatshirts">SWEATSHIRTS</a>
+  <a href="products.html?category=tanktops">TANK TOPS</a>
+  <a href="products.html?category=hooded-tank-top" class="sub-item">HOODED TANK TOP</a>
+  <a href="products.html?category=muscle-tee" class="sub-item">MUSCLE TEE</a>
+  <a href="products.html?category=sweatshorts">SWEATSHORTS</a>
+  <a href="products.html?category=pants">PANTS</a>
+  <a href="products.html?category=caps">CAPS</a>
+  <a href="products.html?category=bucket-hats">BUCKET HATS</a>
+</div>
 </div>
         <a href="about.html">ABOUT</a>
         <a href="contact.html">CONTACT</a>
