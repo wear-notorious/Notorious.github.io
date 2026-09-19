@@ -3,6 +3,7 @@
 
 <head>
   <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+  
   <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -16,12 +17,7 @@
     name="description"
     content="Shipping, delivery and return information for NOTORIOUS™ orders in Morocco."
   >
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  >
-
+  
   <style>
     * {
       margin: 0;
@@ -588,6 +584,43 @@
       h1 {
         font-size: 45px;
       }
+            .shipping-hero {
+        padding: 70px 20px 45px;
+      }
+
+      .shipping-hero h1 {
+        font-size: 42px;
+      }
+
+      .shipping-hero p {
+        font-size: 15px;
+      }
+
+      .policy-container {
+        padding: 55px 20px 70px;
+      }
+
+      .policy-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .policy-card {
+        padding: 32px 26px;
+      }
+
+      .policy-card h2 {
+        font-size: 22px;
+      }
+
+      .important-note {
+        padding: 0 20px;
+        margin-bottom: 70px;
+      }
+
+      .note-box {
+        padding: 32px 24px;
+      }
     }
     
   </style>
@@ -842,11 +875,12 @@
 
 </footer>
 
-  <script>
-    function toggleMenu() {
-      document.querySelector(".nav-links").classList.toggle("active");
-    }
-    <script>
+<script>
+  function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+  }
+</script>
+<script>
   function openNotoriousEmail(event) {
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
@@ -868,7 +902,6 @@
     productsMenu.classList.toggle('open');
   });
 </script>
-  </script>
 
 </body>
 </html>
