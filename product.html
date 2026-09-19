@@ -1057,7 +1057,187 @@ nav {
   font-size: 11px;
   letter-spacing: 0.5px;
 }
-    
+
+    /* ===== PRODUCTS DROPDOWN ===== */
+header {
+  position: relative;
+  z-index: 100;
+}
+
+.products-menu {
+  position: relative;
+}
+
+.products-menu-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: inherit;
+  cursor: pointer;
+  padding: 0 0 6px;
+  margin: 0;
+}
+
+.products-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 180px;
+  padding: 12px 0;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  z-index: 2000;
+}
+
+.products-menu:hover .products-dropdown,
+.products-menu:focus-within .products-dropdown {
+  display: block;
+}
+
+.products-dropdown a {
+  display: block;
+  padding: 12px 18px 6px;
+  white-space: nowrap;
+}
+
+.products-dropdown a:hover {
+  background: #151515;
+}
+
+/* Pont invisible bach l-menu ma ytsedch mlli t7rrek la souris (desktop) */
+@media (min-width: 769px) {
+  .products-menu::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .products-menu {
+    width: 100%;
+    text-align: center;
+  }
+
+  .products-menu-btn {
+    width: 100%;
+  }
+
+  .products-menu-btn::after {
+    content: "⌄";
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 14px;
+    transition: transform 0.2s ease;
+  }
+
+  .products-menu.open .products-menu-btn::after {
+    transform: rotate(180deg);
+  }
+
+  .products-dropdown {
+    display: none !important;
+    position: static;
+    transform: none;
+    min-width: 100%;
+    background: #111;
+    border: 1px solid #222;
+    margin-top: 8px;
+    padding: 4px 0;
+  }
+
+  .products-menu.open .products-dropdown {
+    display: block !important;
+  }
+
+  .products-dropdown a {
+    padding: 9px 14px;
+    font-size: 11px;
+    opacity: 0.8;
+  }
+
+  .products-dropdown a:hover {
+    background: #181818;
+    opacity: 1;
+  }
+}
+
+/* Nefs l-taille dial l-links l-akhrin f mobile sghir */
+@media (max-width: 700px) {
+  .products-menu-btn {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .products-dropdown a {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+}
+
+/* Sous-catégories dial TANK TOPS */
+.products-dropdown a.sub-item {
+  position: relative;
+  margin-left: 26px;
+  padding: 9px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: #8a8a8a;
+  opacity: 1;
+  border-left: 1px solid #2f2f2f;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.products-dropdown a.sub-item::before {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  background: #555;
+  transform: translateY(-50%) rotate(45deg);
+  transition: background 0.2s ease;
+}
+
+.products-dropdown a.sub-item::after {
+  display: none;
+}
+
+.products-dropdown a.sub-item:hover {
+  color: #fff;
+  border-left-color: #fff;
+}
+
+.products-dropdown a.sub-item:hover::before {
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .products-dropdown a.sub-item {
+    margin-left: 0;
+    padding: 8px 14px;
+    font-size: 10px;
+    border-left: none;
+    text-align: center;
+  }
+
+  .products-dropdown a.sub-item::before {
+    display: none;
+  }
+}
   </style>
   <link
   rel="stylesheet"
@@ -1080,7 +1260,22 @@ nav {
 
     <div class="nav-links">
       <a href="index.html">HOME</a>
-      <a href="products.html">PRODUCTS</a>
+      <div class="products-menu">
+  <button type="button" class="products-menu-btn">PRODUCTS</button>
+
+  <div class="products-dropdown">
+    <a href="products.html?category=tshirts">T-SHIRTS</a>
+    <a href="products.html?category=hoodies">HOODIES</a>
+    <a href="products.html?category=sweatshirts">SWEATSHIRTS</a>
+    <a href="products.html?category=tanktops">TANK TOPS</a>
+    <a href="products.html?category=hooded-tank-top" class="sub-item">HOODED TANK TOP</a>
+    <a href="products.html?category=muscle-tee" class="sub-item">MUSCLE TEE</a>
+    <a href="products.html?category=sweatshorts">SWEATSHORTS</a>
+    <a href="products.html?category=pants">PANTS</a>
+    <a href="products.html?category=caps">CAPS</a>
+    <a href="products.html?category=bucket-hats">BUCKET HATS</a>
+  </div>
+</div>
       <a href="about.html">ABOUT</a>
       <a href="contact.html">CONTACT</a>
     </div>
@@ -1801,6 +1996,15 @@ updateCartCount();
       );
     }
   }
+</script>
+
+  <script>
+  const productsBtn = document.querySelector('.products-menu-btn');
+  const productsMenu = document.querySelector('.products-menu');
+
+  productsBtn.addEventListener('click', () => {
+    productsMenu.classList.toggle('open');
+  });
 </script>
 </body>
 </html>
