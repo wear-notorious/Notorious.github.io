@@ -43,7 +43,7 @@
   window.addEventListener("resize", resize);
 
   var particles = [];
-  var MAX_PARTICLES = 140;
+  var MAX_PARTICLES = 240;
   var lastSpawn = 0;
   var SPAWN_INTERVAL = 22; // ms between particle spawns while the mouse moves
 
@@ -86,8 +86,8 @@
       }
 
       var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-      gradient.addColorStop(0, "rgba(255,255,255," + (0.18 * p.life).toFixed(3) + ")");
-      gradient.addColorStop(1, "rgba(255,255,255,0)");
+      gradient.addColorStop(0, "rgba(212,175,55," + (0.18 * p.life).toFixed(3) + ")");
+      gradient.addColorStop(1, "rgba(212,175,55,0)");
 
       ctx.fillStyle = gradient;
       ctx.beginPath();
