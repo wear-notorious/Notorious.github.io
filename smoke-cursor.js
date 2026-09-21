@@ -1,5 +1,5 @@
 /*
-  NOTORIOUS™ — Gold smoke trail
+  NOTORIOUS™ — Gray smoke trail
   Works on both desktop (mouse) and mobile (touch), respects
   prefers-reduced-motion, and never blocks clicks/taps or page scrolling.
 
@@ -46,10 +46,10 @@
   resize();
   window.addEventListener("resize", resize);
 
-  // Same gold tones as the .best-seller-badge gradient, for brand consistency.
-  var GOLD_LIGHT = "247,226,125"; // #f7e27d
-  var GOLD_MID   = "212,175,55";  // #d4af37
-  var GOLD_DARK  = "143,107,0";   // #8f6b00
+  // Neutral smoke-gray tones.
+  var SMOKE_LIGHT = "235,235,235";
+  var SMOKE_MID   = "170,170,170";
+  var SMOKE_DARK  = "90,90,90";
 
   // Lighter budget on touch devices — weaker GPUs, smaller screens.
   var MAX_PARTICLES = isTouchDevice ? 80 : 120;
@@ -150,9 +150,9 @@
       var alpha = p.life * 0.34;
 
       var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-      gradient.addColorStop(0,   "rgba(" + GOLD_LIGHT + "," + alpha.toFixed(3) + ")");
-      gradient.addColorStop(0.5, "rgba(" + GOLD_MID   + "," + (alpha * 0.55).toFixed(3) + ")");
-      gradient.addColorStop(1,   "rgba(" + GOLD_DARK  + ",0)");
+      gradient.addColorStop(0,   "rgba(" + SMOKE_LIGHT + "," + alpha.toFixed(3) + ")");
+      gradient.addColorStop(0.5, "rgba(" + SMOKE_MID   + "," + (alpha * 0.55).toFixed(3) + ")");
+      gradient.addColorStop(1,   "rgba(" + SMOKE_DARK  + ",0)");
 
       ctx.fillStyle = gradient;
       ctx.beginPath();
