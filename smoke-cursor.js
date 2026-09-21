@@ -1,7 +1,7 @@
 /*
-  NOTORIOUS™ — Gold smoke cursor trail
-  Desktop only, respects prefers-reduced-motion, never blocks clicks.
-  Tuned for a subtle, premium glow — not a flashy gimmick.
+  NOTORIOUS™ — Gold smoke trail
+  Works on both desktop (mouse) and mobile (touch), respects
+  prefers-reduced-motion, and never blocks clicks/taps or page scrolling.
 
   Include this file before </body> on any page you want the effect on:
   <script src="smoke-cursor.js" defer></script>
@@ -10,10 +10,10 @@
 (function () {
   "use strict";
 
-  var isTouch = window.matchMedia("(pointer: coarse)").matches;
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) return;
 
-  if (isTouch || reducedMotion) return;
+  var isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
   var canvas = document.createElement("canvas");
   canvas.id = "notoriousSmoke";
@@ -25,7 +25,7 @@
   canvas.style.zIndex = "40";
   canvas.style.mixBlendMode = "screen";
   // Melts the individual soft circles into one continuous smoke cloud.
-  canvas.style.filter = "blur(6px)";
+  canvas.style.filter = isTouchDevice ? "blur(5px)" : "blur(6px)";
 
   function mount() {
     if (!document.body.contains(canvas)) document.body.appendChild(canvas);
@@ -51,8 +51,12 @@
   var GOLD_MID   = "212,175,55";  // #d4af37
   var GOLD_DARK  = "143,107,0";   // #8f6b00
 
+  // Lighter budget on touch devices — weaker GPUs, smaller screens.
+  var MAX_PARTICLES = isTouchDevice ? 80 : 120;
+  var BASE_RADIUS   = isTouchDevice ? 5 : 6;
+  var RADIUS_RANGE  = isTouchDevice ? 5 : 6;
+
   var particles = [];
-  var MAX_PARTICLES = 120;
 
   function spawnParticle(x, y) {
     if (particles.length > MAX_PARTICLES) particles.shift();
@@ -60,7 +64,7 @@
     particles.push({
       x: x + (Math.random() - 0.5) * 4,
       y: y + (Math.random() - 0.5) * 4,
-      radius: 6 + Math.random() * 6,
+      radius: BASE_RADIUS + Math.random() * RADIUS_RANGE,
       growth: 0.28 + Math.random() * 0.28,  // gentle, elegant expansion
       vx: (Math.random() - 0.5) * 0.25,
       vy: -0.2 - Math.random() * 0.35,      // slow, calm upward drift
@@ -71,14 +75,12 @@
 
   var lastX = null, lastY = null;
 
-  window.addEventListener("mousemove", function (e) {
-    var x = e.clientX, y = e.clientY;
-
+  function trailTo(x, y) {
     if (lastX === null) {
       spawnParticle(x, y);
     } else {
       // Fill the gap between the last and current position so fast
-      // mouse movement still reads as one continuous trail, not dots.
+      // movement still reads as one continuous trail, not dots.
       var dx = x - lastX, dy = y - lastY;
       var dist = Math.sqrt(dx * dx + dy * dy);
       var steps = Math.max(1, Math.floor(dist / 9));
@@ -91,7 +93,40 @@
 
     lastX = x;
     lastY = y;
+  }
+
+  function resetTrail() {
+    lastX = null;
+    lastY = null;
+  }
+
+  // Desktop: mouse
+  window.addEventListener("mousemove", function (e) {
+    trailTo(e.clientX, e.clientY);
   });
+
+  // Mobile: touch. No preventDefault, so normal page scrolling
+  // keeps working exactly as before.
+  window.addEventListener(
+    "touchstart",
+    function (e) {
+      var t = e.touches[0];
+      if (t) trailTo(t.clientX, t.clientY);
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "touchmove",
+    function (e) {
+      var t = e.touches[0];
+      if (t) trailTo(t.clientX, t.clientY);
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("touchend", resetTrail, { passive: true });
+  window.addEventListener("touchcancel", resetTrail, { passive: true });
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
@@ -110,7 +145,7 @@
         continue;
       }
 
-      // Peak alpha kept low (0.34) on purpose — a discreet glow, not a
+      // Peak alpha kept low on purpose — a discreet glow, not a
       // dominant visual, so it reads as premium rather than gimmicky.
       var alpha = p.life * 0.34;
 
