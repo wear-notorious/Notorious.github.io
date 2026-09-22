@@ -271,6 +271,7 @@ nav {
 }
 
 .main-image-wrap {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
   background: #111;
@@ -287,6 +288,72 @@ nav {
   touch-action: pan-y;
   user-select: none;
   transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+/* ===== SWIPE GLITCH EFFECT ===== */
+
+.glitch-ghost {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+.glitch-ghost.red  { filter: url(#glitchRedFilter); }
+.glitch-ghost.cyan { filter: url(#glitchCyanFilter); }
+
+.main-image-wrap.glitching .main-product-image {
+  animation: glitchJitter 0.28s steps(2, end) 1;
+}
+
+.main-image-wrap.glitching .glitch-ghost.red {
+  animation: glitchGhostRed 0.28s steps(2, end) 1;
+}
+
+.main-image-wrap.glitching .glitch-ghost.cyan {
+  animation: glitchGhostCyan 0.28s steps(2, end) 1;
+}
+
+@keyframes glitchJitter {
+  0%   { clip-path: inset(0 0 0 0);    transform: translate(0, 0);   filter: contrast(1)   saturate(1); }
+  10%  { clip-path: inset(10% 0 60% 0); transform: translate(-6px,0); filter: contrast(1.4) saturate(1.6); }
+  20%  { clip-path: inset(55% 0 15% 0); transform: translate(5px,0); }
+  30%  { clip-path: inset(20% 0 45% 0); transform: translate(-4px,0); }
+  40%  { clip-path: inset(70% 0 5% 0);  transform: translate(6px,0); }
+  50%  { clip-path: inset(5% 0 70% 0);  transform: translate(-3px,0); filter: contrast(1.6) saturate(0.4); }
+  60%  { clip-path: inset(35% 0 30% 0); transform: translate(4px,0); }
+  70%  { clip-path: inset(0 0 0 0);    transform: translate(-2px,0); filter: contrast(1.1) saturate(1.2); }
+  85%  { clip-path: inset(0 0 0 0);    transform: translate(2px,0); }
+  100% { clip-path: inset(0 0 0 0);    transform: translate(0, 0);   filter: contrast(1)   saturate(1); }
+}
+
+@keyframes glitchGhostRed {
+  0%   { opacity: 0;    transform: translateX(0); }
+  15%  { opacity: 0.55; transform: translateX(-6px); }
+  35%  { opacity: 0.2;  transform: translateX(4px); }
+  55%  { opacity: 0.5;  transform: translateX(-3px); }
+  75%  { opacity: 0.15; transform: translateX(2px); }
+  100% { opacity: 0;    transform: translateX(0); }
+}
+
+@keyframes glitchGhostCyan {
+  0%   { opacity: 0;    transform: translateX(0); }
+  15%  { opacity: 0.5;  transform: translateX(6px); }
+  35%  { opacity: 0.18; transform: translateX(-4px); }
+  55%  { opacity: 0.45; transform: translateX(3px); }
+  75%  { opacity: 0.15; transform: translateX(-2px); }
+  100% { opacity: 0;    transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-image-wrap.glitching .main-product-image,
+  .main-image-wrap.glitching .glitch-ghost {
+    animation: none !important;
+  }
 }
 
 .thumbnails {
@@ -875,9 +942,6 @@ nav {
   }
 }
 
-@media (max-width: 768px) {
-}
-
     /* YOU MIGHT ALSO LIKE */
 
 .might-like-section {
@@ -1243,14 +1307,31 @@ header {
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 >
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
->
   
 </head>
 
 <body>
+
+<!-- SVG filters used by the swipe glitch effect (RGB channel split) -->
+<svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="glitchRedFilter">
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 0 0 0 0
+        0 0 0 0 0
+        0 0 0 1 0" />
+    </filter>
+    <filter id="glitchCyanFilter">
+      <feColorMatrix type="matrix" values="
+        0 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 1 0" />
+    </filter>
+  </defs>
+</svg>
+
 <header>
   <nav>
 
@@ -1386,6 +1467,8 @@ productPage.innerHTML = `
           alt="${product.product}"
           onclick="openImageZoom()"
         >
+        <img id="glitchGhostRed" class="glitch-ghost red" src="${productImages[0] || ""}" alt="" aria-hidden="true">
+        <img id="glitchGhostCyan" class="glitch-ghost cyan" src="${productImages[0] || ""}" alt="" aria-hidden="true">
       </div>
 
       <div class="thumbnails">
@@ -1493,8 +1576,6 @@ productPage.innerHTML = `
 
   </main>
 
-  </main>
-
 <!-- YOU MIGHT ALSO LIKE -->
 <section class="might-like-section">
   <div class="might-like-header">
@@ -1546,8 +1627,6 @@ productPage.innerHTML = `
 </footer>
 
 <!-- IMAGE ZOOM OVERLAY -->
-  
-  <!-- IMAGE ZOOM OVERLAY -->
 <div id="imageZoomOverlay" class="image-zoom-overlay" onclick="closeImageZoom()">
   <button
     type="button"
@@ -1662,6 +1741,30 @@ if (dots[activeIndex]) {
   dots[activeIndex].classList.add("active");
 }
 }
+
+// ===== SWIPE GLITCH EFFECT =====
+function triggerGlitch() {
+  const wrap = document.querySelector(".main-image-wrap");
+  const mainImage = document.getElementById("mainProductImage");
+  const redGhost = document.getElementById("glitchGhostRed");
+  const cyanGhost = document.getElementById("glitchGhostCyan");
+
+  if (!wrap || !mainImage) return;
+
+  if (redGhost) redGhost.src = mainImage.src;
+  if (cyanGhost) cyanGhost.src = mainImage.src;
+
+  wrap.classList.remove("glitching");
+  // Force a reflow so the animation restarts cleanly on consecutive swipes
+  void wrap.offsetWidth;
+  wrap.classList.add("glitching");
+
+  clearTimeout(wrap._glitchTimeout);
+  wrap._glitchTimeout = setTimeout(() => {
+    wrap.classList.remove("glitching");
+  }, 300);
+}
+
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -1679,9 +1782,8 @@ function handleSwipe() {
 
 function swipeImage(direction) {
   const thumbnails = Array.from(document.querySelectorAll(".thumbnail"));
-  const mainImage = document.getElementById("mainProductImage");
 
-  if (!thumbnails.length || !mainImage) return;
+  if (!thumbnails.length) return;
 
   let currentIndex = thumbnails.findIndex(btn =>
     btn.classList.contains("active")
@@ -1697,26 +1799,8 @@ function swipeImage(direction) {
     newIndex = thumbnails.length - 1;
   }
 
-  const moveOut = direction === 1 ? "-35px" : "35px";
-  const moveIn = direction === 1 ? "35px" : "-35px";
-
-  mainImage.style.transform = `translateX(${moveOut})`;
-  mainImage.style.opacity = "0";
-
-  setTimeout(() => {
-    thumbnails[newIndex].click();
-
-    mainImage.style.transition = "none";
-    mainImage.style.transform = `translateX(${moveIn})`;
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        mainImage.style.transition = "transform 0.22s ease, opacity 0.22s ease";
-        mainImage.style.transform = "translateX(0)";
-        mainImage.style.opacity = "1";
-      });
-    });
-  }, 220);
+  thumbnails[newIndex].click();
+  triggerGlitch();
 }
 
 document.addEventListener("touchstart", function(e) {
