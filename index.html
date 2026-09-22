@@ -1355,7 +1355,9 @@
   .drop-countdown-sep {
     font-size: 22px;
   }
-  .drop-live-btn {
+  }
+    
+.drop-live-btn {
   display: none;
   margin-top: 8px;
   padding: 16px 34px;
@@ -1381,6 +1383,50 @@
 .drop-countdown.is-live .drop-live-btn {
   display: inline-block;
 }
+
+@media (max-width: 600px) {
+  .drop-countdown {
+    padding: 40px 16px;
+  }
+
+  .drop-countdown-timer {
+    gap: 8px;
+  }
+
+  .drop-countdown-unit {
+    min-width: 52px;
+  }
+
+  .drop-countdown-sep {
+    font-size: 22px;
+  }
+}
+
+.drop-live-btn {
+  display: none;
+  margin-top: 8px;
+  padding: 16px 34px;
+  background: #fff;
+  color: #000;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.drop-live-btn:hover {
+  transform: translateY(-3px);
+  background: #e7e7e7;
+}
+
+.drop-countdown.is-live .drop-countdown-timer {
+  display: none;
+}
+
+.drop-countdown.is-live .drop-live-btn {
+  display: inline-block;
 }
   </style>
 </head>
