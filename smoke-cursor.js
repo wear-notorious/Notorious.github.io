@@ -1,7 +1,7 @@
 /*
-  NOTORIOUS™ — Gray smoke trail
-  Works on both desktop (mouse) and mobile (touch), respects
-  prefers-reduced-motion, and never blocks clicks/taps or page scrolling.
+  NOTORIOUS™ — Wispy gray smoke trail
+  Works on desktop (mouse) only. Respects prefers-reduced-motion,
+  never blocks clicks/taps or page scrolling.
 
   Include this file before </body> on any page you want the effect on:
   <script src="smoke-cursor.js" defer></script>
@@ -14,6 +14,7 @@
   if (reducedMotion) return;
 
   var isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+  if (isTouchDevice) return;
 
   var canvas = document.createElement("canvas");
   canvas.id = "notoriousSmoke";
@@ -24,8 +25,7 @@
   canvas.style.pointerEvents = "none";
   canvas.style.zIndex = "40";
   canvas.style.mixBlendMode = "screen";
-  // Melts the individual soft circles into one continuous smoke cloud.
-  canvas.style.filter = isTouchDevice ? "blur(5px)" : "blur(6px)";
+  canvas.style.filter = "blur(7px)";
 
   function mount() {
     if (!document.body.contains(canvas)) document.body.appendChild(canvas);
@@ -46,30 +46,40 @@
   resize();
   window.addEventListener("resize", resize);
 
-  // Neutral smoke-gray tones.
-  var SMOKE_LIGHT = "235,235,235";
-  var SMOKE_MID   = "170,170,170";
-  var SMOKE_DARK  = "90,90,90";
+  var SMOKE_LIGHT = "240,240,240";
+  var SMOKE_MID   = "180,180,180";
+  var SMOKE_DARK  = "100,100,100";
 
-  // Lighter budget on touch devices — weaker GPUs, smaller screens.
-  var MAX_PARTICLES = isTouchDevice ? 80 : 120;
-  var BASE_RADIUS   = isTouchDevice ? 5 : 6;
-  var RADIUS_RANGE  = isTouchDevice ? 5 : 6;
+  var MAX_PARTICLES = 160;
+  var BASE_RADIUS   = 4;
+  var RADIUS_RANGE  = 5;
 
   var particles = [];
 
   function spawnParticle(x, y) {
     if (particles.length > MAX_PARTICLES) particles.shift();
 
+    // Slight random offset per wisp so the trail isn't a single clean line
+    var angle = Math.random() * Math.PI * 2;
+    var spread = Math.random() * 10;
+
     particles.push({
-      x: x + (Math.random() - 0.5) * 4,
-      y: y + (Math.random() - 0.5) * 4,
+      x: x + Math.cos(angle) * spread,
+      y: y + Math.sin(angle) * spread,
       radius: BASE_RADIUS + Math.random() * RADIUS_RANGE,
-      growth: 0.28 + Math.random() * 0.28,  // gentle, elegant expansion
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: -0.2 - Math.random() * 0.35,      // slow, calm upward drift
+      growth: 0.22 + Math.random() * 0.3,
+      // Gentle sideways drift, like smoke curling as it rises
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: -0.3 - Math.random() * 0.5,
+      // Wobble makes each particle curl instead of moving in a straight line
+      wobble: Math.random() * Math.PI * 2,
+      wobbleSpeed: 0.02 + Math.random() * 0.03,
+      wobbleAmount: 0.15 + Math.random() * 0.25,
+      // Stretch gives an elongated, wispy shape instead of a round blob
+      stretch: 1.4 + Math.random() * 1.3,
+      rotation: angle,
       life: 1,
-      decay: 0.009 + Math.random() * 0.010
+      decay: 0.006 + Math.random() * 0.008
     });
   }
 
@@ -79,11 +89,9 @@
     if (lastX === null) {
       spawnParticle(x, y);
     } else {
-      // Fill the gap between the last and current position so fast
-      // movement still reads as one continuous trail, not dots.
       var dx = x - lastX, dy = y - lastY;
       var dist = Math.sqrt(dx * dx + dy * dy);
-      var steps = Math.max(1, Math.floor(dist / 9));
+      var steps = Math.max(1, Math.floor(dist / 7));
 
       for (var i = 1; i <= steps; i++) {
         var t = i / steps;
@@ -100,33 +108,11 @@
     lastY = null;
   }
 
-  // Desktop: mouse
   window.addEventListener("mousemove", function (e) {
     trailTo(e.clientX, e.clientY);
   });
 
-  // Mobile: touch. No preventDefault, so normal page scrolling
-  // keeps working exactly as before.
-  window.addEventListener(
-    "touchstart",
-    function (e) {
-      var t = e.touches[0];
-      if (t) trailTo(t.clientX, t.clientY);
-    },
-    { passive: true }
-  );
-
-  window.addEventListener(
-    "touchmove",
-    function (e) {
-      var t = e.touches[0];
-      if (t) trailTo(t.clientX, t.clientY);
-    },
-    { passive: true }
-  );
-
-  window.addEventListener("touchend", resetTrail, { passive: true });
-  window.addEventListener("touchcancel", resetTrail, { passive: true });
+  window.addEventListener("mouseleave", resetTrail);
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
@@ -134,10 +120,13 @@
     for (var i = particles.length - 1; i >= 0; i--) {
       var p = particles[i];
 
-      p.x += p.vx;
+      p.wobble += p.wobbleSpeed;
+      p.x += p.vx + Math.sin(p.wobble) * p.wobbleAmount;
       p.y += p.vy;
-      p.vx *= 0.98;
-      p.radius += p.growth; // expands as it ages
+      p.vx *= 0.985;
+      p.vy *= 0.995;
+      p.radius += p.growth;
+      p.rotation += 0.01;
       p.life -= p.decay;
 
       if (p.life <= 0) {
@@ -145,19 +134,24 @@
         continue;
       }
 
-      // Peak alpha kept low on purpose — a discreet glow, not a
-      // dominant visual, so it reads as premium rather than gimmicky.
-      var alpha = p.life * 0.34;
+      var alpha = p.life * 0.3;
 
-      var gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      // Elongate the shape on one axis so it reads as a wisp, not a dot
+      ctx.scale(p.stretch, 1);
+
+      var gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, p.radius);
       gradient.addColorStop(0,   "rgba(" + SMOKE_LIGHT + "," + alpha.toFixed(3) + ")");
-      gradient.addColorStop(0.5, "rgba(" + SMOKE_MID   + "," + (alpha * 0.55).toFixed(3) + ")");
+      gradient.addColorStop(0.5, "rgba(" + SMOKE_MID   + "," + (alpha * 0.5).toFixed(3) + ")");
       gradient.addColorStop(1,   "rgba(" + SMOKE_DARK  + ",0)");
 
       ctx.fillStyle = gradient;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.arc(0, 0, p.radius, 0, Math.PI * 2);
       ctx.fill();
+      ctx.restore();
     }
 
     requestAnimationFrame(animate);
