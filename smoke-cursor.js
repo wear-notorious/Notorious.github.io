@@ -113,6 +113,38 @@
   });
 
   window.addEventListener("mouseleave", resetTrail);
+  window.addEventListener("mouseleave", resetTrail);
+
+function burstAt(x, y) {
+  var count = 22;
+
+  for (var i = 0; i < count; i++) {
+    var angle = Math.random() * Math.PI * 2;
+    var force = 1.2 + Math.random() * 2.2;
+
+    if (particles.length > MAX_PARTICLES) particles.shift();
+
+    particles.push({
+      x: x,
+      y: y,
+      radius: BASE_RADIUS + Math.random() * RADIUS_RANGE * 1.4,
+      growth: 0.35 + Math.random() * 0.4,
+      vx: Math.cos(angle) * force,
+      vy: Math.sin(angle) * force - 0.6,
+      wobble: Math.random() * Math.PI * 2,
+      wobbleSpeed: 0.03 + Math.random() * 0.04,
+      wobbleAmount: 0.2 + Math.random() * 0.3,
+      stretch: 1.2 + Math.random() * 1.2,
+      rotation: angle,
+      life: 1,
+      decay: 0.011 + Math.random() * 0.012
+    });
+  }
+}
+
+window.addEventListener("click", function (e) {
+  burstAt(e.clientX, e.clientY);
+});
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
