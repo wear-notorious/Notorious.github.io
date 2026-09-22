@@ -1494,7 +1494,7 @@
 }
 
 .social-proof-stars {
-  color: #fff;
+  color: var(--gold-2, #d4af37);
   font-size: 14px;
   letter-spacing: 2px;
   margin-bottom: 16px;
@@ -2008,7 +2008,7 @@ loadProducts();
   });
 </script>
 
-  <script>
+<script>
   const socialProofPrev = document.getElementById("socialProofPrev");
   const socialProofNext = document.getElementById("socialProofNext");
   const socialProofGrid = document.getElementById("socialProofGrid");
@@ -2020,6 +2020,66 @@ loadProducts();
   socialProofNext?.addEventListener("click", () => {
     socialProofGrid.scrollBy({ left: 340, behavior: "smooth" });
   });
+
+  // ===== AUTO-SCROLL =====
+  if (socialProofGrid) {
+    var socialProofAutoScroll = null;
+    var socialProofPaused = false;
+
+    function startSocialProofAutoScroll() {
+      if (socialProofAutoScroll) return;
+
+      socialProofAutoScroll = setInterval(function () {
+        if (socialProofPaused) return;
+
+        var maxScroll =
+          socialProofGrid.scrollWidth - socialProofGrid.clientWidth;
+
+        if (socialProofGrid.scrollLeft >= maxScroll - 2) {
+          socialProofGrid.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          socialProofGrid.scrollBy({ left: 1, behavior: "auto" });
+        }
+      }, 30);
+    }
+
+    function stopSocialProofAutoScroll() {
+      clearInterval(socialProofAutoScroll);
+      socialProofAutoScroll = null;
+    }
+
+    // Desktop: w9ef mlli l-cursor f fou9 l-carousel
+    socialProofGrid.addEventListener("mouseenter", function () {
+      socialProofPaused = true;
+    });
+
+    socialProofGrid.addEventListener("mouseleave", function () {
+      socialProofPaused = false;
+    });
+
+    // Mobile: w9ef mlli l-client kaylmes o kaydir scroll b yeddo
+    socialProofGrid.addEventListener("touchstart", function () {
+      socialProofPaused = true;
+    });
+
+    socialProofGrid.addEventListener("touchend", function () {
+      setTimeout(function () {
+        socialProofPaused = false;
+      }, 1500);
+    });
+
+    // W9ef mlli l-client ykliki 3la l-arrows, o kemmel mora chwiya
+    [socialProofPrev, socialProofNext].forEach(function (btn) {
+      btn?.addEventListener("click", function () {
+        socialProofPaused = true;
+        setTimeout(function () {
+          socialProofPaused = false;
+        }, 1500);
+      });
+    });
+
+    startSocialProofAutoScroll();
+  }
 </script>
   
   <script>
