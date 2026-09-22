@@ -1277,6 +1277,108 @@
   .products-menu.open .products-dropdown a {
     padding: 9px 0;
   }
+  /* ===== DROP COUNTDOWN ===== */
+.drop-countdown {
+  padding: 55px 24px;
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  background: #0d0d0d;
+}
+
+.drop-countdown-inner {
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
+
+.drop-countdown-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+.drop-countdown-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.drop-countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 64px;
+}
+
+.drop-countdown-number {
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.drop-countdown-text {
+  margin-top: 8px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #777;
+}
+
+.drop-countdown-sep {
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 900;
+  color: #444;
+  transform: translateY(-8px);
+}
+
+@media (max-width: 600px) {
+  .drop-countdown {
+    padding: 40px 16px;
+  }
+
+  .drop-countdown-timer {
+    gap: 8px;
+  }
+
+  .drop-countdown-unit {
+    min-width: 52px;
+  }
+
+  .drop-countdown-sep {
+    font-size: 22px;
+  }
+  .drop-live-btn {
+  display: none;
+  margin-top: 8px;
+  padding: 16px 34px;
+  background: #fff;
+  color: #000;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.drop-live-btn:hover {
+  transform: translateY(-3px);
+  background: #e7e7e7;
+}
+
+.drop-countdown.is-live .drop-countdown-timer {
+  display: none;
+}
+
+.drop-countdown.is-live .drop-live-btn {
+  display: inline-block;
+}
 }
   </style>
 </head>
@@ -1354,6 +1456,38 @@
   <div class="hero-dots" id="heroDots"></div>
 </section>
 
+   <section class="drop-countdown">
+  <div class="drop-countdown-inner">
+    <span class="drop-countdown-label" id="dropLabel">NEXT DROP IN</span>
+
+    <div class="drop-countdown-timer" id="dropCountdown">
+      <div class="drop-countdown-unit">
+        <span class="drop-countdown-number" id="cdDays">00</span>
+        <span class="drop-countdown-text">DAYS</span>
+      </div>
+      <span class="drop-countdown-sep">:</span>
+      <div class="drop-countdown-unit">
+        <span class="drop-countdown-number" id="cdHours">00</span>
+        <span class="drop-countdown-text">HRS</span>
+      </div>
+      <span class="drop-countdown-sep">:</span>
+      <div class="drop-countdown-unit">
+        <span class="drop-countdown-number" id="cdMinutes">00</span>
+        <span class="drop-countdown-text">MIN</span>
+      </div>
+      <span class="drop-countdown-sep">:</span>
+      <div class="drop-countdown-unit">
+        <span class="drop-countdown-number" id="cdSeconds">00</span>
+        <span class="drop-countdown-text">SEC</span>
+      </div>
+    </div>
+
+    <a href="products.html" class="drop-live-btn" id="dropLiveBtn">
+      SHOP THE DROP NOW →
+    </a>
+  </div>
+</section>
+    
     <section id="shop">
       <div class="container">
 
@@ -1624,6 +1758,47 @@ loadProducts();
   mightLikeNext?.addEventListener("click", () => {
     mightLikeGrid.scrollBy({ left: 560, behavior: "smooth" });
   });
+</script>
+  <script>
+ <script>
+  // ===== DROP COUNTDOWN =====
+  // Beddel had date b date/heure dial l-drop l-jay dyalek
+  var dropTargetDate = new Date("2026-10-15T20:00:00").getTime();
+
+  function updateDropCountdown() {
+    var now = new Date().getTime();
+    var distance = dropTargetDate - now;
+
+    var daysEl = document.getElementById("cdDays");
+    var hoursEl = document.getElementById("cdHours");
+    var minutesEl = document.getElementById("cdMinutes");
+    var secondsEl = document.getElementById("cdSeconds");
+    var section = document.getElementById("dropCountdown")
+      ? document.getElementById("dropCountdown").closest(".drop-countdown")
+      : null;
+    var label = document.getElementById("dropLabel");
+
+    if (!daysEl) return;
+
+    if (distance <= 0) {
+      if (section) section.classList.add("is-live");
+      if (label) label.textContent = "THE DROP IS LIVE";
+      return;
+    }
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    daysEl.textContent = String(days).padStart(2, "0");
+    hoursEl.textContent = String(hours).padStart(2, "0");
+    minutesEl.textContent = String(minutes).padStart(2, "0");
+    secondsEl.textContent = String(seconds).padStart(2, "0");
+  }
+
+  updateDropCountdown();
+  setInterval(updateDropCountdown, 1000);
 </script>
 </body>
 </html>
