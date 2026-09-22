@@ -1428,6 +1428,149 @@
 .drop-countdown.is-live .drop-live-btn {
   display: inline-block;
 }
+    /* ===== SOCIAL PROOF CAROUSEL ===== */
+.social-proof-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 90px 40px 75px;
+}
+
+.social-proof-header {
+  margin-bottom: 32px;
+}
+
+.social-proof-header span {
+  display: block;
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.social-proof-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.social-proof-scroller {
+  position: relative;
+}
+
+.social-proof-grid {
+  display: flex;
+  gap: 18px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 15px;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 30px, #000 calc(100% - 30px), transparent 100%);
+}
+
+.social-proof-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.social-proof-card {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 28px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.social-proof-card:hover {
+  transform: translateY(-4px);
+  border-color: #555;
+}
+
+.social-proof-stars {
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.social-proof-quote {
+  color: #ddd;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  min-height: 72px;
+}
+
+.social-proof-author {
+  color: #777;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.social-proof-arrow {
+  display: none;
+}
+
+@media (min-width: 801px) {
+  .social-proof-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    background: rgba(10, 10, 10, 0.85);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 3;
+    transition: border-color 0.2s ease;
+  }
+
+  .social-proof-arrow:hover {
+    border-color: #fff;
+  }
+
+  .social-proof-arrow.prev { left: -6px; }
+  .social-proof-arrow.next { right: -6px; }
+}
+
+@media (max-width: 800px) {
+  .social-proof-section {
+    padding: 65px 20px 55px;
+  }
+
+  .social-proof-header h2 {
+    font-size: 22px;
+  }
+
+  .social-proof-grid {
+    gap: 12px;
+  }
+
+  .social-proof-card {
+    flex: 0 0 78%;
+    padding: 22px;
+  }
+
+  .social-proof-quote {
+    min-height: 0;
+  }
+}
   </style>
 </head>
 
@@ -1574,6 +1717,63 @@
   </div>
 </section>
 
+    <!-- SOCIAL PROOF -->
+<section class="social-proof-section">
+  <div class="social-proof-header">
+    <span>KEEP EXPLORING</span>
+    <h2>WORN BY THE STREETS</h2>
+  </div>
+
+  <div class="social-proof-scroller">
+    <button class="social-proof-arrow prev" id="socialProofPrev" aria-label="Scroll left">‹</button>
+
+    <div class="social-proof-grid" id="socialProofGrid">
+
+      <div class="social-proof-card">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Finally l9it brand meghribia that delivers world class quality!!! Bravo 3likom, keep it up guys"
+        </p>
+        <div class="social-proof-author">— Hamza Steazy, Bouznika</div>
+      </div>
+
+      <div class="social-proof-card">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Unbeatable quality w lweqt howa lweqt"
+        </p>
+        <div class="social-proof-author">— Chouaib Sahraoui, Tanger</div>
+      </div>
+
+      <div class="social-proof-card">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Hchoma elikom hahahha kherejtou 3la lbudget! But worth it honestly"
+        </p>
+        <div class="social-proof-author">— Ines Laaboudi, Marrakech</div>
+      </div>
+
+      <div class="social-proof-card">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Tshirt wssel deghya w qualité herbana tbarkelha elekom khoti"
+        </p>
+        <div class="social-proof-author">— Anas Ahbari, Casablanca</div>
+      </div>
+
+      <div class="social-proof-card">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Commande wesslatni hia hadik kima huya F les photos, big respect likom"
+        </p>
+        <div class="social-proof-author">— Hatim Moutchaoui, Fes</div>
+      </div>
+
+    </div>
+
+    <button class="social-proof-arrow next" id="socialProofNext" aria-label="Scroll right">›</button>
+  </div>
+</section>
   </main>
 
   <!-- YOU MIGHT ALSO LIKE -->
@@ -1805,6 +2005,20 @@ loadProducts();
 
   mightLikeNext?.addEventListener("click", () => {
     mightLikeGrid.scrollBy({ left: 560, behavior: "smooth" });
+  });
+</script>
+
+  <script>
+  const socialProofPrev = document.getElementById("socialProofPrev");
+  const socialProofNext = document.getElementById("socialProofNext");
+  const socialProofGrid = document.getElementById("socialProofGrid");
+
+  socialProofPrev?.addEventListener("click", () => {
+    socialProofGrid.scrollBy({ left: -340, behavior: "smooth" });
+  });
+
+  socialProofNext?.addEventListener("click", () => {
+    socialProofGrid.scrollBy({ left: 340, behavior: "smooth" });
   });
 </script>
   
