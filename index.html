@@ -1465,8 +1465,7 @@
   gap: 18px;
   width: 100%;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 15px;
   scrollbar-width: none;
@@ -1768,7 +1767,47 @@
         </p>
         <div class="social-proof-author">— Hatim Moutchaoui, Fes</div>
       </div>
+      <!-- ===== DUPLICATE FOR SEAMLESS LOOP — don't remove ===== -->
+      <div class="social-proof-card" aria-hidden="true">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Finally l9it brand meghribia that delivers world class quality!!! Bravo 3likom, keep it up guys"
+        </p>
+        <div class="social-proof-author">— Hamza Steazy, Bouznika</div>
+      </div>
 
+      <div class="social-proof-card" aria-hidden="true">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Unbeatable quality w lweqt howa lweqt"
+        </p>
+        <div class="social-proof-author">— Chouaib Sahraoui, Tanger</div>
+      </div>
+
+      <div class="social-proof-card" aria-hidden="true">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Hchoma elikom hahahha kherejtou 3la lbudget! But worth it honestly"
+        </p>
+        <div class="social-proof-author">— Ines Laaboudi, Marrakech</div>
+      </div>
+
+      <div class="social-proof-card" aria-hidden="true">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Tshirt wssel deghya w qualité herbana tbarkelha elekom khoti"
+        </p>
+        <div class="social-proof-author">— Anas Ahbari, Casablanca</div>
+      </div>
+
+      <div class="social-proof-card" aria-hidden="true">
+        <div class="social-proof-stars">★★★★★</div>
+        <p class="social-proof-quote">
+          "Commande wesslatni hia hadik kima huya F les photos, big respect likom"
+        </p>
+        <div class="social-proof-author">— Hatim Moutchaoui, Fes</div>
+      </div>
+      
     </div>
 
     <button class="social-proof-arrow next" id="socialProofNext" aria-label="Scroll right">›</button>
@@ -2021,10 +2060,18 @@ loadProducts();
     socialProofGrid.scrollBy({ left: 340, behavior: "smooth" });
   });
 
-  // ===== AUTO-SCROLL =====
+  // ===== INFINITE AUTO-SCROLL =====
   if (socialProofGrid) {
     var socialProofAutoScroll = null;
     var socialProofPaused = false;
+    var socialProofHalfWidth = 0;
+
+    function calcSocialProofHalfWidth() {
+      socialProofHalfWidth = socialProofGrid.scrollWidth / 2;
+    }
+
+    calcSocialProofHalfWidth();
+    window.addEventListener("resize", calcSocialProofHalfWidth);
 
     function startSocialProofAutoScroll() {
       if (socialProofAutoScroll) return;
@@ -2032,23 +2079,14 @@ loadProducts();
       socialProofAutoScroll = setInterval(function () {
         if (socialProofPaused) return;
 
-        var maxScroll =
-          socialProofGrid.scrollWidth - socialProofGrid.clientWidth;
+        socialProofGrid.scrollLeft += 1;
 
-        if (socialProofGrid.scrollLeft >= maxScroll - 2) {
-          socialProofGrid.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-          socialProofGrid.scrollBy({ left: 1, behavior: "auto" });
+        if (socialProofGrid.scrollLeft >= socialProofHalfWidth) {
+          socialProofGrid.scrollLeft = 0;
         }
       }, 30);
     }
 
-    function stopSocialProofAutoScroll() {
-      clearInterval(socialProofAutoScroll);
-      socialProofAutoScroll = null;
-    }
-
-    // Desktop: w9ef mlli l-cursor f fou9 l-carousel
     socialProofGrid.addEventListener("mouseenter", function () {
       socialProofPaused = true;
     });
@@ -2057,7 +2095,6 @@ loadProducts();
       socialProofPaused = false;
     });
 
-    // Mobile: w9ef mlli l-client kaylmes o kaydir scroll b yeddo
     socialProofGrid.addEventListener("touchstart", function () {
       socialProofPaused = true;
     });
@@ -2068,7 +2105,6 @@ loadProducts();
       }, 1500);
     });
 
-    // W9ef mlli l-client ykliki 3la l-arrows, o kemmel mora chwiya
     [socialProofPrev, socialProofNext].forEach(function (btn) {
       btn?.addEventListener("click", function () {
         socialProofPaused = true;
