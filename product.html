@@ -518,6 +518,54 @@ nav {
   border-radius: 8px;
 }
 
+.quantity-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: fit-content;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.qty-btn {
+  width: 44px;
+  height: 44px;
+  background: #111;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.qty-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+.quantity-stepper input {
+  width: 52px;
+  height: 44px;
+  text-align: center;
+  background: #0d0d0d;
+  color: #fff;
+  border: none;
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  -moz-appearance: textfield;
+}
+
+.quantity-stepper input::-webkit-outer-spin-button,
+.quantity-stepper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .order-btn {
   width: 100%;
   margin-top: 28px;
@@ -1543,13 +1591,33 @@ productPage.innerHTML = `
       <div class="quantity-section">
         <label for="quantity">QUANTITY</label>
 
-        <select id="quantity">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
+        <div class="quantity-stepper">
+          <button
+            type="button"
+            class="qty-btn"
+            onclick="changeQuantity(-1)"
+            aria-label="Decrease quantity"
+          >
+            −
+          </button>
+
+          <input
+            type="text"
+            id="quantity"
+            value="1"
+            readonly
+            inputmode="numeric"
+          >
+
+          <button
+            type="button"
+            class="qty-btn"
+            onclick="changeQuantity(1)"
+            aria-label="Increase quantity"
+          >
+            +
+          </button>
+        </div>
       </div>
 
 <button
@@ -1815,7 +1883,17 @@ document.addEventListener("touchend", function(e) {
     handleSwipe();
   }
 });
-  
+  function changeQuantity(delta) {
+  const input = document.getElementById("quantity");
+  let value = parseInt(input.value) || 1;
+
+  value += delta;
+
+  if (value < 1) value = 1;
+  if (value > 10) value = 10;
+
+  input.value = value;
+}
 function selectSize(size, button) {
   selectedSize = size;
 
