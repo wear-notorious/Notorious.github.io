@@ -287,7 +287,11 @@ nav {
   display: block;
   touch-action: pan-y;
   user-select: none;
-  transition: transform 0.22s ease, opacity 0.22s ease;
+  transition: opacity 0.25s ease, transform 0.22s ease;
+}
+
+.main-product-image.fading {
+  opacity: 0;
 }
 
 /* ===== SWIPE GLITCH EFFECT ===== */
@@ -1858,8 +1862,9 @@ function handleSwipe() {
 
 function swipeImage(direction) {
   const thumbnails = Array.from(document.querySelectorAll(".thumbnail"));
+  const mainImage = document.getElementById("mainProductImage");
 
-  if (!thumbnails.length) return;
+  if (!thumbnails.length || !mainImage) return;
 
   let currentIndex = thumbnails.findIndex(btn =>
     btn.classList.contains("active")
@@ -1875,9 +1880,16 @@ function swipeImage(direction) {
     newIndex = thumbnails.length - 1;
   }
 
-  thumbnails[newIndex].click();
-  triggerGlitch();
+  mainImage.classList.add("fading");
+
+  setTimeout(() => {
+    thumbnails[newIndex].click();
+    mainImage.classList.remove("fading");
+  }, 200);
 }
+
+document.addEventListener("touchstart", function(e) {
+  ...
 
 document.addEventListener("touchstart", function(e) {
   if (e.target.id === "mainProductImage") {
