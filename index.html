@@ -2172,5 +2172,24 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+  
+  <script>
+  // Auto-close mobile menu wast n click 3la link (mashi darori "X")
+  document.querySelectorAll('.nav-links a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      if (window.innerWidth <= 800) {
+        const menu = document.querySelector('.nav-links');
+        const button = document.querySelector('.menu-toggle');
+        const productsMenu = document.querySelector('.products-menu');
+
+        menu.classList.remove('active');
+        productsMenu.classList.remove('open'); // sedd dropdown PRODUCTS b7al ykoun 7al
+
+        button.innerHTML = '☰';
+        button.setAttribute('aria-label', 'Open menu');
+      }
+    });
+  });
+</script>
 </body>
 </html>
