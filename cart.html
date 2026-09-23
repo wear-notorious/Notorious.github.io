@@ -932,5 +932,28 @@ updateCartCount();
   });
 </script>
   <script src="smoke-cursor.js" defer></script>
+  <script>
+    
+  // Sedd le menu automatiquement fach l user kayscrolli l page (mashi darori yclicki 3la link)
+  const navLinksEl = document.querySelector('.nav-links');
+  const menuToggleBtn = document.querySelector('.menu-toggle');
+  const productsMenuEl = document.querySelector('.products-menu');
+
+  function closeMobileMenu() {
+    if (!navLinksEl.classList.contains('active')) return; // ila mab9ach 7al, matdirch walo
+
+    navLinksEl.classList.remove('active');
+    productsMenuEl.classList.remove('open');
+
+    menuToggleBtn.innerHTML = '☰';
+    menuToggleBtn.setAttribute('aria-label', 'Open menu');
+  }
+
+  // scroll: mnin ybdaa yscrolli l page men wra le menu
+  window.addEventListener('scroll', closeMobileMenu, { passive: true });
+
+  // touchmove: bach ykoun rapide bzaf 3la mobile (9bel ma yewe3 scroll event)
+  document.addEventListener('touchmove', closeMobileMenu, { passive: true });
+</script>
 </body>
 </html>
