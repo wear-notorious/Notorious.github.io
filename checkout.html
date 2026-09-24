@@ -215,6 +215,24 @@
       color: #999;
       font-size: 13px;
       text-align: center;
+      line-height: 1.5;
+    }
+
+    #emptyNotice {
+      display: none;
+      background: #181818;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 15px 17px;
+      margin: 25px 0;
+      color: #bbb;
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    #emptyNotice a {
+      color: #fff;
     }
 
     .order-btn {
@@ -233,6 +251,14 @@
     .order-btn:hover {
       transform: translateY(-2px);
       background: #ddd;
+    }
+
+    .order-btn:disabled,
+    .order-btn:disabled:hover {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+      background: white;
     }
 
     .secure {
@@ -299,16 +325,17 @@
           <label>Full name</label>
           <input type="text" id="name" placeholder="Your full name" required>
         </div>
+
         <div class="field">
-  <label>Email address</label>
-  <input
-    type="email"
-    id="email"
-    placeholder="your@email.com"
-    autocomplete="email"
-    required
-  >
-</div>
+          <label>Email address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="your@email.com"
+            autocomplete="email"
+            required
+          >
+        </div>
 
         <div class="field">
           <label>Phone number</label>
@@ -362,12 +389,16 @@
         <strong id="quantity">—</strong>
       </div>
 
-      <div class="summary-line">
+      <div class="summary-line" id="priceLine">
         <span>Unit price</span>
         <strong><span id="price">0</span> MAD</strong>
       </div>
 
-      <div class="payment-method">
+      <div id="emptyNotice">
+        Your order is empty. <a href="index.html#shop">Back to shop</a> to choose a product.
+      </div>
+
+      <div class="payment-method" id="paymentMethodBlock">
         <div class="payment-method-title">PAYMENT METHOD</div>
 
         <label class="payment-option selected">
@@ -418,114 +449,237 @@
 </main>
 
 <script src="https://www.paypal.com/sdk/js?client-id=BAAaMqIAOQ2H7Wc2SkHjE4y9GtI6DWVVjuzt7jTmNgCQyrGeZKHdOBVFkx5RL7mTAY2f6yZV61UMwP_MQA&currency=USD&components=buttons&enable-funding=card"></script>
+<!-- ^ Check in PayPal Developer Dashboard > Apps & Credentials > LIVE that this is the real Client ID.
+     A normal PayPal Client ID usually starts with "A". NEVER put the Secret here. -->
 
 <script>
+  // =====================================================
+  // CONFIG
+  // =====================================================
+
   // Approximate MAD -> USD rate. PayPal does not support charging in MAD
   // directly, so the PayPal total is converted at checkout time.
   // Update this every so often to track the real exchange rate.
   const MAD_TO_USD_RATE = 0.105;
 
+  // Prices (MAD) that are locked in the code. If a product is listed here,
+  // the price from the URL / cart is IGNORED, so nobody can edit it.
+  // Add your other products here (name must match the product name exactly).
+  // Products NOT listed here fall back to the price sent by the shop page.
+  const CATALOG = {
+    "ASAP Tee": 209
+  };
+
+  const MAX_QTY = 10;      // max quantity per item
+  const MAX_PRICE = 5000;  // sanity limit for fallback prices (MAD)
+
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
+
+  // One order id per page load (also sent to PayPal as custom_id
+  // so you can match a PayPal payment with a row in your sheet).
+  const ORDER_ID = "NOT-" + Date.now();
+
+  // =====================================================
+  // HELPERS
+  // =====================================================
+
+  const $ = function (id) { return document.getElementById(id); };
+  const hasOwn = function (obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+  };
+
+  function cleanQty(value) {
+    const n = parseInt(value, 10);
+    if (!Number.isFinite(n) || n < 1) return 1;
+    return Math.min(n, MAX_QTY);
+  }
+
+  // Returns a trusted price for a product, or null if the price is not valid.
+  function resolvePrice(productName, claimedPrice) {
+    if (hasOwn(CATALOG, productName)) return CATALOG[productName];
+
+    const n = Number(claimedPrice);
+    if (Number.isFinite(n) && n > 0 && n <= MAX_PRICE) return n;
+
+    return null;
+  }
+
+  // =====================================================
+  // BUILD THE ORDER (single product or cart)
+  // =====================================================
+
   const params = new URLSearchParams(window.location.search);
   const isCartCheckout = params.get("cart") === "1";
 
-let cart = [];
+  let items = [];
 
-if (isCartCheckout) {
-  try {
-    cart = JSON.parse(localStorage.getItem("notoriousCheckoutCart")) || [];
-  } catch (error) {
-    cart = [];
+  if (isCartCheckout) {
+    let rawCart = [];
+
+    try {
+      rawCart = JSON.parse(localStorage.getItem("notoriousCheckoutCart")) || [];
+    } catch (error) {
+      rawCart = [];
+    }
+
+    if (!Array.isArray(rawCart)) rawCart = [];
+
+    rawCart.forEach(function (item) {
+      if (!item || !item.product) return;
+
+      const name = String(item.product);
+      const unitPrice = resolvePrice(name, item.price);
+      if (unitPrice === null) return; // skip invalid items
+
+      items.push({
+        product: name,
+        size: String(item.size || "-"),
+        quantity: cleanQty(item.quantity),
+        price: unitPrice
+      });
+    });
+
+  } else {
+    const name = params.get("product") || "ASAP Tee";
+    const unitPrice = resolvePrice(name, params.get("price"));
+
+    if (unitPrice !== null) {
+      items.push({
+        product: name,
+        size: params.get("size") || "-",
+        quantity: cleanQty(params.get("quantity")),
+        price: unitPrice
+      });
+    }
   }
-}
 
-  const product = params.get("product") || "ASAP Tee";
-  const price = Number(params.get("price")) || 209;
-  const size = params.get("size") || "-";
-  const quantity = Number(params.get("quantity")) || 1;
-  
-let cartTotal = 0;
-let cartQuantity = 0;
+  const totalMad = items.reduce(function (sum, item) {
+    return sum + item.price * item.quantity;
+  }, 0);
 
-if (isCartCheckout && cart.length > 0) {
-  cartTotal = cart.reduce(
-    (sum, item) => sum + Number(item.price) * Number(item.quantity),
-    0
-  );
+  const totalQty = items.reduce(function (sum, item) {
+    return sum + item.quantity;
+  }, 0);
 
-  cartQuantity = cart.reduce(
-    (sum, item) => sum + Number(item.quantity),
-    0
-  );
+  // PayPal needs at least 0.01 USD
+  const totalUsd = Math.max(0.01, totalMad * MAD_TO_USD_RATE).toFixed(2);
 
-  document.getElementById("product").textContent =
-    cart.map(item => `${item.product} (${item.size})`).join(" + ");
+  const orderDescription = isCartCheckout
+    ? items.map(function (i) { return i.product + " (" + i.size + ") x" + i.quantity; }).join(" | ")
+    : (items[0] ? items[0].product : "");
 
-  document.getElementById("price").textContent = cartTotal;
-  document.getElementById("size").textContent = "Multiple";
-  document.getElementById("quantity").textContent = cartQuantity;
-  document.getElementById("total").textContent = cartTotal;
+  // =====================================================
+  // FILL THE SUMMARY
+  // =====================================================
 
-} else {
-  document.getElementById("product").textContent = product;
-  document.getElementById("price").textContent = price;
-  document.getElementById("size").textContent = size;
-  document.getElementById("quantity").textContent = quantity;
-  document.getElementById("total").textContent = price * quantity;
-}
+  if (items.length === 0) {
+    // Nothing valid to order: block both payment methods.
+    $("emptyNotice").style.display = "block";
+    $("paymentMethodBlock").style.display = "none";
+    $("priceLine").style.display = "none";
+    $("codBtn").disabled = true;
+    $("total").textContent = "0";
 
-const totalMad = isCartCheckout ? cartTotal : (price * quantity);
-const totalUsd = (totalMad * MAD_TO_USD_RATE).toFixed(2);
-document.getElementById("totalUsd").textContent = totalUsd;
+  } else if (isCartCheckout) {
+    $("product").textContent = items.map(function (i) {
+      return i.product + " (" + i.size + ")";
+    }).join(" + ");
+    $("size").textContent = "Multiple";
+    $("quantity").textContent = totalQty;
+    $("priceLine").style.display = "none"; // no single unit price for a cart
+    $("total").textContent = totalMad;
 
-const orderDescription = isCartCheckout
-  ? cart.map(item => `${item.product} (${item.size}) x${item.quantity}`).join(" | ")
-  : product;
+  } else {
+    $("product").textContent = items[0].product;
+    $("size").textContent = items[0].size;
+    $("quantity").textContent = items[0].quantity;
+    $("price").textContent = items[0].price;
+    $("total").textContent = totalMad;
+  }
 
-  // ===== PAYMENT METHOD SWITCHING =====
+  $("totalUsd").textContent = totalUsd;
+
+  // Prevent the form from being submitted by pressing Enter.
+  $("checkoutForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+  });
+
+  // =====================================================
+  // PAYMENT METHOD SWITCHING
+  // =====================================================
+
   function switchPaymentMethod(method) {
     document.querySelectorAll(".payment-option").forEach(function (opt) {
       const isSelected = opt.querySelector("input").value === method;
       opt.classList.toggle("selected", isSelected);
     });
 
-    const codBtn = document.getElementById("codBtn");
-    const paypalContainer = document.getElementById("paypalButtonContainer");
-    const usdNote = document.getElementById("usdNote");
+    const codBtn = $("codBtn");
+    const paypalContainer = $("paypalButtonContainer");
+    const paypalUnavailable = $("paypalUnavailable");
+    const usdNote = $("usdNote");
 
     if (method === "paypal") {
       codBtn.style.display = "none";
-      paypalContainer.style.display = "block";
       usdNote.style.display = "block";
+
+      // Show the container first, so PayPal can measure its width,
+      // then render the buttons (only once).
+      paypalContainer.style.display = "block";
+
+      if (initPayPal()) {
+        paypalUnavailable.style.display = "none";
+      } else {
+        paypalContainer.style.display = "none";
+        paypalUnavailable.style.display = "block";
+      }
+
     } else {
       codBtn.style.display = "block";
       paypalContainer.style.display = "none";
+      paypalUnavailable.style.display = "none";
       usdNote.style.display = "none";
     }
   }
 
-  // ===== SHARED ORDER SUBMISSION (used by both COD and PayPal) =====
-  async function submitOrder(paymentMethod, paymentReference) {
-    const orderId = "NOT-" + Date.now();
+  // =====================================================
+  // SHARED ORDER SUBMISSION (used by both COD and PayPal)
+  // =====================================================
+
+  let isSubmitting = false;
+
+  async function submitOrder(paymentMethod, paymentReference, paypalOrderId) {
+    if (isSubmitting) return;
+    isSubmitting = true;
+
+    const codBtn = $("codBtn");
+    codBtn.disabled = true;
 
     const orderData = {
-      orderId: orderId,
+      orderId: ORDER_ID,
       paymentMethod: paymentMethod || "COD",
-      paymentReference: paymentReference || "",
+      paymentReference: paymentReference || "",   // PayPal: capture id
+      paypalOrderId: paypalOrderId || "",         // PayPal: order id
 
+      // Lines of the order: Apps Script re-checks the prices from the Products sheet
+      items: items.map(function (i) {
+        return { product: i.product, size: i.size, quantity: i.quantity };
+      }),
+      claimedTotal: totalMad,
+
+      // Kept for the old format (single product: unit price, cart: total)
       product: orderDescription,
-      price: isCartCheckout ? cartTotal : price,
-      size: isCartCheckout ? "Multiple" : size,
-      quantity: isCartCheckout ? cartQuantity : quantity,
+      price: isCartCheckout ? totalMad : items[0].price,
+      size: isCartCheckout ? "Multiple" : items[0].size,
+      quantity: totalQty,
 
-      fullName: document.getElementById("name").value.trim(),
-      email: document.getElementById("email").value.trim(),
-      phone: document.getElementById("phone").value.trim(),
-      city: document.getElementById("city").value.trim(),
-      postalCode: document.getElementById("postal").value.trim(),
-      address: document.getElementById("address").value.trim()
+      fullName: $("name").value.trim(),
+      email: $("email").value.trim(),
+      phone: $("phone").value.trim(),
+      city: $("city").value.trim(),
+      postalCode: $("postal").value.trim(),
+      address: $("address").value.trim()
     };
-
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
 
     try {
       await fetch(WEB_APP_URL, {
@@ -537,41 +691,79 @@ const orderDescription = isCartCheckout
         body: JSON.stringify(orderData)
       });
 
-      const successParams = new URLSearchParams({
-        orderId: orderId,
-        product: orderDescription,
-        size: orderData.size,
-        quantity: orderData.quantity,
-        total: isCartCheckout ? cartTotal : Number(price) * Number(quantity),
-        paymentMethod: orderData.paymentMethod
-      });
+    } catch (error) {
+      console.error("Order save failed:", error);
 
-      if (isCartCheckout) {
-        localStorage.removeItem("notoriousCart");
-        localStorage.removeItem("notoriousCheckoutCart");
+      if (paymentMethod === "PayPal") {
+        // The customer already paid: never ask them to pay again.
+        const message =
+          "Payment received (ref: " + paymentReference + ") but we couldn't save your order details. " +
+          "Please contact us with this reference. Do NOT pay again.";
+
+        $("paypalButtonContainer").style.display = "none";
+        $("paypalUnavailable").textContent = message;
+        $("paypalUnavailable").style.display = "block";
+        alert(message);
+        // isSubmitting stays true on purpose, to block any second payment.
+
+      } else {
+        alert("Something went wrong. Please try again.");
+        isSubmitting = false;
+        codBtn.disabled = false;
+        codBtn.textContent = "CONFIRM ORDER";
       }
 
-      window.location.href = "success.html?" + successParams.toString();
-
-    } catch (error) {
-      alert("Something went wrong. Please try again.");
+      return;
     }
+
+    if (isCartCheckout) {
+      localStorage.removeItem("notoriousCart");
+      localStorage.removeItem("notoriousCheckoutCart");
+    }
+
+    const successParams = new URLSearchParams({
+      orderId: ORDER_ID,
+      product: orderDescription,
+      size: orderData.size,
+      quantity: orderData.quantity,
+      total: totalMad,
+      paymentMethod: orderData.paymentMethod
+    });
+
+    window.location.href = "success.html?" + successParams.toString();
   }
 
-  // ===== COD FLOW =====
-  async function confirmOrder() {
-    const form = document.getElementById("checkoutForm");
+  // =====================================================
+  // COD FLOW
+  // =====================================================
+
+  function confirmOrder() {
+    if (isSubmitting || totalMad <= 0) return;
+
+    const form = $("checkoutForm");
 
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
 
-    submitOrder("COD", "");
+    $("codBtn").textContent = "PLACING ORDER...";
+    submitOrder("COD", "", "");
   }
 
-  // ===== PAYPAL FLOW =====
-  if (window.paypal) {
+  // =====================================================
+  // PAYPAL FLOW
+  // =====================================================
+
+  let paypalRendered = false;
+
+  // Returns true if the PayPal buttons are (or will be) available.
+  function initPayPal() {
+    if (paypalRendered) return true;
+    if (!window.paypal || totalMad <= 0) return false;
+
+    paypalRendered = true;
+
     paypal.Buttons({
       style: {
         layout: "vertical",
@@ -581,9 +773,9 @@ const orderDescription = isCartCheckout
       },
 
       onClick: function (data, actions) {
-        const form = document.getElementById("checkoutForm");
+        const form = $("checkoutForm");
 
-        if (!form.checkValidity()) {
+        if (isSubmitting || totalMad <= 0 || !form.checkValidity()) {
           form.reportValidity();
           return actions.reject();
         }
@@ -594,19 +786,41 @@ const orderDescription = isCartCheckout
       createOrder: function (data, actions) {
         return actions.order.create({
           purchase_units: [{
+            custom_id: ORDER_ID,
+            description: orderDescription.slice(0, 127),
             amount: {
               value: totalUsd,
               currency_code: "USD"
-            },
-            description: orderDescription.slice(0, 127)
+            }
           }]
         });
       },
 
-      onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
-          submitOrder("PayPal", details.id);
-        });
+      onApprove: async function (data, actions) {
+        try {
+          const details = await actions.order.capture();
+
+          const purchaseUnit = details.purchase_units && details.purchase_units[0];
+          const capture = purchaseUnit && purchaseUnit.payments &&
+                          purchaseUnit.payments.captures &&
+                          purchaseUnit.payments.captures[0];
+
+          if (details.status !== "COMPLETED" || !capture) {
+            alert("Your payment was not completed. You have not been charged. Please try again or choose Cash on Delivery.");
+            return;
+          }
+
+          // capture.id = the transaction id you can find in your PayPal account
+          await submitOrder("PayPal", capture.id, details.id);
+
+        } catch (err) {
+          console.error("PayPal capture error:", err);
+          alert("Something went wrong while confirming your PayPal payment. Please check your PayPal account before trying again, or choose Cash on Delivery.");
+        }
+      },
+
+      onCancel: function () {
+        // Customer closed the PayPal window: nothing to do, they can retry.
       },
 
       onError: function (err) {
@@ -614,9 +828,14 @@ const orderDescription = isCartCheckout
         alert("Something went wrong with PayPal. Please try again or choose Cash on Delivery.");
       }
 
-    }).render("#paypalButtonContainer");
-  } else {
-    document.getElementById("paypalUnavailable").style.display = "block";
+    }).render("#paypalButtonContainer").catch(function (err) {
+      console.error("PayPal render error:", err);
+      paypalRendered = false;
+      $("paypalButtonContainer").style.display = "none";
+      $("paypalUnavailable").style.display = "block";
+    });
+
+    return true;
   }
 </script>
 
