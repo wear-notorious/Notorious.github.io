@@ -755,6 +755,36 @@
   // PAYPAL FLOW
   // =====================================================
 
+  // Customer info (already typed in the delivery form) in PayPal "payer" format.
+  // Used to pre-fill PayPal's card form. Delivery is in Morocco, so country = MA.
+  function buildPayer() {
+    const fullName = $("name").value.trim();
+    const email = $("email").value.trim();
+    const city = $("city").value.trim();
+    const address = $("address").value.trim();
+    const postal = $("postal").value.trim();
+
+    if (!fullName || !email || !city || !address) return null;
+
+    const parts = fullName.split(/\s+/);
+    const givenName = parts.shift();
+    const surname = parts.join(" ") || givenName;
+
+    const payerAddress = {
+      country_code: "MA",
+      address_line_1: address.slice(0, 300),
+      admin_area_2: city.slice(0, 120)
+    };
+
+    if (postal) payerAddress.postal_code = postal.slice(0, 60);
+
+    return {
+      name: { given_name: givenName, surname: surname },
+      email_address: email,
+      address: payerAddress
+    };
+  }
+
   let paypalRendered = false;
 
   // Returns true if the PayPal buttons are (or will be) available.
@@ -783,8 +813,8 @@
         return actions.resolve();
       },
 
-      createOrder: function (data, actions) {
-        return actions.order.create({
+      createOrder: async function (data, actions) {
+        const order = {
           purchase_units: [{
             custom_id: ORDER_ID,
             description: orderDescription.slice(0, 127),
@@ -793,7 +823,22 @@
               currency_code: "USD"
             }
           }]
-        });
+        };
+
+        // Best effort: give PayPal the info the customer already typed, so the
+        // card form can be pre-filled. If PayPal refuses it, the order is created
+        // without it, so the payment never breaks.
+        const payer = buildPayer();
+
+        if (payer) {
+          try {
+            return await actions.order.create(Object.assign({ payer: payer }, order));
+          } catch (err) {
+            console.warn("PayPal prefill refused, creating order without it:", err);
+          }
+        }
+
+        return actions.order.create(order);
       },
 
       onApprove: async function (data, actions) {
