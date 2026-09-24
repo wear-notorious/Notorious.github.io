@@ -37,9 +37,41 @@
     }
 
     .back {
-      color: #aaa;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 22px;
+      border: 1px solid #333;
+      border-radius: 999px;
+      color: #fff;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      transition: background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+    }
+
+    .back-arrow {
+      display: inline-block;
+      font-size: 15px;
+      line-height: 1;
+      transition: transform .25s ease;
+    }
+
+    .back:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .back:hover .back-arrow {
+      transform: translateX(-4px);
+    }
+
+    .back:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
     }
 
     .checkout {
@@ -278,6 +310,12 @@
         height: 50px;
       }
 
+      .back {
+        padding: 9px 16px;
+        font-size: 11px;
+        gap: 8px;
+      }
+
       .checkout {
         padding: 40px 18px;
       }
@@ -305,7 +343,7 @@
     <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo">
   </div>
 
-  <a href="index.html#shop" class="back">← Back to shop</a>
+  <a href="index.html#shop" class="back"><span class="back-arrow">←</span> BACK TO SHOP</a>
 </header>
 
 <main class="checkout">
