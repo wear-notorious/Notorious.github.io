@@ -130,6 +130,13 @@
       font-weight: 800;
     }
 
+    .usd-note {
+      text-align: right;
+      color: #777;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
     .cod {
       margin: 25px 0;
       background: #181818;
@@ -138,6 +145,76 @@
       color: #bbb;
       font-size: 14px;
       line-height: 1.5;
+    }
+
+    /* ===== PAYMENT METHOD ===== */
+
+    .payment-method {
+      margin: 25px 0;
+    }
+
+    .payment-method-title {
+      font-size: 13px;
+      color: #aaa;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #181818;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 15px 17px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: border-color .2s ease;
+    }
+
+    .payment-option.selected,
+    .payment-option:has(input:checked) {
+      border-color: #fff;
+    }
+
+    .payment-option input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      margin: 2px 0 0;
+      border-radius: 50%;
+      accent-color: #fff;
+      flex-shrink: 0;
+    }
+
+    .payment-option-label strong {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .payment-option-label small {
+      display: block;
+      color: #888;
+      font-size: 12px;
+    }
+
+    #paypalButtonContainer {
+      margin-top: 10px;
+    }
+
+    #paypalUnavailable {
+      display: none;
+      background: #181818;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 15px 17px;
+      color: #999;
+      font-size: 13px;
+      text-align: center;
     }
 
     .order-btn {
@@ -290,9 +367,24 @@
         <strong><span id="price">0</span> MAD</strong>
       </div>
 
-      <div class="cod">
-        <strong>Cash on Delivery</strong><br>
-        Pay when your order arrives.
+      <div class="payment-method">
+        <div class="payment-method-title">PAYMENT METHOD</div>
+
+        <label class="payment-option selected">
+          <input type="radio" name="paymentMethod" value="cod" checked onchange="switchPaymentMethod('cod')">
+          <span class="payment-option-label">
+            <strong>Cash on Delivery</strong>
+            <small>Pay when your order arrives.</small>
+          </span>
+        </label>
+
+        <label class="payment-option">
+          <input type="radio" name="paymentMethod" value="paypal" onchange="switchPaymentMethod('paypal')">
+          <span class="payment-option-label">
+            <strong>PayPal / Credit Card</strong>
+            <small>Pay securely online now.</small>
+          </span>
+        </label>
       </div>
 
       <div class="total">
@@ -300,11 +392,20 @@
         <span><span id="total">0</span> MAD</span>
       </div>
 
+      <div id="usdNote" class="usd-note" style="display:none;">
+        ≈ <span id="totalUsd">0</span> USD (charged via PayPal)
+      </div>
+
       <br>
 
-      <button class="order-btn" onclick="confirmOrder()">
+      <button class="order-btn" id="codBtn" onclick="confirmOrder()">
         CONFIRM ORDER
       </button>
+
+      <div id="paypalButtonContainer" style="display:none;"></div>
+      <p id="paypalUnavailable">
+        PayPal couldn't load. Please use Cash on Delivery, or refresh the page.
+      </p>
 
       <p class="secure">
         NOTORIOUS™ — WEAR WHAT THEY WON’T.
@@ -316,7 +417,14 @@
 
 </main>
 
+<script src="https://www.paypal.com/sdk/js?client-id=BAAaMqlAOQ2H7Wc2SkHjE4y9GtI6DWVVjuzt7jTmNgCQyrGeZKHdOBVFkx5RL7mTAY2f6yZV61UMwP_MQA&currency=USD&components=buttons&enable-funding=card"></script>
+
 <script>
+  // Approximate MAD -> USD rate. PayPal does not support charging in MAD
+  // directly, so the PayPal total is converted at checkout time.
+  // Update this every so often to track the real exchange rate.
+  const MAD_TO_USD_RATE = 0.105;
+
   const params = new URLSearchParams(window.location.search);
   const isCartCheckout = params.get("cart") === "1";
 
@@ -365,73 +473,151 @@ if (isCartCheckout && cart.length > 0) {
   document.getElementById("total").textContent = price * quantity;
 }
 
- async function confirmOrder() {
-  const form = document.getElementById("checkoutForm");
+const totalMad = isCartCheckout ? cartTotal : (price * quantity);
+const totalUsd = (totalMad * MAD_TO_USD_RATE).toFixed(2);
+document.getElementById("totalUsd").textContent = totalUsd;
 
-  if (!form.checkValidity()) {
-    form.reportValidity();
-    return;
-  }
-const orderId = "NOT-" + Date.now();
+const orderDescription = isCartCheckout
+  ? cart.map(item => `${item.product} (${item.size}) x${item.quantity}`).join(" | ")
+  : product;
 
-const orderData = {
-  orderId: orderId,
-
-  product: isCartCheckout
-    ? cart.map(item => `${item.product} (${item.size}) x${item.quantity}`).join(" | ")
-    : product,
-
-  price: isCartCheckout ? cartTotal : price,
-
-  size: isCartCheckout ? "Multiple" : size,
-
-  quantity: isCartCheckout ? cartQuantity : quantity,
-
-  fullName: document.getElementById("name").value.trim(),
-  email: document.getElementById("email").value.trim(),
-  phone: document.getElementById("phone").value.trim(),
-  city: document.getElementById("city").value.trim(),
-  postalCode: document.getElementById("postal").value.trim(),
-  address: document.getElementById("address").value.trim()
-};
-
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
-
-  try {
-    await fetch(WEB_APP_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(orderData)
+  // ===== PAYMENT METHOD SWITCHING =====
+  function switchPaymentMethod(method) {
+    document.querySelectorAll(".payment-option").forEach(function (opt) {
+      const isSelected = opt.querySelector("input").value === method;
+      opt.classList.toggle("selected", isSelected);
     });
 
- const successParams = new URLSearchParams({
-  orderId: orderId,
+    const codBtn = document.getElementById("codBtn");
+    const paypalContainer = document.getElementById("paypalButtonContainer");
+    const usdNote = document.getElementById("usdNote");
 
-  product: isCartCheckout
-    ? cart.map(item => `${item.product} (${item.size}) x${item.quantity}`).join(" | ")
-    : product,
-
-  size: isCartCheckout ? "Multiple" : size,
-
-  quantity: isCartCheckout ? cartQuantity : quantity,
-
-  total: isCartCheckout
-    ? cartTotal
-    : Number(price) * Number(quantity)
-});
-if (isCartCheckout) {
-  localStorage.removeItem("notoriousCart");
-  localStorage.removeItem("notoriousCheckoutCart");
-}
-window.location.href = "success.html?" + successParams.toString();
-
-  } catch (error) {
-    alert("Something went wrong. Please try again.");
+    if (method === "paypal") {
+      codBtn.style.display = "none";
+      paypalContainer.style.display = "block";
+      usdNote.style.display = "block";
+    } else {
+      codBtn.style.display = "block";
+      paypalContainer.style.display = "none";
+      usdNote.style.display = "none";
+    }
   }
-}
+
+  // ===== SHARED ORDER SUBMISSION (used by both COD and PayPal) =====
+  async function submitOrder(paymentMethod, paymentReference) {
+    const orderId = "NOT-" + Date.now();
+
+    const orderData = {
+      orderId: orderId,
+      paymentMethod: paymentMethod || "COD",
+      paymentReference: paymentReference || "",
+
+      product: orderDescription,
+      price: isCartCheckout ? cartTotal : price,
+      size: isCartCheckout ? "Multiple" : size,
+      quantity: isCartCheckout ? cartQuantity : quantity,
+
+      fullName: document.getElementById("name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      city: document.getElementById("city").value.trim(),
+      postalCode: document.getElementById("postal").value.trim(),
+      address: document.getElementById("address").value.trim()
+    };
+
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
+
+    try {
+      await fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(orderData)
+      });
+
+      const successParams = new URLSearchParams({
+        orderId: orderId,
+        product: orderDescription,
+        size: orderData.size,
+        quantity: orderData.quantity,
+        total: isCartCheckout ? cartTotal : Number(price) * Number(quantity),
+        paymentMethod: orderData.paymentMethod
+      });
+
+      if (isCartCheckout) {
+        localStorage.removeItem("notoriousCart");
+        localStorage.removeItem("notoriousCheckoutCart");
+      }
+
+      window.location.href = "success.html?" + successParams.toString();
+
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    }
+  }
+
+  // ===== COD FLOW =====
+  async function confirmOrder() {
+    const form = document.getElementById("checkoutForm");
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    submitOrder("COD", "");
+  }
+
+  // ===== PAYPAL FLOW =====
+  if (window.paypal) {
+    paypal.Buttons({
+      style: {
+        layout: "vertical",
+        color: "black",
+        shape: "pill",
+        label: "pay"
+      },
+
+      onClick: function (data, actions) {
+        const form = document.getElementById("checkoutForm");
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return actions.reject();
+        }
+
+        return actions.resolve();
+      },
+
+      createOrder: function (data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: totalUsd,
+              currency_code: "USD"
+            },
+            description: orderDescription.slice(0, 127)
+          }]
+        });
+      },
+
+      onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+          submitOrder("PayPal", details.id);
+        });
+      },
+
+      onError: function (err) {
+        console.error("PayPal error:", err);
+        alert("Something went wrong with PayPal. Please try again or choose Cash on Delivery.");
+      }
+
+    }).render("#paypalButtonContainer");
+  } else {
+    document.getElementById("paypalUnavailable").style.display = "block";
+  }
 </script>
 
 </body>
