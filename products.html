@@ -644,6 +644,40 @@
       font-size: 11px;
     }
 
+    /* WHATSAPP FLOATING BUTTON */
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 999;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #000;
+      border-radius: 50%;
+      font-size: 26px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+    }
+
+    @media (max-width: 800px) {
+      .whatsapp-float {
+        right: 16px;
+        bottom: 16px;
+        width: 52px;
+        height: 52px;
+        font-size: 23px;
+      }
+    }
+
     /* TABLET */
 
     @media (max-width: 1000px) {
@@ -1161,6 +1195,16 @@
   </div>
 
 </footer>
+
+<a
+  href="https://wa.me/212648717988?text=Salam%2C%20bghit%20nsowlk%20%21"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener"
+  aria-label="Chat on WhatsApp"
+>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
 
 <script>
   const PRODUCTS_API_URL =
