@@ -151,10 +151,10 @@ nav {
 }
     /* MOBILE HEADER */
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   nav {
-    height: 80px;
-    padding: 0 20px;
+    height: 95px;
+    padding: 0 25px;
     box-sizing: border-box;
     position: relative;
     display: flex;
@@ -168,6 +168,12 @@ nav {
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
     background: none;
     border: none;
     color: #fff;
@@ -184,15 +190,36 @@ nav {
   }
 
   .logo img {
-    height: 65px !important;
+    height: 65px;
   }
 
   .cart-button {
     display: flex;
     position: absolute;
     right: 20px;
-    left: auto;
-    margin-left: 0;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -7px;
+    right: -10px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border-radius: 50%;
+    background: #fff;
+    color: #000;
+    font-size: 10px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
   }
 
   .nav-links {
@@ -216,71 +243,8 @@ nav {
   }
 
   .nav-links a {
-    font-size: 13px;
-    letter-spacing: 2px;
-  }
-
-  .products-menu {
-    width: 100%;
-    text-align: center;
-  }
-
-  .products-menu-btn {
-    width: 100%;
-    font-size: 13px;
-    letter-spacing: 2px;
-  }
-
-  .products-menu-btn::after {
-    content: "⌄";
-    display: inline-block;
-    margin-left: 8px;
-    font-size: 14px;
-    transition: transform 0.2s ease;
-  }
-
-  .products-menu.open .products-menu-btn::after {
-    transform: rotate(180deg);
-  }
-
-  .products-dropdown {
-    display: none !important;
-    position: static;
-    transform: none;
-    min-width: 100%;
-    background: #111;
-    border: 1px solid #222;
-    margin-top: 10px;
-    padding: 6px 0;
-  }
-
-  .products-menu.open .products-dropdown {
-    display: block !important;
-    margin-top: 8px;
-    padding: 4px 0;
-  }
-
-  .products-dropdown a {
-    padding: 10px 0;
-    font-size: 11px;
-    opacity: 0.8;
-  }
-
-  .products-dropdown a:hover {
-    background: #181818;
-    opacity: 1;
-  }
-
-  .products-dropdown a.sub-item {
-    margin-left: 0;
-    padding: 8px 14px;
     font-size: 10px;
-    border-left: none;
-    text-align: center;
-  }
-
-  .products-dropdown a.sub-item::before {
-    display: none;
+    letter-spacing: 1px;
   }
 }
     
@@ -323,11 +287,7 @@ nav {
   display: block;
   touch-action: pan-y;
   user-select: none;
-  transition: opacity 0.25s ease, transform 0.22s ease;
-}
-
-.main-product-image.fading {
-  opacity: 0;
+  transition: transform 0.22s ease, opacity 0.22s ease;
 }
 
 /* ===== SWIPE GLITCH EFFECT ===== */
@@ -558,54 +518,6 @@ nav {
   border-radius: 8px;
 }
 
-.quantity-stepper {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  width: fit-content;
-  border: 1px solid #333;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.qty-btn {
-  width: 44px;
-  height: 44px;
-  background: #111;
-  color: #fff;
-  border: none;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.qty-btn:hover {
-  background: #fff;
-  color: #000;
-}
-
-.quantity-stepper input {
-  width: 52px;
-  height: 44px;
-  text-align: center;
-  background: #0d0d0d;
-  color: #fff;
-  border: none;
-  border-left: 1px solid #333;
-  border-right: 1px solid #333;
-  font-size: 15px;
-  font-weight: 700;
-  font-family: inherit;
-  -moz-appearance: textfield;
-}
-
-.quantity-stepper input::-webkit-outer-spin-button,
-.quantity-stepper input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 .order-btn {
   width: 100%;
   margin-top: 28px;
@@ -720,38 +632,30 @@ nav {
   .product-details h1 {
     font-size: 32px;
   }
+.product-details {
+  padding: 0 4px;
+}
 
-  .product-details {
-    padding: 0 4px;
-  }
+.sizes {
+  gap: 8px;
+}
 
-  .sizes {
-    gap: 8px;
-  }
+.size-btn {
+  min-width: 44px;
+  padding: 11px 10px;
+}
 
-  .size-btn {
-    min-width: 44px;
-    padding: 11px 10px;
-  }
+.quantity-row {
+  margin-top: 18px;
+}
 
-  .quantity-row {
-    margin-top: 18px;
-  }
-
-  .order-btn {
-    margin-top: 20px;
-    padding: 18px 20px;
-    font-size: 16px;
-  }
-
+.order-btn {
+  margin-top: 20px;
+  padding: 18px 20px;
+  font-size: 16px;
+}
   .thumbnails {
     gap: 8px;
-  }
-
-  /* Nkhbiw l-effet glitch f mobile */
-  .main-image-wrap.glitching .main-product-image,
-  .main-image-wrap.glitching .glitch-ghost {
-    animation: none !important;
   }
 }
     /* PRODUCT PAGE HEADER */
@@ -759,7 +663,73 @@ nav {
 
 /* MOBILE HEADER */
 @media (max-width: 768px) {
+  .header-container {
+  height: 80px;
+  padding: 0 20px;
+  position: relative;
+}
+  /* Mobile Dropdown Adjustments */
+  .products-menu {
+    width: 100%;
+    text-align: center;
+  }
 
+  .products-dropdown {
+    position: static;
+    transform: none;
+    min-width: 100%;
+    background: transparent;
+    border: none;
+    padding: 6px 0;
+    box-shadow: none;
+  }
+
+  .products-dropdown a {
+    padding: 10px 0;
+    font-size: 11px;
+    opacity: 0.8;
+  }
+
+  .products-dropdown a:hover {
+    background: transparent;
+    opacity: 1;
+  }
+
+.menu-toggle {
+  display: block;
+  position: absolute;
+  left: 20px;
+  right: auto;
+}
+
+.logo-link {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cart-button {
+  position: absolute;
+  right: 20px;
+  left: auto;
+}
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background: #0b0b0b;
+    border-top: 1px solid #222;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
   .recently-viewed-section {
   margin-top: 50px;
   padding-top: 35px;
@@ -1332,40 +1302,6 @@ header {
     display: none;
   }
 }
-
-    /* WHATSAPP FLOATING BUTTON */
-    .whatsapp-float {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-      z-index: 999;
-      width: 58px;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-      color: #000;
-      border-radius: 50%;
-      font-size: 26px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .whatsapp-float:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
-    }
-
-    @media (max-width: 800px) {
-      .whatsapp-float {
-        right: 16px;
-        bottom: 16px;
-        width: 52px;
-        height: 52px;
-        font-size: 23px;
-      }
-    }
   </style>
   <link
   rel="stylesheet"
@@ -1607,33 +1543,13 @@ productPage.innerHTML = `
       <div class="quantity-section">
         <label for="quantity">QUANTITY</label>
 
-        <div class="quantity-stepper">
-          <button
-            type="button"
-            class="qty-btn"
-            onclick="changeQuantity(-1)"
-            aria-label="Decrease quantity"
-          >
-            −
-          </button>
-
-          <input
-            type="text"
-            id="quantity"
-            value="1"
-            readonly
-            inputmode="numeric"
-          >
-
-          <button
-            type="button"
-            class="qty-btn"
-            onclick="changeQuantity(1)"
-            aria-label="Increase quantity"
-          >
-            +
-          </button>
-        </div>
+        <select id="quantity">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
 
 <button
@@ -1709,16 +1625,6 @@ productPage.innerHTML = `
     © 2026 NOTORIOUS™. All rights reserved.
   </div>
 </footer>
-
-<a
-  href="https://wa.me/212648717988?text=Salam%2C%20bghit%20nsowlk%20%21"
-  class="whatsapp-float"
-  target="_blank"
-  rel="noopener"
-  aria-label="Chat on WhatsApp"
->
-  <i class="fa-brands fa-whatsapp"></i>
-</a>
 
 <!-- IMAGE ZOOM OVERLAY -->
 <div id="imageZoomOverlay" class="image-zoom-overlay" onclick="closeImageZoom()">
@@ -1876,9 +1782,8 @@ function handleSwipe() {
 
 function swipeImage(direction) {
   const thumbnails = Array.from(document.querySelectorAll(".thumbnail"));
-  const mainImage = document.getElementById("mainProductImage");
 
-  if (!thumbnails.length || !mainImage) return;
+  if (!thumbnails.length) return;
 
   let currentIndex = thumbnails.findIndex(btn =>
     btn.classList.contains("active")
@@ -1894,12 +1799,8 @@ function swipeImage(direction) {
     newIndex = thumbnails.length - 1;
   }
 
-  mainImage.classList.add("fading");
-
-  setTimeout(() => {
-    thumbnails[newIndex].click();
-    mainImage.classList.remove("fading");
-  }, 250);
+  thumbnails[newIndex].click();
+  triggerGlitch();
 }
 
 document.addEventListener("touchstart", function(e) {
@@ -1914,17 +1815,7 @@ document.addEventListener("touchend", function(e) {
     handleSwipe();
   }
 });
-  function changeQuantity(delta) {
-  const input = document.getElementById("quantity");
-  let value = parseInt(input.value) || 1;
-
-  value += delta;
-
-  if (value < 1) value = 1;
-  if (value > 10) value = 10;
-
-  input.value = value;
-}
+  
 function selectSize(size, button) {
   selectedSize = size;
 
