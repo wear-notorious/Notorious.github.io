@@ -172,12 +172,22 @@
     }
 
     .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
+      flex-wrap: nowrap;
       gap: 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px;
+    }
+
+    .contact-grid::-webkit-scrollbar {
+      display: none;
     }
 
     .contact-card {
+      flex: 1 1 200px;
+      min-width: 200px;
       background: #0e0e0e;
       border: 1px solid #252525;
       border-radius: 18px;
@@ -319,6 +329,40 @@
       font-size: 11px;
     }
 
+    /* WHATSAPP FLOATING BUTTON */
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 999;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #000;
+      border-radius: 50%;
+      font-size: 26px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+    }
+
+    @media (max-width: 800px) {
+      .whatsapp-float {
+        right: 16px;
+        bottom: 16px;
+        width: 52px;
+        height: 52px;
+        font-size: 23px;
+      }
+    }
+
     @media (max-width: 700px) {
       nav {
   height: 95px;
@@ -416,8 +460,25 @@
         padding: 65px 18px 80px;
       }
 
-      .contact-grid {
-        grid-template-columns: 1fr;
+      .contact-card {
+        flex: 1 1 160px;
+        min-width: 160px;
+        padding: 28px 18px;
+      }
+
+      .contact-card i {
+        font-size: 26px;
+        margin-bottom: 14px;
+      }
+
+      .contact-card h2 {
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+
+      .contact-card p {
+        font-size: 12px;
+        margin-bottom: 16px;
       }
 
       .support-note {
@@ -676,6 +737,23 @@
       <div class="contact-grid">
 
         <div class="contact-card">
+          <i class="fa-brands fa-whatsapp"></i>
+
+          <h2>WhatsApp</h2>
+
+          <p>
+            Chat with us directly for the fastest replies
+            on orders, sizing and delivery.
+          </p>
+
+          <a
+            href="https://wa.me/212648717988?text=Salam%2C%20bghit%20nsowlk%20%21"
+            target="_blank">
+            CHAT NOW
+          </a>
+        </div>
+
+        <div class="contact-card">
           <i class="fa-brands fa-instagram"></i>
 
           <h2>Instagram</h2>
@@ -825,6 +903,16 @@
 
   </footer>
 
+<a
+  href="https://wa.me/212648717988?text=Salam%2C%20bghit%20nsowlk%20%21"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener"
+  aria-label="Chat on WhatsApp"
+>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
   <script>
     function toggleMenu() {
       document.querySelector(".nav-links").classList.toggle("active");
@@ -854,18 +942,5 @@
   });
 </script>
   <script src="smoke-cursor.js" defer></script>
-  <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6ab2f98d6934013440e78694/1k35htkqs';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 </body>
 </html>
