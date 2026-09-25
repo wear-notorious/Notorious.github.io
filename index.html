@@ -1570,6 +1570,40 @@
     min-height: 0;
   }
 }
+
+    /* ===== WHATSAPP FLOATING BUTTON ===== */
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 999;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #000;
+      border-radius: 50%;
+      font-size: 26px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+    }
+
+    @media (max-width: 800px) {
+      .whatsapp-float {
+        right: 16px;
+        bottom: 16px;
+        width: 52px;
+        height: 52px;
+        font-size: 23px;
+      }
+    }
   </style>
 </head>
 
@@ -1868,6 +1902,17 @@
     © 2026 NOTORIOUS™. All rights reserved.
   </div>
 </footer>
+
+<a
+  href="https://wa.me/212648717988?text=Salam%2C%20bghit%20nsawlek%203la%20NOTORIOUS%E2%84%A2"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener"
+  aria-label="Chat on WhatsApp"
+>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
 <script>
   function toggleMenu() {
   const menu = document.querySelector(".nav-links");
@@ -2159,19 +2204,6 @@ loadProducts();
   setInterval(updateDropCountdown, 1000);
 </script>
   <script src="smoke-cursor.js" defer></script>
-  <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6ab2f98d6934013440e78694/1k35htkqs';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
   
 <script>
   // Sedd le menu automatiquement fach l user kayscrolli l page (mashi darori yclicki 3la link)
