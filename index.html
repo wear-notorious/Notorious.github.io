@@ -479,12 +479,13 @@
     }
 
     .hero-kicker {
-      display: inline-block;
+      display: block;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 4px;
       margin-bottom: 20px;
-      color: #bdbdbd;
+      color: #e0e0e0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
     }
 
 .hero h1 {
@@ -497,10 +498,36 @@
 }
     .hero p {
       max-width: 520px;
-      font-size: clamp(1rem, 1.4vw, 1.2rem);
-      line-height: 1.7;
-      color: #c5c5c5;
       margin-bottom: 36px;
+    }
+
+    .hero p .line-soft {
+      display: block;
+      font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+      font-weight: 400;
+      line-height: 1.6;
+      color: #b8b8b8;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+      margin-bottom: 6px;
+    }
+
+    .hero p .line-bold {
+      display: block;
+      font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+      font-weight: 800;
+      line-height: 1.4;
+      letter-spacing: -0.2px;
+      color: #f5f5f5;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
+    }
+
+    .hero p .line-bold .accent-word {
+      color: var(--gold-2);
+    }
+
+    .hero p .accent-word-soft {
+      color: #d8d8d8;
+      font-style: italic;
     }
 
     .btn {
@@ -576,11 +603,12 @@
 
     /* Micro-tag foq l-kicker */
     .hero-badge {
-      display: inline-flex;
+      display: flex;
+      width: fit-content;
       align-items: center;
       gap: 8px;
       padding: 6px 14px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       border: 1px solid rgba(212, 175, 55, 0.4);
       border-radius: 999px;
       background: rgba(212, 175, 55, 0.08);
@@ -1137,10 +1165,18 @@
       }
 
       .hero p {
-        font-size: 15px;
-        line-height: 1.6;
         margin-bottom: 26px;
         max-width: 340px;
+      }
+
+      .hero p .line-soft {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .hero p .line-bold {
+        font-size: 17px;
+        line-height: 1.35;
       }
 
       .btn {
@@ -1769,8 +1805,8 @@
     </h1>
 
     <p>
-      Limited drops. Bold attitude.<br>
-      Made for people who don’t dress like everyone else.
+      <span class="line-soft">Every piece drops once. Then it's <span class="accent-word-soft">gone</span>.</span>
+      <span class="line-bold">Built for the ones who move <span class="accent-word">different.</span></span>
     </p>
 
     <a class="btn" href="#shop">SHOP THE DROP</a>
