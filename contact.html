@@ -462,25 +462,44 @@
         padding: 65px 18px 80px;
       }
 
+      /* ===== 5 cards in one line, no swipe needed ===== */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+        overflow: visible;
+      }
+
       .contact-card {
-        flex: 1 1 160px;
-        min-width: 160px;
-        padding: 28px 18px;
+        flex: none;
+        min-width: 0;
+        padding: 12px 4px;
+        border-radius: 10px;
       }
 
       .contact-card i {
-        font-size: 26px;
-        margin-bottom: 14px;
-      }
-
-      .contact-card h2 {
-        font-size: 16px;
+        font-size: 17px;
         margin-bottom: 8px;
       }
 
+      .contact-card h2 {
+        font-size: 9.5px;
+        line-height: 1.2;
+        letter-spacing: 0.2px;
+        margin-bottom: 6px;
+        word-break: break-word;
+      }
+
       .contact-card p {
-        font-size: 12px;
-        margin-bottom: 16px;
+        display: none;
+      }
+
+      .contact-card a {
+        font-size: 6.5px;
+        letter-spacing: 0.3px;
+        padding-bottom: 2px;
+        line-height: 1.3;
+        white-space: nowrap;
       }
 
       .support-note {
@@ -494,6 +513,31 @@
 
       .footer-socials {
         gap: 18px;
+      }
+    }
+
+    /* Extra-small phones: shrink a touch more so nothing wraps to 3 lines */
+    @media (max-width: 400px) {
+      .contact-grid {
+        gap: 4px;
+      }
+
+      .contact-card {
+        padding: 10px 3px;
+      }
+
+      .contact-card i {
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+
+      .contact-card h2 {
+        font-size: 8.5px;
+        margin-bottom: 5px;
+      }
+
+      .contact-card a {
+        font-size: 6px;
       }
     }
     /* ===== PRODUCTS DROPDOWN ===== */
