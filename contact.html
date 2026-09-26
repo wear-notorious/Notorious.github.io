@@ -187,6 +187,12 @@
       border-radius: 18px;
       padding: 42px 30px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-card p {
+      flex: 1 0 auto;
     }
 
     .contact-card i {
@@ -218,6 +224,22 @@
 
     .contact-card a:hover {
       border-color: #fff;
+    }
+
+    @media (min-width: 701px) {
+      .contact-card h2,
+      .contact-card p {
+        display: none;
+      }
+
+      .contact-card {
+        justify-content: center;
+        padding: 46px 24px;
+      }
+
+      .contact-card i {
+        margin-bottom: 20px;
+      }
     }
 
     .contact-arrow {
