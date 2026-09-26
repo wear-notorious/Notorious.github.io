@@ -572,6 +572,84 @@
       background: #fff;
     }
 
+    /* ===== HERO TEXT UPGRADE ===== */
+
+    /* Micro-tag foq l-kicker */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.08);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--gold-3);
+    }
+
+    .hero-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-2);
+      box-shadow: 0 0 8px var(--gold-2);
+    }
+
+    /* Text stroke - donne un edge streetwear */
+    .hero h1 {
+      -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+
+    /* Kinetic reveal per word (bdal fade simple) */
+    .hero h1 .word-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero h1 .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: wordRise 0.85s cubic-bezier(.19,1,.22,1) forwards;
+    }
+
+    .hero h1 .word-line:nth-child(1) .word:nth-child(1) { animation-delay: 0.15s; }
+    .hero h1 .word-line:nth-child(1) .word:nth-child(2) { animation-delay: 0.28s; }
+    .hero h1 .word-line:nth-child(2) .word:nth-child(1) { animation-delay: 0.41s; }
+    .hero h1 .word-line:nth-child(2) .word:nth-child(2) { animation-delay: 0.54s; }
+
+    @keyframes wordRise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Gold accent sur le dernier mot */
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--gold-1) 0%, var(--gold-3) 50%, var(--gold-2) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-stroke: 0.6px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Glitch effect - se joue une fois au chargement */
+    .hero h1.glitch-active .word-line:nth-child(2) {
+      animation: glitchShift 0.4s steps(2, end) 0.5s 2;
+    }
+
+    @keyframes glitchShift {
+      0%   { transform: translate(0); }
+      20%  { transform: translate(-2px, 1px); }
+      40%  { transform: translate(2px, -1px); text-shadow: -2px 0 var(--gold-2), 2px 0 rgba(255,0,60,0.35); }
+      60%  { transform: translate(-1px, 0); }
+      80%  { transform: translate(1px, 1px); text-shadow: none; }
+      100% { transform: translate(0); text-shadow: none; }
+    }
+
     section {
       padding: 90px 24px;
     }
@@ -1605,6 +1683,23 @@
         font-size: 23px;
       }
     }
+
+    /* MOBILE ADJUSTMENTS - HERO TEXT UPGRADE */
+    @media (max-width: 800px) {
+      .hero-badge {
+        font-size: 9px;
+        padding: 5px 12px;
+        margin-bottom: 12px;
+      }
+
+      .hero h1 {
+        -webkit-text-stroke: 0.4px rgba(255, 255, 255, 0.12);
+      }
+
+      .hero h1 .accent {
+        -webkit-text-stroke: 0.4px rgba(212, 175, 55, 0.25);
+      }
+    }
   </style>
 </head>
 
@@ -1665,9 +1760,13 @@
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
+    <span class="hero-badge">LIMITED DROP LIVE</span>
     <span class="hero-kicker">NOTORIOUS™ STREETWEAR</span>
 
-    <h1>WEAR WHAT<br>THEY WON’T.</h1>
+    <h1 id="heroTitle">
+      <span class="word-line"><span class="word">WEAR</span> <span class="word">WHAT</span></span>
+      <span class="word-line"><span class="word">THEY</span> <span class="word accent">WON'T.</span></span>
+    </h1>
 
     <p>
       Limited drops. Bold attitude.<br>
@@ -2207,6 +2306,14 @@ loadProducts();
   setInterval(updateDropCountdown, 1000);
 </script>
   <script src="smoke-cursor.js" defer></script>
+
+  <script>
+  // ===== HERO TEXT UPGRADE: trigger glitch once after kinetic reveal =====
+  const heroTitle = document.getElementById("heroTitle");
+  if (heroTitle) {
+    setTimeout(() => heroTitle.classList.add("glitch-active"), 900);
+  }
+</script>
   
 <script>
   // Sedd le menu automatiquement fach l user kayscrolli l page (mashi darori yclicki 3la link)
