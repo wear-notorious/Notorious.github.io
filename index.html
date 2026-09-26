@@ -497,37 +497,20 @@
     text-transform: uppercase;
 }
     .hero p {
-      max-width: 520px;
-      margin-bottom: 36px;
-    }
-
-    .hero p .line-soft {
-      display: block;
-      font-size: clamp(0.95rem, 1.2vw, 1.05rem);
-      font-weight: 400;
+      max-width: 540px;
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      font-weight: 700;
       line-height: 1.6;
-      color: #b8b8b8;
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
-      margin-bottom: 6px;
-    }
-
-    .hero p .line-bold {
-      display: block;
-      font-size: clamp(1.1rem, 1.7vw, 1.35rem);
-      font-weight: 800;
-      line-height: 1.4;
-      letter-spacing: -0.2px;
-      color: #f5f5f5;
+      color: #eaeaea;
+      margin-bottom: 36px;
+      letter-spacing: 0.2px;
+      -webkit-text-stroke: 0.4px rgba(255, 255, 255, 0.25);
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
     }
 
-    .hero p .line-bold .accent-word {
+    .hero p .accent-word {
       color: var(--gold-2);
-    }
-
-    .hero p .accent-word-soft {
-      color: #d8d8d8;
-      font-style: italic;
+      -webkit-text-stroke: 0.4px rgba(212, 175, 55, 0.3);
     }
 
     .btn {
@@ -1165,18 +1148,10 @@
       }
 
       .hero p {
+        font-size: 15px;
+        line-height: 1.55;
         margin-bottom: 26px;
         max-width: 340px;
-      }
-
-      .hero p .line-soft {
-        font-size: 13px;
-        line-height: 1.5;
-      }
-
-      .hero p .line-bold {
-        font-size: 17px;
-        line-height: 1.35;
       }
 
       .btn {
@@ -1805,8 +1780,8 @@
     </h1>
 
     <p>
-      <span class="line-soft">Every piece drops once. Then it's <span class="accent-word-soft">gone</span>.</span>
-      <span class="line-bold">Built for the ones who move <span class="accent-word">different.</span></span>
+      Every piece drops once. Then it's gone.<br>
+      Built for the ones who move <span class="accent-word">different.</span>
     </p>
 
     <a class="btn" href="#shop">SHOP THE DROP</a>
