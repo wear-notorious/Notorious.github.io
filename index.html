@@ -1,31 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NOTORIOUS™ — Wear What They Won’t</title>
   <meta
     name="description"
     content="NOTORIOUS™ — Premium streetwear brand. Wear What They Won’t."
   />
-
-  <link rel="canonical" href="https://wear-notorious.github.io/Notorious.github.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="NOTORIOUS™">
-  <meta property="og:title" content="NOTORIOUS™ — Wear What They Won’t">
-  <meta property="og:description" content="Discover NOTORIOUS™ streetwear. Wear What They Won’t.">
-  <meta property="og:url" content="https://wear-notorious.github.io/Notorious.github.io/">
-  <meta property="og:image" content="https://wear-notorious.github.io/Notorious.github.io/images/slider-1.png">
-  <meta property="og:image:alt" content="NOTORIOUS streetwear collection">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="preconnect" href="https://script.google.com">
-  <link rel="preconnect" href="https://script.googleusercontent.com">
-  <link rel="preload" as="image" href="images/slider-1.png" fetchpriority="high">
 
   <style>
     * {
@@ -217,7 +204,8 @@
       z-index: 2000;
     }
 
-    .products-menu.open .products-dropdown {
+    .products-menu:hover .products-dropdown,
+    .products-menu:focus-within .products-dropdown {
       display: block;
     }
 
@@ -323,17 +311,14 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background: #0a0a0a;
+        background: #090909;
         border-top: 1px solid #222;
         border-bottom: 1px solid #222;
         flex-direction: column;
         align-items: center;
         gap: 22px;
-        padding: 22px;
-        z-index: 9999;
-        max-height: calc(100dvh - 80px);
-        overflow-y: auto;
-        overscroll-behavior: contain;
+        padding: 25px;
+        z-index: 1000;
         transform: none;
       }
 
@@ -494,13 +479,12 @@
     }
 
     .hero-kicker {
-      display: block;
+      display: inline-block;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 4px;
       margin-bottom: 20px;
-      color: #e0e0e0;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      color: #bdbdbd;
     }
 
 .hero h1 {
@@ -512,20 +496,11 @@
     text-transform: uppercase;
 }
     .hero p {
-      max-width: 540px;
+      max-width: 520px;
       font-size: clamp(1rem, 1.4vw, 1.2rem);
-      font-weight: 700;
-      line-height: 1.6;
-      color: #eaeaea;
+      line-height: 1.7;
+      color: #c5c5c5;
       margin-bottom: 36px;
-      letter-spacing: 0.2px;
-      -webkit-text-stroke: 0.4px rgba(255, 255, 255, 0.25);
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
-    }
-
-    .hero p .accent-word {
-      color: var(--gold-2);
-      -webkit-text-stroke: 0.4px rgba(212, 175, 55, 0.3);
     }
 
     .btn {
@@ -595,71 +570,6 @@
 
     .hero-dots button.active {
       background: #fff;
-    }
-
-    /* ===== HERO TEXT UPGRADE ===== */
-
-    /* Micro-tag foq l-kicker */
-    .hero-badge {
-      display: flex;
-      width: fit-content;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      border-radius: 999px;
-      background: rgba(212, 175, 55, 0.08);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      color: var(--gold-3);
-    }
-
-    .hero-badge::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold-2);
-      box-shadow: 0 0 8px var(--gold-2);
-    }
-
-    /* Text stroke - donne un edge streetwear */
-    .hero h1 {
-      -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.15);
-      position: relative;
-    }
-
-    /* Kinetic reveal per word (bdal fade simple) */
-    .hero h1 .word-line {
-      display: block;
-      overflow: hidden;
-    }
-
-    .hero h1 .word {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(100%);
-      animation: wordRise 0.85s cubic-bezier(.19,1,.22,1) forwards;
-    }
-
-    .hero h1 .word-line:nth-child(1) .word:nth-child(1) { animation-delay: 0.15s; }
-    .hero h1 .word-line:nth-child(1) .word:nth-child(2) { animation-delay: 0.28s; }
-    .hero h1 .word-line:nth-child(2) .word:nth-child(1) { animation-delay: 0.41s; }
-    .hero h1 .word-line:nth-child(2) .word:nth-child(2) { animation-delay: 0.54s; }
-
-    @keyframes wordRise {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Gold accent sur le dernier mot */
-    .hero h1 .accent {
-      background: linear-gradient(135deg, var(--gold-1) 0%, var(--gold-3) 50%, var(--gold-2) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      -webkit-text-stroke: 0.6px rgba(212, 175, 55, 0.3);
     }
 
     section {
@@ -770,6 +680,28 @@
       transform: translateY(-2px);
     }
 
+    .best-seller-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 5;
+      padding: 7px 11px;
+      background: linear-gradient(
+        135deg,
+        var(--gold-1) 0%,
+        var(--gold-2) 25%,
+        var(--gold-3) 50%,
+        var(--gold-2) 75%,
+        var(--gold-1) 100%
+      );
+      color: #000;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    }
 
     .product-image {
       position: relative;
@@ -788,6 +720,30 @@
 
     .product-info h3 {
       margin-bottom: 8px;
+    }
+
+    .product-social-proof {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 2px 0 10px;
+    }
+
+    .product-stars {
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .new-drop {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #aaa;
+      border: 1px solid #444;
+      border-radius: 4px;
+      padding: 3px 6px;
     }
 
     .product-info p {
@@ -1046,6 +1002,24 @@
         display: none;
       }
 
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #0a0a0a;
+        border-bottom: 1px solid #222;
+        flex-direction: column;
+        padding: 22px;
+        gap: 15px;
+        z-index: 9999;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
       .products {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -1056,8 +1030,7 @@
       }
 
       .product-image {
-        height: auto;
-        aspect-ratio: 1 / 1;
+        height: 420px;
       }
 
       .hero {
@@ -1087,7 +1060,7 @@
 
       .hero p {
         font-size: 15px;
-        line-height: 1.55;
+        line-height: 1.6;
         margin-bottom: 26px;
         max-width: 340px;
       }
@@ -1241,8 +1214,8 @@
 
       .product-image {
         width: 100%;
-        height: auto;
-        aspect-ratio: 1 / 1;
+        height: 180px;
+        aspect-ratio: auto;
         overflow: hidden;
         background: #f5f5f5;
       }
@@ -1250,7 +1223,7 @@
       .product-image img {
         width: 100% !important;
         height: 100% !important;
-        object-fit: contain !important;
+        object-fit: cover !important;
         object-position: center;
       }
 
@@ -1269,7 +1242,10 @@
         min-height: 34px;
       }
 
-  
+      .product-social-proof {
+        margin: 0 0 6px;
+      }
+
       .product-info p {
         display: none;
       }
@@ -1629,46 +1605,6 @@
         font-size: 23px;
       }
     }
-
-    /* MOBILE ADJUSTMENTS - HERO TEXT UPGRADE */
-    @media (max-width: 800px) {
-      .hero-badge {
-        font-size: 9px;
-        padding: 5px 12px;
-        margin-bottom: 12px;
-      }
-
-      .hero h1 {
-        -webkit-text-stroke: 0.4px rgba(255, 255, 255, 0.12);
-      }
-
-      .hero h1 .accent {
-        -webkit-text-stroke: 0.4px rgba(212, 175, 55, 0.25);
-      }
-    }
-
-    [hidden] { display: none !important; }
-    #shop { scroll-margin-top: 130px; }
-    .product-card { display: flex; flex-direction: column; }
-    .product-image img { width: 100%; height: 100%; object-fit: contain; }
-    .might-like-img-wrap img { object-fit: contain; }
-    .product-status { color: #bbb; margin-bottom: 18px; }
-    .product-status:empty { display: none; }
-    .retry-button, .motion-toggle {
-      border: 1px solid #777; background: #111; color: #fff;
-      border-radius: 6px; padding: 10px 14px; min-height: 44px; cursor: pointer;
-    }
-    .retry-button { margin-bottom: 20px; }
-    .motion-toggle { position: absolute; right: 7%; bottom: 75px; z-index: 2; font-size: 11px; }
-    .motion-toggle:disabled { cursor: default; color: #bbb; }
-    .hero-dots button { height: 24px; background-clip: content-box; padding: 10px 0; }
-    .might-like-grid:focus-visible, .social-proof-grid:focus-visible { outline-offset: -3px; }
-    @media (max-width: 800px) {
-      .hero-dots { display: flex; bottom: 12px; }
-      .motion-toggle { right: 22px; bottom: 47px; }
-      .hero { padding-bottom: 120px; }
-      #shop { scroll-margin-top: 95px; }
-    }
   </style>
 </head>
 
@@ -1677,7 +1613,7 @@
  <header>
   <nav>
 
-   <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+   <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
   ☰
 </button>
 
@@ -1687,14 +1623,22 @@
       </a>
     </div>
 
-  <div class="nav-links" id="navLinks">
+  <div class="nav-links">
   <a href="#home">HOME</a>
   <div class="products-menu">
-  <button type="button" class="products-menu-btn" aria-expanded="false" aria-controls="productsDropdown">PRODUCTS</button>
+  <button type="button" class="products-menu-btn">PRODUCTS</button>
 
-  <div class="products-dropdown" id="productsDropdown">
-    <a href="products.html?gender=men">MEN</a>
-    <a href="products.html?gender=women">WOMEN</a>
+  <div class="products-dropdown">
+    <a href="products.html?category=tshirts">T-SHIRTS</a>
+    <a href="products.html?category=hoodies">HOODIES</a>
+    <a href="products.html?category=sweatshirts">SWEATSHIRTS</a>
+    <a href="products.html?category=tanktops">TANK TOPS</a>
+    <a href="products.html?category=hooded-tank-top" class="sub-item">HOODED TANK TOP</a>
+    <a href="products.html?category=muscle-tee" class="sub-item">MUSCLE TEE</a>
+    <a href="products.html?category=sweatshorts">SWEATSHORTS</a>
+    <a href="products.html?category=pants">PANTS</a>
+    <a href="products.html?category=caps">CAPS</a>
+    <a href="products.html?category=bucket-hats">BUCKET HATS</a>
   </div>
 </div>
   <a href="about.html">ABOUT</a>
@@ -1703,7 +1647,7 @@
 
     <a href="cart.html" class="cart-button" aria-label="Shopping cart">
       <i class="fa-solid fa-bag-shopping"></i>
-      <span class="cart-count" hidden>0</span>
+      <span class="cart-count">0</span>
     </a>
 
   </nav>
@@ -1713,33 +1657,28 @@
 
    <section class="hero" id="home">
      <div class="hero-bg">
-  <img src="images/slider-1.png" fetchpriority="high" decoding="async" class="active" alt="">
-  <img data-src="images/slide-2.png" decoding="async" alt="">
-  <img data-src="images/slider-3.png" decoding="async" alt="">
-  <img data-src="images/slider-4.png" decoding="async" alt="">
+  <img src="images/slider-1.png" class="active" alt="">
+  <img src="images/slide-2.png" alt="">
+  <img src="images/slider-3.png" alt="">
+  <img src="images/slider-4.png" alt="">
 </div>
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
-    <span class="hero-badge">LIMITED STREETWEAR</span>
     <span class="hero-kicker">NOTORIOUS™ STREETWEAR</span>
 
-    <h1 id="heroTitle">
-      <span class="word-line"><span class="word">WEAR</span> <span class="word">WHAT</span></span>
-      <span class="word-line"><span class="word">THEY</span> <span class="word accent">WON'T.</span></span>
-    </h1>
+    <h1>WEAR WHAT<br>THEY WON’T.</h1>
 
     <p>
-      Every piece drops once. Then it's gone.<br>
-      Built for the ones who move <span class="accent-word">different.</span>
+      Limited drops. Bold attitude.<br>
+      Made for people who don’t dress like everyone else.
     </p>
 
     <a class="btn" href="#shop">SHOP THE DROP</a>
   </div>
 
   <div class="hero-scroll-cue">SCROLL</div>
-  <div class="hero-dots" id="heroDots" aria-label="Hero slides"></div>
-<button type="button" id="motionToggle" class="motion-toggle" aria-pressed="false">Pause slides</button>
+  <div class="hero-dots" id="heroDots"></div>
 </section>
 
    <section class="drop-countdown">
@@ -1779,16 +1718,13 @@
 
         <div class="section-header">
           <div>
-            <span class="section-kicker">EXPLORE THE COLLECTION</span>
-            <h2 class="section-title">Featured Pieces</h2>
+            <span class="section-kicker">FRESH OFF THE RACK</span>
+            <h2 class="section-title">Latest Drops</h2>
           </div>
           <a href="products.html" class="section-header-link">VIEW ALL PRODUCTS</a>
         </div>
 
-       <p id="productStatus" class="product-status" role="status" aria-live="polite">Loading products…</p>
-<button id="productRetry" class="retry-button" type="button" hidden>Try again</button>
-<noscript><p>Please enable JavaScript to browse products, or <a href="contact.html">contact us for help ordering</a>.</p></noscript>
-<div class="products" id="productsContainer" aria-busy="true">
+       <div class="products" id="productsContainer">
 </div>
         <div class="view-more-wrapper">
   <a href="products.html" class="view-more-btn">VIEW MORE</a>
@@ -1825,7 +1761,7 @@
   <div class="social-proof-scroller">
     <button class="social-proof-arrow prev" id="socialProofPrev" aria-label="Scroll left">‹</button>
 
-    <div class="social-proof-grid" id="socialProofGrid" tabindex="0" role="region" aria-label="Customer reviews">
+    <div class="social-proof-grid" id="socialProofGrid">
 
       <div class="social-proof-card">
         <div class="social-proof-stars">★★★★★</div>
@@ -1880,7 +1816,7 @@
         <p class="social-proof-quote">
           "Unbeatable quality w lweqt howa lweqt"
         </p>
-        <div class="social-proof-author">— Chakib Sahraoui, Tanger</div>
+        <div class="social-proof-author">— Chouaib Sahraoui, Tanger</div>
       </div>
 
       <div class="social-proof-card" aria-hidden="true">
@@ -1924,7 +1860,7 @@
   <div class="might-like-scroller">
     <button class="might-like-arrow prev" id="mightLikePrev" aria-label="Scroll left">‹</button>
 
-    <div class="might-like-grid" id="mightLikeGrid" tabindex="0" role="region" aria-label="More products">
+    <div class="might-like-grid" id="mightLikeGrid">
       <!-- Products will load automatically -->
     </div>
 
@@ -1941,19 +1877,20 @@
   <div class="footer-tagline">WEAR WHAT THEY WON’T.</div>
 
   <div class="footer-socials">
-  <a href="https://www.instagram.com/wear_notorious/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+  <a href="https://www.instagram.com/wear_notorious/" target="_blank" aria-label="Instagram">
     <i class="fa-brands fa-instagram"></i>
   </a>
 
-  <a href="https://www.tiktok.com/@wear_notorious" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+  <a href="https://www.tiktok.com/@wear_notorious" target="_blank" aria-label="TikTok">
     <i class="fa-brands fa-tiktok"></i>
   </a>
 
-  <a href="https://www.facebook.com/wearnotorious" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+  <a href="https://www.facebook.com/wearnotorious" target="_blank" aria-label="Facebook">
     <i class="fa-brands fa-facebook-f"></i>
   </a>
     <a
   href="mailto:wear.notorious0@gmail.com"
+  onclick="openNotoriousEmail(event)"
   aria-label="Email"
 >
   <i class="fa-solid fa-envelope"></i>
@@ -1980,279 +1917,318 @@
   </svg>
 </a>
 
-  <script src="smoke-cursor.js" defer></script>
+<script>
+  function toggleMenu() {
+  const menu = document.querySelector(".nav-links");
+  const button = document.querySelector(".menu-toggle");
+
+  menu.classList.toggle("active");
+
+  if (menu.classList.contains("active")) {
+    button.innerHTML = "✕";
+    button.setAttribute("aria-label", "Close menu");
+  } else {
+    button.innerHTML = "☰";
+    button.setAttribute("aria-label", "Open menu");
+  }
+}
+  const PRODUCTS_API_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
+
+function renderProducts(products) {
+  const container = document.getElementById("productsContainer");
+
+  container.innerHTML = products.slice(0, 6).map(product => `
+    <a href="product.html?slug=${product.slug}"
+       class="product-card"
+       style="display:flex; flex-direction:column; color:inherit; text-decoration:none;">
+
+      <div class="product-image">
+      ${product.slug === "asap" ? `
+  <span class="best-seller-badge">BEST SELLER</span>
+` : ""}
+        <img
+          src="${product.mainImage}"
+          alt="${product.product}"
+          style="width:100%; height:100%; object-fit:cover;"
+        />
+      </div>
+
+      <div class="product-info">
+        <h3>${product.product}</h3>
+        <div class="product-social-proof">
+          <span class="product-stars">★★★★★</span>
+          <span class="new-drop">NEW DROP</span>
+        </div>
+        <div class="price">${product.price} MAD</div>
+      </div>
+
+    </a>
+  `).join("");
+}
+
+  function renderMightLike(products) {
+  const container = document.getElementById("mightLikeGrid");
+
+  if (!container) return;
+
+  const selectedProducts = [...products]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 8);
+
+  container.innerHTML = selectedProducts.map(product => `
+    <a href="product.html?slug=${product.slug}" class="might-like-card">
+      <div class="might-like-img-wrap">
+        <img
+          src="${product.mainImage}"
+          alt="${product.product}"
+          loading="lazy"
+        >
+      </div>
+
+      <h3>${product.product}</h3>
+
+      <div class="might-like-price">
+        ${product.price} MAD
+      </div>
+    </a>
+  `).join("");
+}
+  
+async function loadProducts() {
+  const cachedProducts = localStorage.getItem("notoriousProducts");
+
+  if (cachedProducts) {
+    try {
+      const products = JSON.parse(cachedProducts);
+renderProducts(products);
+renderMightLike(products);
+    } catch (error) {
+      console.error("Cache error:", error);
+    }
+  }
+
+  try {
+    const response = await fetch(PRODUCTS_API_URL);
+    const products = await response.json();
+
+    localStorage.setItem(
+      "notoriousProducts",
+      JSON.stringify(products)
+    );
+
+    renderProducts(products);
+    renderMightLike(products);
+
+  } catch (error) {
+    console.error("Error loading products:", error);
+  }
+}
+loadProducts();
+</script>
+  <script>
+    // HERO BACKGROUND AUTO SLIDER + progress dots
+    const heroImages = document.querySelectorAll(".hero-bg img");
+    const heroDotsContainer = document.getElementById("heroDots");
+    let currentHeroImage = 0;
+
+    if (heroDotsContainer) {
+      heroImages.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.setAttribute("aria-label", "Show slide " + (i + 1));
+        if (i === 0) dot.classList.add("active");
+        dot.addEventListener("click", () => goToHeroImage(i));
+        heroDotsContainer.appendChild(dot);
+      });
+    }
+
+    function goToHeroImage(index) {
+      heroImages[currentHeroImage].classList.remove("active");
+      if (heroDotsContainer && heroDotsContainer.children[currentHeroImage]) {
+        heroDotsContainer.children[currentHeroImage].classList.remove("active");
+      }
+
+      currentHeroImage = index;
+
+      heroImages[currentHeroImage].classList.add("active");
+      if (heroDotsContainer && heroDotsContainer.children[currentHeroImage]) {
+        heroDotsContainer.children[currentHeroImage].classList.add("active");
+      }
+    }
+
+    setInterval(() => {
+      goToHeroImage((currentHeroImage + 1) % heroImages.length);
+    }, 4000);
+</script>
+  <script>
+  function openNotoriousEmail(event) {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (!isMobile) {
+      event.preventDefault();
+
+      window.open(
+        "https://mail.google.com/mail/?view=cm&fs=1&to=wear.notorious0@gmail.com",
+        "_blank"
+      );
+    }
+  }
+</script>
+  <script>
+  const productsBtn = document.querySelector('.products-menu-btn');
+  const productsMenu = document.querySelector('.products-menu');
+
+  productsBtn.addEventListener('click', () => {
+    productsMenu.classList.toggle('open');
+  });
+</script>
+  <script>
+  const mightLikePrev = document.getElementById("mightLikePrev");
+  const mightLikeNext = document.getElementById("mightLikeNext");
+  const mightLikeGrid = document.getElementById("mightLikeGrid");
+
+  mightLikePrev?.addEventListener("click", () => {
+    mightLikeGrid.scrollBy({ left: -560, behavior: "smooth" });
+  });
+
+  mightLikeNext?.addEventListener("click", () => {
+    mightLikeGrid.scrollBy({ left: 560, behavior: "smooth" });
+  });
+</script>
 
 <script>
-'use strict';
-const PRODUCTS_API_URL = 'https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec';
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const mobileNav = window.matchMedia('(max-width: 800px)');
-const navLinks = document.getElementById('navLinks');
-const menuButton = document.querySelector('.menu-toggle');
-const productsMenu = document.querySelector('.products-menu');
-const productsButton = document.querySelector('.products-menu-btn');
-function setProductsOpen(open) {
-  productsMenu.classList.toggle('open', open);
-  productsButton.setAttribute('aria-expanded', String(open));
-}
-function closeMobileMenu() {
-  navLinks.classList.remove('active');
-  menuButton.textContent = '☰';
-  menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-label', 'Open menu');
-  setProductsOpen(false);
-}
-menuButton.addEventListener('click', () => {
-  const open = !navLinks.classList.contains('active');
-  closeMobileMenu();
-  navLinks.classList.toggle('active', open);
-  menuButton.textContent = open ? '✕' : '☰';
-  menuButton.setAttribute('aria-expanded', String(open));
-  menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-});
-productsButton.addEventListener('click', () => setProductsOpen(!productsMenu.classList.contains('open')));
-productsMenu.addEventListener('mouseenter', () => { if (!mobileNav.matches) setProductsOpen(true); });
-productsMenu.addEventListener('mouseleave', () => {
-  if (!mobileNav.matches && !productsMenu.contains(document.activeElement)) setProductsOpen(false);
-});
-productsMenu.addEventListener('focusout', event => {
-  if (!productsMenu.contains(event.relatedTarget)) setProductsOpen(false);
-});
-document.addEventListener('click', event => {
-  if (!event.target.closest('nav')) closeMobileMenu();
-});
-navLinks.addEventListener('click', event => { if (event.target.closest('a')) closeMobileMenu(); });
-document.addEventListener('keydown', event => {
-  if (event.key !== 'Escape') return;
-  const wasOpen = navLinks.classList.contains('active');
-  const productsWereOpen = productsMenu.classList.contains('open');
-  closeMobileMenu();
-  if (wasOpen && mobileNav.matches) menuButton.focus();
-  else if (productsWereOpen) productsButton.focus();
-});
-window.addEventListener('scroll', () => { if (mobileNav.matches) closeMobileMenu(); }, { passive: true });
-document.addEventListener('touchmove', event => {
-  if (mobileNav.matches && !event.target.closest('nav')) closeMobileMenu();
-}, { passive: true });
-mobileNav.addEventListener('change', closeMobileMenu);
+  const socialProofPrev = document.getElementById("socialProofPrev");
+  const socialProofNext = document.getElementById("socialProofNext");
+  const socialProofGrid = document.getElementById("socialProofGrid");
 
-function updateCartCount() {
-  let total = 0;
-  let available = true;
-  try {
-    const cart = JSON.parse(localStorage.getItem('notoriousCart') || '[]');
-    if (!Array.isArray(cart)) throw new Error('Invalid cart');
-    total = cart.reduce((sum, item) => {
-      const quantity = Number(item?.quantity ?? 1);
-      return sum + (Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 0);
-    }, 0);
-  } catch { available = false; }
-  const count = document.querySelector('.cart-count');
-  count.textContent = String(total);
-  count.hidden = !available || total === 0;
-  document.querySelector('.cart-button').setAttribute('aria-label', available ? `Shopping cart, ${total} items` : 'Shopping cart');
-}
-updateCartCount();
-window.addEventListener('pageshow', updateCartCount);
-window.addEventListener('storage', event => { if (event.key === 'notoriousCart' || event.key === null) updateCartCount(); });
-
-const productsContainer = document.getElementById('productsContainer');
-const mightLikeGrid = document.getElementById('mightLikeGrid');
-const productStatus = document.getElementById('productStatus');
-const productRetry = document.getElementById('productRetry');
-let hasProducts = false;
-let loadingProducts = false;
-function safeImageURL(value) {
-  if (typeof value !== 'string' || !value.trim()) return null;
-  try {
-    const url = new URL(value, document.baseURI);
-    return url.protocol === 'https:' || (url.protocol === 'http:' && url.origin === location.origin) ? url.href : null;
-  } catch { return null; }
-}
-function normalizeProducts(value) {
-  if (!Array.isArray(value)) throw new Error('Invalid product response');
-  const products = value.filter(product => product && typeof product.slug === 'string' && product.slug.trim()
-    && typeof product.product === 'string' && product.product.trim()
-    && product.price !== '' && product.price != null && Number.isFinite(Number(product.price)) && Number(product.price) >= 0);
-  if (value.length && !products.length) throw new Error('Invalid product records');
-  return products.filter(product => !product.status || String(product.status).toLowerCase() === 'active');
-}
-function productCard(product, recommendation) {
-  const card = document.createElement('a');
-  card.className = recommendation ? 'might-like-card' : 'product-card';
-  card.href = 'product.html?slug=' + encodeURIComponent(product.slug);
-  const imageWrap = document.createElement('div');
-  imageWrap.className = recommendation ? 'might-like-img-wrap' : 'product-image';
-  const imageURL = safeImageURL(product.mainImage);
-  const image = document.createElement('img');
-  image.alt = product.product;
-  image.loading = 'lazy';
-  image.decoding = 'async';
-  image.width = 600;
-  image.height = 600;
-  function showFallback() {
-    image.remove();
-    imageWrap.textContent = 'Image unavailable';
-  }
-  if (imageURL) {
-    image.addEventListener('error', showFallback, { once: true });
-    image.src = imageURL;
-    imageWrap.append(image);
-  } else showFallback();
-  const info = recommendation ? card : document.createElement('div');
-  if (!recommendation) info.className = 'product-info';
-  const title = document.createElement('h3');
-  title.textContent = product.product;
-  const price = document.createElement('div');
-  price.className = recommendation ? 'might-like-price' : 'price';
-  price.textContent = new Intl.NumberFormat('en', { maximumFractionDigits: 2 }).format(Number(product.price)) + ' MAD';
-  card.append(imageWrap);
-  info.append(title, price);
-  if (!recommendation) card.append(info);
-  return card;
-}
-function renderProducts(products) {
-  productsContainer.replaceChildren(...products.slice(0, 6).map(product => productCard(product, false)));
-  // Keep recommendations stable across cache refreshes, without a biased random sort.
-  const recommendations = products.length > 6 ? products.slice(6, 14) : products.slice(0, 8);
-  mightLikeGrid.replaceChildren(...recommendations.map(product => productCard(product, true)));
-  document.querySelector('.might-like-section').hidden = products.length === 0;
-  hasProducts = products.length > 0;
-}
-async function loadProducts() {
-  if (loadingProducts) return;
-  loadingProducts = true;
-  productRetry.hidden = true;
-  productsContainer.setAttribute('aria-busy', 'true');
-  productStatus.textContent = hasProducts ? 'Updating products…' : 'Loading products…';
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
-  try {
-    const response = await fetch(PRODUCTS_API_URL, { signal: controller.signal });
-    if (!response.ok) throw new Error('Product request failed');
-    const rawProducts = await response.json();
-    const products = normalizeProducts(rawProducts);
-    renderProducts(products);
-    productStatus.textContent = products.length ? '' : 'No products available right now. Check back soon.';
-    // Cache is optional. Storage errors must never prevent rendering.
-    try { localStorage.setItem('notoriousProducts', JSON.stringify(rawProducts)); } catch {}
-  } catch {
-    productStatus.textContent = hasProducts
-      ? 'Showing saved products. Prices and availability will be confirmed on the product page.'
-      : 'We couldn’t load the products. Please try again.';
-    productRetry.hidden = false;
-  } finally {
-    clearTimeout(timeout);
-    productsContainer.setAttribute('aria-busy', 'false');
-    loadingProducts = false;
-  }
-}
-try {
-  const cached = localStorage.getItem('notoriousProducts');
-  if (cached) renderProducts(normalizeProducts(JSON.parse(cached)));
-} catch {}
-productRetry.addEventListener('click', loadProducts);
-loadProducts();
-
-// One visible control pauses both automatic carousels; reduced motion disables them.
-const motionButton = document.getElementById('motionToggle');
-let userPaused = false;
-function syncMotionButton() {
-  motionButton.textContent = reducedMotion.matches ? 'Motion reduced' : userPaused ? 'Resume slides' : 'Pause slides';
-  motionButton.disabled = reducedMotion.matches;
-  motionButton.setAttribute('aria-pressed', String(userPaused || reducedMotion.matches));
-}
-motionButton.addEventListener('click', () => { userPaused = !userPaused; syncMotionButton(); });
-reducedMotion.addEventListener('change', syncMotionButton);
-syncMotionButton();
-const heroImages = [...document.querySelectorAll('.hero-bg img')];
-const heroDots = document.getElementById('heroDots');
-let heroIndex = 0;
-let heroBusy = false;
-let lastHeroChange = Date.now();
-async function goToHeroImage(index) {
-  if (heroBusy || !heroImages[index] || index === heroIndex) return;
-  heroBusy = true;
-  const next = heroImages[index];
-  try {
-    if (next.dataset.src) { next.src = next.dataset.src; delete next.dataset.src; }
-    await next.decode();
-    heroImages[heroIndex].classList.remove('active');
-    heroDots.children[heroIndex].setAttribute('aria-pressed', 'false');
-    heroDots.children[heroIndex].classList.remove('active');
-    heroIndex = index;
-    next.classList.add('active');
-    heroDots.children[index].classList.add('active');
-    heroDots.children[index].setAttribute('aria-pressed', 'true');
-  } catch { /* Keep the current slide if the next image cannot load. */ }
-  finally { heroBusy = false; lastHeroChange = Date.now(); }
-}
-heroImages.forEach((_, index) => {
-  const dot = document.createElement('button');
-  dot.type = 'button';
-  dot.setAttribute('aria-label', `Show slide ${index + 1}`);
-  dot.setAttribute('aria-pressed', String(index === 0));
-  dot.classList.toggle('active', index === 0);
-  dot.addEventListener('click', () => goToHeroImage(index));
-  heroDots.append(dot);
-});
-const hero = document.querySelector('.hero');
-setInterval(() => {
-  if (!reducedMotion.matches && !userPaused && !document.hidden && !hero.matches(':hover')
-      && !hero.contains(document.activeElement) && Date.now() - lastHeroChange >= 5000) {
-    goToHeroImage((heroIndex + 1) % heroImages.length);
-  }
-}, 1000);
-function scrollCards(grid, direction) {
-  const first = grid.firstElementChild;
-  if (!first) return;
-  const step = first.getBoundingClientRect().width + (parseFloat(getComputedStyle(grid).gap) || 0);
-  grid.scrollBy({ left: direction * step, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
-}
-for (const [id, grid, direction] of [
-  ['mightLikePrev', mightLikeGrid, -1], ['mightLikeNext', mightLikeGrid, 1],
-  ['socialProofPrev', document.getElementById('socialProofGrid'), -1],
-  ['socialProofNext', document.getElementById('socialProofGrid'), 1]
-]) document.getElementById(id).addEventListener('click', () => scrollCards(grid, direction));
-const socialGrid = document.getElementById('socialProofGrid');
-let socialPausedUntil = 0;
-let socialTouching = false;
-socialGrid.addEventListener('touchstart', () => { socialTouching = true; }, { passive: true });
-for (const event of ['touchend', 'touchcancel']) socialGrid.addEventListener(event, () => {
-  socialTouching = false; socialPausedUntil = Date.now() + 2000;
-}, { passive: true });
-socialGrid.addEventListener('wheel', () => { socialPausedUntil = Date.now() + 2000; }, { passive: true });
-setInterval(() => {
-  if (reducedMotion.matches || userPaused || document.hidden || socialTouching || Date.now() < socialPausedUntil
-      || socialGrid.parentElement.matches(':hover') || socialGrid.parentElement.contains(document.activeElement)) return;
-  const first = socialGrid.firstElementChild;
-  const duplicate = socialGrid.querySelector('[aria-hidden="true"]');
-  if (!first || !duplicate) return;
-  const loopWidth = duplicate.getBoundingClientRect().left - first.getBoundingClientRect().left;
-  socialGrid.scrollLeft += 1;
-  if (loopWidth > 0 && socialGrid.scrollLeft >= loopWidth) socialGrid.scrollLeft -= loopWidth;
-}, 30);
-
-// 15 October 2026, 20:00 in Africa/Casablanca (UTC+01:00 on this date).
-const dropTargetDate = new Date('2026-10-15T20:00:00+01:00').getTime();
-function updateDropCountdown() {
-  const distance = Math.max(0, dropTargetDate - Date.now());
-  const values = [Math.floor(distance / 86400000), Math.floor(distance / 3600000) % 24,
-    Math.floor(distance / 60000) % 60, Math.floor(distance / 1000) % 60];
-  ['cdDays', 'cdHours', 'cdMinutes', 'cdSeconds'].forEach((id, index) => {
-    document.getElementById(id).textContent = String(values[index]).padStart(2, '0');
+  socialProofPrev?.addEventListener("click", () => {
+    socialProofGrid.scrollBy({ left: -340, behavior: "smooth" });
   });
-  const live = distance === 0;
-  document.querySelector('.drop-countdown').classList.toggle('is-live', live);
-  document.getElementById('dropLabel').textContent = live ? 'THE DROP IS LIVE' : 'NEXT DROP IN';
-  document.querySelector('.hero-badge').textContent = live ? 'LIMITED DROP LIVE' : 'LIMITED STREETWEAR';
-  return live;
-}
-if (!updateDropCountdown()) {
-  const timer = setInterval(() => { if (updateDropCountdown()) clearInterval(timer); }, 1000);
-}
 
+  socialProofNext?.addEventListener("click", () => {
+    socialProofGrid.scrollBy({ left: 340, behavior: "smooth" });
+  });
+
+  // ===== INFINITE AUTO-SCROLL =====
+  if (socialProofGrid) {
+    var socialProofAutoScroll = null;
+    var socialProofPaused = false;
+    var socialProofHalfWidth = 0;
+
+    function calcSocialProofHalfWidth() {
+      socialProofHalfWidth = socialProofGrid.scrollWidth / 2;
+    }
+
+    calcSocialProofHalfWidth();
+    window.addEventListener("resize", calcSocialProofHalfWidth);
+
+    function startSocialProofAutoScroll() {
+      if (socialProofAutoScroll) return;
+
+      socialProofAutoScroll = setInterval(function () {
+        if (socialProofPaused) return;
+
+        socialProofGrid.scrollLeft += 1;
+
+        if (socialProofGrid.scrollLeft >= socialProofHalfWidth) {
+          socialProofGrid.scrollLeft = 0;
+        }
+      }, 30);
+    }
+
+    socialProofGrid.addEventListener("mouseenter", function () {
+      socialProofPaused = true;
+    });
+
+    socialProofGrid.addEventListener("mouseleave", function () {
+      socialProofPaused = false;
+    });
+
+    socialProofGrid.addEventListener("touchstart", function () {
+      socialProofPaused = true;
+    });
+
+    socialProofGrid.addEventListener("touchend", function () {
+      setTimeout(function () {
+        socialProofPaused = false;
+      }, 1500);
+    });
+
+    [socialProofPrev, socialProofNext].forEach(function (btn) {
+      btn?.addEventListener("click", function () {
+        socialProofPaused = true;
+        setTimeout(function () {
+          socialProofPaused = false;
+        }, 1500);
+      });
+    });
+
+    startSocialProofAutoScroll();
+  }
+</script>
+  
+  <script>
+  // ===== DROP COUNTDOWN =====
+  // Beddel had date b date/heure dial l-drop l-jay dyalek
+  var dropTargetDate = new Date("2026-10-15T20:00:00").getTime();
+
+  function updateDropCountdown() {
+    var now = new Date().getTime();
+    var distance = dropTargetDate - now;
+
+    var daysEl = document.getElementById("cdDays");
+    var hoursEl = document.getElementById("cdHours");
+    var minutesEl = document.getElementById("cdMinutes");
+    var secondsEl = document.getElementById("cdSeconds");
+    var section = document.getElementById("dropCountdown")
+      ? document.getElementById("dropCountdown").closest(".drop-countdown")
+      : null;
+    var label = document.getElementById("dropLabel");
+
+    if (!daysEl) return;
+
+    if (distance <= 0) {
+      if (section) section.classList.add("is-live");
+      if (label) label.textContent = "THE DROP IS LIVE";
+      return;
+    }
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    daysEl.textContent = String(days).padStart(2, "0");
+    hoursEl.textContent = String(hours).padStart(2, "0");
+    minutesEl.textContent = String(minutes).padStart(2, "0");
+    secondsEl.textContent = String(seconds).padStart(2, "0");
+  }
+
+  updateDropCountdown();
+  setInterval(updateDropCountdown, 1000);
+</script>
+  <script src="smoke-cursor.js" defer></script>
+  
+<script>
+  // Sedd le menu automatiquement fach l user kayscrolli l page (mashi darori yclicki 3la link)
+  const navLinksEl = document.querySelector('.nav-links');
+  const menuToggleBtn = document.querySelector('.menu-toggle');
+  const productsMenuEl = document.querySelector('.products-menu');
+
+  function closeMobileMenu() {
+    if (!navLinksEl.classList.contains('active')) return; // ila mab9ach 7al, matdirch walo
+
+    navLinksEl.classList.remove('active');
+    productsMenuEl.classList.remove('open');
+
+    menuToggleBtn.innerHTML = '☰';
+    menuToggleBtn.setAttribute('aria-label', 'Open menu');
+  }
+
+  // scroll: mnin ybdaa yscrolli l page men wra le menu
+  window.addEventListener('scroll', closeMobileMenu, { passive: true });
+
+  // touchmove: bach ykoun rapide bzaf 3la mobile (9bel ma yewe3 scroll event)
+  document.addEventListener('touchmove', closeMobileMenu, { passive: true });
 </script>
 </body>
 </html>
-
