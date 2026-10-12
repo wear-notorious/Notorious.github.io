@@ -1612,6 +1612,13 @@
       }
     }
   </style>
+<script>
+// Convert local catalog image paths from the API to WebP; leave remote URLs untouched.
+function toWebpImage(value) {
+  if (typeof value !== 'string') return value;
+  return value.replace(/^(images\\/[^?#]+)\\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i, '$1.webp');
+}
+</script>
 </head>
 
 <body>
@@ -1953,7 +1960,7 @@ function renderProducts(products) {
   <span class="best-seller-badge">BEST SELLER</span>
 ` : ""}
         <img
-          src="${product.mainImage}"
+          src="${toWebpImage(product.mainImage)}"
           alt="${product.product}"
           style="width:100%; height:100%; object-fit:cover;"
         />
@@ -1985,7 +1992,7 @@ function renderProducts(products) {
     <a href="product.html?slug=${product.slug}" class="might-like-card">
       <div class="might-like-img-wrap">
         <img
-          src="${product.mainImage}"
+          src="${toWebpImage(product.mainImage)}"
           alt="${product.product}"
           loading="lazy"
         >
