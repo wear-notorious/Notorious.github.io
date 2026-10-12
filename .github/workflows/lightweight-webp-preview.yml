@@ -1,0 +1,38 @@
+name: Build lightweight WebP preview ZIP
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: optimization/webp-conversion
+      - name: Package site without duplicate source images
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          root=Path('.')
+          excluded={'.git','.github','node_modules'}
+          originals={'.png','.jpg','.jpeg','.jfif'}
+          count=0
+          with ZipFile('notorious-webp-preview.zip','w',ZIP_DEFLATED,compresslevel=6) as z:
+              for f in root.rglob('*'):
+                  if not f.is_file() or f.name=='notorious-webp-preview.zip':
+                      continue
+                  if any(p in excluded for p in f.parts):
+                      continue
+                  if f.parts[0]=='images' and f.suffix.lower() in originals:
+                      continue
+                  z.write(f, f.as_posix())
+                  count+=1
+          print(f'Packaged {count} files; ZIP size {Path("notorious-webp-preview.zip").stat().st_size/1048576:.1f} MiB')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: notorious-webp-preview
+          path: notorious-webp-preview.zip
+          retention-days: 7
