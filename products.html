@@ -979,7 +979,7 @@
 // Convert local catalog image paths from the API to WebP; leave remote URLs untouched.
 function toWebpImage(value) {
   if (typeof value !== 'string') return value;
-  return value.replace(/^(images\\/[^?#]+)\\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i, '$1.webp');
+  return value.replace(/^(images\/[^?#]+)\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i, '$1.webp');
 }
 </script>
 </head>
