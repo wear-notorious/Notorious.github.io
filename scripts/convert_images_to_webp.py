@@ -3,7 +3,7 @@ from PIL import Image, ImageOps
 import json
 
 root = Path(__file__).resolve().parents[1]
-extensions = {".png", ".jpg", ".jpeg"}
+extensions = {".png", ".jpg", ".jpeg", ".jfif"}
 excluded = {".git", "node_modules", ".github", "dist", "build"}
 results = []
 for source in root.rglob("*"):
