@@ -1,0 +1,36 @@
+name: Validate WebP catalog and JavaScript
+on:
+  push:
+    branches: [optimization/webp-conversion]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check inline JavaScript syntax and catalog image files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, subprocess, sys
+          pages=['index.html','products.html','product.html','about.html','cart.html','checkout.html','contact.html','legal.html']
+          errors=[]
+          for page in pages:
+              data=Path(page).read_text(encoding='utf-8')
+              for n,block in enumerate(re.findall(r'<script\b[^>]*>(.*?)</script\s*>',data,re.S|re.I)):
+                  if not block.strip():continue
+                  result=subprocess.run(['node','--check','--input-type=commonjs'],input=block,text=True,capture_output=True)
+                  if result.returncode:errors.append(f'{page}: inline script {n+1}: {result.stderr[:400]}')
+              for image in re.findall(r'(?<![\w/])images/[\w.%+-]+\.webp',data,re.I):
+                  if not Path(image).is_file():errors.append(f'{page}: missing {image}')
+          webps=list(Path('images').glob('*.webp'))
+          print('WebP images:',len(webps))
+          print('HTML pages checked:',len(pages))
+          for e in errors:print('ERROR:',e)
+          if errors:sys.exit(1)
+          PY
