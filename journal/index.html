@@ -275,8 +275,25 @@ header .products-dropdown a.sub-item:hover::before { background: #fff; }
 }
 
 /* Header fixed => main yt7errek l ta7t */
-main { padding-top: 140px; }
-@media (max-width: 800px) { main { padding-top: 100px; } }
+main { padding-top: 0; }
+@media (max-width: 800px) { main { padding-top: 0; } }
+
+  /* ===== FIX: nav khass ya5od l 3ard kamel ===== */
+header { display: block !important; }
+
+header nav {
+  width: 100% !important;
+  justify-content: space-between !important;
+}
+
+header .logo { margin: 0; }
+
+header .products-menu-btn { line-height: inherit; }
+
+@media (max-width: 800px) {
+  header nav { justify-content: center !important; }
+}
+  
 </style>
 </head>
 
