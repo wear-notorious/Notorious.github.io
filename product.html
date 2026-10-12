@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="description" content="Explore bold streetwear by NOTORIOUS™. View product details, sizes and pricing.">
+  <link rel="canonical" href="https://wear-notorious.github.io/Notorious.github.io/product.html">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="NOTORIOUS™">
+  <meta property="og:title" content="Streetwear Product | NOTORIOUS™">
+  <meta property="og:description" content="Explore bold streetwear by NOTORIOUS™. View product details, sizes and pricing.">
+  <meta property="og:url" content="https://wear-notorious.github.io/Notorious.github.io/product.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="robots" content="noindex,follow" id="product-robots">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>NOTORIOUS™</title>
+  <title>Streetwear Product | NOTORIOUS™</title>
 
   <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
 
@@ -1468,6 +1478,32 @@ localStorage.setItem(
     }
 
     document.title = product.product + " | NOTORIOUS™";
+    const productUrl = new URL(window.location.href);
+    productUrl.search = "?slug=" + encodeURIComponent(product.slug);
+    document.querySelector('link[rel="canonical"]').href = productUrl.href;
+    document.querySelector('meta[property="og:url"]').content = productUrl.href;
+    document.querySelector('meta[property="og:title"]').content = document.title;
+    const productDescription = String(product.description || product.product || "").replace(/<[^>]*>/g, " ").trim().slice(0, 280);
+    document.querySelector('meta[name="description"]').content = productDescription;
+    document.querySelector('meta[property="og:description"]').content = productDescription;
+    document.querySelector('meta[name="robots"]').content = "index,follow";
+    const productSchema = {
+      "@context": "https://schema.org", "@type": "Product",
+      name: String(product.product),
+      description: productDescription,
+      image: [product.mainImage, product.image2, product.image3, product.image4].filter(Boolean).map(src => new URL(src, window.location.href).href),
+      url: productUrl.href,
+      brand: { "@type": "Brand", name: "NOTORIOUS™" }
+    };
+    const price = Number(product.price);
+    if (Number.isFinite(price) && price >= 0) productSchema.offers = { "@type": "Offer", price: price, priceCurrency: "MAD", url: productUrl.href };
+    const oldSchema = document.getElementById("product-jsonld");
+    if (oldSchema) oldSchema.remove();
+    const schemaScript = document.createElement("script");
+    schemaScript.id = "product-jsonld";
+    schemaScript.type = "application/ld+json";
+    schemaScript.textContent = JSON.stringify(productSchema);
+    document.head.appendChild(schemaScript);
 
    const productImages = [
   product.mainImage,
