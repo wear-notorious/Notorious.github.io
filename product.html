@@ -1506,7 +1506,7 @@ localStorage.setItem(
       brand: { "@type": "Brand", name: "NOTORIOUS™" }
     };
     const price = Number(product.price);
-    if (Number.isFinite(price) && price >= 0) productSchema.offers = { "@type": "Offer", price: price, priceCurrency: "MAD", url: productUrl.href };
+    if (Number.isFinite(price) && price >= 0) productSchema.offers = { "@type": "Offer", price: price, priceCurrency: "MAD", availability: "https://schema.org/InStock", url: productUrl.href };
     const oldSchema = document.getElementById("product-jsonld");
     if (oldSchema) oldSchema.remove();
     const schemaScript = document.createElement("script");
