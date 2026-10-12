@@ -1420,6 +1420,14 @@ const PRODUCTS_API_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gs
 async function loadProduct() {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get("slug");
+  // Set the product-specific canonical before the asynchronous catalog request.
+  // This preserves the correct URL even if product data loads slowly.
+  if (slug) {
+    const canonicalUrl = new URL(window.location.pathname, window.location.origin);
+    canonicalUrl.searchParams.set("slug", slug);
+    document.querySelector('link[rel="canonical"]').href = canonicalUrl.href;
+    document.querySelector('meta[property="og:url"]').content = canonicalUrl.href;
+  }
 
   const productPage = document.getElementById("productPage");
 
