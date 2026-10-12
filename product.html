@@ -9,7 +9,7 @@
   <meta property="og:description" content="Explore bold streetwear by NOTORIOUS™. View product details, sizes and pricing.">
   <meta property="og:url" content="https://wear-notorious.github.io/Notorious.github.io/product.html">
   <meta name="twitter:card" content="summary">
-  <meta name="robots" content="noindex,follow" id="product-robots">
+  <meta name="robots" content="index,follow" id="product-robots">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1424,6 +1424,7 @@ async function loadProduct() {
   const productPage = document.getElementById("productPage");
 
   if (!slug) {
+    document.querySelector('meta[name="robots"]').content = "noindex,follow";
     productPage.innerHTML = "PRODUCT NOT FOUND";
     return;
   }
@@ -1473,6 +1474,7 @@ localStorage.setItem(
     );
 
     if (!product) {
+      document.querySelector('meta[name="robots"]').content = "noindex,follow";
       productPage.innerHTML = "PRODUCT NOT FOUND";
       return;
     }
