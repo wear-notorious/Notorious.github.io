@@ -2063,7 +2063,10 @@ function toWebpImage(value) {
 function renderProducts(products) {
   const container = document.getElementById("productsContainer");
 
-  container.innerHTML = products.slice(0, 6).map(product => `
+  // Products are appended to the Products sheet as they are added.
+// Reverse a copy so the newest rows appear first without changing the catalog order.
+  const latestProducts = [...products].reverse().slice(0, 6);
+  container.innerHTML = latestProducts.map(product => `
     <a href="product.html?slug=${product.slug}"
        class="product-card"
        style="display:flex; flex-direction:column; color:inherit; text-decoration:none;">
