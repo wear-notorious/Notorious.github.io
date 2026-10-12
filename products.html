@@ -15,7 +15,7 @@
 
   <title>Shop T-Shirts, Hoodies & Streetwear | NOTORIOUS™</title>
 
-  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+  <link rel="icon" type="image/png" href="images/Favicon-Notorious.webp">
 
   <link
     rel="stylesheet"
@@ -975,6 +975,13 @@
   }
 }
 </style>
+<script>
+// Convert local catalog image paths from the API to WebP; leave remote URLs untouched.
+function toWebpImage(value) {
+  if (typeof value !== 'string') return value;
+  return value.replace(/^(images\/[^?#]+)\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i, '$1.webp');
+}
+</script>
 </head>
 
 <body>
@@ -984,7 +991,7 @@
 
     <a href="index.html" class="logo-link">
       <img
-        src="images/Notorious-Logo-White.png"
+        src="images/Notorious-Logo-White.webp"
         alt="NOTORIOUS™"
         class="site-logo"
       >
@@ -1317,7 +1324,7 @@
   <span class="best-seller-badge">BEST SELLER</span>
 ` : ""}
           <img
-            src="${product.mainImage}"
+            src="${toWebpImage(product.mainImage)}"
             alt="${product.product}"
             loading="lazy"
           >

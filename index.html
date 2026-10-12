@@ -9,9 +9,9 @@
   <meta property="og:description" content="Shop NOTORIOUS™ streetwear: statement T-shirts, hoodies and gym apparel. Bold designs for those who wear what they won't.">
   <meta property="og:url" content="https://wear-notorious.github.io/Notorious.github.io/">
   <meta name="twitter:card" content="summary">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"NOTORIOUS™","url":"https://wear-notorious.github.io/Notorious.github.io/","logo":"https://wear-notorious.github.io/Notorious.github.io/images/Notorious-Logo-White.png"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"NOTORIOUS™","url":"https://wear-notorious.github.io/Notorious.github.io/","logo":"https://wear-notorious.github.io/Notorious.github.io/images/Notorious-Logo-White.webp"}</script>
 
-  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+  <link rel="icon" type="image/png" href="images/Favicon-Notorious.webp">
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -768,7 +768,7 @@
       display: flex;
       align-items: center;
       overflow: hidden;
-      background-image: url("images/brand-statement.png");
+      background-image: url("images/brand-statement.webp");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -1612,6 +1612,13 @@
       }
     }
   </style>
+<script>
+// Convert local catalog image paths from the API to WebP; leave remote URLs untouched.
+function toWebpImage(value) {
+  if (typeof value !== 'string') return value;
+  return value.replace(/^(images\/[^?#]+)\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i, '$1.webp');
+}
+</script>
 </head>
 
 <body>
@@ -1625,7 +1632,7 @@
 
     <div class="logo">
       <a href="index.html">
-        <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo" style="height:85px; width:auto; display:block;">
+        <img src="images/Notorious-Logo-White.webp" alt="NOTORIOUS Logo" style="height:85px; width:auto; display:block;">
       </a>
     </div>
 
@@ -1663,10 +1670,10 @@
 
    <section class="hero" id="home">
      <div class="hero-bg">
-  <img src="images/slider-1.png" class="active" alt="">
-  <img src="images/slide-2.png" alt="">
-  <img src="images/slider-3.png" alt="">
-  <img src="images/slider-4.png" alt="">
+  <img src="images/slider-1.webp" class="active" alt="">
+  <img src="images/slide-2.webp" alt="">
+  <img src="images/slider-3.webp" alt="">
+  <img src="images/slider-4.webp" alt="">
 </div>
   <div class="hero-overlay"></div>
 
@@ -1953,7 +1960,7 @@ function renderProducts(products) {
   <span class="best-seller-badge">BEST SELLER</span>
 ` : ""}
         <img
-          src="${product.mainImage}"
+          src="${toWebpImage(product.mainImage)}"
           alt="${product.product}"
           style="width:100%; height:100%; object-fit:cover;"
         />
@@ -1985,7 +1992,7 @@ function renderProducts(products) {
     <a href="product.html?slug=${product.slug}" class="might-like-card">
       <div class="might-like-img-wrap">
         <img
-          src="${product.mainImage}"
+          src="${toWebpImage(product.mainImage)}"
           alt="${product.product}"
           loading="lazy"
         >

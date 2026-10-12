@@ -16,7 +16,7 @@
 
   <title>Streetwear Product | NOTORIOUS™</title>
 
-  <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+  <link rel="icon" type="image/png" href="images/Favicon-Notorious.webp">
 
   <style>
     * {
@@ -1346,6 +1346,13 @@ header {
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 >
   
+<script>
+// Convert local catalog image paths from the API to WebP; leave remote URLs untouched.
+function toWebpImage(value) {
+  if (typeof value !== 'string') return value;
+  return value.replace(/^(images\/[^?#]+)\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i, '$1.webp');
+}
+</script>
 </head>
 
 <body>
@@ -1374,7 +1381,7 @@ header {
   <nav>
 
     <a class="logo" href="index.html">
-      <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS Logo">
+      <img src="images/Notorious-Logo-White.webp" alt="NOTORIOUS Logo">
     </a>
 
     <div class="nav-links">
@@ -1501,7 +1508,7 @@ localStorage.setItem(
       "@context": "https://schema.org", "@type": "Product",
       name: String(product.product),
       description: productDescription,
-      image: [product.mainImage, product.image2, product.image3, product.image4].filter(Boolean).map(src => new URL(src, window.location.href).href),
+      image: [product.mainImage, product.image2, product.image3, product.image4].filter(Boolean).map(src => new URL(toWebpImage(src), window.location.href).href),
       url: productUrl.href,
       brand: { "@type": "Brand", name: "NOTORIOUS™" }
     };
@@ -1515,12 +1522,7 @@ localStorage.setItem(
     schemaScript.textContent = JSON.stringify(productSchema);
     document.head.appendChild(schemaScript);
 
-   const productImages = [
-  product.mainImage,
-  product.image2,
-  product.image3,
-  product.image4
-].filter(Boolean);
+   const productImages = [product.mainImage, product.image2, product.image3, product.image4].filter(Boolean).map(toWebpImage)
 
 const sizes = String(product.sizes || "")
   .split(",")
@@ -1785,7 +1787,7 @@ if (mightLikeGrid) {
   mightLikeGrid.innerHTML = mightLikeProducts.map(item => `
     <a href="product.html?slug=${item.slug}" class="might-like-card">
       <img
-        src="${item.mainImage}"
+        src="${toWebpImage(item.mainImage)}"
         alt="${item.product}"
         loading="lazy"
       >
@@ -1942,7 +1944,7 @@ function addToCart() {
       slug: product.slug,
       product: product.product,
       price: Number(product.price),
-      image: product.mainImage,
+      image: toWebpImage(product.mainImage),
       size: selectedSize,
       quantity: quantity
     });
