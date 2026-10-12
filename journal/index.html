@@ -293,6 +293,12 @@ header .products-menu-btn { line-height: inherit; }
 @media (max-width: 800px) {
   header nav { justify-content: center !important; }
 }
+  /* ===== FIX: 7yed l underline l9dim dial aria-current ===== */
+header .nav-links a[aria-current="page"] {
+  border-bottom: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
   
 </style>
 </head>
@@ -378,7 +384,7 @@ header .products-menu-btn { line-height: inherit; }
     <a href="https://www.facebook.com/wearnotorious" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
     <a href="mailto:wear.notorious0@gmail.com" onclick="openNotoriousEmail(event)" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
   </div>
-  <a href="index.html" class="footer-link">NOTORIOUS JOURNAL</a>
+  <a href="index.html" class="footer-link">Notorious Journal</a>
   <a href="../shipping.html" class="footer-link">Shipping &amp; Returns</a>
   <a href="../legal.html" class="footer-link">Privacy &amp; Terms</a>
   <a href="../about.html" class="footer-link">About Us</a>
