@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="Shop NOTORIOUS™ streetwear: statement T-shirts, hoodies and gym apparel. Bold designs for those who wear what they won't.">
-  <link rel="canonical" href="https://wear-notorious.github.io/Notorious.github.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="NOTORIOUS™">
-  <meta property="og:title" content="NOTORIOUS™ | Bold Streetwear, T-Shirts & Hoodies">
-  <meta property="og:description" content="Shop NOTORIOUS™ streetwear: statement T-shirts, hoodies and gym apparel. Bold designs for those who wear what they won't.">
-  <meta property="og:url" content="https://wear-notorious.github.io/Notorious.github.io/">
-  <meta name="twitter:card" content="summary">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"NOTORIOUS™","url":"https://wear-notorious.github.io/Notorious.github.io/","logo":"https://wear-notorious.github.io/Notorious.github.io/images/Notorious-Logo-White.webp"}</script>
-
-  <link rel="icon" type="image/png" href="images/Favicon-Notorious.webp">
+  <link rel="icon" type="image/webp" href="images/Favicon-Notorious.webp">
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NOTORIOUS™ | Bold Streetwear, T-Shirts & Hoodies</title>
+  <title>NOTORIOUS™ — Wear What They Won’t</title>
+  <meta
+    name="description"
+    content="NOTORIOUS™ — Premium streetwear brand. Wear What They Won’t."
+  />
 
   <style>
     * {
@@ -485,12 +479,13 @@
     }
 
     .hero-kicker {
-      display: inline-block;
+      display: block;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 4px;
       margin-bottom: 20px;
-      color: #bdbdbd;
+      color: #e0e0e0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
     }
 
 .hero h1 {
@@ -502,11 +497,20 @@
     text-transform: uppercase;
 }
     .hero p {
-      max-width: 520px;
+      max-width: 540px;
       font-size: clamp(1rem, 1.4vw, 1.2rem);
-      line-height: 1.7;
-      color: #c5c5c5;
+      font-weight: 700;
+      line-height: 1.6;
+      color: #eaeaea;
       margin-bottom: 36px;
+      letter-spacing: 0.2px;
+      -webkit-text-stroke: 0.4px rgba(255, 255, 255, 0.25);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
+    }
+
+    .hero p .accent-word {
+      color: var(--gold-2);
+      -webkit-text-stroke: 0.4px rgba(212, 175, 55, 0.3);
     }
 
     .btn {
@@ -576,6 +580,85 @@
 
     .hero-dots button.active {
       background: #fff;
+    }
+
+    /* ===== HERO TEXT UPGRADE ===== */
+
+    /* Micro-tag foq l-kicker */
+    .hero-badge {
+      display: flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      border-radius: 999px;
+      background: rgba(212, 175, 55, 0.08);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--gold-3);
+    }
+
+    .hero-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-2);
+      box-shadow: 0 0 8px var(--gold-2);
+    }
+
+    /* Text stroke - donne un edge streetwear */
+    .hero h1 {
+      -webkit-text-stroke: 0.6px rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+
+    /* Kinetic reveal per word (bdal fade simple) */
+    .hero h1 .word-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero h1 .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: wordRise 0.85s cubic-bezier(.19,1,.22,1) forwards;
+    }
+
+    .hero h1 .word-line:nth-child(1) .word:nth-child(1) { animation-delay: 0.15s; }
+    .hero h1 .word-line:nth-child(1) .word:nth-child(2) { animation-delay: 0.28s; }
+    .hero h1 .word-line:nth-child(2) .word:nth-child(1) { animation-delay: 0.41s; }
+    .hero h1 .word-line:nth-child(2) .word:nth-child(2) { animation-delay: 0.54s; }
+
+    @keyframes wordRise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Gold accent sur le dernier mot */
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--gold-1) 0%, var(--gold-3) 50%, var(--gold-2) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-stroke: 0.6px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Glitch effect - se joue une fois au chargement */
+    .hero h1.glitch-active .word-line:nth-child(2) {
+      animation: glitchShift 0.4s steps(2, end) 0.5s 2;
+    }
+
+    @keyframes glitchShift {
+      0%   { transform: translate(0); }
+      20%  { transform: translate(-2px, 1px); }
+      40%  { transform: translate(2px, -1px); text-shadow: -2px 0 var(--gold-2), 2px 0 rgba(255,0,60,0.35); }
+      60%  { transform: translate(-1px, 0); }
+      80%  { transform: translate(1px, 1px); text-shadow: none; }
+      100% { transform: translate(0); text-shadow: none; }
     }
 
     section {
@@ -814,8 +897,7 @@
     .brand-statement-content p {
       max-width: 520px;
       margin: 28px 0 32px;
-      color: #ccc;
-      font-size: 17px;
+      color: #ccc;      font-size: 17px;
       line-height: 1.6;
     }
 
@@ -1066,7 +1148,7 @@
 
       .hero p {
         font-size: 15px;
-        line-height: 1.6;
+        line-height: 1.55;
         margin-bottom: 26px;
         max-width: 340px;
       }
@@ -1611,14 +1693,24 @@
         font-size: 23px;
       }
     }
+
+    /* MOBILE ADJUSTMENTS - HERO TEXT UPGRADE */
+    @media (max-width: 800px) {
+      .hero-badge {
+        font-size: 9px;
+        padding: 5px 12px;
+        margin-bottom: 12px;
+      }
+
+      .hero h1 {
+        -webkit-text-stroke: 0.4px rgba(255, 255, 255, 0.12);
+      }
+
+      .hero h1 .accent {
+        -webkit-text-stroke: 0.4px rgba(212, 175, 55, 0.25);
+      }
+    }
   </style>
-<script>
-// Convert local catalog image paths from the API to WebP; leave remote URLs untouched.
-function toWebpImage(value) {
-  if (typeof value !== 'string') return value;
-  return value.replace(/^(images\/[^?#]+)\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i, '$1.webp');
-}
-</script>
 </head>
 
 <body>
@@ -1678,13 +1770,17 @@ function toWebpImage(value) {
   <div class="hero-overlay"></div>
 
   <div class="hero-content">
+    <span class="hero-badge">LIMITED DROP LIVE</span>
     <span class="hero-kicker">NOTORIOUS™ STREETWEAR</span>
 
-    <h1>WEAR WHAT<br>THEY WON’T.</h1>
+    <h1 id="heroTitle">
+      <span class="word-line"><span class="word">WEAR</span> <span class="word">WHAT</span></span>
+      <span class="word-line"><span class="word">THEY</span> <span class="word accent">WON'T.</span></span>
+    </h1>
 
     <p>
-      Limited drops. Bold attitude.<br>
-      Made for people who don’t dress like everyone else.
+      Every piece drops once. Then it's gone.<br>
+      Built for the ones who move <span class="accent-word">different.</span>
     </p>
 
     <a class="btn" href="#shop">SHOP THE DROP</a>
@@ -1700,8 +1796,7 @@ function toWebpImage(value) {
 
     <div class="drop-countdown-timer" id="dropCountdown">
       <div class="drop-countdown-unit">
-        <span class="drop-countdown-number" id="cdDays">00</span>
-        <span class="drop-countdown-text">DAYS</span>
+        <span class="drop-countdown-number" id="cdDays">00</span>        <span class="drop-countdown-text">DAYS</span>
       </div>
       <span class="drop-countdown-sep">:</span>
       <div class="drop-countdown-unit">
@@ -1947,6 +2042,10 @@ function toWebpImage(value) {
 }
   const PRODUCTS_API_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
 
+function toWebpImage(value) {
+  if (typeof value !== 'string') return value;
+  return value.replace(/^(images\/[^?#]+)\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i, '$1.webp');
+}
 function renderProducts(products) {
   const container = document.getElementById("productsContainer");
 
@@ -2220,6 +2319,14 @@ loadProducts();
   setInterval(updateDropCountdown, 1000);
 </script>
   <script src="smoke-cursor.js" defer></script>
+
+  <script>
+  // ===== HERO TEXT UPGRADE: trigger glitch once after kinetic reveal =====
+  const heroTitle = document.getElementById("heroTitle");
+  if (heroTitle) {
+    setTimeout(() => heroTitle.classList.add("glitch-active"), 900);
+  }
+</script>
   
 <script>
   // Sedd le menu automatiquement fach l user kayscrolli l page (mashi darori yclicki 3la link)
