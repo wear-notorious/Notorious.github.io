@@ -77,6 +77,18 @@ header .nav-links a {
   padding-bottom: 6px;
 }
 
+header .nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: 0; height: 2px;
+  background: white;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+header .nav-links a:hover::after { width: 100%; }
+
+
 header .menu-toggle { display: none !important; }
 
 header .cart-button {
@@ -296,7 +308,7 @@ header .nav-links a:hover,
 header .products-dropdown a:hover {
   text-decoration: none !important;
 }
-header .nav-links a::after { display: none !important; }
+
 
   /* 7yed underline mnin t7et 3la l articles */
 a.tile:hover,
