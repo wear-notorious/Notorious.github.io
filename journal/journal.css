@@ -14,3 +14,10 @@ a.tile:hover strong{text-decoration:none}
 /* effet hover bla underline (optionnel) */
 .tile{transition:border-color .2s ease}
 .tile:hover{border-color:#fff}
+
+/* Contextual WebP images in journal articles */
+article .journal-photo{margin:34px 0 38px;max-width:820px}
+article .journal-photo img{display:block;width:100%;height:auto;max-height:540px;object-fit:cover;object-position:center;border:1px solid #262626;border-radius:3px;background:#141414}
+article .journal-photo--hero img{max-height:485px}
+article .journal-photo figcaption{font-size:12px;letter-spacing:.025em;color:#999;margin-top:9px;line-height:1.5}
+@media(max-width:600px){article .journal-photo{margin:26px 0 30px}article .journal-photo img{max-height:360px}article .journal-photo--hero img{max-height:340px}}
