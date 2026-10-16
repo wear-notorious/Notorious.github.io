@@ -76,17 +76,6 @@ header .nav-links a {
   padding-bottom: 6px;
 }
 
-header .nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 50%; bottom: 0;
-  width: 0; height: 2px;
-  background: white;
-  transform: translateX(-50%);
-  transition: width 0.3s ease;
-}
-header .nav-links a:hover::after { width: 100%; }
-
 header .menu-toggle { display: none !important; }
 
 header .cart-button {
@@ -299,7 +288,15 @@ header .nav-links a[aria-current="page"] {
   text-decoration: none !important;
   box-shadow: none !important;
 }
-  
+
+/* ===== FIX: 7yed ay underline 3la HOME / PRODUCTS / JOURNAL / ABOUT / CONTACT ===== */
+header a:hover,
+header .nav-links a:hover,
+header .products-dropdown a:hover {
+  text-decoration: none !important;
+}
+header .nav-links a::after { display: none !important; }
+
 </style>
 </head>
 
@@ -349,7 +346,7 @@ header .nav-links a[aria-current="page"] {
 <main>
   <div class="eyebrow">NOTORIOUS JOURNAL · MAROC</div>
   <h1>LE STYLE N'A PAS DE RÈGLES.</h1>
-  <p class="lead">Guides streetwear, gym culture et conseils pratiques. Français + , pensés pour la vie au Maroc.</p>
+  <p class="lead">Guides streetwear, gym culture et quelques conseils pratiques liiiik a jemmi.</p>
 
   <div class="grid">
     <a class="tile" href="gym-streetwear-maroc.html">
