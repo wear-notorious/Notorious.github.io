@@ -129,21 +129,8 @@ for (const p of data) {
    newSitemap=newSitemap.slice(0,blockStart)+block+newSitemap.slice(blockEnd);
  }
 }
-planned.set("sitemap.xml",newSitemap);");
- const block=new RegExp("(<url>\\s*<loc>"+escaped+"<\\/loc>)([\\s\\S]*?)(<\\/url>)","g");
- let matched=false;
- newSitemap=newSitemap.replace(block,(whole,open,mid,close)=>{
-  matched=true;
-  if(modifiedProducts.has(p.slug)||!/<lastmod>/.test(mid)) {
-    const nextMid=/<lastmod>/.test(mid)?mid.replace(/<lastmod>[^<]*<\\/lastmod>/g,"<lastmod>"+buildDate+"</lastmod>"):mid+"\\n    <lastmod>"+buildDate+"</lastmod>";
-    return open+nextMid+close;
-  }
-  return whole;
- });
- check(matched,"Unable to locate sitemap block for "+p.slug);
-}
 planned.set("sitemap.xml",newSitemap);
 // All validation above completes before writing any files.
 for(const [file,content] of planned)fs.writeFileSync(file,content,"utf8");
-console.log("Generated "+data.length+" product pages and updated "+planned.size+" files in the SEO preview.");
+console.log("Generated "+data.length+" product pages and updated "+planned.size+" files.");
 console.log("Verified real product names, canonical tags, static content, Product JSON-LD and commerce handler signatures.");
