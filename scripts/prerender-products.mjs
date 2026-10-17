@@ -52,6 +52,13 @@ const legacy=original
  .replace(initialCanon,'const canonicalUrl = new URL("product-" + encodeURIComponent(slug.toLowerCase()) + ".html", window.location.href);')
  .replace(loadedCanon,'const productUrl = new URL("product-" + encodeURIComponent(String(product.slug).toLowerCase()) + ".html", window.location.href);');
 planned.set("product.html",links(legacy));
+// Never silently overwrite a merchant's later changes to the live product page.
+// A design/function edit must be copied into the maintained master template first.
+const liveProduct=fs.readFileSync("product.html","utf8");
+const omitGeneratedSlugList=s=>s.replace(/<script>const NOTORIOUS_SEO_PRODUCT_SLUGS = new Set\(\[[^\]]*\]\);<\/script>\s*/g,"");
+const initialMigration=!liveProduct.includes("NOTORIOUS_SEO_PRODUCT_SLUGS")&&liveProduct.includes("product.html?slug=");
+check(initialMigration || omitGeneratedSlugList(liveProduct)===omitGeneratedSlugList(planned.get("product.html")),
+ "Live product.html changed since the static master template was synced. Refusing to overwrite product design or ecommerce code. Update scripts/product-page.html.template together with product.html before rerunning.");
 for(const product of data){
  const images=[product.mainImage,product.image2,product.image3,product.image4].filter(Boolean).map(webp);
  const sizes=String(product.sizes||"").split(",").map(x=>x.trim()).filter(Boolean);
