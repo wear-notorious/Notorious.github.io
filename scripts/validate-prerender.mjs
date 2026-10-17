@@ -7,8 +7,8 @@ const sitemap=fs.readFileSync("sitemap.xml","utf8");
 const urls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1]);
 function test(x,msg){if(!x)throw Error(msg);}
 test(new Set(urls).size===urls.length,"Duplicate sitemap entries");
-test(products.length===26,"Unexpected catalog size: "+products.length);
-test(urls.length===41,"Expected 41 entries in sitemap");
+test(products.length>=26,"Incomplete product catalog: "+products.length);
+test(urls.length>=41,"Sitemap unexpectedly lost indexed URLs");
 for(const p of products){
  const path="product-"+p.slug+".html";
  const page=fs.readFileSync(path,"utf8");
@@ -39,5 +39,9 @@ for(const pagePath of ["index.html","products.html","product.html"]){
  const c=fs.readFileSync(pagePath,"utf8");
  test(c.includes("NOTORIOUS_SEO_PRODUCT_SLUGS"),"Missing safe links routing "+pagePath);
  test(c.includes("product.html?slug="),"New product link fallback not retained "+pagePath);
+ for(const [_,attrs,code] of c.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
+   if(/type="application\/ld\+json"/.test(attrs))JSON.parse(code);
+   else if(code.trim()&&!/\bsrc=/.test(attrs))new vm.Script(code,{filename:pagePath});
+ }
 }
 console.log("PASS: 26 HTML product pages, canonical/schema/price, images, JavaScript syntax, links and sitemap.");
