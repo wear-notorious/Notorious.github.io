@@ -9,6 +9,8 @@ on:
       - scripts/prerender-products.mjs
       - scripts/validate-prerender.mjs
       - scripts/build-merchant-feed.mjs
+      - scripts/build-site-entities.mjs
+      - scripts/validate-site-entities.mjs
       - scripts/product-page.html.template
       - .github/workflows/product-prerender-preview.yml
   workflow_dispatch:
@@ -45,11 +47,22 @@ jobs:
           cmp /tmp/notorious-seo-before.patch /tmp/notorious-seo-after.patch
       - name: Build Google Merchant Center product feed
         run: node scripts/build-merchant-feed.mjs
+      - name: Generate Organization WebSite and catalog SEO data
+        run: node scripts/build-site-entities.mjs
+      - name: Validate structured data and catalog product URLs
+        run: node scripts/validate-site-entities.mjs
+      - name: Verify repeated site metadata builds are identical
+        run: |
+          git diff -- index.html products.html about.html contact.html shipping.html legal.html > /tmp/site-entities-before.patch
+          node scripts/build-site-entities.mjs
+          node scripts/validate-site-entities.mjs
+          git diff -- index.html products.html about.html contact.html shipping.html legal.html > /tmp/site-entities-after.patch
+          cmp /tmp/site-entities-before.patch /tmp/site-entities-after.patch
       - name: Commit validated changes to current branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/public-products-snapshot.json product-*.html product.html index.html products.html journal/*.html sitemap.xml merchant-feed.txt
+          git add scripts/public-products-snapshot.json product-*.html product.html index.html products.html journal/*.html sitemap.xml merchant-feed.txt about.html contact.html shipping.html legal.html
           if ! git diff --cached --quiet; then
             git commit -m "Refresh static product pages from public catalog"
             git push origin "HEAD:$GITHUB_REF_NAME"
