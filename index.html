@@ -1725,6 +1725,7 @@
       }
     }
   </style>
+<script>const NOTORIOUS_SEO_PRODUCT_SLUGS = new Set(["asap","fbi","horny","bull","cannot","bcs","absolut","ai","boobs","badbull","hornyhoodie","youtube","sirotonin","ocb","statue","notor","momy","notime","dogs","visse","spotme","visages","blood","fuckk","racist","liquor"]);</script>
 </head>
 
 <body>
@@ -1852,32 +1853,32 @@
 <noscript>
   <nav aria-label="Explore NOTORIOUS products">
     <p>Explore NOTORIOUS products:</p>
-    <a href="product.html?slug=asap">asap</a> ·
-    <a href="product.html?slug=fbi">fbi</a> ·
-    <a href="product.html?slug=horny">horny</a> ·
-    <a href="product.html?slug=bull">bull</a> ·
-    <a href="product.html?slug=cannot">cannot</a> ·
-    <a href="product.html?slug=bcs">bcs</a> ·
-    <a href="product.html?slug=absolut">absolut</a> ·
-    <a href="product.html?slug=ai">ai</a> ·
-    <a href="product.html?slug=boobs">boobs</a> ·
-    <a href="product.html?slug=badbull">badbull</a> ·
-    <a href="product.html?slug=hornyhoodie">hornyhoodie</a> ·
-    <a href="product.html?slug=youtube">youtube</a> ·
-    <a href="product.html?slug=sirotonin">sirotonin</a> ·
-    <a href="product.html?slug=ocb">ocb</a> ·
-    <a href="product.html?slug=statue">statue</a> ·
-    <a href="product.html?slug=notor">notor</a> ·
-    <a href="product.html?slug=momy">momy</a> ·
-    <a href="product.html?slug=notime">notime</a> ·
-    <a href="product.html?slug=dogs">dogs</a> ·
-    <a href="product.html?slug=visse">visse</a> ·
-    <a href="product.html?slug=spotme">spotme</a> ·
-    <a href="product.html?slug=visages">visages</a> ·
-    <a href="product.html?slug=blood">blood</a> ·
-    <a href="product.html?slug=fuckk">fuckk</a> ·
-    <a href="product.html?slug=racist">racist</a> ·
-    <a href="product.html?slug=liquor">liquor</a>
+    <a href="product-asap.html">asap</a> ·
+    <a href="product-fbi.html">fbi</a> ·
+    <a href="product-horny.html">horny</a> ·
+    <a href="product-bull.html">bull</a> ·
+    <a href="product-cannot.html">cannot</a> ·
+    <a href="product-bcs.html">bcs</a> ·
+    <a href="product-absolut.html">absolut</a> ·
+    <a href="product-ai.html">ai</a> ·
+    <a href="product-boobs.html">boobs</a> ·
+    <a href="product-badbull.html">badbull</a> ·
+    <a href="product-hornyhoodie.html">hornyhoodie</a> ·
+    <a href="product-youtube.html">youtube</a> ·
+    <a href="product-sirotonin.html">sirotonin</a> ·
+    <a href="product-ocb.html">ocb</a> ·
+    <a href="product-statue.html">statue</a> ·
+    <a href="product-notor.html">notor</a> ·
+    <a href="product-momy.html">momy</a> ·
+    <a href="product-notime.html">notime</a> ·
+    <a href="product-dogs.html">dogs</a> ·
+    <a href="product-visse.html">visse</a> ·
+    <a href="product-spotme.html">spotme</a> ·
+    <a href="product-visages.html">visages</a> ·
+    <a href="product-blood.html">blood</a> ·
+    <a href="product-fuckk.html">fuckk</a> ·
+    <a href="product-racist.html">racist</a> ·
+    <a href="product-liquor.html">liquor</a>
   </nav>
 </noscript>
         <div class="view-more-wrapper">
@@ -2100,7 +2101,7 @@ function renderProducts(products) {
 // Reverse a copy so the newest rows appear first without changing the catalog order.
   const latestProducts = [...products].reverse().slice(0, 6);
   container.innerHTML = latestProducts.map(product => `
-    <a href="product.html?slug=${product.slug}"
+    <a href="${(NOTORIOUS_SEO_PRODUCT_SLUGS.has(String(product.slug).toLowerCase()) ? "product-" + encodeURIComponent(product.slug) + ".html" : "product.html?slug=" + encodeURIComponent(product.slug))}"
        class="product-card"
        style="display:flex; flex-direction:column; color:inherit; text-decoration:none;">
 
@@ -2138,7 +2139,7 @@ function renderProducts(products) {
     .slice(0, 8);
 
   container.innerHTML = selectedProducts.map(product => `
-    <a href="product.html?slug=${product.slug}" class="might-like-card">
+    <a href="${(NOTORIOUS_SEO_PRODUCT_SLUGS.has(String(product.slug).toLowerCase()) ? "product-" + encodeURIComponent(product.slug) + ".html" : "product.html?slug=" + encodeURIComponent(product.slug))}" class="might-like-card">
       <div class="might-like-img-wrap">
         <img
           src="${toWebpImage(product.mainImage)}"

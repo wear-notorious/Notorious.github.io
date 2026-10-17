@@ -1,0 +1,46 @@
+name: NOTORIOUS static product SEO
+on:
+  push:
+    branches:
+      - main
+      - seo/prerender-products
+    paths:
+      - scripts/fetch-public-product-data.mjs
+      - scripts/prerender-products.mjs
+      - scripts/validate-prerender.mjs
+      - scripts/product-page.html.template
+      - .github/workflows/product-prerender-preview.yml
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: seo-products-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download and validate public product data
+        run: node scripts/fetch-public-product-data.mjs
+      - name: Render static product pages from verified catalog
+        run: node scripts/prerender-products.mjs
+      - name: Verify canonical URLs, schema, image files and script syntax
+        run: node scripts/validate-prerender.mjs
+      - name: Commit validated changes to current branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/public-products-snapshot.json product-*.html product.html index.html products.html journal/*.html sitemap.xml
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh static product pages from public catalog"
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi

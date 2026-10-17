@@ -984,6 +984,7 @@ function toWebpImage(value) {
   return value.replace(/^(images\/[^?#]+)\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i, '$1.webp');
 }
 </script>
+<script>const NOTORIOUS_SEO_PRODUCT_SLUGS = new Set(["asap","fbi","horny","bull","cannot","bcs","absolut","ai","boobs","badbull","hornyhoodie","youtube","sirotonin","ocb","statue","notor","momy","notime","dogs","visse","spotme","visages","blood","fuckk","racist","liquor"]);</script>
 </head>
 
 <body>
@@ -1319,7 +1320,7 @@ function toWebpImage(value) {
 
     grid.innerHTML = products.map(product => `
       <a
-        href="product.html?slug=${encodeURIComponent(product.slug)}"
+        href="${(NOTORIOUS_SEO_PRODUCT_SLUGS.has(String(product.slug).toLowerCase()) ? "product-" + encodeURIComponent(product.slug) + ".html" : "product.html?slug=" + encodeURIComponent(product.slug))}"
         class="product-card"
       >
         <div class="product-image">
