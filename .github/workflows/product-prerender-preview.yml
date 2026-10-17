@@ -5,6 +5,7 @@ on:
       - seo/prerender-products
     paths:
       - scripts/fetch-public-product-data.mjs
+      - scripts/prerender-products.mjs
       - .github/workflows/product-prerender-preview.yml
   workflow_dispatch:
 permissions:
@@ -25,12 +26,14 @@ jobs:
           node-version: '22'
       - name: Download and validate public product data
         run: node scripts/fetch-public-product-data.mjs
-      - name: Commit preview snapshot on preview branch
+      - name: Render static product pages from verified catalog
+        run: node scripts/prerender-products.mjs
+      - name: Commit SEO preview on preview branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/public-products-snapshot.json
+          git add scripts/public-products-snapshot.json product-*.html product.html index.html products.html journal/*.html sitemap.xml
           if ! git diff --cached --quiet; then
-            git commit -m "Preview verified public products for SEO rendering"
+            git commit -m "Preview validated static SEO pages for all products"
             git push origin HEAD:seo/prerender-products
           fi
