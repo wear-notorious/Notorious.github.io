@@ -1553,6 +1553,8 @@ productPage.innerHTML = `
         <img
           id="mainProductImage"
           class="main-product-image"
+          fetchpriority="high"
+          decoding="async"
           src="${productImages[0] || ""}"
           alt="${product.product}"
           onclick="openImageZoom()"
@@ -1568,7 +1570,7 @@ productPage.innerHTML = `
             class="thumbnail ${index === 0 ? "active" : ""}"
             onclick="changeImage('${image}', this)"
           >
-            <img src="${image}" alt="${product.product}">
+            <img src="${image}" alt="${product.product}" loading="lazy" decoding="async">
           </button>
         `).join("")}
       </div>
