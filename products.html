@@ -1319,7 +1319,7 @@ function toWebpImage(value) {
 
     grid.innerHTML = products.map(product => `
       <a
-        href="product.html?slug=${encodeURIComponent(product.slug)}"
+        href="product-${encodeURIComponent(product.slug)}.html"
         class="product-card"
       >
         <div class="product-image">
