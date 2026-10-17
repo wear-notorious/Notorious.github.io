@@ -1358,6 +1358,7 @@ function toWebpImage(value) {
 <link rel="canonical" href="https://wear-notorious.github.io/Notorious.github.io/product-youtube.html">
 <meta name="twitter:image" content="https://wear-notorious.github.io/Notorious.github.io/images/youtube.webp">
 <script id="product-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"GOD'S PLAN™ T-SHIRT –  WHITE","description":"Looking for a message that hits subscriber-level recognition with a higher purpose? The **GOD WANTS YOU TO BE SAVED™ T-Shirt** reclaims iconic internet culture ","image":["https://wear-notorious.github.io/Notorious.github.io/images/youtube.webp","https://wear-notorious.github.io/Notorious.github.io/images/youtube1.webp","https://wear-notorious.github.io/Notorious.github.io/images/youtube2.webp","https://wear-notorious.github.io/Notorious.github.io/images/youtube3.webp"],"url":"https://wear-notorious.github.io/Notorious.github.io/product-youtube.html","brand":{"@type":"Brand","name":"NOTORIOUS™"},"offers":{"@type":"Offer","price":179,"priceCurrency":"MAD","url":"https://wear-notorious.github.io/Notorious.github.io/product-youtube.html"}}</script>
+<script>const NOTORIOUS_SEO_PRODUCT_SLUGS = new Set(["asap","fbi","horny","bull","cannot","bcs","absolut","ai","boobs","badbull","hornyhoodie","youtube","sirotonin","ocb","statue","notor","momy","notime","dogs","visse","spotme","visages","blood","fuckk","racist","liquor"]);</script>
 </head>
 
 <body>
@@ -2128,7 +2129,7 @@ if (mightLikeGrid) {
     .slice(0, 8);
 
   mightLikeGrid.innerHTML = mightLikeProducts.map(item => `
-    <a href="product-${encodeURIComponent(item.slug)}.html" class="might-like-card">
+    <a href="${(NOTORIOUS_SEO_PRODUCT_SLUGS.has(String(item.slug).toLowerCase()) ? "product-" + encodeURIComponent(item.slug) + ".html" : "product.html?slug=" + encodeURIComponent(item.slug))}" class="might-like-card">
       <img
         src="${toWebpImage(item.mainImage)}"
         alt="${item.product}"

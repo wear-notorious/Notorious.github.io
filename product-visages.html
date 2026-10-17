@@ -1358,6 +1358,7 @@ function toWebpImage(value) {
 <link rel="canonical" href="https://wear-notorious.github.io/Notorious.github.io/product-visages.html">
 <meta name="twitter:image" content="https://wear-notorious.github.io/Notorious.github.io/images/visages.webp">
 <script id="product-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"VISAGES ™  HOODED TANK TOP – BLACK","description":"Forged in raw metal aesthetics and dark underground art, the NOTORIOUS™ VISAGES Hooded Tank Top features a striking, distressed yellow graphic of intertwined gr","image":["https://wear-notorious.github.io/Notorious.github.io/images/visages.webp","https://wear-notorious.github.io/Notorious.github.io/images/visages1.webp","https://wear-notorious.github.io/Notorious.github.io/images/visages2.webp","https://wear-notorious.github.io/Notorious.github.io/images/visages3.webp"],"url":"https://wear-notorious.github.io/Notorious.github.io/product-visages.html","brand":{"@type":"Brand","name":"NOTORIOUS™"},"offers":{"@type":"Offer","price":209,"priceCurrency":"MAD","url":"https://wear-notorious.github.io/Notorious.github.io/product-visages.html"}}</script>
+<script>const NOTORIOUS_SEO_PRODUCT_SLUGS = new Set(["asap","fbi","horny","bull","cannot","bcs","absolut","ai","boobs","badbull","hornyhoodie","youtube","sirotonin","ocb","statue","notor","momy","notime","dogs","visse","spotme","visages","blood","fuckk","racist","liquor"]);</script>
 </head>
 
 <body>
@@ -2128,7 +2129,7 @@ if (mightLikeGrid) {
     .slice(0, 8);
 
   mightLikeGrid.innerHTML = mightLikeProducts.map(item => `
-    <a href="product-${encodeURIComponent(item.slug)}.html" class="might-like-card">
+    <a href="${(NOTORIOUS_SEO_PRODUCT_SLUGS.has(String(item.slug).toLowerCase()) ? "product-" + encodeURIComponent(item.slug) + ".html" : "product.html?slug=" + encodeURIComponent(item.slug))}" class="might-like-card">
       <img
         src="${toWebpImage(item.mainImage)}"
         alt="${item.product}"
