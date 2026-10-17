@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - seo/prerender-products
+      - seo/product-snippets-and-sitemap-dates
     paths:
       - scripts/fetch-public-product-data.mjs
       - scripts/prerender-products.mjs
