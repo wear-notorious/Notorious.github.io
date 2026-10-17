@@ -1,0 +1,36 @@
+name: SEO product snapshot preview
+on:
+  push:
+    branches:
+      - seo/prerender-products
+    paths:
+      - scripts/fetch-public-product-data.mjs
+      - .github/workflows/product-prerender-preview.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: seo-products-preview
+  cancel-in-progress: true
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download and validate public product data
+        run: node scripts/fetch-public-product-data.mjs
+      - name: Commit preview snapshot on preview branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/public-products-snapshot.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Preview verified public products for SEO rendering"
+            git push origin HEAD:seo/prerender-products
+          fi
