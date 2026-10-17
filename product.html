@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta name="description" content="Explore bold streetwear by NOTORIOUS™. View product details, sizes and pricing.">
-  <link rel="canonical" href="https://wear-notorious.github.io/Notorious.github.io/product.html">
   <meta property="og:type" content="product">
   <meta property="og:site_name" content="NOTORIOUS™">
   <meta property="og:title" content="Streetwear Product | NOTORIOUS™">
@@ -1436,7 +1435,11 @@ async function loadProduct() {
   if (slug) {
     const canonicalUrl = new URL(window.location.pathname, window.location.origin);
     canonicalUrl.searchParams.set("slug", slug);
-    document.querySelector('link[rel="canonical"]').href = canonicalUrl.href;
+    // Avoid a generic canonical for all product slugs in the raw HTML.
+    const canonicalLink = document.createElement("link");
+    canonicalLink.rel = "canonical";
+    canonicalLink.href = canonicalUrl.href;
+    document.head.appendChild(canonicalLink);
     document.querySelector('meta[property="og:url"]').content = canonicalUrl.href;
   }
 
