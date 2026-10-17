@@ -46,7 +46,7 @@ const listItems=productData.map((p,index)=>{
  productUrls.add(absolute);
  const image=webp(p.mainImage);
  test(fs.existsSync(image),"Product image missing "+p.slug);
- return {"@type":"ListItem",position:index+1,item:{"@type":"Product",name:p.product,url:absolute,image:BASE+image}};
+ return {"@type":"ListItem",position:index+1,item:{"@type":"WebPage",name:p.product,url:absolute,image:BASE+image}};
 });
 const webSchema={"@context":"https://schema.org","@type":"WebSite","@id":WEBSITE,url:BASE,name:"NOTORIOUS™",alternateName:"NOTORIOUS",publisher:{"@id":ORG}};
 headOnly("index.html",h=>{

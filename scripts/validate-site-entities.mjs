@@ -26,7 +26,7 @@ check(list.itemListElement.length===products.length,"Wrong number of list items"
 const found=new Set();
 for(const [i,p] of products.entries()){
  const item=list.itemListElement[i],target=BASE+"product-"+p.slug+".html";
- check(item?.position===i+1&&item.item?.name===p.product&&item.item.url===target,"Wrong schema entry "+p.slug);
+ check(item?.position===i+1&&item.item?.["@type"]==="WebPage"&&item.item?.name===p.product&&item.item.url===target,"Wrong schema entry "+p.slug);
  check(!found.has(target),"Duplicate product entry "+p.slug);
  found.add(target);
  check(fs.existsSync("product-"+p.slug+".html"),"Missing linked product "+p.slug);
