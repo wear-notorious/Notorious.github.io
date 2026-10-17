@@ -98,6 +98,25 @@ for(const product of data){
  .replace('<meta name="twitter:description" content="Explore bold streetwear by NOTORIOUS™. View product details, sizes and pricing.">','<meta name="twitter:description" content="'+e(description)+'">');
  head+='<link rel="canonical" href="'+e(canonicalUrl)+'">\n<meta name="twitter:image" content="'+e(pic)+'">\n<script id="product-jsonld" type="application/ld+json">'+safeJson(ld)+'</script>\n';
  page=links(head+rest);
+ // Google Shopping links carry ?size=SIZE. Pre-select that size on the
+ // existing size buttons both before and after the original async refresh.
+ // URLs without ?size have unchanged UI/behavior.
+ const selectMerchantSize=[
+  'const notoriousMerchantVariantSize = new URLSearchParams(window.location.search).get("size");',
+  'function selectNotoriousMerchantSize() {',
+  ' if (!notoriousMerchantVariantSize) return;',
+  ' const requested = notoriousMerchantVariantSize.toUpperCase();',
+  ' const target = [...document.querySelectorAll("#productPage .size-btn")].find(b => b.textContent.trim().toUpperCase() === requested);',
+  ' if (target && (selectedSize !== requested || !target.classList.contains("active"))) target.click();',
+  '}',
+  'const notoriousMerchantProductLoad = loadProduct();',
+  'selectNotoriousMerchantSize();',
+  'notoriousMerchantProductLoad.then(selectNotoriousMerchantSize);'
+ ].join("\n");
+ const callMarker="loadProduct();\n  function updateCartCount()";
+ check(page.includes(callMarker),"Unable to enhance product variant selection safely");
+ page=page.replace(callMarker,selectMerchantSize+"\n  function updateCartCount()");
+
  check(page.includes('href="'+canonicalUrl+'"')&&page.includes('id="mainProductImage"')&&page.includes('function addToCart()')&&page.includes('function orderNow()')&&page.includes('type="application/ld+json"'),"Page validation failed "+product.slug);
  const outputFile="product-"+product.slug+".html";
  if(!fs.existsSync(outputFile)||fs.readFileSync(outputFile,"utf8")!==page) modifiedProducts.add(product.slug);

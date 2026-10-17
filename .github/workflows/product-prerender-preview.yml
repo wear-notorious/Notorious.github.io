@@ -8,6 +8,7 @@ on:
       - scripts/fetch-public-product-data.mjs
       - scripts/prerender-products.mjs
       - scripts/validate-prerender.mjs
+      - scripts/build-merchant-feed.mjs
       - scripts/product-page.html.template
       - .github/workflows/product-prerender-preview.yml
   workflow_dispatch:
@@ -42,11 +43,13 @@ jobs:
           node scripts/validate-prerender.mjs
           git diff -- product-*.html product.html sitemap.xml > /tmp/notorious-seo-after.patch
           cmp /tmp/notorious-seo-before.patch /tmp/notorious-seo-after.patch
+      - name: Build Google Merchant Center product feed
+        run: node scripts/build-merchant-feed.mjs
       - name: Commit validated changes to current branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/public-products-snapshot.json product-*.html product.html index.html products.html journal/*.html sitemap.xml
+          git add scripts/public-products-snapshot.json product-*.html product.html index.html products.html journal/*.html sitemap.xml merchant-feed.txt
           if ! git diff --cached --quiet; then
             git commit -m "Refresh static product pages from public catalog"
             git push origin "HEAD:$GITHUB_REF_NAME"
