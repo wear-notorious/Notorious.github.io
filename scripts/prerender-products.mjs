@@ -5,7 +5,7 @@ import vm from "node:vm";
 const BASE="https://wear-notorious.github.io/Notorious.github.io/";
 const bt=String.fromCharCode(96), dollar=String.fromCharCode(36,123);
 const data=JSON.parse(fs.readFileSync("scripts/public-products-snapshot.json","utf8"));
-const original=fs.readFileSync("product.html","utf8");
+const original=fs.readFileSync("scripts/product-page.html.template","utf8");
 const sitemap=fs.readFileSync("sitemap.xml","utf8");
 function check(x,msg){if(!x)throw Error(msg);}
 function e(x){return String(x??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
@@ -37,6 +37,8 @@ function links(src){
  .replaceAll("product.html?slug="+dollar+"encodeURIComponent(product.slug)}",expr("product.slug"))
  .replaceAll("product.html?slug="+dollar+"product.slug}",expr("product.slug"))
  .replaceAll("product.html?slug="+dollar+"item.slug}",expr("item.slug"))
+ .replaceAll("product-"+dollar+"encodeURIComponent(product.slug)}.html",expr("product.slug"))
+ .replaceAll("product-"+dollar+"encodeURIComponent(item.slug)}.html",expr("item.slug"))
  .replace(/product\.html\?slug=([a-z0-9-]+)/g,(_,slug)=>slugs.has(slug) ? "product-"+slug+".html" : "product.html?slug="+slug);
  if(out.includes("NOTORIOUS_SEO_PRODUCT_SLUGS.has")&&!out.includes("const NOTORIOUS_SEO_PRODUCT_SLUGS =")){
    const marker="<\/head>";
