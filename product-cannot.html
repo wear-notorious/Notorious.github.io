@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.">
+  <meta name="description" content="CANNOT™ T-SHIRT –  WHITE — T-shirt graphique streetwear NOTORIOUS™ au Maroc. Livraison gratuite partout au Maroc et paiement à la livraison.">
   <meta property="og:type" content="product">
   <meta property="og:site_name" content="NOTORIOUS™">
   <meta property="og:title" content="CANNOT™ T-SHIRT –  WHITE | NOTORIOUS™">
-  <meta property="og:description" content="Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.">
+  <meta property="og:description" content="CANNOT™ T-SHIRT –  WHITE — T-shirt graphique streetwear NOTORIOUS™ au Maroc. Livraison gratuite partout au Maroc et paiement à la livraison.">
   <meta property="og:url" content="https://wear-notorious.github.io/Notorious.github.io/product-cannot.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CANNOT™ T-SHIRT –  WHITE | NOTORIOUS™">
-  <meta name="twitter:description" content="Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.">
+  <meta name="twitter:description" content="CANNOT™ T-SHIRT –  WHITE — T-shirt graphique streetwear NOTORIOUS™ au Maroc. Livraison gratuite partout au Maroc et paiement à la livraison.">
   <meta property="og:image" content="https://wear-notorious.github.io/Notorious.github.io/images/cannot.webp">
   <meta name="robots" content="index,follow" id="product-robots">
 
@@ -1357,7 +1357,7 @@ function toWebpImage(value) {
 </script>
 <link rel="canonical" href="https://wear-notorious.github.io/Notorious.github.io/product-cannot.html">
 <meta name="twitter:image" content="https://wear-notorious.github.io/Notorious.github.io/images/cannot.webp">
-<script id="product-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"CANNOT™ T-SHIRT –  WHITE","description":"Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.","image":["https://wear-notorious.github.io/Notorious.github.io/images/cannot.webp","https://wear-notorious.github.io/Notorious.github.io/images/cannot-1.webp","https://wear-notorious.github.io/Notorious.github.io/images/cannot-2.webp","https://wear-notorious.github.io/Notorious.github.io/images/cannot-3.webp"],"url":"https://wear-notorious.github.io/Notorious.github.io/product-cannot.html","brand":{"@type":"Brand","name":"NOTORIOUS™"},"offers":{"@type":"Offer","price":179,"priceCurrency":"MAD","url":"https://wear-notorious.github.io/Notorious.github.io/product-cannot.html"}}</script>
+<script id="product-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"CANNOT™ T-SHIRT –  WHITE","description":"CANNOT™ T-SHIRT –  WHITE — T-shirt graphique streetwear NOTORIOUS™ au Maroc. Livraison gratuite partout au Maroc et paiement à la livraison.","image":["https://wear-notorious.github.io/Notorious.github.io/images/cannot.webp","https://wear-notorious.github.io/Notorious.github.io/images/cannot-1.webp","https://wear-notorious.github.io/Notorious.github.io/images/cannot-2.webp","https://wear-notorious.github.io/Notorious.github.io/images/cannot-3.webp"],"url":"https://wear-notorious.github.io/Notorious.github.io/product-cannot.html","brand":{"@type":"Brand","name":"NOTORIOUS™"},"offers":{"@type":"Offer","price":179,"priceCurrency":"MAD","url":"https://wear-notorious.github.io/Notorious.github.io/product-cannot.html"}}</script>
 <script>const NOTORIOUS_SEO_PRODUCT_SLUGS = new Set(["asap","fbi","horny","bull","cannot","bcs","absolut","ai","boobs","badbull","hornyhoodie","youtube","sirotonin","ocb","statue","notor","momy","notime","dogs","visse","spotme","visages","blood","fuckk","racist","liquor"]);</script>
 </head>
 
@@ -1752,6 +1752,19 @@ function toWebpImage(value) {
 <script>
 const PRODUCTS_API_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
 
+// Search metadata uses the real product details; improve only a known generic
+// supplier placeholder, without altering the description shown to shoppers.
+function getProductSeoDescription(product) {
+  const original = String(product.description || product.product || "")
+    .replace(/<[^>]*>/g, " ").replace(/&nbsp;/gi, " ")
+    .replace(/\s+/g, " ").trim();
+  const placeholder = "Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.";
+  if (original === placeholder && String(product.category || "").toLowerCase() === "tshirts") {
+    return (String(product.product) + " — T-shirt graphique streetwear NOTORIOUS™ au Maroc. Livraison gratuite partout au Maroc et paiement à la livraison.").slice(0, 160);
+  }
+  return original.slice(0, 160);
+}
+
 async function loadProduct() {
   const params = new URLSearchParams(window.location.search);
   const slug = "cannot";
@@ -1833,9 +1846,7 @@ localStorage.setItem(
     document.querySelector('link[rel="canonical"]').href = productUrl.href;
     document.querySelector('meta[property="og:url"]').content = productUrl.href;
     document.querySelector('meta[property="og:title"]').content = document.title;
-    const productDescription = String(product.description || product.product || "")
-      .replace(/<[^>]*>/g, " ").replace(/&nbsp;/gi, " ")
-      .replace(/\s+/g, " ").trim().slice(0, 160);
+    const productDescription = getProductSeoDescription(product);
     document.querySelector('meta[name="description"]').content = productDescription;
     document.querySelector('meta[property="og:description"]').content = productDescription;
     document.querySelector('meta[name="twitter:title"]').content = document.title;

@@ -35,6 +35,13 @@ jobs:
         run: node scripts/prerender-products.mjs
       - name: Verify canonical URLs, schema, image files and script syntax
         run: node scripts/validate-prerender.mjs
+      - name: Confirm repeat build keeps identical SEO output
+        run: |
+          git diff -- product-*.html product.html sitemap.xml > /tmp/notorious-seo-before.patch
+          node scripts/prerender-products.mjs
+          node scripts/validate-prerender.mjs
+          git diff -- product-*.html product.html sitemap.xml > /tmp/notorious-seo-after.patch
+          cmp /tmp/notorious-seo-before.patch /tmp/notorious-seo-after.patch
       - name: Commit validated changes to current branch
         run: |
           git config user.name "github-actions[bot]"

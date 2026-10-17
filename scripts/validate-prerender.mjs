@@ -15,6 +15,18 @@ for(const p of products){
  const head=page.slice(0,page.indexOf("</head>"));
  const expected=BASE+path;
  test(urls.includes(expected),"Product missing from sitemap "+p.slug);
+ const productLoc="<loc>"+expected+"</loc>";
+ const locIndex=sitemap.indexOf(productLoc);
+ const urlBlock=sitemap.slice(sitemap.lastIndexOf("<url>",locIndex),sitemap.indexOf("</url>",locIndex)+6);
+ test(urlBlock.includes("<lastmod>")&&urlBlock.includes("</lastmod>"),"Missing product lastmod "+p.slug);
+ const originalDescription=String(p.description||"").trim();
+ const generic="Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.";
+ if(originalDescription===generic && String(p.category||"").toLowerCase()==="tshirts") {
+   const meta=head.match(/<meta name="description" content="([^"]+)"/)?.[1]||"";
+   test(meta.includes(p.product)&&meta.includes("Maroc"),"Generic placeholder not optimized for "+p.slug);
+   test(page.includes('<p class="product-description">'+p.description+'</p>'),"Visible description was changed "+p.slug);
+ }
+
  test((head.match(/<link rel="canonical"/g)||[]).length===1&&head.includes('href="'+expected+'"'),"Wrong canonical "+p.slug);
  test(page.includes('<h1>'+p.product+'</h1>')&&page.includes('id="mainProductImage"'),"Missing static product content "+p.slug);
  test(page.includes('function addToCart()')&&page.includes('function orderNow()'),"Missing ecommerce controls "+p.slug);
