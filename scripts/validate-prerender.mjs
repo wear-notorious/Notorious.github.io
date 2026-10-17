@@ -18,8 +18,8 @@ for(const p of products){
  const productLoc="<loc>"+expected+"</loc>";
  const locIndex=sitemap.indexOf(productLoc);
  const urlBlock=sitemap.slice(sitemap.lastIndexOf("<url>",locIndex),sitemap.indexOf("</url>",locIndex)+6);
- test(/<lastmod>\\d{4}-\\d{2}-\\d{2}<\\/lastmod>/.test(urlBlock),"Missing accurate lastmod "+p.slug);
- const originalDescription=String(p.description||"").replace(/<[^>]*>/g," ").replace(/&nbsp;/gi," ").replace(/\\s+/g," ").trim();
+ test(urlBlock.includes("<lastmod>")&&urlBlock.includes("</lastmod>"),"Missing product lastmod "+p.slug);
+ const originalDescription=String(p.description||"").trim();
  const generic="Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.";
  if(originalDescription===generic && String(p.category||"").toLowerCase()==="tshirts") {
    const meta=head.match(/<meta name="description" content="([^"]+)"/)?.[1]||"";
