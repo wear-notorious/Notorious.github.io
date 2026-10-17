@@ -2487,7 +2487,16 @@ function orderNow() {
   document.querySelector(".nav-links").classList.toggle("active");
 }
   
-loadProduct();
+const notoriousMerchantVariantSize = new URLSearchParams(window.location.search).get("size");
+function selectNotoriousMerchantSize() {
+ if (!notoriousMerchantVariantSize) return;
+ const requested = notoriousMerchantVariantSize.toUpperCase();
+ const target = [...document.querySelectorAll("#productPage .size-btn")].find(b => b.textContent.trim().toUpperCase() === requested);
+ if (target && (selectedSize !== requested || !target.classList.contains("active"))) target.click();
+}
+const notoriousMerchantProductLoad = loadProduct();
+selectNotoriousMerchantSize();
+notoriousMerchantProductLoad.then(selectNotoriousMerchantSize);
   function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("notoriousCart")) || [];
   const total = cart.reduce((sum, item) => sum + Number(item.quantity), 0);
