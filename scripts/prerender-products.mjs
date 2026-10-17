@@ -12,8 +12,17 @@ function e(x){return String(x??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").re
 function clean(x){return String(x??"").replace(/<[^>]*>/g," ").replace(/&nbsp;/gi," ").replace(/&amp;/gi,"&").replace(/\s+/g," ").trim();}
 function safeJson(x){return JSON.stringify(x).replace(/</g,"\\u003c").replace(/>/g,"\\u003e").replace(/&/g,"\\u0026");}
 function webp(x){return String(x||"").replace(/^(images\/[^?#]+)\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i,"$1.webp");}
+function getSeoDescription(p){
+ const original=clean(p.description||p.product);
+ const placeholder="Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.";
+ if(original===placeholder && String(p.category||"").toLowerCase()==="tshirts") {
+  return (String(p.product)+" — T-shirt graphique streetwear NOTORIOUS™ au Maroc. Livraison gratuite partout au Maroc et paiement à la livraison.").slice(0,160);
+ }
+ return original.slice(0,160);
+}
 function url(slug){return BASE+"product-"+encodeURIComponent(slug)+".html";}
-const planned=new Map(),slugs=new Set();
+const planned=new Map(),slugs=new Set(),modifiedProducts=new Set();
+const buildDate=new Date().toISOString().slice(0,10);
 check(Array.isArray(data)&&data.length>=26,"Incomplete source catalog");
 for(const p of data){check(/^[a-z0-9-]+$/.test(p.slug)&&p.product&&p.mainImage,"Invalid product fields");check(!slugs.has(p.slug),"Duplicate slug");slugs.add(p.slug);}
 const listed=[...sitemap.matchAll(/\/product(?:\.html\?slug=|-)([a-z0-9-]+)(?:\.html)?<\/loc>/g)].map(x=>x[1]);
@@ -64,7 +73,7 @@ for(const product of data){
  const sizes=String(product.sizes||"").split(",").map(x=>x.trim()).filter(Boolean);
  const markup=vm.runInNewContext(bt+productTemplate+bt,{product,productImages:images,sizes,toWebpImage:webp},{timeout:1500});
  check(markup.includes('<h1>'+product.product+'</h1>')&&markup.includes('id="mainProductImage"')&&markup.includes('onclick="addToCart()"'),"Template not fully rendered: "+product.slug);
- const description=clean(product.description||product.product).slice(0,160);
+ const description=getSeoDescription(product);
  const title=String(product.product)+" | NOTORIOUS™";
  const canonicalUrl=url(product.slug);
  const pic=new URL(webp(product.mainImage),BASE).href;
@@ -90,7 +99,9 @@ for(const product of data){
  head+='<link rel="canonical" href="'+e(canonicalUrl)+'">\n<meta name="twitter:image" content="'+e(pic)+'">\n<script id="product-jsonld" type="application/ld+json">'+safeJson(ld)+'</script>\n';
  page=links(head+rest);
  check(page.includes('href="'+canonicalUrl+'"')&&page.includes('id="mainProductImage"')&&page.includes('function addToCart()')&&page.includes('function orderNow()')&&page.includes('type="application/ld+json"'),"Page validation failed "+product.slug);
- planned.set("product-"+product.slug+".html",page);
+ const outputFile="product-"+product.slug+".html";
+ if(!fs.existsSync(outputFile)||fs.readFileSync(outputFile,"utf8")!==page) modifiedProducts.add(product.slug);
+ planned.set(outputFile,page);
 }
 const articles=["gym-streetwear-maroc","hoodie-320gsm-maroc","graphic-tshirt-style-maroc","oversized-vs-regular-fit-tshirt-maroc","kifach-tkhtar-hoodie-qualite-maroc","gym-outfits-hommes-maroc","hoodie-vs-sweatshirt-maroc","style-black-graphic-tshirt-maroc"];
 for(const path of ["index.html","products.html",...articles.map(a=>"journal/"+a+".html")]){
@@ -102,6 +113,23 @@ const urls=new Set([...newSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1])
 for(const p of data){if(!urls.has(url(p.slug))){newSitemap=newSitemap.replace('</urlset>','  <url><loc>'+url(p.slug)+'</loc></url>\n</urlset>');urls.add(url(p.slug));}}
 check([...newSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].length===urls.size,"Duplicate sitemap URLs");
 check(data.every(p=>urls.has(url(p.slug)))&&!newSitemap.includes("product.html?slug="),"Incorrect sitemap migration");
+// Signal real product changes with accurate lastmod dates. Unchanged products
+// retain their existing date; the daily build must not fabricate freshness.
+for(const p of data) {
+ const productUrl=url(p.slug);
+ const escaped=productUrl.replace(/[.*+?^$\{\}()|[\]\\]/g,"\\planned.set("sitemap.xml",newSitemap);");
+ const block=new RegExp("(<url>\\s*<loc>"+escaped+"<\\/loc>)([\\s\\S]*?)(<\\/url>)","g");
+ let matched=false;
+ newSitemap=newSitemap.replace(block,(whole,open,mid,close)=>{
+  matched=true;
+  if(modifiedProducts.has(p.slug)||!/<lastmod>/.test(mid)) {
+    const nextMid=/<lastmod>/.test(mid)?mid.replace(/<lastmod>[^<]*<\\/lastmod>/g,"<lastmod>"+buildDate+"</lastmod>"):mid+"\\n    <lastmod>"+buildDate+"</lastmod>";
+    return open+nextMid+close;
+  }
+  return whole;
+ });
+ check(matched,"Unable to locate sitemap block for "+p.slug);
+}
 planned.set("sitemap.xml",newSitemap);
 // All validation above completes before writing any files.
 for(const [file,content] of planned)fs.writeFileSync(file,content,"utf8");
