@@ -6,6 +6,8 @@ on:
     paths:
       - scripts/fetch-public-product-data.mjs
       - scripts/prerender-products.mjs
+      - scripts/validate-prerender.mjs
+      - scripts/product-page.html.template
       - .github/workflows/product-prerender-preview.yml
   workflow_dispatch:
 permissions:
@@ -28,6 +30,8 @@ jobs:
         run: node scripts/fetch-public-product-data.mjs
       - name: Render static product pages from verified catalog
         run: node scripts/prerender-products.mjs
+      - name: Verify canonical URLs, schema, image files and script syntax
+        run: node scripts/validate-prerender.mjs
       - name: Commit SEO preview on preview branch
         run: |
           git config user.name "github-actions[bot]"
