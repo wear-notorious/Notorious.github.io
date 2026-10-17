@@ -17,6 +17,15 @@ let skipped=0;
 function assert(ok,msg){if(!ok)throw Error(msg);}
 function text(x){return String(x??"").replace(/<[^>]*>/g," ").replace(/&nbsp;/gi," ").replace(/&amp;/gi,"&").replace(/[\r\n\t]+/g," ").replace(/\s+/g," ").trim();}
 function webp(s){return String(s||"").replace(/^(images\/[^?#]+)\.(?:png|jpe?g|jfif)(?=([?#].*)?$)/i,"$1.webp");}
+function feedDescription(product) {
+ const original=text(product.description);
+ const generic="Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.";
+ // Identical supplier placeholders are not useful in merchant results.
+ if(original===generic&&String(product.category||"").toLowerCase()==="tshirts"){
+   return text(product.product)+" — T-shirt graphique streetwear NOTORIOUS™ au Maroc. Livraison gratuite partout au Maroc et paiement à la livraison.";
+ }
+ return original;
+}
 function merchantColor(title) {
  const matches=[...String(title).toUpperCase().matchAll(/\b(BLACK|WHITE)\b/g)];
  const colors=[...new Set(matches.map(m=>m[1]))];
@@ -57,11 +66,15 @@ for(const p of products){
    if(!allowedSizes.has(size)){console.warn("Skipping unverified apparel size",p.slug,size);continue;}
    const id="NOTORIOUS-"+p.slug+"-"+size;
    assert(!ids.has(id),"Duplicate variant ID "+id);ids.add(id);
-   const link=BASE+"product-"+p.slug+".html?size="+encodeURIComponent(size);
+   const page="product-"+p.slug+".html";
+   assert(fs.existsSync(page),"Product URL file missing: "+page);
+   const html=fs.readFileSync(page,"utf8");
+   assert(html.includes("notoriousMerchantVariantSize"),"Size variant selection missing in "+page);
+   const link=BASE+page+"?size="+encodeURIComponent(size);
    const row={
      id,item_group_id:"NOTORIOUS-"+p.slug,
      title:text(p.product)+" - "+size,
-     description:text(p.description).slice(0,5000),
+     description:feedDescription(p).slice(0,5000),
      link,
      image_link:new URL(images[0],BASE).href,
      additional_image_link:images.slice(1).map(s=>new URL(s,BASE).href).join(","),
