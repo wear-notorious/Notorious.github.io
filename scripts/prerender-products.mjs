@@ -29,12 +29,21 @@ const begin=original.indexOf(lead);
 const finish=original.indexOf(bt+";\n\n    const mightLikeGrid",begin+lead.length);
 check(begin>=0&&finish>begin,"Cannot locate original product markup template");
 const productTemplate=original.slice(begin+lead.length,finish);
+// Dynamic catalog may gain new products between scheduled builds.
+// Unknown slugs always retain the working legacy product.html?slug= URL.
 function links(src){
- return src
- .replaceAll("product.html?slug="+dollar+"encodeURIComponent(product.slug)}","product-"+dollar+"encodeURIComponent(product.slug)}.html")
- .replaceAll("product.html?slug="+dollar+"product.slug}","product-"+dollar+"encodeURIComponent(product.slug)}.html")
- .replaceAll("product.html?slug="+dollar+"item.slug}","product-"+dollar+"encodeURIComponent(item.slug)}.html")
- .replace(/product\.html\?slug=([a-z0-9-]+)/g,(_,slug)=>"product-"+slug+".html");
+ const expr=(name)=>dollar+'(NOTORIOUS_SEO_PRODUCT_SLUGS.has(String('+name+').toLowerCase()) ? "product-" + encodeURIComponent('+name+') + ".html" : "product.html?slug=" + encodeURIComponent('+name+'))}';
+ let out=src
+ .replaceAll("product.html?slug="+dollar+"encodeURIComponent(product.slug)}",expr("product.slug"))
+ .replaceAll("product.html?slug="+dollar+"product.slug}",expr("product.slug"))
+ .replaceAll("product.html?slug="+dollar+"item.slug}",expr("item.slug"))
+ .replace(/product\.html\?slug=([a-z0-9-]+)/g,(_,slug)=>slugs.has(slug) ? "product-"+slug+".html" : "product.html?slug="+slug);
+ if(out.includes("NOTORIOUS_SEO_PRODUCT_SLUGS.has")&&!out.includes("const NOTORIOUS_SEO_PRODUCT_SLUGS =")){
+   const marker="<\/head>";
+   check(out.includes(marker),"No head for static link allowlist");
+   out=out.replace(marker,'<script>const NOTORIOUS_SEO_PRODUCT_SLUGS = new Set('+JSON.stringify([...slugs])+');</script>\n'+marker);
+ }
+ return out;
 }
 // Keep old query-string URLs functional, with clear canonical toward their static equivalent.
 const legacy=original
