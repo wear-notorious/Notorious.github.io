@@ -66,10 +66,14 @@ headOnly("products.html",h=>{
  let out=h.replace(old.text,'<script type="application/ld+json">'+json(schema)+'</script>');
  const oldTitle="T-shirts graphiques, Hoodies &amp; Streetwear au Maroc | NOTORIOUS™";
  const newTitle=safeHTML(shortName);
- test(out.includes("<title>"+oldTitle+"</title>"),"Unexpected products title");
- test(out.includes('content="'+oldTitle+'"'),"Unexpected products og:title");
- out=out.replace("<title>"+oldTitle+"</title>","<title>"+newTitle+"</title>")
-  .replace('property="og:title" content="'+oldTitle+'"','property="og:title" content="'+newTitle+'"');
+ if(out.includes("<title>"+oldTitle+"</title>")) {
+  test(out.includes('content="'+oldTitle+'"'),"Unexpected products og:title");
+  out=out.replace("<title>"+oldTitle+"</title>","<title>"+newTitle+"</title>")
+    .replace('property="og:title" content="'+oldTitle+'"','property="og:title" content="'+newTitle+'"');
+ } else {
+  test(out.includes("<title>"+newTitle+"</title>"),"Unexpected products title");
+  test(out.includes('property="og:title" content="'+newTitle+'"'),"Unexpected products og:title");
+ }
  return out;
 });
 const pages=[
@@ -87,9 +91,12 @@ for(const [path,type,name,desc] of pages){
   if(path==="legal.html"){
     const prior="Read the NOTORIOUS™ privacy policy, terms and legal information.";
     const updated=desc;
-    test(out.includes('name="description" content="'+prior+'"'),"Legal meta description changed");
-    out=out.replace('name="description" content="'+prior+'"','name="description" content="'+safeHTML(updated)+'"');
-    out=out.replace('property="og:description" content="'+prior+'"','property="og:description" content="'+safeHTML(updated)+'"');
+    if(out.includes('name="description" content="'+prior+'"')){
+      out=out.replace('name="description" content="'+prior+'"','name="description" content="'+safeHTML(updated)+'"');
+      out=out.replace('property="og:description" content="'+prior+'"','property="og:description" content="'+safeHTML(updated)+'"');
+    } else {
+      test(out.includes('name="description" content="'+safeHTML(updated)+'"'),"Legal meta description changed");
+    }
   }
   return out;
  });
