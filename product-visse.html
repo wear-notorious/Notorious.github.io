@@ -1752,6 +1752,19 @@ function toWebpImage(value) {
 <script>
 const PRODUCTS_API_URL = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
 
+// Search metadata uses the real product details; improve only a known generic
+// supplier placeholder, without altering the description shown to shoppers.
+function getProductSeoDescription(product) {
+  const original = String(product.description || product.product || "")
+    .replace(/<[^>]*>/g, " ").replace(/&nbsp;/gi, " ")
+    .replace(/\s+/g, " ").trim();
+  const placeholder = "Premium streetwear T-shirt by NOTORIOUS™. Bold design made for those who wear what they won't.";
+  if (original === placeholder && String(product.category || "").toLowerCase() === "tshirts") {
+    return (String(product.product) + " — T-shirt graphique streetwear NOTORIOUS™ au Maroc. Livraison gratuite partout au Maroc et paiement à la livraison.").slice(0, 160);
+  }
+  return original.slice(0, 160);
+}
+
 async function loadProduct() {
   const params = new URLSearchParams(window.location.search);
   const slug = "visse";
@@ -1833,9 +1846,7 @@ localStorage.setItem(
     document.querySelector('link[rel="canonical"]').href = productUrl.href;
     document.querySelector('meta[property="og:url"]').content = productUrl.href;
     document.querySelector('meta[property="og:title"]').content = document.title;
-    const productDescription = String(product.description || product.product || "")
-      .replace(/<[^>]*>/g, " ").replace(/&nbsp;/gi, " ")
-      .replace(/\s+/g, " ").trim().slice(0, 160);
+    const productDescription = getProductSeoDescription(product);
     document.querySelector('meta[name="description"]').content = productDescription;
     document.querySelector('meta[property="og:description"]').content = productDescription;
     document.querySelector('meta[name="twitter:title"]').content = document.title;
