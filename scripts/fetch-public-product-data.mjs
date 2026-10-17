@@ -3,8 +3,29 @@
 import fs from "node:fs";
 const URL_BASE = "https://script.google.com/macros/s/AKfycbx90N-BQoq68gskAzmCC_J144d6hg3FMAYIIQd1hevkUa-6aNxNjM4cqBRuCAJNGF0D/exec";
 const callback = "notoriousSeoSnapshotCallback";
-const response = await fetch(URL_BASE + "?callback=" + callback, {signal: AbortSignal.timeout(30000),redirect:"follow"});
-if (!response.ok) throw Error("Product feed HTTP " + response.status);
+// Google Apps Script occasionally times out under GitHub Actions. Retry transient
+// outages but never publish partial or stale product data after repeated failures.
+let response;
+for (let attempt = 1; attempt <= 3; attempt++) {
+  try {
+    response = await fetch(URL_BASE + "?callback=" + callback, {
+      signal: AbortSignal.timeout(30000), redirect:"follow"
+    });
+    if (!response.ok) {
+      const error = Error("Product feed HTTP " + response.status);
+      if (response.status >= 400 && response.status < 500) throw error;
+      throw error;
+    }
+    break;
+  } catch (error) {
+    const clientError = response && response.status >= 400 && response.status < 500;
+    if (attempt === 3 || clientError) throw error;
+    console.warn("Transient product feed error, retrying attempt "+(attempt+1)+"/3: "+error.message);
+    await new Promise(resolve => setTimeout(resolve, attempt * 2000));
+    response = undefined;
+  }
+}
+
 const text = (await response.text()).trim();
 let payload;
 try { payload = JSON.parse(text); }
