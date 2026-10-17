@@ -113,11 +113,23 @@ const urls=new Set([...newSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(x=>x[1])
 for(const p of data){if(!urls.has(url(p.slug))){newSitemap=newSitemap.replace('</urlset>','  <url><loc>'+url(p.slug)+'</loc></url>\n</urlset>');urls.add(url(p.slug));}}
 check([...newSitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].length===urls.size,"Duplicate sitemap URLs");
 check(data.every(p=>urls.has(url(p.slug)))&&!newSitemap.includes("product.html?slug="),"Incorrect sitemap migration");
-// Signal real product changes with accurate lastmod dates. Unchanged products
-// retain their existing date; the daily build must not fabricate freshness.
-for(const p of data) {
- const productUrl=url(p.slug);
- const escaped=productUrl.replace(/[.*+?^$\{\}()|[\]\\]/g,"\\planned.set("sitemap.xml",newSitemap);");
+// Mark meaningful product updates in the sitemap, not every daily cron run.
+for (const p of data) {
+ const locator="<loc>"+url(p.slug)+"</loc>";
+ const locIndex=newSitemap.indexOf(locator);
+ check(locIndex>=0,"Sitemap missing product: "+p.slug);
+ const blockStart=newSitemap.lastIndexOf("<url>",locIndex);
+ const blockEnd=newSitemap.indexOf("</url>",locIndex)+6;
+ check(blockStart>=0&&blockEnd>locIndex,"Broken sitemap product block: "+p.slug);
+ let block=newSitemap.slice(blockStart,blockEnd);
+ if(modifiedProducts.has(p.slug)||!block.includes("<lastmod>")) {
+   const lastmod="<lastmod>"+buildDate+"</lastmod>";
+   if(block.includes("<lastmod>"))block=block.replace(/<lastmod>[^<]*<\/lastmod>/,lastmod);
+   else block=block.replace(locator,locator+"\n    "+lastmod);
+   newSitemap=newSitemap.slice(0,blockStart)+block+newSitemap.slice(blockEnd);
+ }
+}
+planned.set("sitemap.xml",newSitemap);");
  const block=new RegExp("(<url>\\s*<loc>"+escaped+"<\\/loc>)([\\s\\S]*?)(<\\/url>)","g");
  let matched=false;
  newSitemap=newSitemap.replace(block,(whole,open,mid,close)=>{
