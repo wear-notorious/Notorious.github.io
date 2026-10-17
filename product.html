@@ -8,7 +8,10 @@
   <meta property="og:title" content="Streetwear Product | NOTORIOUS™">
   <meta property="og:description" content="Explore bold streetwear by NOTORIOUS™. View product details, sizes and pricing.">
   <meta property="og:url" content="https://wear-notorious.github.io/Notorious.github.io/product.html">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Streetwear Product | NOTORIOUS™">
+  <meta name="twitter:description" content="Explore bold streetwear by NOTORIOUS™. View product details, sizes and pricing.">
+  <meta property="og:image" content="https://wear-notorious.github.io/Notorious.github.io/images/Favicon-Notorious.webp">
   <meta name="robots" content="index,follow" id="product-robots">
 
   <meta charset="UTF-8">
@@ -16,7 +19,7 @@
 
   <title>Streetwear Product | NOTORIOUS™</title>
 
-  <link rel="icon" type="image/png" href="images/Favicon-Notorious.webp">
+  <link rel="icon" type="image/webp" href="images/Favicon-Notorious.webp">
 
   <style>
     * {
@@ -1496,14 +1499,21 @@ localStorage.setItem(
     }
 
     document.title = product.product + " | NOTORIOUS™";
-    const productUrl = new URL(window.location.href);
-    productUrl.search = "?slug=" + encodeURIComponent(product.slug);
+    // Keep canonical independent from tracking parameters and URL fragments.
+    const productUrl = new URL(window.location.pathname, window.location.origin);
+    productUrl.searchParams.set("slug", String(product.slug));
     document.querySelector('link[rel="canonical"]').href = productUrl.href;
     document.querySelector('meta[property="og:url"]').content = productUrl.href;
     document.querySelector('meta[property="og:title"]').content = document.title;
-    const productDescription = String(product.description || product.product || "").replace(/<[^>]*>/g, " ").trim().slice(0, 280);
+    const productDescription = String(product.description || product.product || "")
+      .replace(/<[^>]*>/g, " ").replace(/&nbsp;/gi, " ")
+      .replace(/\s+/g, " ").trim().slice(0, 160);
     document.querySelector('meta[name="description"]').content = productDescription;
     document.querySelector('meta[property="og:description"]').content = productDescription;
+    document.querySelector('meta[name="twitter:title"]').content = document.title;
+    document.querySelector('meta[name="twitter:description"]').content = productDescription;
+    const primaryImage = product.mainImage ? new URL(toWebpImage(product.mainImage), window.location.href).href : "";
+    if (primaryImage) document.querySelector('meta[property="og:image"]').content = primaryImage;
     document.querySelector('meta[name="robots"]').content = "index,follow";
     const productSchema = {
       "@context": "https://schema.org", "@type": "Product",
@@ -1514,7 +1524,10 @@ localStorage.setItem(
       brand: { "@type": "Brand", name: "NOTORIOUS™" }
     };
     const price = Number(product.price);
-    if (Number.isFinite(price) && price >= 0) productSchema.offers = { "@type": "Offer", price: price, priceCurrency: "MAD", availability: "https://schema.org/InStock", url: productUrl.href };
+    if (Number.isFinite(price) && price >= 0) {
+      // Do not claim stock availability without a reliable inventory field.
+      productSchema.offers = { "@type": "Offer", price: price, priceCurrency: "MAD", url: productUrl.href };
+    }
     const oldSchema = document.getElementById("product-jsonld");
     if (oldSchema) oldSchema.remove();
     const schemaScript = document.createElement("script");
