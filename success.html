@@ -124,9 +124,9 @@
 
     <div class="check" aria-hidden="true">…</div>
 
-    <h1>ORDER PENDING</h1>
+    <h1 id="statusTitle">ORDER PENDING</h1>
 
-    <p class="subtitle">
+    <p class="subtitle" id="statusMessage">
       Your order request was sent, but receipt by our order system is not yet verified.<br>
       Keep the reference below until our team confirms your order.
     </p>
@@ -195,13 +195,26 @@
   const matchingOrder = stored && stored.orderId === orderId ? stored : null;
 
   document.getElementById("orderNumber").textContent = orderId || "-";
-  document.getElementById("productName").textContent = params.get("product") || "-";
-  document.getElementById("productSize").textContent = params.get("size") || "-";
-  document.getElementById("productQuantity").textContent = params.get("quantity") || "-";
-  document.getElementById("orderTotal").textContent = params.get("total") || "0";
+  // Do not render query-string claims of purchase, charge, or total as proof.
+  const orderItems = matchingOrder && Array.isArray(matchingOrder.items) ? matchingOrder.items : [];
+  document.getElementById("productName").textContent =
+    orderItems.length ? orderItems.map(i => i.product).join(" + ") : "-";
+  document.getElementById("productSize").textContent =
+    orderItems.length === 1 ? orderItems[0].size : (orderItems.length > 1 ? "Multiple" : "-");
+  document.getElementById("productQuantity").textContent =
+    orderItems.length ? orderItems.reduce((sum, i) => sum + Number(i.quantity || 0), 0) : "-";
+  document.getElementById("orderTotal").textContent =
+    matchingOrder ? String(matchingOrder.totalMad) : "-";
 
-  const paymentMethod = matchingOrder ? matchingOrder.paymentMethod : params.get("paymentMethod");
-  if (paymentMethod === "PayPal") {
+  const paymentMethod = matchingOrder && matchingOrder.paymentMethod;
+  if (!matchingOrder) {
+    document.getElementById("statusTitle").textContent = "ORDER NOT VERIFIED";
+    document.getElementById("statusMessage").textContent =
+      "This page is not proof of an order. Please contact NOTORIOUS for assistance.";
+    document.getElementById("paymentLabel").textContent = "Not verified";
+    document.getElementById("nextStep").textContent =
+      "Contact our team if you attempted to place an order or make a payment.";
+  } else if (paymentMethod === "PayPal") {
     document.getElementById("paymentLabel").textContent = "PayPal — order verification pending";
     document.getElementById("nextStep").textContent =
       "Do NOT pay again. Contact us with the order and PayPal transaction references if you are not contacted.";
@@ -209,7 +222,7 @@
       document.getElementById("paypalReference").textContent = matchingOrder.paymentReference;
       document.getElementById("paypalReferenceRow").style.display = "block";
     }
-  } else {
+  } else if (matchingOrder) {
     document.getElementById("paymentLabel").textContent = "Cash on Delivery — awaiting confirmation";
     document.getElementById("nextStep").textContent =
       "Our team will contact you to verify the order before delivery. Pay only upon delivery.";
