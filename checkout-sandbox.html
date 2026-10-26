@@ -487,17 +487,8 @@
 
 </main>
 
-<!-- SANDBOX TEST ONLY: insert the PUBLIC sandbox client ID below, never a secret. -->
-<script>
-  const sandboxClientId = new URLSearchParams(location.search).get("sandbox_client_id");
-  if (sandboxClientId && /^[A-Za-z0-9_-]{20,200}$/.test(sandboxClientId)) {
-    const sdk = document.createElement("script");
-    sdk.src = "https://www.paypal.com/sdk/js?client-id=" + encodeURIComponent(sandboxClientId) + "&currency=USD&components=buttons";
-    document.head.appendChild(sdk);
-  }
-</script>
-<!-- Sandbox preview, not live checkout. ^ Check in PayPal Developer Dashboard > Apps & Credentials > LIVE that this is the real Client ID.
-     A normal PayPal Client ID usually starts with "A". NEVER put the Secret here. -->
+<!-- SANDBOX PREVIEW ONLY. Public client ID; no secret in source. -->
+<script src="https://www.paypal.com/sdk/js?client-id=AfwWk-EKBozXscmersApD6TNUygGPmgpQIk9yjX7WyeEKu7lxUF7awXvZqM0fNlOlwschdjpqEZ4Us4O&currency=USD&components=buttons"></script>
 
 <script>
   // =====================================================
@@ -520,7 +511,7 @@
   const MAX_QTY = 10;      // max quantity per item
   const MAX_PRICE = 5000;  // sanity limit for fallback prices (MAD)
 
-  const WEB_APP_URL = ""; // No live backend writes from sandbox preview
+  const WEB_APP_URL = ""; // Deliberately disabled: sandbox backend not deployed
 
   // One order id per page load (also sent to PayPal as custom_id
   // so you can match a PayPal payment with a row in your sheet).
@@ -786,6 +777,8 @@
   // =====================================================
 
   function confirmOrder() {
+    alert("SANDBOX PREVIEW ONLY — checkout disabled until test backend is verified.");
+    return;
     if (isSubmitting || totalMad <= 0) return;
 
     const form = $("checkoutForm");
@@ -837,6 +830,8 @@
 
   // Returns true if the PayPal buttons are (or will be) available.
   function initPayPal() {
+    // Do not create or capture PayPal orders before the isolated backend is ready.
+    return false;
     if (paypalRendered) return true;
     if (!window.paypal || totalMad <= 0 || !WEB_APP_URL) return false;
 
