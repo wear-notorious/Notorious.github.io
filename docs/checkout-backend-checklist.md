@@ -11,7 +11,7 @@ Status: **frontend review branch only — NOT production-ready for merge**.
 
 ## Minimum safe backend contract before deploying payment-verification changes
 
-**There is no Apps Script backend source in this repository.** Do not replace the deployed Google Apps Script without first reviewing its current code and the connected Google Sheet. Coordinate these changes with whoever owns that deployment.
+**The live Apps Script source was supplied separately during checkout review; it is not committed in this repository.** It already recalculates prices from the `Products` sheet and queries PayPal's Orders API, but it lacks an atomic idempotency/duplicate-order check, does not require a matching merchant account, accepts PayPal requests with missing capture IDs, and warns instead of holding potentially mismatched totals. A reviewed replacement candidate and nine simulated regression tests were delivered privately to the merchant for sandbox validation. Do not deploy or merge this PR until they are tested with a copy of the actual spreadsheet and correctly configured PayPal credentials.
 
 1. **Authoritative products/prices.** Fetch product identifiers, active status, size availability, MAD unit prices, and delivery charges from the trusted Products sheet/server, never `price`, `claimedTotal`, or any browser-supplied fields.
 2. **Create COD order.** Provide an HTTPS endpoint such as `POST /api/orders/cod` that validates buyer fields and items, records each order once, and returns readable JSON: `{ "ok": true, "orderId": "...", "status": "received" }`. Apply an idempotency constraint on the order ID and rate limits against spam; never silently accept out-of-stock/unavailable products.
