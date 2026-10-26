@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <link rel="icon" type="image/png" href="images/Favicon-Notorious.png">
+ <link rel="icon" type="image/webp" href="images/Favicon-Notorious.webp">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,follow">
-  <title>Order Confirmed | NOTORIOUS™</title>
+  <title>Order request pending | NOTORIOUS™</title>
 
   <style>
     * {
@@ -120,15 +120,15 @@
 
   <div class="confirmation-box">
 
-    <img src="images/Notorious-Logo-White.png" alt="NOTORIOUS" class="logo">
+    <img src="images/Notorious-Logo-White.webp" alt="NOTORIOUS" class="logo">
 
-    <div class="check">✓</div>
+    <div class="check" aria-hidden="true">…</div>
 
-    <h1>ORDER CONFIRMED</h1>
+    <h1 id="statusTitle">ORDER PENDING</h1>
 
-    <p class="subtitle">
-      Thank you for your order.<br>
-      Your order has been received successfully.
+    <p class="subtitle" id="statusMessage">
+      Your order request was sent, but receipt by our order system is not yet verified.<br>
+      Keep the reference below until our team confirms your order.
     </p>
 
   <div class="info-box">
@@ -158,16 +158,21 @@
 
   <p>
     <span class="label">Payment:</span>
-    Cash on Delivery
+    <span id="paymentLabel">Pending confirmation</span>
+  </p>
+  <p id="paypalReferenceRow" style="display:none">
+    <span class="label">PayPal transaction:</span>
+    <strong id="paypalReference"></strong>
   </p>
 
   <p>
     <span class="label">Next step:</span>
-    Your order will be confirmed by phone before delivery.
+    <span id="nextStep">Our team will contact you to confirm your order.</span>
   </p>
 
 </div>
 
+    <p class="subtitle" style="font-size:14px">Do not submit the same order again until its status is checked. <a href="contact.html" style="text-decoration:underline">Contact NOTORIOUS</a> if you have questions.</p>
     <a href="index.html" class="button">
       CONTINUE SHOPPING
     </a>
@@ -179,19 +184,49 @@
   </div>
 <script>
   const params = new URLSearchParams(window.location.search);
-document.getElementById("orderNumber").textContent =
-  params.get("orderId") || "-";
+  let stored = null;
+  try {
+    stored = JSON.parse(sessionStorage.getItem("notoriousCheckoutResult") || "null");
+  } catch (err) {
+    stored = null;
+  }
+  const orderId = params.get("orderId") || "";
+  // URL query parameters are not proof of a recorded or paid order.
+  const matchingOrder = stored && stored.orderId === orderId ? stored : null;
+
+  document.getElementById("orderNumber").textContent = orderId || "-";
+  // Do not render query-string claims of purchase, charge, or total as proof.
+  const orderItems = matchingOrder && Array.isArray(matchingOrder.items) ? matchingOrder.items : [];
   document.getElementById("productName").textContent =
-    params.get("product") || "-";
-
+    orderItems.length ? orderItems.map(i => i.product).join(" + ") : "-";
   document.getElementById("productSize").textContent =
-    params.get("size") || "-";
-
+    orderItems.length === 1 ? orderItems[0].size : (orderItems.length > 1 ? "Multiple" : "-");
   document.getElementById("productQuantity").textContent =
-    params.get("quantity") || "1";
-
+    orderItems.length ? orderItems.reduce((sum, i) => sum + Number(i.quantity || 0), 0) : "-";
   document.getElementById("orderTotal").textContent =
-    params.get("total") || "0";
+    matchingOrder ? String(matchingOrder.totalMad) : "-";
+
+  const paymentMethod = matchingOrder && matchingOrder.paymentMethod;
+  if (!matchingOrder) {
+    document.getElementById("statusTitle").textContent = "ORDER NOT VERIFIED";
+    document.getElementById("statusMessage").textContent =
+      "This page is not proof of an order. Please contact NOTORIOUS for assistance.";
+    document.getElementById("paymentLabel").textContent = "Not verified";
+    document.getElementById("nextStep").textContent =
+      "Contact our team if you attempted to place an order or make a payment.";
+  } else if (paymentMethod === "PayPal") {
+    document.getElementById("paymentLabel").textContent = "PayPal — order verification pending";
+    document.getElementById("nextStep").textContent =
+      "Do NOT pay again. Contact us with the order and PayPal transaction references if you are not contacted.";
+    if (matchingOrder && matchingOrder.paymentReference) {
+      document.getElementById("paypalReference").textContent = matchingOrder.paymentReference;
+      document.getElementById("paypalReferenceRow").style.display = "block";
+    }
+  } else if (matchingOrder) {
+    document.getElementById("paymentLabel").textContent = "Cash on Delivery — awaiting confirmation";
+    document.getElementById("nextStep").textContent =
+      "Our team will contact you to verify the order before delivery. Pay only upon delivery.";
+  }
 </script>
 </body>
 </html>

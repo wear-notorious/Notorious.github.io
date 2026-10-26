@@ -463,7 +463,7 @@
       </div>
 
       <div id="usdNote" class="usd-note" style="display:none;">
-        ≈ <span id="totalUsd">0</span> USD (charged via PayPal)
+        USD <span id="totalUsd">0</span> will be charged via PayPal (estimated conversion from MAD).
       </div>
 
       <br>
@@ -501,10 +501,9 @@
   // Update this every so often to track the real exchange rate.
   const MAD_TO_USD_RATE = 0.105;
 
-  // Prices (MAD) that are locked in the code. If a product is listed here,
-  // the price from the URL / cart is IGNORED, so nobody can edit it.
-  // Add your other products here (name must match the product name exactly).
-  // Products NOT listed here fall back to the price sent by the shop page.
+  // This catalog improves the displayed quote, but cannot protect against
+  // browser tampering. The Apps Script MUST validate each line against the
+  // Products sheet; PayPal orders need server-side creation and verification.
   const CATALOG = {
     "ASAP Tee": 209
   };
@@ -516,7 +515,14 @@
 
   // One order id per page load (also sent to PayPal as custom_id
   // so you can match a PayPal payment with a row in your sheet).
-  const ORDER_ID = "NOT-" + Date.now();
+  // Randomized reference; the server must also enforce unique, idempotent order IDs.
+  function createOrderId() {
+    const bytes = new Uint8Array(8);
+    window.crypto.getRandomValues(bytes);
+    return "NOT-" + Date.now().toString(36).toUpperCase() + "-" +
+      Array.from(bytes, b => b.toString(16).padStart(2, "0")).join("").toUpperCase();
+  }
+  const ORDER_ID = createOrderId();
 
   // =====================================================
   // HELPERS
@@ -533,7 +539,7 @@
     return Math.min(n, MAX_QTY);
   }
 
-  // Returns a trusted price for a product, or null if the price is not valid.
+  // DISPLAY-ONLY guard. Never trust a browser price for COD or PayPal billing.
   function resolvePrice(productName, claimedPrice) {
     if (hasOwn(CATALOG, productName)) return CATALOG[productName];
 
@@ -687,6 +693,36 @@
 
   let isSubmitting = false;
 
+  // The deployed Apps Script is currently called with no-cors. Its response is
+  // opaque, so the browser CANNOT prove that the order reached the spreadsheet.
+  // Keep a non-sensitive local reference and show "pending", not "confirmed".
+  function savePendingReference(paymentMethod, paymentReference, paypalOrderId) {
+    const summary = {
+      orderId: ORDER_ID,
+      paymentMethod: paymentMethod,
+      paymentReference: paymentReference || "",
+      paypalOrderId: paypalOrderId || "",
+      totalMad: totalMad,
+      items: items.map(function (i) {
+        return { product: i.product, size: i.size, quantity: i.quantity };
+      }),
+      createdAt: new Date().toISOString()
+    };
+    try {
+      const existing = JSON.parse(localStorage.getItem("notoriousPendingOrders") || "[]");
+      const records = Array.isArray(existing) ? existing : [];
+      const kept = records.filter(function (item) { return item.orderId !== ORDER_ID; });
+      localStorage.setItem("notoriousPendingOrders", JSON.stringify([summary].concat(kept).slice(0, 20)));
+    } catch (err) {
+      console.warn("Could not store pending order reference:", err);
+    }
+    try {
+      sessionStorage.setItem("notoriousCheckoutResult", JSON.stringify(summary));
+    } catch (err) {
+      console.warn("Could not store checkout summary:", err);
+    }
+  }
+
   async function submitOrder(paymentMethod, paymentReference, paypalOrderId) {
     if (isSubmitting) return;
     isSubmitting = true;
@@ -697,16 +733,15 @@
     const orderData = {
       orderId: ORDER_ID,
       paymentMethod: paymentMethod || "COD",
-      paymentReference: paymentReference || "",   // PayPal: capture id
-      paypalOrderId: paypalOrderId || "",         // PayPal: order id
+      paymentReference: paymentReference || "",
+      paypalOrderId: paypalOrderId || "",
 
-      // Lines of the order: Apps Script re-checks the prices from the Products sheet
+      // Apps Script must recalculate all prices from a trusted catalog.
       items: items.map(function (i) {
         return { product: i.product, size: i.size, quantity: i.quantity };
       }),
       claimedTotal: totalMad,
 
-      // Kept for the old format (single product: unit price, cart: total)
       product: orderDescription,
       price: isCartCheckout ? totalMad : items[0].price,
       size: isCartCheckout ? "Multiple" : items[0].size,
@@ -720,41 +755,46 @@
       address: $("address").value.trim()
     };
 
+    // Persist the PayPal capture reference BEFORE any network call.
+    if (paymentMethod === "PayPal") {
+      savePendingReference(paymentMethod, paymentReference, paypalOrderId);
+    }
+
     try {
-      await fetch(WEB_APP_URL, {
+      const response = await fetch(WEB_APP_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "text/plain;charset=UTF-8" },
         body: JSON.stringify(orderData)
       });
-
+      if (response.type !== "opaque" && !response.ok) {
+        throw new Error("Order API returned HTTP " + response.status);
+      }
     } catch (error) {
-      console.error("Order save failed:", error);
-
+      console.error("Order request failed:", error);
       if (paymentMethod === "PayPal") {
-        // The customer already paid: never ask them to pay again.
-        const message =
-          "Payment received (ref: " + paymentReference + ") but we couldn't save your order details. " +
-          "Please contact us with this reference. Do NOT pay again.";
-
+        const message = "Your PayPal payment may already be captured. Do NOT pay again. " +
+          "Please contact NOTORIOUS with order reference " + ORDER_ID +
+          " and PayPal transaction " + (paymentReference || paypalOrderId || "not available") + ".";
         $("paypalButtonContainer").style.display = "none";
         $("paypalUnavailable").textContent = message;
         $("paypalUnavailable").style.display = "block";
         alert(message);
-        // isSubmitting stays true on purpose, to block any second payment.
-
+        // Block another charge, even when we could not contact Apps Script.
       } else {
-        alert("Something went wrong. Please try again.");
+        alert("We could not send your order request. Please contact NOTORIOUS with reference " +
+          ORDER_ID + " before trying again, to avoid a duplicate order.");
         isSubmitting = false;
         codBtn.disabled = false;
         codBtn.textContent = "CONFIRM ORDER";
       }
-
       return;
     }
 
+    savePendingReference(orderData.paymentMethod, paymentReference, paypalOrderId);
+
+    // Preserve a backup in notoriousPendingOrders before clearing the cart.
+    // Never confuse an opaque network response with a confirmed server write.
     if (isCartCheckout) {
       localStorage.removeItem("notoriousCart");
       localStorage.removeItem("notoriousCheckoutCart");
@@ -766,9 +806,9 @@
       size: orderData.size,
       quantity: orderData.quantity,
       total: totalMad,
-      paymentMethod: orderData.paymentMethod
+      paymentMethod: orderData.paymentMethod,
+      status: "pending"
     });
-
     window.location.href = "success.html?" + successParams.toString();
   }
 
@@ -881,25 +921,62 @@
       },
 
       onApprove: async function (data, actions) {
+        let captureReference = "";
+        let paypalOrderReference = data.orderID || "";
         try {
           const details = await actions.order.capture();
+          paypalOrderReference = details.id || paypalOrderReference;
 
           const purchaseUnit = details.purchase_units && details.purchase_units[0];
           const capture = purchaseUnit && purchaseUnit.payments &&
                           purchaseUnit.payments.captures &&
                           purchaseUnit.payments.captures[0];
+          captureReference = capture && capture.id || "";
 
-          if (details.status !== "COMPLETED" || !capture) {
-            alert("Your payment was not completed. You have not been charged. Please try again or choose Cash on Delivery.");
+          // If the buyer was charged, retain their reference immediately.
+          if (captureReference) {
+            savePendingReference("PayPal", captureReference, paypalOrderReference);
+          }
+
+          const paidUsd = capture && capture.amount && Number(capture.amount.value);
+          const amountMatches = capture && capture.amount &&
+            capture.amount.currency_code === "USD" &&
+            Number.isFinite(paidUsd) &&
+            Math.abs(paidUsd - Number(totalUsd)) < 0.005;
+          const orderMatches = !purchaseUnit || !purchaseUnit.custom_id ||
+            purchaseUnit.custom_id === ORDER_ID;
+
+          if (!capture || !captureReference ||
+              details.status !== "COMPLETED" || capture.status !== "COMPLETED" ||
+              !amountMatches || !orderMatches) {
+            isSubmitting = true; // Prevent an accidental second payment.
+            const message = "Your PayPal transaction needs manual verification. " +
+              "Do NOT pay again. Contact NOTORIOUS with order " + ORDER_ID +
+              " and PayPal reference " + (captureReference || paypalOrderReference) + ".";
+            $("paypalButtonContainer").style.display = "none";
+            $("paypalUnavailable").textContent = message;
+            $("paypalUnavailable").style.display = "block";
+            alert(message);
             return;
           }
 
-          // capture.id = the transaction id you can find in your PayPal account
-          await submitOrder("PayPal", capture.id, details.id);
+          // Client checks are only a safety net. The server must verify the
+          // capture with PayPal, check the amount, and enforce idempotency.
+          await submitOrder("PayPal", captureReference, paypalOrderReference);
 
         } catch (err) {
-          console.error("PayPal capture error:", err);
-          alert("Something went wrong while confirming your PayPal payment. Please check your PayPal account before trying again, or choose Cash on Delivery.");
+          console.error("PayPal approval/capture error:", err);
+          if (captureReference) {
+            savePendingReference("PayPal", captureReference, paypalOrderReference);
+          }
+          isSubmitting = true; // Do not permit blind retry after an uncertain capture.
+          const message = "We could not verify the final PayPal result. " +
+            "Please check your PayPal account and contact NOTORIOUS with order " +
+            ORDER_ID + " before attempting any other payment. Do NOT pay again yet.";
+          $("paypalButtonContainer").style.display = "none";
+          $("paypalUnavailable").textContent = message;
+          $("paypalUnavailable").style.display = "block";
+          alert(message);
         }
       },
 
@@ -909,7 +986,7 @@
 
       onError: function (err) {
         console.error("PayPal error:", err);
-        alert("Something went wrong with PayPal. Please try again or choose Cash on Delivery.");
+        alert("PayPal encountered an error. Check your PayPal account before retrying or choosing another payment method.");
       }
 
     }).render("#paypalButtonContainer").catch(function (err) {
