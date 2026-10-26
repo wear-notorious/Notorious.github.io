@@ -1,28 +1,23 @@
 # NOTORIOUS — Sandbox payment test checklist
 
-Status: NOT READY TO ACCEPT PAYMENTS. Do not merge this branch yet.
+Status: NOT READY TO ACCEPT PAYMENTS. Do not merge or deploy this branch.
 
-## Test backend requirements
+## Verified on 26 October 2026
 
-1. Use a separate Google Apps Script deployment and separate TEST spreadsheet.
-2. Keep Sandbox API credentials only in Apps Script Script Properties. Never put a secret in GitHub or browser code.
-3. Recompute all line prices using active Products rows; reject unknown products and untrusted price claims.
-4. Verify PayPal order and capture using the Sandbox REST API from Apps Script, including COMPLETED status, capture belonging to order, matching custom_id, USD currency, exact expected amount, and Sandbox merchant account.
-5. Check duplicate order IDs and capture IDs under a spreadsheet lock before writing.
-6. Record a verified payment status only after verification; never trust the browser's paid flag.
-7. Do not show a confirmed success screen solely because a no-cors fetch completed. Apps Script ContentService redirects and CORS behavior require a separately designed confirmation mechanism.
-8. Keep the public production checkout unchanged until tests are passed.
+- The Apps Script project is bound to the NOTORIOUS TEST spreadsheet. The existing Sandbox deployment is configured for the owner only.
+- A separate copy of the original script was created before changes.
+- The script editor now rejects unverified PayPal payments before recording an order, validates identifiers and rejects duplicate order and payment references under a lock.
+- PayPal validation checks the order and capture evidence, including status, merchant, custom reference, exact USD amounts, and the capture's order relationship.
+- Twelve isolated in-memory checks passed for valid evidence, unpaid order, wrong reference, merchant, amount and currency, multiple captures, refunded capture, wrong relationship, and three duplicate lookup cases. These checks did not call PayPal or write orders or send email.
 
-## Required tests
+## Still required before any deployment or payment
 
-- COD recorded exactly once in TEST spreadsheet.
-- Unknown/inactive product rejected.
-- Fake capture ID rejected.
-- Valid completed Sandbox capture accepted once.
-- Reused capture ID rejected.
-- Mismatched amount, currency, merchant, or order ID rejected.
-- PayPal completed but order-write failed: user receives a pending/support message, never a prompt to pay twice.
+- Review and test the revised Apps Script with actual Sandbox API response shapes and separate test data. The existing deployed version has not been updated.
+- Test end-to-end acceptance of one Sandbox capture, duplicate submissions and failure/recovery after capture, including concurrent requests. Do not perform real payments.
+- Replace client-side price trust and browser-side payment creation/capture with a trusted server-controlled flow.
+- Design a reliable authenticated confirmation mechanism. A no-cors fetch cannot prove an order was recorded.
+- Keep the checkout and PayPal controls disabled until an isolated test architecture works without changing the existing owner-only access.
+- Review currency conversion and reconciliation; the fixed MAD-to-USD rate is not a live quote.
+- Obtain the owner's explicit authorization before deployment or public payment access.
 
-## Current limitations
-
-The isolated checkout-sandbox.html has the public Sandbox client ID, but payment initiation and order submission are deliberately disabled. A verified isolated backend is not deployed yet. This document is a checklist, not evidence of successful end-to-end payment testing.
+The checkout-sandbox.html preview remains intentionally disabled. No secrets belong in this repository.
