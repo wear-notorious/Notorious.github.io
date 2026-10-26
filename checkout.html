@@ -921,25 +921,62 @@
       },
 
       onApprove: async function (data, actions) {
+        let captureReference = "";
+        let paypalOrderReference = data.orderID || "";
         try {
           const details = await actions.order.capture();
+          paypalOrderReference = details.id || paypalOrderReference;
 
           const purchaseUnit = details.purchase_units && details.purchase_units[0];
           const capture = purchaseUnit && purchaseUnit.payments &&
                           purchaseUnit.payments.captures &&
                           purchaseUnit.payments.captures[0];
+          captureReference = capture && capture.id || "";
 
-          if (details.status !== "COMPLETED" || !capture) {
-            alert("Your payment was not completed. You have not been charged. Please try again or choose Cash on Delivery.");
+          // If the buyer was charged, retain their reference immediately.
+          if (captureReference) {
+            savePendingReference("PayPal", captureReference, paypalOrderReference);
+          }
+
+          const paidUsd = capture && capture.amount && Number(capture.amount.value);
+          const amountMatches = capture && capture.amount &&
+            capture.amount.currency_code === "USD" &&
+            Number.isFinite(paidUsd) &&
+            Math.abs(paidUsd - Number(totalUsd)) < 0.005;
+          const orderMatches = !purchaseUnit || !purchaseUnit.custom_id ||
+            purchaseUnit.custom_id === ORDER_ID;
+
+          if (!capture || !captureReference ||
+              details.status !== "COMPLETED" || capture.status !== "COMPLETED" ||
+              !amountMatches || !orderMatches) {
+            isSubmitting = true; // Prevent an accidental second payment.
+            const message = "Your PayPal transaction needs manual verification. " +
+              "Do NOT pay again. Contact NOTORIOUS with order " + ORDER_ID +
+              " and PayPal reference " + (captureReference || paypalOrderReference) + ".";
+            $("paypalButtonContainer").style.display = "none";
+            $("paypalUnavailable").textContent = message;
+            $("paypalUnavailable").style.display = "block";
+            alert(message);
             return;
           }
 
-          // capture.id = the transaction id you can find in your PayPal account
-          await submitOrder("PayPal", capture.id, details.id);
+          // Client checks are only a safety net. The server must verify the
+          // capture with PayPal, check the amount, and enforce idempotency.
+          await submitOrder("PayPal", captureReference, paypalOrderReference);
 
         } catch (err) {
-          console.error("PayPal capture error:", err);
-          alert("Something went wrong while confirming your PayPal payment. Please check your PayPal account before trying again, or choose Cash on Delivery.");
+          console.error("PayPal approval/capture error:", err);
+          if (captureReference) {
+            savePendingReference("PayPal", captureReference, paypalOrderReference);
+          }
+          isSubmitting = true; // Do not permit blind retry after an uncertain capture.
+          const message = "We could not verify the final PayPal result. " +
+            "Please check your PayPal account and contact NOTORIOUS with order " +
+            ORDER_ID + " before attempting any other payment. Do NOT pay again yet.";
+          $("paypalButtonContainer").style.display = "none";
+          $("paypalUnavailable").textContent = message;
+          $("paypalUnavailable").style.display = "block";
+          alert(message);
         }
       },
 
@@ -949,7 +986,7 @@
 
       onError: function (err) {
         console.error("PayPal error:", err);
-        alert("Something went wrong with PayPal. Please try again or choose Cash on Delivery.");
+        alert("PayPal encountered an error. Check your PayPal account before retrying or choosing another payment method.");
       }
 
     }).render("#paypalButtonContainer").catch(function (err) {
