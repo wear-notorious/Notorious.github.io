@@ -23,11 +23,15 @@ class PayPalSandbox:
         return self.call('/v2/checkout/orders','POST',data,key)['id']
     def capture(self,paypal_id,key):
         return self.call('/v2/checkout/orders/'+quote(paypal_id,safe='')+'/capture','POST',{},key)
+    def lookup_order(self,paypal_id):
+        return self.call('/v2/checkout/orders/'+quote(paypal_id,safe=''))
+    def lookup_capture(self,capture_id):
+        return self.call('/v2/payments/captures/'+quote(capture_id,safe=''))
     def lookup_paid(self,paypal_id):
-        order=self.call('/v2/checkout/orders/'+quote(paypal_id,safe=''))
+        order=self.lookup_order(paypal_id)
         captures=order['purchase_units'][0]['payments']['captures']
         if len(captures)!=1: raise ValueError('Expected one capture')
-        capture=self.call('/v2/payments/captures/'+quote(captures[0]['id'],safe=''))
+        capture=self.lookup_capture(captures[0]['id'])
         return order,capture
 
 class GoogleTestSheet:
