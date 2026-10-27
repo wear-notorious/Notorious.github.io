@@ -109,3 +109,87 @@ class Engine:
         except Exception:
             self.transition(oid,'SHEET_IN_PROGRESS','PAID_PENDING_SHEET'); raise Pending('Sheet sync pending')
         return self.status(oid,token)
+
+# Cross-process advisory lock on a shared *local* filesystem. The durable DB
+# state still blocks automatic retries after crashes or ambiguous outcomes.
+import contextlib, fcntl, os
+
+@contextlib.contextmanager
+def order_lock(engine, name):
+    lock_dir=os.path.abspath(engine.path)+'.locks'
+    os.makedirs(lock_dir,mode=0o700,exist_ok=True)
+    fd=os.open(os.path.join(lock_dir,name),os.O_CREAT|os.O_RDWR,0o600)
+    try:
+        try: fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError: raise Pending('Another operation is active')
+        yield
+    finally:
+        os.close(fd)
+
+def guarded_create(fn):
+    def wrapped(self,key,token,request):
+        if not isinstance(key,str): raise Invalid('Invalid session')
+        with order_lock(self,digest(key)): return fn(self,key,token,request)
+    return wrapped
+
+def guarded_order(fn):
+    def wrapped(self,oid,token,*args,**kwargs):
+        row=self.get(oid,token)
+        with order_lock(self,row['idem']): return fn(self,oid,token,*args,**kwargs)
+    return wrapped
+
+def valid_unpaid_order(order,row,merchant):
+    try:
+        unit=order['purchase_units'][0]; amount=unit['amount']; value=Decimal(amount['value'])
+        return (order['id']==row['paypal_id'] and order['status'] in ('CREATED','PAYER_ACTION_REQUIRED','APPROVED')
+                and len(order['purchase_units'])==1 and unit['custom_id']==row['id']
+                and unit['payee']['merchant_id']==merchant and amount['currency_code']=='USD'
+                and value==Decimal(row['usd']) and value.as_tuple().exponent==-2
+                and not (unit.get('payments') or {}).get('captures'))
+    except (KeyError,IndexError,TypeError,ValueError,ArithmeticError): return False
+
+def reconcile(self,oid,token, candidate_paypal_id=None):
+    """Read-only PayPal recovery; never creates or captures, even on a retry.
+
+    Unknown create requires an independently recovered PayPal order ID. A
+    missing ID, ambiguous status or remote failure remains pending. The per-key
+    OS lock must be shared by every process using this database.
+    """
+    row=self.get(oid,token); state=row['state']
+    if state=='SHEET_IN_PROGRESS':
+        self.transition(oid,state,'PAID_PENDING_SHEET')
+        return self.status(oid,token)
+    if state in ('CREATE_UNKNOWN','CREATE_IN_PROGRESS'):
+        if not isinstance(candidate_paypal_id,str) or not candidate_paypal_id.isalnum() or len(candidate_paypal_id)>40: raise Pending('PayPal order ID required for read-only reconciliation')
+        # Validate the candidate before persisting it. A unique constraint prevents reuse.
+        try:
+            order=self.paypal.lookup_order(candidate_paypal_id)
+            expected=dict(row); expected['paypal_id']=candidate_paypal_id
+            if not valid_unpaid_order(order,expected,self.merchant): raise ValueError('Untrusted candidate')
+            with self.db() as c:
+                changed=c.execute('UPDATE orders SET paypal_id=?,state=?,version=version+1 WHERE id=? AND state=?',(candidate_paypal_id,'AWAITING_APPROVAL',oid,state)).rowcount
+                if changed!=1: raise Pending('State changed')
+        except Pending: raise
+        except Exception: raise Pending('Creation remains unresolved')
+        return self.status(oid,token)
+    if state in ('CAPTURE_UNKNOWN','CAPTURE_IN_PROGRESS'):
+        if not row['paypal_id']: raise Pending('PayPal order ID missing')
+        try:
+            order=self.paypal.lookup_order(row['paypal_id'])
+            if order.get('status')!='COMPLETED': raise Pending('Capture not confirmed')
+            captures=order['purchase_units'][0]['payments']['captures']
+            if len(captures)!=1: raise Pending('Capture ambiguous')
+            capture=self.paypal.lookup_capture(captures[0]['id'])
+            if not evidence(order,capture,{'id':oid,'paypal_id':row['paypal_id'],'usd':row['usd'],'merchant':self.merchant}): raise Pending('Payment evidence mismatch')
+            with self.db() as c:
+                changed=c.execute('UPDATE orders SET capture_id=?,state=?,version=version+1 WHERE id=? AND state=?',(capture['id'],'PAID_PENDING_SHEET',oid,state)).rowcount
+                if changed!=1: raise Pending('State changed')
+        except Pending: raise
+        except Exception: raise Pending('Capture remains unresolved')
+        return self.status(oid,token)
+    return self.public(row)
+
+Engine.create=guarded_create(Engine.create)
+Engine.capture=guarded_order(Engine.capture)
+Engine.sync=guarded_order(Engine.sync)
+Engine.reconcile=guarded_order(reconcile)
