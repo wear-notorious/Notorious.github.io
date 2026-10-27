@@ -3,12 +3,13 @@ import json, os, re
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from core import Engine, Conflict, Invalid, Pending
 from adapters import PayPalSandbox, GoogleTestSheet
+from google_auth_provider import GoogleTokenProvider
 
 # These settings must be supplied explicitly; never use real account credentials.
 def build_engine():
     if os.environ.get('NOTORIOUS_ENV')!='TEST': raise RuntimeError('TEST mode required')
     catalog=json.loads(os.environ['TEST_CATALOG_JSON']) # SKU -> integer MAD centimes
-    sheet=GoogleTestSheet(os.environ['TEST_SPREADSHEET_ID'],lambda:os.environ['TEST_GOOGLE_ACCESS_TOKEN'])
+    sheet=GoogleTestSheet(os.environ['TEST_SPREADSHEET_ID'],GoogleTokenProvider.from_adc())
     return Engine(os.environ['TEST_DB_PATH'],PayPalSandbox(os.environ['TEST_PAYPAL_CLIENT_ID'],os.environ['TEST_PAYPAL_SECRET']),sheet,catalog,os.environ['TEST_MAD_TO_USD_RATE'],os.environ['TEST_PAYPAL_MERCHANT_ID'])
 
 class Handler(BaseHTTPRequestHandler):
