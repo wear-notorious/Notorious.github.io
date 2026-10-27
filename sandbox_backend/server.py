@@ -35,12 +35,13 @@ class Handler(BaseHTTPRequestHandler):
             if self.path=='/api/orders':
                 result=self.server.engine.create(self.headers.get('Idempotency-Key',''),token,body)
             else:
-                match=re.fullmatch(r'/api/orders/(NOT-[0-9a-f]{32})/(capture|sync)',self.path)
+                match=re.fullmatch(r'/api/orders/(NOT-[0-9a-f]{32})/(capture|sync|reconcile)',self.path)
                 if not match: return self.reply(404,{'error':'not found'})
                 if match.group(2)=='capture':
                     if os.environ.get('TEST_CAPTURE_ENABLED')!='YES': return self.reply(403,{'error':'capture disabled'})
                     result=self.server.engine.capture(match.group(1),token)
-                else: result=self.server.engine.sync(match.group(1),token)
+                elif match.group(2)=='sync': result=self.server.engine.sync(match.group(1),token)
+                else: result=self.server.engine.reconcile(match.group(1),token,body.get('candidatePayPalOrderId'))
             self.reply(200,result)
         except Pending: self.reply(202,{'state':'PENDING','message':'Do not pay again. Reconciliation required.'})
         except Conflict: self.reply(409,{'error':'request conflict'})
