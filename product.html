@@ -1356,6 +1356,7 @@ function toWebpImage(value) {
 }
 </script>
 <script>const NOTORIOUS_SEO_PRODUCT_SLUGS = new Set(["asap","fbi","horny","bull","cannot","bcs","absolut","ai","boobs","badbull","hornyhoodie","youtube","sirotonin","ocb","statue","notor","momy","notime","dogs","visse","spotme","visages","blood","fuckk","racist","liquor"]);</script>
+<script>const studioSlug=new URLSearchParams(location.search).get("slug");if(studioSlug&&/^[a-z0-9-]{1,80}$/.test(studioSlug)){const target=new URL("product-"+studioSlug+".html",location.href);const size=new URLSearchParams(location.search).get("size");if(size)target.searchParams.set("size",size);location.replace(target.href);}</script>
 </head>
 
 <body>

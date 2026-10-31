@@ -1,16 +1,10 @@
-name: NOTORIOUS static product SEO
+name: NOTORIOUS product catalog
 on:
   push:
-    branches:
-      - main
-      - seo/prerender-products
+    branches: [main]
     paths:
-      - scripts/fetch-public-product-data.mjs
-      - scripts/prerender-products.mjs
-      - scripts/validate-prerender.mjs
-      - scripts/build-merchant-feed.mjs
-      - scripts/build-site-entities.mjs
-      - scripts/validate-site-entities.mjs
+      - scripts/studio-build.mjs
+      - scripts/studio-render.mjs
       - scripts/product-page.html.template
       - .github/workflows/product-prerender-preview.yml
   workflow_dispatch:
@@ -19,51 +13,31 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: seo-products-${{ github.ref }}
-  cancel-in-progress: true
+  group: notorious-product-catalog
+  cancel-in-progress: false
 jobs:
-  snapshot:
+  catalog:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: true
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Download and validate public product data
-        run: node scripts/fetch-public-product-data.mjs
-      - name: Render static product pages from verified catalog
-        run: node scripts/prerender-products.mjs
-      - name: Verify canonical URLs, schema, image files and script syntax
-        run: node scripts/validate-prerender.mjs
-      - name: Confirm repeat build keeps identical SEO output
+      - name: Build catalog with Studio SEO and availability
+        run: node scripts/studio-build.mjs
+      - name: Verify build is repeatable
         run: |
-          git diff -- product-*.html product.html sitemap.xml > /tmp/notorious-seo-before.patch
-          node scripts/prerender-products.mjs
-          node scripts/validate-prerender.mjs
-          git diff -- product-*.html product.html sitemap.xml > /tmp/notorious-seo-after.patch
-          cmp /tmp/notorious-seo-before.patch /tmp/notorious-seo-after.patch
-      - name: Build Google Merchant Center product feed
-        run: node scripts/build-merchant-feed.mjs
-      - name: Generate Organization WebSite and catalog SEO data
-        run: node scripts/build-site-entities.mjs
-      - name: Validate structured data and catalog product URLs
-        run: node scripts/validate-site-entities.mjs
-      - name: Verify repeated site metadata builds are identical
-        run: |
-          git diff -- index.html products.html about.html contact.html shipping.html legal.html > /tmp/site-entities-before.patch
-          node scripts/build-site-entities.mjs
-          node scripts/validate-site-entities.mjs
-          git diff -- index.html products.html about.html contact.html shipping.html legal.html > /tmp/site-entities-after.patch
-          cmp /tmp/site-entities-before.patch /tmp/site-entities-after.patch
-      - name: Commit validated changes to current branch
+          git diff -- product-*.html sitemap.xml merchant-feed.txt catalog/studio-products.json > /tmp/before.patch
+          node scripts/studio-build.mjs
+          git diff -- product-*.html sitemap.xml merchant-feed.txt catalog/studio-products.json > /tmp/after.patch
+          cmp /tmp/before.patch /tmp/after.patch
+      - name: Save verified product output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/public-products-snapshot.json product-*.html product.html index.html products.html journal/*.html sitemap.xml merchant-feed.txt about.html contact.html shipping.html legal.html
+          git add product-*.html sitemap.xml merchant-feed.txt catalog/studio-products.json
           if ! git diff --cached --quiet; then
-            git commit -m "Refresh static product pages from public catalog"
+            git commit -m "Refresh NOTORIOUS product catalog"
             git push origin "HEAD:$GITHUB_REF_NAME"
           fi

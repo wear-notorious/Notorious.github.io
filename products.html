@@ -1320,7 +1320,7 @@ function toWebpImage(value) {
 
     grid.innerHTML = products.map(product => `
       <a
-        href="${(NOTORIOUS_SEO_PRODUCT_SLUGS.has(String(product.slug).toLowerCase()) ? "product-" + encodeURIComponent(product.slug) + ".html" : "product.html?slug=" + encodeURIComponent(product.slug))}"
+        href="product-${encodeURIComponent(product.slug)}.html"
         class="product-card"
       >
         <div class="product-image">
@@ -1450,61 +1450,13 @@ if (searchInput) {
     applyFilters();
   }
 
-  const cachedProducts =
-    localStorage.getItem("notoriousProducts");
-
-  if (cachedProducts) {
-    try {
-      initializeProducts(JSON.parse(cachedProducts));
-    } catch (error) {
-      console.error("Cache error:", error);
-    }
-  }
-
-  const callbackName =
-    "notoriousProductsListingCallback";
-
-  window[callbackName] = function(products) {
-    initializeProducts(products);
-
-    delete window[callbackName];
-
-    const script =
-      document.getElementById("productsApiScript");
-
-    if (script) {
-      script.remove();
-    }
-  };
-
-  const script =
-    document.createElement("script");
-
-  script.id = "productsApiScript";
-
-  script.src =
-    PRODUCTS_API_URL +
-    "?callback=" +
-    callbackName +
-    "&t=" +
-    Date.now();
-
-  script.onerror = function() {
-    if (!allProducts.length) {
-      document.getElementById("productsGrid").innerHTML = `
-        <div class="empty-state">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          <p>Could not load products.</p>
-          <span>PLEASE REFRESH THE PAGE</span>
-        </div>
-      `;
-
-      document.getElementById("productCount").textContent =
-        "PRODUCTS";
-    }
-  };
-
-  document.body.appendChild(script);
+  fetch("catalog/studio-products.json", {cache:"no-store"})
+    .then(response => {if(!response.ok)throw Error("Catalog unavailable");return response.json();})
+    .then(products => initializeProducts(products.filter(p => !p.status || String(p.status).toLowerCase() === "active")))
+    .catch(error => {
+      console.error("Catalog unavailable", error);
+      document.getElementById("productsGrid").innerHTML = '<div class="empty-state"><p>Could not load products. Please refresh.</p></div>';
+    });
 </script>
 <script>
   function openNotoriousEmail(event) {

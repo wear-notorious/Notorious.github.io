@@ -2103,7 +2103,7 @@ function renderProducts(products) {
 // Reverse a copy so the newest rows appear first without changing the catalog order.
   const latestProducts = [...products].reverse().slice(0, 6);
   container.innerHTML = latestProducts.map(product => `
-    <a href="${(NOTORIOUS_SEO_PRODUCT_SLUGS.has(String(product.slug).toLowerCase()) ? "product-" + encodeURIComponent(product.slug) + ".html" : "product.html?slug=" + encodeURIComponent(product.slug))}"
+    <a href="product-${encodeURIComponent(product.slug)}.html"
        class="product-card"
        style="display:flex; flex-direction:column; color:inherit; text-decoration:none;">
 
@@ -2141,7 +2141,7 @@ function renderProducts(products) {
     .slice(0, 8);
 
   container.innerHTML = selectedProducts.map(product => `
-    <a href="${(NOTORIOUS_SEO_PRODUCT_SLUGS.has(String(product.slug).toLowerCase()) ? "product-" + encodeURIComponent(product.slug) + ".html" : "product.html?slug=" + encodeURIComponent(product.slug))}" class="might-like-card">
+    <a href="product-${encodeURIComponent(product.slug)}.html" class="might-like-card">
       <div class="might-like-img-wrap">
         <img
           src="${toWebpImage(product.mainImage)}"
@@ -2160,33 +2160,13 @@ function renderProducts(products) {
 }
   
 async function loadProducts() {
-  const cachedProducts = localStorage.getItem("notoriousProducts");
-
-  if (cachedProducts) {
-    try {
-      const products = JSON.parse(cachedProducts);
-renderProducts(products);
-renderMightLike(products);
-    } catch (error) {
-      console.error("Cache error:", error);
-    }
-  }
-
   try {
-    const response = await fetch(PRODUCTS_API_URL);
-    const products = await response.json();
-
-    localStorage.setItem(
-      "notoriousProducts",
-      JSON.stringify(products)
-    );
-
-    renderProducts(products);
-    renderMightLike(products);
-
-  } catch (error) {
-    console.error("Error loading products:", error);
-  }
+    const response = await fetch("catalog/studio-products.json", {cache:"no-store"});
+    if(!response.ok) throw Error("Catalog unavailable");
+    const products = (await response.json()).filter(p => !p.status || String(p.status).toLowerCase() === "active");
+    localStorage.setItem("notoriousProducts", JSON.stringify(products));
+    renderProducts(products); renderMightLike(products);
+  } catch(error) { console.error("Error loading products:",error); }
 }
 loadProducts();
 </script>
