@@ -478,5 +478,21 @@
     "image4": "images/studio-the-beetles-hoodie-black-20bac71ff4e2.webp",
     "status": "Active",
     "id": 30
+  },
+  {
+    "slug": "listen-and-learn-hoodie-white",
+    "product": "LISTEN AND LEARN™ HOODIE – WHITE",
+    "price": 259,
+    "description": "When an alcoholic speaks, you better pay attention. The **LISTEN AND LEARN™ Premium Hoodie says it all with a bold graphic, dark humour, and unapologetic NOTORIOUS™ attitude. No lectures, no apologies. Just facts. Wear the message. Make a statement. Get yours now.",
+    "material": "67% Cotton / 33% Polyester",
+    "fit": "Unisex",
+    "sizes": "S,M,L,XL,XXL",
+    "category": "hoodies",
+    "mainImage": "images/studio-listen-and-learn-hoodie-white-28cde496d924.webp",
+    "image2": "images/studio-listen-and-learn-hoodie-white-5a7eb4b4b239.webp",
+    "image3": "images/studio-listen-and-learn-hoodie-white-3699cb24bdb6.webp",
+    "image4": "images/studio-listen-and-learn-hoodie-white-2932404088e4.webp",
+    "status": "Active",
+    "id": 31
   }
 ]

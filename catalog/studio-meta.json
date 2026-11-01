@@ -156,6 +156,41 @@
           "color": "Noir"
         }
       ]
+    },
+    "listen-and-learn-hoodie-white": {
+      "title": "LISTEN AND LEARN™ HOODIE – WHITE | NOTORIOUS™",
+      "description": "When an alcoholic speaks, you better pay attention. The **LISTEN AND LEARN™ Premium Hoodie says it all with a bold graphic, dark humour, and unapologetic NOTORI",
+      "group": "12155cd8-191e-41c9-8883-4439e4c5a8c8",
+      "color": "Blanc",
+      "stock": "in_stock",
+      "hidden": false,
+      "images": [
+        "images/studio-listen-and-learn-hoodie-white-28cde496d924.webp",
+        "images/studio-listen-and-learn-hoodie-white-5a7eb4b4b239.webp",
+        "images/studio-listen-and-learn-hoodie-white-3699cb24bdb6.webp",
+        "images/studio-listen-and-learn-hoodie-white-2932404088e4.webp"
+      ],
+      "alts": [
+        "LISTEN AND LEARN™ HOODIE – WHITE — photo 1",
+        "LISTEN AND LEARN™ HOODIE – WHITE — photo 2",
+        "LISTEN AND LEARN™ HOODIE – WHITE — photo 3",
+        "LISTEN AND LEARN™ HOODIE – WHITE — photo 4"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "sku": "NOTORIOUS-listen-and-learn-hoodie-white",
+      "groupPrimary": true,
+      "variants": [
+        {
+          "slug": "listen-and-learn-hoodie-white",
+          "color": "Blanc"
+        }
+      ]
     }
   }
 }
