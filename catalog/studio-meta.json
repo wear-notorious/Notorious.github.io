@@ -191,6 +191,41 @@
           "color": "Blanc"
         }
       ]
+    },
+    "pumpkin-obsession-hoodie-brown": {
+      "title": "PUMPKIN OBSESSION ™ HOODIE – BROWN | NOTORIOUS™",
+      "description": "He likes my pumpkins… and isn't afraid to show it. The PUMPKIN LOVE Hoodie brings playful Halloween energy to bold streetwear, featuring two carved pumpkins wra",
+      "group": "0cc6feac-fe2c-43bd-8cf3-1dddb871195c",
+      "color": "Brown",
+      "stock": "in_stock",
+      "hidden": false,
+      "images": [
+        "images/studio-pumpkin-obsession-hoodie-brown-8e765f715109.webp",
+        "images/studio-pumpkin-obsession-hoodie-brown-dda7df46a997.webp",
+        "images/studio-pumpkin-obsession-hoodie-brown-047e27930814.webp",
+        "images/studio-pumpkin-obsession-hoodie-brown-db1a64a13e51.webp"
+      ],
+      "alts": [
+        "PUMPKIN OBSESSION ™ HOODIE – BROWN — photo 1",
+        "PUMPKIN OBSESSION ™ HOODIE – BROWN — photo 2",
+        "PUMPKIN OBSESSION ™ HOODIE – BROWN — photo 3",
+        "PUMPKIN OBSESSION ™ HOODIE – BROWN — photo 4"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "sku": "NOTORIOUS-pumpkin-obsession-hoodie-brown",
+      "groupPrimary": true,
+      "variants": [
+        {
+          "slug": "pumpkin-obsession-hoodie-brown",
+          "color": "Brown"
+        }
+      ]
     }
   }
 }

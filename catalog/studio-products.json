@@ -494,5 +494,21 @@
     "image4": "images/studio-listen-and-learn-hoodie-white-2932404088e4.webp",
     "status": "Active",
     "id": 31
+  },
+  {
+    "slug": "pumpkin-obsession-hoodie-brown",
+    "product": "PUMPKIN OBSESSION ™ HOODIE – BROWN",
+    "price": 269,
+    "description": "He likes my pumpkins… and isn't afraid to show it. The PUMPKIN LOVE Hoodie brings playful Halloween energy to bold streetwear, featuring two carved pumpkins wrapped in skeletal hands and a cheeky statement that speaks for itself. Spooky, flirty, and unapologetically different — made for those who love their style with a little mystery and attitude.",
+    "material": "67% Cotton / 33% Polyester",
+    "fit": "Unisex",
+    "sizes": "S,M,L,XL,XXL",
+    "category": "hoodies",
+    "mainImage": "images/studio-pumpkin-obsession-hoodie-brown-8e765f715109.webp",
+    "image2": "images/studio-pumpkin-obsession-hoodie-brown-dda7df46a997.webp",
+    "image3": "images/studio-pumpkin-obsession-hoodie-brown-047e27930814.webp",
+    "image4": "images/studio-pumpkin-obsession-hoodie-brown-db1a64a13e51.webp",
+    "status": "Active",
+    "id": 32
   }
 ]
