@@ -86,6 +86,41 @@
           "color": ""
         }
       ]
+    },
+    "red-or-blue-hoodie-black": {
+      "title": "RED OR BLUE™ HOODIE – BLACK | NOTORIOUS™",
+      "description": "Red or blue? Why not both? The **RED OR BLUE™ Premium Hoodie** takes an iconic choice and gives it a shameless twist with a provocative graphic and unmistakable",
+      "group": "c7f414ac-74d8-4fad-b39a-d5e297a502c5",
+      "color": "Noir",
+      "stock": "in_stock",
+      "hidden": false,
+      "images": [
+        "images/studio-red-or-blue-hoodie-black-39bcd1a6c10a.webp",
+        "images/studio-red-or-blue-hoodie-black-c27fce526aa3.webp",
+        "images/studio-red-or-blue-hoodie-black-3c476bd772c9.webp",
+        "images/studio-red-or-blue-hoodie-black-ab20d3816ab8.webp"
+      ],
+      "alts": [
+        "RED OR BLUE™ HOODIE – BLACK — photo 1",
+        "RED OR BLUE™ HOODIE – BLACK — photo 2",
+        "RED OR BLUE™ HOODIE – BLACK — photo 3",
+        "RED OR BLUE™ HOODIE – BLACK — photo 4"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "sku": "NOTORIOUS-red-or-blue-hoodie-black",
+      "groupPrimary": true,
+      "variants": [
+        {
+          "slug": "red-or-blue-hoodie-black",
+          "color": "Noir"
+        }
+      ]
     }
   }
 }

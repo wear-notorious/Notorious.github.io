@@ -446,5 +446,21 @@
     "image4": "images/studio-feetish-hoodie-black-2c804ae7c7eb.webp",
     "status": "Inactive",
     "id": 27
+  },
+  {
+    "slug": "red-or-blue-hoodie-black",
+    "product": "RED OR BLUE™ HOODIE – BLACK",
+    "price": 249,
+    "description": "Red or blue? Why not both? The **RED OR BLUE™ Premium Hoodie** takes an iconic choice and gives it a shameless twist with a provocative graphic and unmistakable NOTORIOUS™ energy. Bold, rebellious, and made for those who prefer their reality a little more twisted.",
+    "material": "67% Cotton / 33% Polyester",
+    "fit": "Unisex",
+    "sizes": "S,M,L,XL,XXL",
+    "category": "hoodies",
+    "mainImage": "images/studio-red-or-blue-hoodie-black-39bcd1a6c10a.webp",
+    "image2": "images/studio-red-or-blue-hoodie-black-c27fce526aa3.webp",
+    "image3": "images/studio-red-or-blue-hoodie-black-3c476bd772c9.webp",
+    "image4": "images/studio-red-or-blue-hoodie-black-ab20d3816ab8.webp",
+    "status": "Active",
+    "id": 29
   }
 ]
