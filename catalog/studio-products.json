@@ -510,5 +510,21 @@
     "image4": "images/studio-pumpkin-obsession-hoodie-brown-db1a64a13e51.webp",
     "status": "Active",
     "id": 32
+  },
+  {
+    "slug": "notorious-safety-is-overrated-hoodie-garnet",
+    "product": "NOTORIOUS™ SAFETY IS OVERRATED HOODIE – GARNET",
+    "price": 249,
+    "description": "Who said playing it safe was ever exciting? The SAFETY IS OVERRATED Hoodie turns a simple safety-pin design into a bold statement of rebellion, challenging the rules with a sharp, minimalist aesthetic and unmistakable NOTORIOUS™ attitude. Risky, unconventional, and unapologetically daring, made for those who were never meant to play by the rules.",
+    "material": "67% Cotton / 33% Polyester",
+    "fit": "Unisex",
+    "sizes": "S,M,L,XL,XXL",
+    "category": "hoodies",
+    "mainImage": "images/studio-notorious-safety-is-overrated-hoodie-garnet-b2db4659ac68.webp",
+    "image2": "images/studio-notorious-safety-is-overrated-hoodie-garnet-19a1dd5a1e4d.webp",
+    "image3": "images/studio-notorious-safety-is-overrated-hoodie-garnet-f85a6aed0f41.webp",
+    "image4": "images/studio-notorious-safety-is-overrated-hoodie-garnet-98b78b4ea5c2.webp",
+    "status": "Active",
+    "id": 33
   }
 ]

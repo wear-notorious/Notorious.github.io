@@ -226,6 +226,41 @@
           "color": "Brown"
         }
       ]
+    },
+    "notorious-safety-is-overrated-hoodie-garnet": {
+      "title": "NOTORIOUS™ SAFETY IS OVERRATED HOODIE – GARNET | NOTORIOUS™",
+      "description": "Who said playing it safe was ever exciting? The SAFETY IS OVERRATED Hoodie turns a simple safety-pin design into a bold statement of rebellion, challenging the ",
+      "group": "67fe9422-6cd7-496d-b687-cdf85c675bbb",
+      "color": "Garnet",
+      "stock": "in_stock",
+      "hidden": false,
+      "images": [
+        "images/studio-notorious-safety-is-overrated-hoodie-garnet-b2db4659ac68.webp",
+        "images/studio-notorious-safety-is-overrated-hoodie-garnet-19a1dd5a1e4d.webp",
+        "images/studio-notorious-safety-is-overrated-hoodie-garnet-f85a6aed0f41.webp",
+        "images/studio-notorious-safety-is-overrated-hoodie-garnet-98b78b4ea5c2.webp"
+      ],
+      "alts": [
+        "NOTORIOUS™ SAFETY IS OVERRATED HOODIE – GARNET — photo 1",
+        "NOTORIOUS™ SAFETY IS OVERRATED HOODIE – GARNET — photo 2",
+        "NOTORIOUS™ SAFETY IS OVERRATED HOODIE – GARNET — photo 3",
+        "NOTORIOUS™ SAFETY IS OVERRATED HOODIE – GARNET — photo 4"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "sku": "NOTORIOUS-notorious-safety-is-overrated-hoodie-garnet",
+      "groupPrimary": true,
+      "variants": [
+        {
+          "slug": "notorious-safety-is-overrated-hoodie-garnet",
+          "color": "Garnet"
+        }
+      ]
     }
   }
 }
