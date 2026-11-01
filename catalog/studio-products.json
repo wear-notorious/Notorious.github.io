@@ -414,5 +414,21 @@
     "status": "Active",
     "slug": "liquor",
     "category": "tshirts"
+  },
+  {
+    "slug": "feetish-hoodie-black",
+    "product": "FEETISH™ HOODIE – BLACK",
+    "price": 249,
+    "description": "Yeah, you read that right. FEETISH. \n\nA little weird? Maybe. Do we care? Not really.\n\nFeaturing a wild foot-inspired graphic with Matrix-style green digital code, this black oversized hoodie is all about turning heads, breaking rules, and making people look twice.\n\nComfy, bold, and just the right amount of inappropriate.\n\nSome call it a fetish. We call it fashion.",
+    "material": "67% Cotton / 33% Polyester",
+    "fit": "Unisex",
+    "sizes": "S,M,L,XL,XXL",
+    "category": "hoodies",
+    "mainImage": "images/studio-feetish-hoodie-black-54668df3f548.webp",
+    "image2": "images/studio-feetish-hoodie-black-b1d5e54414f3.webp",
+    "image3": "images/studio-feetish-hoodie-black-4b99562c8d07.webp",
+    "image4": "images/studio-feetish-hoodie-black-2c804ae7c7eb.webp",
+    "status": "Active",
+    "id": 27
   }
 ]

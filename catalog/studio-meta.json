@@ -16,6 +16,41 @@
     "bcs": {
       "title": "BETTER CALL™ T-SHIRT – BLACK | NOTORIOUS™",
       "description": "BETTER CALL™ T-SHIRT – BLACK — T-shirt graphique streetwear NOTORIOUS™ au Maroc. Livraison gratuite partout au Maroc et paiement à la livraison."
+    },
+    "feetish-hoodie-black": {
+      "title": "FEETISH™ HOODIE – BLACK | NOTORIOUS™",
+      "description": "Yeah, you read that right. FEETISH. A little weird? Maybe. Do we care? Not really. Featuring a wild foot-inspired graphic with Matrix-style green digital code, ",
+      "group": "90b51262-a091-4b7e-b0c7-2bd06afcdcad",
+      "color": "",
+      "stock": "in_stock",
+      "hidden": false,
+      "images": [
+        "images/studio-feetish-hoodie-black-54668df3f548.webp",
+        "images/studio-feetish-hoodie-black-b1d5e54414f3.webp",
+        "images/studio-feetish-hoodie-black-4b99562c8d07.webp",
+        "images/studio-feetish-hoodie-black-2c804ae7c7eb.webp"
+      ],
+      "alts": [
+        "FEETISH™ HOODIE – BLACK — photo 1",
+        "FEETISH™ HOODIE – BLACK — photo 2",
+        "FEETISH™ HOODIE – BLACK — photo 3",
+        "FEETISH™ HOODIE – BLACK — photo 4"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "sku": "NOTORIOUS-feetish-hoodie-black",
+      "groupPrimary": true,
+      "variants": [
+        {
+          "slug": "feetish-hoodie-black",
+          "color": ""
+        }
+      ]
     }
   }
 }
