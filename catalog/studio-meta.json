@@ -121,6 +121,41 @@
           "color": "Noir"
         }
       ]
+    },
+    "the-beetles-hoodie-black": {
+      "title": "THE BEETLES™ HOODIE – BLACK | NOTORIOUS™",
+      "description": "Forget the Fab Four. Meet the bad four. The THE BEETLES™ Premium Hoodie is for the troublemakers, the rule-breakers, and everyone who's never given a damn about",
+      "group": "5bc34d8f-71a2-486e-9c0e-469af92143d5",
+      "color": "Noir",
+      "stock": "in_stock",
+      "hidden": false,
+      "images": [
+        "images/studio-the-beetles-hoodie-black-83a339c9ab74.webp",
+        "images/studio-the-beetles-hoodie-black-6abc8b8e80a8.webp",
+        "images/studio-the-beetles-hoodie-black-92d3f8ed0f8c.webp",
+        "images/studio-the-beetles-hoodie-black-20bac71ff4e2.webp"
+      ],
+      "alts": [
+        "THE BEETLES™ HOODIE – BLACK — photo 1",
+        "THE BEETLES™ HOODIE – BLACK — photo 2",
+        "THE BEETLES™ HOODIE – BLACK — photo 3",
+        "THE BEETLES™ HOODIE – BLACK — photo 4"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "sku": "NOTORIOUS-the-beetles-hoodie-black",
+      "groupPrimary": true,
+      "variants": [
+        {
+          "slug": "the-beetles-hoodie-black",
+          "color": "Noir"
+        }
+      ]
     }
   }
 }

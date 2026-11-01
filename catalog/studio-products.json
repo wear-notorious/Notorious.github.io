@@ -462,5 +462,21 @@
     "image4": "images/studio-red-or-blue-hoodie-black-ab20d3816ab8.webp",
     "status": "Active",
     "id": 29
+  },
+  {
+    "slug": "the-beetles-hoodie-black",
+    "product": "THE BEETLES™ HOODIE – BLACK",
+    "price": 249,
+    "description": "Forget the Fab Four. Meet the bad four. The THE BEETLES™ Premium Hoodie is for the troublemakers, the rule-breakers, and everyone who's never given a damn about fitting in. Four legends, zero fucks given, and pure NOTORIOUS™ attitude. Throw it on, turn heads, and let the hoodie do the talking. Get yours now.",
+    "material": "67% coton et 33% polyester",
+    "fit": "Unisex",
+    "sizes": "S,M,L,XL,XXL",
+    "category": "hoodies",
+    "mainImage": "images/studio-the-beetles-hoodie-black-83a339c9ab74.webp",
+    "image2": "images/studio-the-beetles-hoodie-black-6abc8b8e80a8.webp",
+    "image3": "images/studio-the-beetles-hoodie-black-92d3f8ed0f8c.webp",
+    "image4": "images/studio-the-beetles-hoodie-black-20bac71ff4e2.webp",
+    "status": "Active",
+    "id": 30
   }
 ]
