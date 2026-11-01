@@ -416,6 +416,22 @@
     "category": "tshirts"
   },
   {
+    "slug": "red-flags-hoodie-black",
+    "product": "RED FLAGS™ HOODIE – BLACK",
+    "price": 249,
+    "description": "Red flags? We call them personality traits. The RED FLAGS™ Premium Hoodie turns bad decisions into bold streetwear with a provocative statement and unmistakable NOTORIOUS™ energy. Toxic, unapologetic, and made for those who were never the green flag anyway.",
+    "material": "67% Cotton / 33% Polyester",
+    "fit": "Unisex",
+    "sizes": "S,M,L,XL,XXL",
+    "category": "hoodies",
+    "mainImage": "images/studio-red-flags-hoodie-black-54668df3f548.webp",
+    "image2": "images/studio-red-flags-hoodie-black-b1d5e54414f3.webp",
+    "image3": "images/studio-red-flags-hoodie-black-4b99562c8d07.webp",
+    "image4": "images/studio-red-flags-hoodie-black-2c804ae7c7eb.webp",
+    "status": "Active",
+    "id": 28
+  },
+  {
     "slug": "feetish-hoodie-black",
     "product": "FEETISH™ HOODIE – BLACK",
     "price": 249,
@@ -428,7 +444,7 @@
     "image2": "images/studio-feetish-hoodie-black-b1d5e54414f3.webp",
     "image3": "images/studio-feetish-hoodie-black-4b99562c8d07.webp",
     "image4": "images/studio-feetish-hoodie-black-2c804ae7c7eb.webp",
-    "status": "Active",
+    "status": "Inactive",
     "id": 27
   }
 ]

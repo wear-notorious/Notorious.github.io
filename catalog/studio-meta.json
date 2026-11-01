@@ -22,8 +22,8 @@
       "description": "Yeah, you read that right. FEETISH. A little weird? Maybe. Do we care? Not really. Featuring a wild foot-inspired graphic with Matrix-style green digital code, ",
       "group": "90b51262-a091-4b7e-b0c7-2bd06afcdcad",
       "color": "",
-      "stock": "in_stock",
-      "hidden": false,
+      "stock": "out_of_stock",
+      "hidden": true,
       "images": [
         "images/studio-feetish-hoodie-black-54668df3f548.webp",
         "images/studio-feetish-hoodie-black-b1d5e54414f3.webp",
@@ -47,7 +47,42 @@
       "groupPrimary": true,
       "variants": [
         {
-          "slug": "feetish-hoodie-black",
+          "slug": "red-flags-hoodie-black",
+          "color": ""
+        }
+      ]
+    },
+    "red-flags-hoodie-black": {
+      "title": "RED FLAGS™ HOODIE – BLACK | NOTORIOUS™",
+      "description": "Red flags? We call them personality traits. The RED FLAGS™ Premium Hoodie turns bad decisions into bold streetwear with a provocative statement and unmistakable",
+      "group": "90b51262-a091-4b7e-b0c7-2bd06afcdcad",
+      "color": "",
+      "stock": "in_stock",
+      "hidden": false,
+      "images": [
+        "images/studio-red-flags-hoodie-black-54668df3f548.webp",
+        "images/studio-red-flags-hoodie-black-b1d5e54414f3.webp",
+        "images/studio-red-flags-hoodie-black-4b99562c8d07.webp",
+        "images/studio-red-flags-hoodie-black-2c804ae7c7eb.webp"
+      ],
+      "alts": [
+        "RED FLAGS™ HOODIE – BLACK — photo 1",
+        "RED FLAGS™ HOODIE – BLACK — photo 2",
+        "RED FLAGS™ HOODIE – BLACK — photo 3",
+        "RED FLAGS™ HOODIE – BLACK — photo 4"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "sku": "NOTORIOUS-red-flags-hoodie-black",
+      "groupPrimary": true,
+      "variants": [
+        {
+          "slug": "red-flags-hoodie-black",
           "color": ""
         }
       ]

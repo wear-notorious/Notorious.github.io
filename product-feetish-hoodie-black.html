@@ -1356,7 +1356,7 @@ function toWebpImage(value) {
 }
 </script>
 <link rel="canonical" href="https://wear-notorious.github.io/Notorious.github.io/product-feetish-hoodie-black.html">
-<script id="product-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"FEETISH™ HOODIE – BLACK","description":"Yeah, you read that right. FEETISH. A little weird? Maybe. Do we care? Not really. Featuring a wild foot-inspired graphic with Matrix-style green digital code, ","image":["https://wear-notorious.github.io/Notorious.github.io/images/studio-feetish-hoodie-black-54668df3f548.webp","https://wear-notorious.github.io/Notorious.github.io/images/studio-feetish-hoodie-black-b1d5e54414f3.webp","https://wear-notorious.github.io/Notorious.github.io/images/studio-feetish-hoodie-black-4b99562c8d07.webp","https://wear-notorious.github.io/Notorious.github.io/images/studio-feetish-hoodie-black-2c804ae7c7eb.webp"],"url":"https://wear-notorious.github.io/Notorious.github.io/product-feetish-hoodie-black.html","sku":"NOTORIOUS-feetish-hoodie-black","brand":{"@type":"Brand","name":"NOTORIOUS™"},"offers":{"@type":"Offer","price":249,"priceCurrency":"MAD","url":"https://wear-notorious.github.io/Notorious.github.io/product-feetish-hoodie-black.html","availability":"https://schema.org/InStock"}}</script>
+<script id="product-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"FEETISH™ HOODIE – BLACK","description":"Yeah, you read that right. FEETISH. A little weird? Maybe. Do we care? Not really. Featuring a wild foot-inspired graphic with Matrix-style green digital code, ","image":["https://wear-notorious.github.io/Notorious.github.io/images/studio-feetish-hoodie-black-54668df3f548.webp","https://wear-notorious.github.io/Notorious.github.io/images/studio-feetish-hoodie-black-b1d5e54414f3.webp","https://wear-notorious.github.io/Notorious.github.io/images/studio-feetish-hoodie-black-4b99562c8d07.webp","https://wear-notorious.github.io/Notorious.github.io/images/studio-feetish-hoodie-black-2c804ae7c7eb.webp"],"url":"https://wear-notorious.github.io/Notorious.github.io/product-feetish-hoodie-black.html","sku":"NOTORIOUS-feetish-hoodie-black","brand":{"@type":"Brand","name":"NOTORIOUS™"},"offers":{"@type":"Offer","price":249,"priceCurrency":"MAD","url":"https://wear-notorious.github.io/Notorious.github.io/product-feetish-hoodie-black.html","availability":"https://schema.org/Discontinued"}}</script>
 </head>
 
 <body>
@@ -1610,17 +1610,17 @@ Some call it a fetish. We call it fashion.</p>
 <button
   type="button"
   class="add-cart-btn"
-  onclick="addToCart()"
+  disabled aria-disabled="true"
 >
-  ADD TO CART
+  UNAVAILABLE
 </button>
 
       <button
         type="button"
         class="order-btn"
-        onclick="orderNow()"
+        disabled aria-disabled="true"
       >
-        ORDER NOW
+        UNAVAILABLE
       </button>
 
       <p class="payment-note">
@@ -1771,7 +1771,7 @@ function getProductSeoDescription(product) {
 }
 
 async function loadProduct(){
- window.currentProduct={"slug":"feetish-hoodie-black","product":"FEETISH™ HOODIE – BLACK","price":249,"description":"Yeah, you read that right. FEETISH. \n\nA little weird? Maybe. Do we care? Not really.\n\nFeaturing a wild foot-inspired graphic with Matrix-style green digital code, this black oversized hoodie is all about turning heads, breaking rules, and making people look twice.\n\nComfy, bold, and just the right amount of inappropriate.\n\nSome call it a fetish. We call it fashion.","material":"67% Cotton / 33% Polyester","fit":"Unisex","sizes":"S,M,L,XL,XXL","category":"hoodies","mainImage":"images/studio-feetish-hoodie-black-54668df3f548.webp","image2":"images/studio-feetish-hoodie-black-b1d5e54414f3.webp","image3":"images/studio-feetish-hoodie-black-4b99562c8d07.webp","image4":"images/studio-feetish-hoodie-black-2c804ae7c7eb.webp","status":"Active","id":27};
+ window.currentProduct={"slug":"feetish-hoodie-black","product":"FEETISH™ HOODIE – BLACK","price":249,"description":"Yeah, you read that right. FEETISH. \n\nA little weird? Maybe. Do we care? Not really.\n\nFeaturing a wild foot-inspired graphic with Matrix-style green digital code, this black oversized hoodie is all about turning heads, breaking rules, and making people look twice.\n\nComfy, bold, and just the right amount of inappropriate.\n\nSome call it a fetish. We call it fashion.","material":"67% Cotton / 33% Polyester","fit":"Unisex","sizes":"S,M,L,XL,XXL","category":"hoodies","mainImage":"images/studio-feetish-hoodie-black-54668df3f548.webp","image2":"images/studio-feetish-hoodie-black-b1d5e54414f3.webp","image3":"images/studio-feetish-hoodie-black-4b99562c8d07.webp","image4":"images/studio-feetish-hoodie-black-2c804ae7c7eb.webp","status":"Inactive","id":27};
 }
 let selectedSize = "";
 
@@ -1887,7 +1887,7 @@ function openSizeGuide() {
 function closeSizeGuide() {
   document.getElementById("sizeGuideModal").classList.remove("active");
 }
-function addToCart() {
+function addToCart() { return;
   if (!selectedSize) {
     showSizeNotification();
     return;
@@ -2075,7 +2075,7 @@ document.addEventListener("touchend", function(event) {
   }
 });
   
-function orderNow() {
+function orderNow() { return;
   if (!selectedSize) {
     showSizeNotification();
     return;
